@@ -407,6 +407,25 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
 .abcde div.hit{border-color:var(--danger);background:var(--danger-tint)}
 .abcde b{font-size:15px}.abcde div.hit b{color:var(--danger)}
 .abcde span{font-size:11.5px;font-weight:600}.abcde small{font-size:11px;color:var(--muted)}
+/* jornada do usuário */
+.jr-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0 8px}
+.jr-st{position:relative;display:grid;gap:4px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.jr-st b{font-size:14.5px}.jr-st span{font-size:13px;color:var(--muted);line-height:1.45}
+.jr-st i{font-style:normal;font:600 11px var(--f-mono);color:var(--muted)}
+.jr-st.done{border-color:color-mix(in srgb,var(--navy) 40%,var(--line))}
+.jr-tag{justify-self:start;font:600 10.5px var(--f-sans);letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:var(--surface-2);color:var(--muted)}
+.jr-st.done .jr-tag{background:#E6F3F7;color:var(--navy)}
+.jr-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:30px 0 8px}.jr-h h3{margin:0}
+.jr-h .jr-tag{align-self:center}
+table.metrics td ul{margin:4px 0 0;padding-left:18px}
+@media (max-width:900px){.jr-flow{grid-template-columns:1fr 1fr}}
+.jr-spec{display:grid;gap:14px;margin:8px 0 6px}
+.jr-spec .box{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:var(--surface)}
+.jr-spec h4{font-size:15px;margin:0 0 8px}
+.jr-spec ol,.jr-spec ul{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14px;line-height:1.5}
+.jr-ex{border-left:3px solid var(--navy);background:#F4F8FB;border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px;line-height:1.55}
+.jr-ex small{color:var(--muted)}
+pre.jr-code{margin:0;padding:14px 16px;border-radius:12px;background:#0F1B2D;color:#E6EEF8;font:12.5px/1.55 var(--f-mono);overflow:auto;white-space:pre}
 </style>
 
 <div class="shell">
@@ -415,6 +434,8 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
     <ol>
       <li><a href="#resumo">Resumo</a></li>
       <li><a href="#decisoes">Decisões do protótipo</a></li>
+      <li><a href="#jornada">Jornada do usuário</a></li>
+      <li><a href="#uso">Uso, limites e travas</a></li>
       <li><a href="#hoje">A Lya hoje</a></li>
       <li><a href="#benchmark">Concorrentes</a></li>
       <li><a href="#matriz">Matriz de recursos</a></li>
@@ -481,7 +502,9 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
         <div class="dcard"><span class="tag ok">Decidido</span><h4>Visão B2C para o médico particular</h4><p>Início com o uso do plano, upgrade no menu, tela de planos (Gratuito, Unlimited, Institucional), pacientes com cadastro e “Assinar e finalizar” no lugar do envio ao prontuário.</p></div>
         <div class="dcard"><span class="tag ok">Decidido</span><h4>Cadastro com questionário pré-atendimento</h4><p>Começa em Pacientes: dados mínimos, questionário sugerido pelo motivo do atendimento e envio por WhatsApp, e-mail, tablet ou durante o atendimento. O paciente responde no celular e as respostas entram em Dados Clínicos e nos Prompts.</p></div>
         <div class="dcard"><span class="tag ok">Decidido</span><h4>Governança B2B visível</h4><p>“Ver como” para simular cada perfil, as 64 permissões reais e mais 6 propostas, marcação de permissões sensíveis, mapa de acesso e trilha de auditoria. O criador de Prompt vira uma tela com seis decisões e prévia ao vivo.</p></div>
-        <div class="dcard"><span class="tag ok">Decidido</span><h4>Telemedicina com a aba da chamada compartilhada</h4><p>Hoje a Lya trata Telemedicina como uma opção na janela de início, com o mesmo passo de microfone do presencial: nada garante que a Lya ouça o paciente. No novo fluxo, ao escolher Telemedicina, “Iniciar atendimento” vira <b>“Compartilhar e iniciar”</b> e abre três passos: <b>onde está a chamada</b> (Google Meet, Zoom, Microsoft Teams, WhatsApp Web ou outra), <b>qual aba compartilhar</b> (com aviso se a aba não for a da chamada) e <b>compartilhar o áudio da aba</b>, com teste de dois medidores, “Você” e “Paciente”. Só a aba escolhida é compartilhada e o vídeo não é gravado.</p>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Histórico: o atendimento congelado e as versões IA × final</h4><p>No <b>Histórico</b>, abrir um atendimento mostra a tela exatamente como ficou ao encerrar, em somente leitura: Em tempo real, Dados Clínicos, Transcrição, <b>Minhas notas</b> e os <b>arquivos anexados</b>, Relatório, Prescrição e os documentos criados. O cabeçalho diz quando foi encerrado e enviado, com o botão para voltar ao Histórico; sugestões, “Criar” e remoção de abas não aparecem. A coluna “Documentos” do Histórico já indica quantos foram editados.</p>
+         <p>O front recebe duas versões de cada documento: a que a IA gerou e a que o profissional salvou. Em cada aba de documento entra a barra <b>Versões do documento</b>, com o selo <b>Editado</b> ou <b>Final = IA</b>, quem salvou e quando, e três vistas: <b>Final (salvo)</b>, que é o padrão; <b>Original (IA)</b>, marcada como “não foi a enviada”; e <b>Comparar</b>, em duas colunas, com o que o profissional incluiu em verde e o texto da IA removido em vermelho riscado. As abas editadas ganham um ponto âmbar. As duas versões ficam guardadas para auditoria.</p></div>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Telemedicina com a aba da chamada compartilhada</h4><p>Hoje a Lya trata Telemedicina como uma opção na janela de início, com o mesmo passo de microfone do presencial: nada garante que a Lya ouça o paciente. No novo fluxo, ao escolher Telemedicina, “Iniciar atendimento” vira <b>“Compartilhar e iniciar”</b> e abre três passos: <b>onde está a chamada</b> (Google Meet, Zoom ou Teams no navegador, WhatsApp Web ou outra plataforma web; aplicativos instalados no computador não são captados), <b>qual aba compartilhar</b> (com aviso se a aba não for a da chamada) e <b>compartilhar o áudio da aba</b>, com teste de dois medidores, “Você” e “Paciente”. Só a aba escolhida é compartilhada e o vídeo não é gravado.</p>
          <p>Durante o atendimento, o cabeçalho mostra as duas fontes de áudio no lugar do microfone. Se o compartilhamento cair, aparece <b>“Paciente sem áudio · Compartilhar”</b> em vermelho, que retoma sem perder o atendimento; início, queda e retomada entram no registro de controle.</p></div>
         <div class="dcard"><span class="tag ok">Decidido</span><h4>Novos nomes: Agentes e Prompts</h4><p>“Assistentes” passam a se chamar <b>Agentes</b> e “Smart Apps” passam a se chamar <b>Prompts</b> em toda a plataforma: menu, telas, permissões, filtros e respostas da Ajuda. O agente é o que o médico escolhe ao iniciar (especialidade ou setor); os prompts são as funções de IA que o agente executa no atendimento e no relatório. A Lya oferece agentes prontos, que podem ser usados ou copiados e ajustados.</p></div>
         <div class="dcard"><span class="tag ok">Decidido</span><h4>Uma porta “Lya”, dois modos: Clínico e Ajuda</h4><p>O chat clínico (<b>Fale com a Lya</b>, antes “Pergunte à Lya”) e o chatbot de ajuda da plataforma passam a ter <b>uma só entrada</b>, com dois modos separados que não se misturam. Motivo: o clínico usa dados do paciente e protocolos; a Ajuda usa a documentação e abre chamados para o time de suporte, que <b>não podem levar dados de paciente</b>. Cada um fica registrado no seu lugar (atendimento ou Suporte).</p>
@@ -493,9 +516,293 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
       </div>
     </section>
 
+    <!-- jornada do usuário -->
+    <section class="s" id="jornada">
+      <div class="s-head"><span class="s-num">03</span><h2>Jornada do usuário</h2></div>
+      <div class="prose">
+        <p>Mapa de referência para construir e revisar as telas: <b>do login à integração</b>, com o que o usuário vê em cada estado, o que pode fazer e como a Lya responde. Vamos ajustar <b>etapa por etapa</b>; cada etapa revisada no protótipo muda de “A revisar” para “Ajustada”.</p>
+      </div>
+      <div class="jr-flow">
+        <div class="jr-st done"><i>01</i><b>Entrada</b><span>Login, verificação em duas etapas, organização e tela inicial do perfil.</span><span class="jr-tag">Ajustada</span></div>
+        <div class="jr-st done"><i>02</i><b>Iniciar atendimento</b><span>Paciente, agente, modalidade, exames, microfone e idioma. Presencial ou telemedicina.</span><span class="jr-tag">Ajustada</span></div>
+        <div class="jr-st done"><i>03</i><b>Atendimento ao vivo</b><span>Tela vazia no início, cards que se preenchem, abas e ações em cada uma.</span><span class="jr-tag">Ajustada</span></div>
+        <div class="jr-st done"><i>04</i><b>Riscos e sugestões</b><span>Alertas de alergia, riscos de protocolo e sugestões da Lya; assumir conduta.</span><span class="jr-tag">Ajustada</span></div>
+        <div class="jr-st done"><i>05</i><b>Fale com a Lya</b><span>Perguntas durante o atendimento, respostas com fonte, levar ao relatório.</span><span class="jr-tag">Ajustada</span></div>
+        <div class="jr-st done"><i>06</i><b>Gerar relatório</b><span>Geração em etapas, abas Relatório e Prescrição, documentos com “Criar”.</span><span class="jr-tag">Ajustada</span></div>
+        <div class="jr-st done"><i>07</i><b>Revisar, encerrar e integrar</b><span>Pendências, encerrar, assinar e enviar ao prontuário, confirmação de integrado.</span><span class="jr-tag">Ajustada</span></div>
+        <div class="jr-st done"><i>08</i><b>Histórico</b><span>Atendimento congelado como terminou e versões IA × final de cada documento.</span><span class="jr-tag">Ajustada</span></div>
+      </div>
+
+      <div class="jr-h"><h3>01 · Entrada</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Ajustada</span></div>
+      <div class="scroll-x"><table class="metrics">
+        <thead><tr><th>Tela · estado</th><th>O que o usuário vê</th><th>Ações</th><th>Resposta da Lya / próximo passo</th></tr></thead>
+        <tbody>
+          <tr><td><b>Login</b></td><td>Marca à esquerda (“A Lya ouve o atendimento e organiza o que importa”); à direita, e-mail, senha, “Manter conectado”.</td><td>Entrar · Entrar com a conta da instituição (SSO) · Esqueci minha senha</td><td>E-mail inválido ou senha vazia: mensagem no próprio campo, sem sair da tela. Esqueci a senha: link por e-mail. SSO pula para a escolha da organização.</td></tr>
+          <tr><td><b>Verificação em duas etapas</b></td><td>“Confirme que é você”: código de 6 dígitos enviado ao celular (final mostrado).</td><td>Confirmar · Reenviar código · Voltar</td><td>Código incompleto: “Digite os 6 dígitos”. Exigida para perfis com permissões sensíveis ou por política da organização.</td></tr>
+          <tr><td><b>Escolha da organização</b></td><td>Só aparece se a conta estiver em mais de uma organização (ex.: Hospital Aurora e consultório particular), com o perfil em cada uma.</td><td>Escolher organização</td><td>Carrega perfil e permissões daquela organização. Troca depois pelo menu do perfil.</td></tr>
+          <tr><td><b>Tela inicial por perfil</b></td><td>Quem atende (médico, enfermeiro, B2C, gestor com permissão de atender) cai em <b>Iniciar atendimento</b>. Quem não atende cai na primeira tela permitida: Relatórios (qualidade) e, se não houver, Atendimentos.</td><td>—</td><td>Menu lateral mostra só o que o perfil pode ver. “Sair”, no menu do perfil, volta ao login.</td></tr>
+        </tbody></table></div>
+
+      <div class="jr-h"><h3>02 · Iniciar atendimento</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Ajustada</span></div>
+      <div class="scroll-x"><table class="metrics">
+        <thead><tr><th>Tela · estado</th><th>O que o usuário vê</th><th>Ações</th><th>Resposta da Lya / próximo passo</th></tr></thead>
+        <tbody>
+          <tr><td><b>Paciente em espera</b> (B2B)</td><td>Cartão com o paciente do atendimento aberto no sistema do hospital: nome, idade, tag Retorno; linha de ajustes e “Iniciar atendimento”.</td><td>Trocar paciente · escolher agente · Presencial/Telemedicina · Anexar exame · microfone · idioma (PT → EN)</td><td>Dados vêm do prontuário; nada a digitar. Exames anexados são lidos e vão para Dados Clínicos.</td></tr>
+          <tr><td><b>Sem atendimento aberto</b></td><td>“Comece um novo atendimento” com Buscar paciente e Cadastrar paciente.</td><td>Buscar · Cadastrar</td><td>Ao escolher o paciente, volta ao cartão “Paciente em espera”.</td></tr>
+          <tr><td><b>Consultório (B2C)</b></td><td>“Pronto para o próximo atendimento?” com a lista de pacientes e o uso do plano.</td><td>Escolher ou cadastrar paciente</td><td>Paciente sem cadastro completo: a Lya capta os dados pela fala e pede confirmação na ficha.</td></tr>
+          <tr><td><b>Agente</b></td><td>Pílula com o agente sugerido pela especialidade; lista com busca (44 agentes em Especialidades, Cirurgia e unidades, Multiprofissional).</td><td>Abrir lista · digitar para filtrar · Enter · setas · Esc</td><td>O agente define prompts, check-list e modelo do relatório do atendimento.</td></tr>
+          <tr><td><b>Microfone</b></td><td>Pílula com o microfone escolhido e o nível do sinal; abre no mesmo modelo do combo de agente, com os microfones encontrados e o sinal de cada um.</td><td>Escolher microfone · Testar o microfone</td><td>A troca vale para este atendimento; o padrão fica em Minhas preferências.</td></tr>
+          <tr><td><b>Microfone sem sinal</b></td><td>Pílula do microfone em vermelho e “Sem sinal do microfone”.</td><td>Iniciar atendimento</td><td>Abre “A Lya não está ouvindo o microfone” com o que conferir (conexão, permissão do navegador, microfone escolhido) e “Testar de novo”. Não inicia sem áudio.</td></tr>
+          <tr><td><b>Presencial</b></td><td>“Iniciar atendimento” · “A gravação começa ao clicar”.</td><td>Iniciar atendimento</td><td>Abre o atendimento ao vivo (etapa 03), gravando pelo microfone.</td></tr>
+          <tr><td><b>Telemedicina</b></td><td>Aviso de que a chamada precisa estar <b>numa aba do navegador</b> (Meet, Zoom ou Teams na versão web, WhatsApp Web): a Lya não capta áudio de aplicativos instalados no computador. O botão vira “Compartilhar e iniciar”.</td><td>Escolher onde está a chamada (Google Meet, Zoom no navegador, Teams no navegador, WhatsApp Web, Outra no navegador) · escolher a aba · ligar o áudio da aba · Compartilhar e iniciar</td><td>Sem aba ou sem áudio, não segue e explica por quê. Aba errada: aviso. Ao iniciar, o cabeçalho mostra “Você” e “Paciente”; se o compartilhamento cair, “Paciente sem áudio · Compartilhar”.</td></tr>
+        </tbody></table></div>
+
+      <div class="jr-h"><h3>03 · Atendimento ao vivo</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Ajustada</span></div>
+      <div class="scroll-x"><table class="metrics">
+        <thead><tr><th>Tela · estado</th><th>O que o usuário vê</th><th>Ações</th><th>Resposta da Lya / próximo passo</th></tr></thead>
+        <tbody>
+          <tr><td><b>Cabeçalho</b></td><td>Paciente (nome abre a ficha), fonte de áudio com sinal (ou “Você” e “Paciente” na telemedicina), idioma, tempo de gravação, Pausar, Gerar relatório, Encerrar atendimento.</td><td>Ficha do paciente · Pausar/Continuar · idioma · Gerar relatório · Encerrar</td><td>Pausar para a escuta e o tempo, mostra a faixa “Gravação pausada”. Encerrar pede confirmação: fecha os dados, gera os logs de controle e desliga Pausar/Continuar.</td></tr>
+          <tr><td><b>Em tempo real · início (sem dados)</b></td><td>“Resumo do último atendimento” (se houver retorno). Cards Alergias, Queixa principal e Hipóteses com linhas animadas e o que a Lya espera ouvir (“Registra quando alguém falar de alergia…”); selo “aguardando”. Check-list com os 10 itens pendentes em vermelho.</td><td>Abrir o Resumo do último atendimento · Trazer item para o relatório</td><td>Nenhum card fica em branco nem diz “não identificado”: cada um explica o que vai registrar.</td></tr>
+          <tr><td><b>Em tempo real · durante</b></td><td>Cards se preenchem com etiquetas e a hora de origem; itens do check-list ficam verdes em qualquer ordem e descem; pendentes sobem. Alergia confirmada vira card crítico.</td><td>Clicar na hora de origem · abrir hipótese · abrir protocolo</td><td>A hora leva ao trecho na Transcrição, destacado. Riscos e sugestões: etapa 04.</td></tr>
+          <tr><td><b>Dados Clínicos</b></td><td>O que veio do sistema do hospital, organizado em grupos fixos (Ficha do paciente e Dados cirúrgicos) e o resumo no topo; exames anexados entram como “anexado no preparo”.</td><td>Abrir e fechar grupos · ver origem de cada dado · ver os resultados do exame</td><td>Cada dado mostra de onde veio (prontuário, exame, fala) e quando.</td></tr>
+          <tr><td><b>Transcrição · início</b></td><td>“Ouvindo a conversa”: as falas aparecem em segundos, com a hora; termos médicos corrigidos pelo vocabulário. Pausado: “Gravação pausada”.</td><td>—</td><td>Ao primeiro trecho, a lista aparece.</td></tr>
+          <tr><td><b>Transcrição · durante</b></td><td>Trechos com hora, em tons alternados (sem identificação de quem fala); termos corrigidos marcados.</td><td>Buscar na transcrição (filtra e mostra “N de M trechos”) · Copiar</td><td>O trecho aberto por uma hora de origem fica destacado.</td></tr>
+          <tr><td><b>Calculadoras</b></td><td>Lista com busca e status: Pronta (dados do cadastro), Dados parciais, Aguardando a conversa. Detalhe ao lado.</td><td>Escolher calculadora · revisar ou editar valores (marca “Cadastro” ou “Editado”) · Adicionar ao relatório</td><td>Calcula na hora; o resultado entra na seção configurada do relatório como apoio. “Configurar calculadoras” para quem tem permissão.</td></tr>
+          <tr><td><b>Minhas notas</b></td><td>Campo livre (só o médico vê), “Incluir no relatório como Notas do médico” e Arquivos.</td><td>Escrever (salva sozinho) · incluir no relatório · adicionar ou remover arquivos</td><td>Arquivos (PDF ou imagem) são lidos e organizados em Dados Clínicos. A aba ganha um ponto quando há nota ou arquivo.</td></tr>
+          <tr><td><b>Gerar relatório cedo demais</b></td><td>Sem nenhuma fala: “A Lya ainda não ouviu a conversa” (só Continuar ouvindo). Com pouco conteúdo: “Ainda há pouco para o relatório”, com o tempo ouvido.</td><td>Continuar ouvindo · Gerar mesmo assim</td><td>Gerar mesmo assim cria o relatório com seções vazias para preencher. Geração e depois: etapa 06.</td></tr>
+        </tbody></table></div>
+
+      <div class="jr-h"><h3>04 · Riscos e sugestões</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Ajustada</span></div>
+      <div class="scroll-x"><table class="metrics">
+        <thead><tr><th>Tela · estado</th><th>O que o usuário vê</th><th>Ações</th><th>Resposta da Lya / próximo passo</th></tr></thead>
+        <tbody>
+          <tr><td><b>Barra de Sugestões · início</b></td><td>Não aparece: sem conversa, não há sugestão nem risco. Nenhum protocolo é mostrado antes do primeiro critério.</td><td>—</td><td>A barra surge com a primeira sugestão.</td></tr>
+          <tr><td><b>Sugestões (avisos)</b></td><td>Pílulas por gravidade: crítico (alergia), atenção, lembrete; até 4 visíveis e “+N”.</td><td>Abrir · ação da sugestão · Já sei · Não se aplica</td><td>Dispensadas somem e ficam no registro de controle.</td></tr>
+          <tr><td><b>Risco de protocolo aparece</b></td><td>Pílula “Risco de TEP · Baixo” quando o primeiro critério surge (prontuário ou fala). O painel mostra escore, critérios com origem (só os que já apareceram), conduta da instituição e, se houver, medicamento sugerido.</td><td>Assumir conduta · Agora não</td><td>Nível e escore mudam com o atendimento (ex.: sepse Baixo → Moderado quando surgem calafrios).</td></tr>
+          <tr><td><b>Agora não</b></td><td>A pílula some neste nível.</td><td>—</td><td>Registro de controle; o alerta volta se o nível mudar.</td></tr>
+          <tr><td><b>Conduta assumida</b></td><td>Pílula “· assumida”; no painel, a hora e o nível em que foi assumida e “Desfazer”.</td><td>Desfazer</td><td>Bloco em Avaliação e plano no formato fixo, só com critérios presentes e a versão do protocolo; selo “conduta padronizada assumida · confira”. Medicamento vai como sugestão na Prescrição.</td></tr>
+          <tr><td><b>Nível mudou depois de assumir</b></td><td>Pílula “· revisar” (ponto vermelho); no painel, “Os critérios mudaram (Baixo → Moderado)”.</td><td>Reconfirmar conduta · Retirar do relatório</td><td>Bloco no relatório com selo “revisar”; em “Antes de enviar”, a pendência “Reconfirmar conduta: protocolo de …”.</td></tr>
+          <tr><td><b>Prescrição</b></td><td>“Sugestão do protocolo de TEP: Enoxaparina 40 mg SC 1x/dia, somente se houver internação”.</td><td>Adicionar à prescrição · Ignorar</td><td>Nada entra na Memed sem o clique; a escolha fica no registro de controle.</td></tr>
+        </tbody></table></div>
+
+      <div class="jr-h"><h3>04 · Assumir conduta: como o conteúdo compõe o relatório</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">No protótipo</span></div>
+      <div class="prose"><p>O card de risco (ex.: “Risco de TEP · Baixo”) mostra o escore, os critérios que colocaram o paciente no protocolo, com a origem de cada um, e a <b>conduta padronizada da instituição</b>. Ao clicar em <b>Assumir conduta</b>, esse conteúdo passa a fazer parte do relatório. As regras abaixo valem para qualquer protocolo (sepse, TEP e os que a instituição cadastrar).</p></div>
+      <div class="jr-spec">
+        <div class="box"><h4>O que entra no relatório</h4><ol>
+          <li><b>Seção de destino:</b> “Avaliação e plano”, por padrão. Cada protocolo pode definir outra seção na configuração da instituição.</li>
+          <li><b>Bloco do protocolo</b>, sempre no mesmo formato: nome do protocolo, escore e nível (ex.: Wells 1,0 · probabilidade baixa), <b>só os critérios presentes</b> com a origem (prontuário ou trecho da conversa com a hora), a conduta padronizada assumida e a versão do protocolo.</li>
+          <li><b>Critérios ausentes não entram</b> no texto (ficam só no registro de controle).</li>
+          <li>Durante a revisão, o bloco aparece com o selo “conduta padronizada assumida · confira”. O selo <b>não sai</b> no documento final nem na integração.</li>
+        </ol></div>
+        <div class="jr-ex"><b>Exemplo no relatório (Avaliação e plano):</b><br>Protocolo de TEP (Wells 1,0 · probabilidade baixa). Critério presente: doença inflamatória intestinal em atividade (prontuário). Conduta: profilaxia de tromboembolismo se houver internação; orientar deambulação e hidratação. <small>Protocolo institucional TEP v3.</small></div>
+        <div class="box"><h4>Regras de comportamento</h4><ul>
+          <li><b>Só entra com o clique.</b> Nada do protocolo vai para o relatório sem “Assumir conduta”.</li>
+          <li><b>“Agora não”</b> não altera o relatório; registra a decisão no log de controle. O card só volta se o nível de risco mudar.</li>
+          <li><b>Relatório ainda não gerado:</b> a conduta assumida é entrada obrigatória da geração. <b>Já gerado:</b> o bloco é inserido na hora na seção de destino, destacado como novo.</li>
+          <li><b>Sem duplicar:</b> assumir de novo o mesmo protocolo atualiza o bloco existente.</li>
+          <li><b>Texto fiel ao protocolo:</b> o bloco vem de um <b>modelo fixo</b> preenchido com os dados; a IA não reescreve a conduta. Ela pode apenas encaixar o bloco na seção.</li>
+          <li><b>O médico pode editar ou remover</b> o bloco. A edição entra no controle de versões (Original da IA × Final salvo) como qualquer outro trecho.</li>
+          <li><b>Mudou o risco depois de assumido</b> (ex.: Baixo → Moderado): o card avisa “critérios mudaram” e o bloco no relatório ganha o selo “revisar”, até o médico reconfirmar.</li>
+          <li><b>Medicamentos da conduta</b> não vão sozinhos para a Memed: aparecem como sugestão na aba Prescrição, para o médico confirmar.</li>
+          <li><b>Pendência:</b> conduta assumida com selo “revisar” entra em “Antes de enviar” e impede o envio até ser resolvida.</li>
+        </ul></div>
+        <div class="box"><h4>Como implementar</h4><ol>
+          <li><b>Cadastro do protocolo</b> (Base de conhecimento da instituição): identificador, nome, versão, escore e faixas, critérios com a fonte esperada (prontuário ou fala), conduta padronizada em itens, seção de destino e o modelo de texto.</li>
+          <li><b>No atendimento</b>, o prompt de protocolo avalia os critérios e devolve escore, nível e critérios presentes com a origem. O front mostra o card.</li>
+          <li><b>Ao clicar em Assumir conduta</b>, o front envia o evento <span class="mono">protocolo.assumido</span> com a fotografia do momento (abaixo). O back-end guarda o evento no log de controle e o anexa ao atendimento.</li>
+          <li><b>Na geração do relatório</b>, as condutas assumidas entram como dado de entrada: o gerador preenche o modelo do protocolo e coloca o bloco na seção de destino, sem reescrever o conteúdo.</li>
+          <li><b>Na integração</b>, o bloco vai no texto da seção (evolução ou plano) e os dados estruturados vão junto no envio, para auditoria e indicadores.</li>
+        </ol></div>
+        <pre class="jr-code">{
+  "evento": "protocolo.assumido",
+  "atendimento_id": "087df7f8-6062-4e05-b73c-afc30d780fd6",
+  "protocolo": { "id": "tep", "nome": "Protocolo de TEP", "versao": "3" },
+  "escore": { "nome": "Wells", "valor": 1.0, "nivel": "baixo" },
+  "criterios_presentes": [
+    { "texto": "Doença inflamatória intestinal em atividade", "origem": "prontuario" }
+  ],
+  "criterios_ausentes": ["Imobilização ou cirurgia recente", "FC acima de 100 bpm", "Trombose ou embolia prévia"],
+  "conduta": ["Profilaxia de tromboembolismo se houver internação", "Orientar deambulação e hidratação"],
+  "secao_destino": "avaliacao_plano",
+  "assumido_por": "Dra. Helena Duarte · CRM 123456/SP",
+  "assumido_em": "2026-10-26T09:42:10-03:00"
+}</pre>
+      </div>
+
+      <div class="jr-h"><h3>05 · Fale com a Lya: respostas com citações e fontes</h3><span class="jr-tag">Regra definida · tela a revisar</span></div>
+      <div class="prose"><p>Mapeamos o chat “Tele” da Telepatia e o Evidence do Heidi nas contas logadas em 29/10/2026. A Lya combina o melhor dos dois e acrescenta o que só ela tem: <b>citar o próprio atendimento</b> (trecho da conversa com a hora) e o prontuário do paciente, além de protocolos da instituição e literatura.</p></div>
+      <div class="scroll-x"><table class="metrics">
+        <thead><tr><th></th><th>Telepatia (Tele)</th><th>Heidi (Evidence)</th><th>Lya (decisão)</th></tr></thead>
+        <tbody>
+          <tr><td><b>Onde fica</b></td><td>Painel ao lado da consulta, sempre aberto.</td><td>Área própria (Evidence) com histórico de conversas; também dentro da sessão.</td><td>Painel lateral no atendimento; <b>tela cheia</b> nas demais telas. Pergunta feita em Iniciar atendimento abre a tela Fale com a Lya.</td></tr>
+          <tr><td><b>Citação no texto</b></td><td>Número sobrescrito ao fim da frase, que rola até a referência.</td><td>Chip com o nome da fonte ao fim de cada afirmação, com “+N” quando há mais de uma.</td><td>Chip com <b>ícone do tipo</b> e nome curto (ex.: “Protocolo DII”, “Transcrição 00:18 +1”).</td></tr>
+          <tr><td><b>Ao clicar na citação</b></td><td>Vai para a lista de referências.</td><td>Janela com a fonte, o <b>trecho exato</b>, certeza da evidência, nível e impacto, paginação “1 de 2”, ações (abrir, salvar, útil/não útil).</td><td>Janela com tipo, título, <b>trecho exato</b>, força da evidência ou versão do protocolo, selos, paginação e ações: Abrir fonte, <b>Ir ao trecho</b> (transcrição), útil/não útil.</td></tr>
+          <tr><td><b>Lista de fontes</b></td><td>“Referências · 1 fonte”, recolhível, com autor, título, revista, ano e link.</td><td>“N sources found · View sources” no topo e “References · N cited” no fim, com selos: Reliable, Global/In region, tipo, IF, especialidade.</td><td>Topo: “N fontes consultadas”. Fim: “Referências · N citadas”, recolhível, com tipo, título, versão ou força e selos.</td></tr>
+          <tr><td><b>Estrutura da resposta</b></td><td>Resposta curta + alerta “Antes de prescrever”.</td><td>Key points, seções, tabela-resumo e Key Safety Notes.</td><td>Curta por padrão (1 a 4 pontos); alerta de segurança destacado quando houver; seções só em perguntas amplas.</td></tr>
+          <tr><td><b>Escolha das fontes</b></td><td>Botão “Basear nas diretrizes da sua instituição”.</td><td>Menu Sources: Clinical web, Literature and guidelines, My Sources, Partner sources.</td><td>Menu “Fontes”: Prontuário, Protocolos da instituição, Literatura (3 de 3).</td></tr>
+          <tr><td><b>Outros</b></td><td>Comandos “/” com memórias (lembrar, preferências, esquecer) e anexar arquivo; tempo de pesquisa (“Trabalhou por 8 s”).</td><td>Atalhos Look up, Work up, Treat, Prepare, Write, Fill form; CPD com fontes referenciadas.</td><td>Prompts salvos com “/”; atalhos do atendimento (Resumir, Perguntas que faltam, Interações, Escore). Memórias: a avaliar.</td></tr>
+        </tbody></table></div>
+      <div class="jr-spec">
+        <div class="box"><h4>Regras das citações na Lya</h4><ul>
+          <li><b>Toda afirmação clínica tem citação.</b> Frase sem fonte não entra; se não houver fonte segura, a Lya diz que não encontrou e sugere reformular. Nunca inventa referência.</li>
+          <li><b>Cinco tipos de fonte</b>, cada um com ícone e cor: <b>Instituição</b> (protocolos e modelos), <b>Prontuário</b> (exames, alergias, dados do paciente), <b>Transcrição</b> (fala do atendimento, com a hora), <b>Literatura</b> (diretrizes, bulas, revistas) e <b>Lya</b> (prompts da instituição).</li>
+          <li><b>Ordem de prioridade:</b> protocolo da instituição &gt; dado do paciente &gt; literatura. Se a literatura divergir do protocolo, a resposta mostra o protocolo e avisa da divergência.</li>
+          <li><b>Trecho exato:</b> a janela mostra o pedaço da fonte que sustenta a frase, não um resumo. Transcrição tem “Ir ao trecho”, que abre a aba Transcrição destacada.</li>
+          <li><b>Selos:</b> Da instituição/Vigente (protocolos), Dado do paciente, Dito no atendimento, Confiável e região (Brasil, Global, Fora da região) para literatura; força da evidência quando existir.</li>
+          <li><b>Só fontes ligadas:</b> o menu Fontes define onde a Lya pode buscar; fonte desligada não é citada.</li>
+          <li><b>Levar ao relatório:</b> “Inserir no relatório” leva o texto <b>com as citações</b> como pendência de revisão; no documento final as citações viram nota de rodapé ou somem, conforme o modelo da instituição.</li>
+          <li><b>Feedback por fonte:</b> útil/não útil em cada citação alimenta a curadoria da Base de conhecimento.</li>
+        </ul></div>
+        <div class="box"><h4>Como construir</h4><ol>
+          <li><b>Recuperação:</b> buscar nas fontes ligadas (protocolos e modelos na Base de conhecimento; dados do paciente; transcrição do atendimento com tempo; literatura curada) e devolver trechos com identificador.</li>
+          <li><b>Geração:</b> o prompt exige que cada frase termine com os identificadores dos trechos usados, ex.: <span class="mono">{dii,ecco}</span>; frase sem identificador é descartada antes de mostrar.</li>
+          <li><b>Checagem:</b> validar que todo identificador existe no conjunto recuperado e que o trecho apoia a frase; caso contrário, remover a frase ou responder “não encontrei”.</li>
+          <li><b>Front:</b> trocar cada marcador por um chip (primeira fonte + “+N”); o clique abre a janela da fonte; “Referências” lista as fontes únicas na ordem de citação.</li>
+          <li><b>Registro:</b> guardar pergunta, resposta, fontes e trechos citados por atendimento (auditoria) e o feedback por fonte.</li>
+        </ol></div>
+        <pre class="jr-code">{
+  "resposta": "&lt;ul&gt;&lt;li&gt;Retome a mesalazina em dose otimizada (4,8 g/dia) {dii,ecco}.&lt;/li&gt;&lt;li&gt;Descarte infecção, inclusive C. difficile {dii}.&lt;/li&gt;&lt;/ul&gt;",
+  "titulo": "Conduta para a reagudização",
+  "fontes": {
+    "dii":  { "tipo": "instituicao", "titulo": "Protocolo DII · Hospital Aurora, p. 4", "versao": "3",
+              "trecho": "Na reagudização após suspensão do 5-ASA, retomar mesalazina em dose otimizada (4,8 g/dia)…",
+              "selos": ["Da instituição", "Vigente"] },
+    "ecco": { "tipo": "literatura", "titulo": "ECCO Guidelines on Therapeutics in UC · 2022",
+              "trecho": "Em retocolite leve a moderada, 5-ASA oral ≥ 2,4 g/dia…", "forca": "alta",
+              "selos": ["Confiável", "Global"] },
+    "t18":  { "tipo": "transcricao", "hora": "00:18", "trecho": "Parei a mesalazina faz umas duas semanas…" }
+  }
+}</pre>
+      </div>
+
+      <div class="jr-h"><h3>05 · Fale com a Lya</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Ajustada</span></div>
+      <div class="scroll-x"><table class="metrics">
+        <thead><tr><th>Tela · estado</th><th>O que o usuário vê</th><th>Ações</th><th>Resposta da Lya / próximo passo</th></tr></thead>
+        <tbody>
+          <tr><td><b>Fora do atendimento</b></td><td>Campo na tela inicial; ao enviar, abre a <b>tela cheia</b> Fale com a Lya com a resposta e o histórico de conversas.</td><td>Perguntar · Fontes · Prompts salvos (/) · anexar</td><td>Sem paciente, toda pergunta é geral. Sem fonte segura: “Não encontrei uma resposta segura nas fontes ligadas”.</td></tr>
+          <tr><td><b>Atendimento · início</b></td><td>Painel lateral com saudação e 4 atalhos: Resumir até agora, Perguntas que faltam, Interações e alergias, Escore de gravidade. Escopo “Sobre o paciente” ou “Pergunta geral”.</td><td>Atalho · digitar · trocar escopo</td><td>Conversa começa limpa a cada atendimento; o campo esvazia ao enviar.</td></tr>
+          <tr><td><b>Atendimento · resposta</b></td><td>Etiqueta do escopo, “N fontes consultadas”, pontos curtos com chip de fonte em cada afirmação, alerta de segurança destacado, Referências no fim.</td><td>Abrir a fonte (trecho exato) · Ir ao trecho · Inserir no relatório (só sobre o paciente) · Gerar documento · copiar · útil/não útil</td><td>Pergunta de plataforma: “Ir para a Ajuda”. Pergunta geral detectada: marcada “(detectada pela Lya)”, sem dados do paciente e sem ir ao relatório.</td></tr>
+          <tr><td><b>Depois do relatório</b></td><td>Atalhos mudam: Revisar pendências, Explicar ao paciente, Orientações ao paciente, Checar a prescrição.</td><td>Atalho · perguntar</td><td>Pendências listadas com o que falta; explicação em linguagem simples para ler ou enviar; orientações viram documento.</td></tr>
+          <tr><td><b>Depois de integrado</b></td><td>“Inserir no relatório” vira <b>“Inserir como adendo”</b>.</td><td>Inserir como adendo</td><td>O conteúdo entra como adendo ao relatório já enviado.</td></tr>
+          <tr><td><b>Limite de perguntas</b></td><td>Aos 80%: rodapé âmbar com “N de M perguntas”. Aos 100%: aviso no lugar do campo.</td><td>Ver planos · Falar com o suporte · Uso e limites</td><td>O atendimento continua; só o chat pausa (ver “Uso, limites e travas”).</td></tr>
+        </tbody></table></div>
+
+      <div class="jr-h"><h3>06 · Gerar relatório</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Ajustada</span></div>
+      <div class="scroll-x"><table class="metrics">
+        <thead><tr><th>Tela · estado</th><th>O que o usuário vê</th><th>Ações</th><th>Resposta da Lya / próximo passo</th></tr></thead>
+        <tbody>
+          <tr><td><b>Cedo demais</b></td><td>Sem fala: “A Lya ainda não ouviu a conversa”. Pouco conteúdo: “Ainda há pouco para o relatório”.</td><td>Continuar ouvindo · Gerar mesmo assim</td><td>Ver etapa 03.</td></tr>
+          <tr><td><b>Gerando</b></td><td>Aba Relatório abre; quadro “Gerando o relatório” com 5 passos (juntar transcrição, conferir doses/alergias/valores, organizar no modelo do agente, montar prescrição e documentos, separar o que conferir); cabeçalho mostra o passo atual.</td><td>Cancelar · olhar outras abas</td><td>Cancelar volta a ouvir, sem perder nada. A gravação para durante a geração.</td></tr>
+          <tr><td><b>Pronto para conferir</b></td><td>Aviso “Relatório pronto. N pendências em amarelo”; abas Relatório e Prescrição criadas; “Antes de enviar” na barra de Sugestões; seções vazias recolhidas.</td><td>Resolver pendências · Editar seção · Regenerar · Copiar · Imprimir · Integrar · Criar documento · Retomar gravação</td><td>Pendência resolvida some de “Antes de enviar”.</td></tr>
+          <tr><td><b>Editar seção</b></td><td>Lápis ao passar o mouse em cada seção; texto vira campo editável.</td><td>Salvar · Cancelar</td><td>Seção ganha o selo “editado por você”; a versão da IA fica guardada (Histórico › Versões).</td></tr>
+          <tr><td><b>Regenerar</b></td><td>“Regenerar 0/3” (limite do plano por relatório); confirmação explica o que muda.</td><td>Gerar de novo · Cancelar</td><td>Refaz com tudo o que foi ouvido; mantém edições, condutas assumidas e calculadoras. No limite, o botão fica desligado com o motivo.</td></tr>
+          <tr><td><b>Retomar gravação</b></td><td>Barra do relatório: “Gravação retomada. O que for dito agora entra quando você gerar de novo.”</td><td>Gerar de novo</td><td>Nova geração inclui o trecho novo.</td></tr>
+          <tr><td><b>Prescrição e documentos</b></td><td>Prescrição montada na Memed (com sugestões de protocolo para confirmar); “Criar” para documentos liberados ao perfil.</td><td>Adicionar/Ignorar sugestão · Criar documento · remover documento</td><td>Abas de documento podem rolar com setas quando não cabem.</td></tr>
+        </tbody></table></div>
+
+      <div class="jr-h"><h3>07 · Revisar, encerrar e integrar</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Ajustada</span></div>
+      <div class="prose"><p>Uma ação só, em dois lugares (cabeçalho “Assinar e enviar ao prontuário” e barra do relatório “Integrar ao prontuário”), que segue sempre a mesma ordem: <b>pendências → encerrar → assinar e enviar → integrado</b> (ou falha com nova tentativa).</p></div>
+      <div class="scroll-x"><table class="metrics">
+        <thead><tr><th>Tela · estado</th><th>O que o usuário vê</th><th>Ações</th><th>Resposta da Lya / próximo passo</th></tr></thead>
+        <tbody>
+          <tr><td><b>Com pendências</b></td><td>Botão de envio com o número de pendências. Ao clicar: “Antes de enviar, resolva N pendências”, com cada uma (dose, peso, conduta a reconfirmar) e a ação ao lado.</td><td>Resolver ali mesmo · Voltar ao relatório</td><td>A lista diminui a cada ação; com tudo resolvido, “Continuar o envio”. Motivo explicado: não enviar dose, alergia ou conduta sem conferência.</td></tr>
+          <tr><td><b>Atendimento aberto</b></td><td>Diálogo “Encerrar o atendimento?” com o que acontece (fecha gravação e dados, cria os logs de controle) e “Em seguida, assina e envia”.</td><td>Encerrar e enviar · Cancelar</td><td>Encerra e segue direto para o envio.</td></tr>
+          <tr><td><b>Enviando</b></td><td>Cabeçalho: “Assinando e enviando ao sistema do hospital…”.</td><td>—</td><td>Assinatura com o certificado do médico (ICP-Brasil) e envio do relatório, da prescrição e dos documentos.</td></tr>
+          <tr><td><b>Integrado</b></td><td>Mensagem verde no topo do relatório: “Integrado ao prontuário do Hospital Aurora · 09:47”, o que foi enviado, quem assinou e o comprovante; cabeçalho “Integrado ao prontuário às 09:47”.</td><td>Ver comprovante · Voltar ao início · Próximo da fila</td><td>Comprovante: destino, paciente, hora, assinatura, documentos, resposta do hospital (201) e hash registrado na Auditoria. Relatório passa a somente leitura; mudanças viram adendo (inclusive do chat: “Inserir como adendo”).</td></tr>
+          <tr><td><b>Falha no envio</b></td><td>Mensagem vermelha: “Não foi possível integrar ao prontuário. O sistema do hospital não respondeu a tempo. Nada foi perdido…”; cabeçalho “Falha no envio · Tentar de novo”.</td><td>Tentar de novo · Ver detalhes</td><td>Relatório salvo e assinado na Lya; nova tentativa automática a cada 5 min por 1 hora, com aviso do resultado; o atendimento aparece em “Com erro de envio” no Histórico e em Integração.</td></tr>
+          <tr><td><b>B2C</b></td><td>“Assinar e finalizar” no lugar do envio; mensagem “Relatório assinado · 09:47 · PDF pronto”.</td><td>Baixar PDF · Enviar ao paciente · Novo atendimento</td><td>Sem prontuário externo: o relatório fica na Lya e no PDF.</td></tr>
+        </tbody></table></div>
+
+      <div class="jr-h"><h3>08 · Histórico</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Ajustada</span></div>
+      <div class="scroll-x"><table class="metrics">
+        <thead><tr><th>Tela · estado</th><th>O que o usuário vê</th><th>Ações</th><th>Resposta da Lya / próximo passo</th></tr></thead>
+        <tbody>
+          <tr><td><b>Lista</b></td><td>Abas com contagem: Todos, Para revisar, Integrados, Com erro de envio, Não sumarizados. Colunas: paciente, agente, profissional (só no escopo da organização), data, status, documentos editados, transcrição, ação.</td><td>Trocar aba · buscar paciente ou agente · período (hoje, 7, 30 dias) · agente · profissional · “Só com documentos editados”</td><td>Filtros combinam entre si; sem resultado: “Nenhum atendimento com esses filtros” e Limpar filtros.</td></tr>
+          <tr><td><b>Quem vê o quê</b></td><td>Selo do escopo: “Escopo: organização” (permissão Visualizar atendimentos da organização) ou “Escopo: meus atendimentos”. Transcrição “Disponível” ou “Restrita” conforme a permissão Visualizar transcrição no histórico.</td><td>—</td><td>Profissional vê os próprios; gestor e qualidade veem a organização. Retenção: transcrições 90 dias; relatórios, versões e logs pelo prazo do prontuário.</td></tr>
+          <tr><td><b>Para revisar</b></td><td>Ação “Continuar revisão” (dono do atendimento).</td><td>Continuar revisão</td><td>Abre o relatório pronto para conferir, com as pendências; segue a etapa 07.</td></tr>
+          <tr><td><b>Integrado</b></td><td>Ação “Ver”.</td><td>Ver</td><td>Abre o atendimento congelado como terminou (somente leitura), com versões Final, Original (IA) e Comparar em cada documento.</td></tr>
+          <tr><td><b>Erro de envio</b></td><td>Ação “Reenviar” (dono) ou “Ver”.</td><td>Reenviar · Tentar de novo</td><td>Abre o atendimento com a mensagem de falha; “Tentar de novo” envia e mostra a confirmação de integrado.</td></tr>
+          <tr><td><b>Não sumarizado</b></td><td>“Sem documentos” e “Por quê?”.</td><td>Por quê?</td><td>Explica o motivo (ex.: gravação curta demais para sumarizar).</td></tr>
+          <tr><td><b>Exportar</b></td><td>“Exportar N atendimentos” com os filtros da tela: formato (CSV ou PDF dos relatórios), relatórios finais, versões IA × final, transcrições (só com permissão e até 90 dias), CPF e telefone sempre mascarados.</td><td>Exportar · Cancelar</td><td>Download preparado e exportação registrada na Auditoria (quem, quando, o quê).</td></tr>
+        </tbody></table></div>
+    </section>
+
+    <section class="s" id="uso">
+      <div class="s-head"><span class="s-num">04</span><h2>Uso, limites e travas</h2></div>
+      <div class="prose">
+        <p>Cada ação da Lya consome IA (transcrição, prompts em tempo real, relatório, chat, leitura de exames). Sem limite, um único usuário pode consumir o custo de dezenas. A régua abaixo separa os três tipos de cliente, mostra limites em linguagem simples para quem usa e mede o custo por dentro em <b>créditos de IA</b>.</p>
+        <p><b>Números iniciais, para calibrar</b> com a telemetria das primeiras semanas (consumo real por atendimento, por especialidade e por tamanho).</p>
+      </div>
+
+      <div class="jr-h"><h3>Separar pergunta do atendimento e pergunta geral</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">No protótipo</span></div>
+      <div class="jr-spec"><div class="box"><ul>
+        <li>No painel do atendimento, o campo tem dois escopos: <b>Sobre o paciente</b> (padrão) e <b>Pergunta geral</b>.</li>
+        <li><b>Sobre o paciente:</b> usa os dados do atendimento, fica no registro do atendimento e pode ir ao relatório (“Inserir no relatório”).</li>
+        <li><b>Pergunta geral:</b> não envia dados do paciente, não fica no registro do atendimento nem vai ao relatório; vai para o histórico geral do Fale com a Lya. Custa menos (contexto menor).</li>
+        <li>A Lya <b>detecta</b> perguntas gerais (“qual a dose de…”, “o que é…”, critérios, diretrizes) sem menção ao paciente e marca “Pergunta geral (detectada pela Lya)”; o médico pode trocar o escopo antes de perguntar.</li>
+        <li>Cada resposta mostra a etiqueta do escopo, para não haver dúvida sobre o que foi usado.</li>
+      </ul></div></div>
+
+      <div class="jr-h"><h3>Quanto custa cada ação (estimativa)</h3></div>
+      <div class="scroll-x"><table class="metrics">
+        <thead><tr><th>Ação</th><th>Créditos</th><th>Por quê</th></tr></thead>
+        <tbody>
+          <tr><td>Atendimento de 15 min</td><td>≈ 12</td><td>Transcrição (≈ 2), prompts em tempo real sobre a transcrição incremental (≈ 7) e relatório (≈ 3).</td></tr>
+          <tr><td>Cada 5 min a mais de atendimento</td><td>≈ 3</td><td>Tempo real roda enquanto houver fala nova.</td></tr>
+          <tr><td>Pergunta geral no chat</td><td>≈ 0,5</td><td>Sem contexto do paciente; busca só em protocolos e literatura.</td></tr>
+          <tr><td>Pergunta sobre o paciente</td><td>≈ 1,5</td><td>Envia resumo do atendimento + dados clínicos + fontes.</td></tr>
+          <tr><td>Regenerar relatório</td><td>≈ 3</td><td>Refaz o relatório inteiro.</td></tr>
+          <tr><td>Ler exame anexado</td><td>≈ 1 por página</td><td>Leitura de PDF ou imagem e organização em Dados Clínicos.</td></tr>
+          <tr><td>Documento extra (atestado, encaminhamento)</td><td>≈ 0,5</td><td>Modelo preenchido com dados do relatório.</td></tr>
+        </tbody></table></div>
+      <p class="small muted" style="margin:6px 0 0">1 crédito ≈ 10 mil tokens (entrada + saída) do modelo padrão. O valor em reais do crédito acompanha o contrato com o provedor de IA.</p>
+
+      <div class="jr-h"><h3>Limites por tipo de cliente</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Aprovados para começar · 29/10/2026</span></div>
+      <div class="scroll-x"><table class="metrics">
+        <thead><tr><th></th><th>B2C Gratuito</th><th>B2C Unlimited (R$ 199/mês)</th><th>B2B Institucional</th></tr></thead>
+        <tbody>
+          <tr><td><b>Atendimentos</b></td><td>10 por mês</td><td>300 por mês (uso justo, ≈ 15 por dia útil)</td><td>Franquia: 250 por licença/mês, compartilhada na organização</td></tr>
+          <tr><td><b>Duração máxima</b></td><td>30 min (aviso aos 25)</td><td>60 min (aviso aos 50)</td><td>Definida pela organização (padrão 90 min)</td></tr>
+          <tr><td><b>Perguntas no chat</b></td><td>30 por mês</td><td>600 por mês e 60 por dia</td><td>400 por licença/mês, compartilhadas; limite diário por profissional opcional</td></tr>
+          <tr><td><b>Páginas de exame lidas</b></td><td>10 por mês</td><td>200 por mês</td><td>100 por licença/mês</td></tr>
+          <tr><td><b>Regenerar relatório</b></td><td>1 por relatório</td><td>3 por relatório</td><td>3 por relatório</td></tr>
+          <tr><td><b>Ao chegar a 100%</b></td><td>Bloqueia novos atendimentos e o chat até renovar; oferece o Unlimited</td><td>Bloqueia acima do uso justo; suporte avalia caso a caso</td><td>Política da organização: bloquear, ou liberar excedente até 110% ou sem limite, cobrado à parte</td></tr>
+          <tr><td><b>Custo-alvo</b></td><td>≤ 150 créditos/mês por usuário (aquisição)</td><td>Margem positiva até o teto de uso justo</td><td>Franquia precificada por licença + excedente</td></tr>
+        </tbody></table></div>
+
+      <div class="jr-h"><h3>Como criar as travas</h3></div>
+      <div class="jr-spec">
+        <div class="box"><h4>Regras de produto (o que o usuário vê)</h4><ul>
+          <li><b>Aviso aos 80%</b> (texto âmbar no rodapé do chat, no plano e no menu) e <b>aos 100%</b> (bloqueio com explicação e próximo passo: Ver planos, Falar com o suporte ou Uso e limites).</li>
+          <li><b>Nunca interromper um atendimento em andamento</b> por limite. O limite vale para <b>começar</b> um novo atendimento ou fazer uma nova pergunta.</li>
+          <li>Esgotou o chat: o atendimento continua normal; só o chat pausa, com o motivo.</li>
+          <li>Duração máxima: aviso antes do fim (“faltam 5 minutos”); ao chegar, a gravação pausa e o médico pode gerar o relatório com o que foi ouvido.</li>
+          <li>B2B: gestor vê o consumo da organização em Configurações › Uso e limites, define a política ao chegar a 100%, os avisos (70/90/100%), cotas por grupo e limite diário por profissional. O profissional que esbarra no limite vê “O gestor da organização foi avisado”.</li>
+          <li>B2C: o uso do mês fica em Minha conta › Faturamento (atendimentos, perguntas, páginas de exame) e no menu.</li>
+        </ul></div>
+        <div class="box"><h4>Regras técnicas (o que segura o custo)</h4><ol>
+          <li><b>Medidor único</b> no back-end: cada chamada de IA grava créditos gastos por usuário, organização, atendimento e tipo de ação; os limites leem esse medidor.</li>
+          <li><b>Checagem antes de chamar a IA</b> (não depois): se o saldo do período não cobre a ação, devolve o erro de limite e o front mostra a trava.</li>
+          <li><b>Tempo real econômico:</b> prompts só rodam quando há fala nova (mínimo 20–30 s entre execuções), sobre a transcrição incremental e um resumo acumulado, nunca sobre a transcrição inteira a cada vez.</li>
+          <li><b>Modelo certo para cada tarefa:</b> modelo menor para tempo real e perguntas gerais; modelo maior para o relatório e perguntas com contexto.</li>
+          <li><b>Contexto enxuto no chat:</b> pergunta geral não leva dados do paciente; pergunta sobre o paciente leva o resumo do atendimento, não a transcrição inteira. Resposta com teto de tamanho.</li>
+          <li><b>Cache:</b> leitura de exame e resumo do atendimento anterior são feitos uma vez e reaproveitados.</li>
+          <li><b>Proteção contra abuso:</b> limite por minuto por usuário (ex.: 6 perguntas/min), bloqueio de perguntas repetidas idênticas e alerta de uso fora do padrão para o time CTC.</li>
+          <li><b>Renovação</b> no 1º dia do mês (B2C) ou no ciclo do contrato (B2B); o saldo não acumula.</li>
+        </ol></div>
+        <pre class="jr-code">// checagem antes de qualquer chamada de IA
+POST /v1/uso/checar
+{ "organizacao_id": "aurora", "usuario_id": "helena", "plano": "institucional",
+  "acao": "chat.pergunta", "escopo": "paciente", "creditos_estimados": 1.5 }
+→ 200 { "permitido": true, "uso_pct": 0.91, "aviso": "80" }
+→ 402 { "permitido": false, "motivo": "franquia_perguntas_esgotada",
+        "politica": "bloquear", "renova_em": "2026-11-01" }</pre>
+      </div>
+    </section>
+
     <!-- 02 -->
     <section class="s" id="hoje">
-      <div class="s-head"><span class="s-num">03</span><h2>A Lya hoje</h2></div>
+      <div class="s-head"><span class="s-num">05</span><h2>A Lya hoje</h2></div>
       <div class="prose">
         <p>Navegamos em lyahealth.com.br (Home, Produto, Preços), no app logado (app.lyahealth.com.br, organização de testes) e lemos o código do site neste repositório. O site é construído sobre um template de painel administrativo (Elstar, React + Tailwind), com a paleta <span class="mono">lya</span> centrada em <span class="mono">#1E5EFF</span> e a fonte Inter.</p>
         <p><b>O que funciona:</b> a promessa “insights em tempo real” já está no título; há depoimentos institucionais fortes (Moinhos de Vento, Dr. On-line); a página de Produto explica Prompts, perfis por especialidade, prompts próprios e integrações; o preço é claro (Gratuito com 10 atendimentos, Unlimited a R$ 199/mês por usuário).</p>
@@ -517,7 +824,7 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
 
     <!-- 03 -->
     <section class="s" id="benchmark">
-      <div class="s-head"><span class="s-num">04</span><h2>Concorrentes</h2></div>
+      <div class="s-head"><span class="s-num">06</span><h2>Concorrentes</h2></div>
       <div class="prose">
         <p>Cada card abaixo reproduz o tom visual de cada site (paleta aproximada, tipo de letra e frase de abertura) para facilitar a comparação lado a lado. As áreas logadas não foram acessadas; tudo o que está aqui vem das páginas públicas.</p>
       </div>
@@ -578,7 +885,7 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
 
     <!-- 04 -->
     <section class="s" id="matriz">
-      <div class="s-head"><span class="s-num">05</span><h2>Matriz de recursos</h2></div>
+      <div class="s-head"><span class="s-num">07</span><h2>Matriz de recursos</h2></div>
       <div class="prose"><p>Lya, Voa e Telepatia foram avaliadas por dentro, com contas logadas (Voa em trial, Telepatia em plano pessoal). A Heidi foi avaliada só pelo site público; onde ele não deixa claro, a célula fica marcada como não verificada em vez de presumida.</p></div>
       <div class="scroll-x">
         <table class="matrix">
@@ -652,7 +959,7 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
 
     <!-- produto por dentro -->
     <section class="s" id="dentro">
-      <div class="s-head"><span class="s-num">06</span><h2>Produto por dentro</h2></div>
+      <div class="s-head"><span class="s-num">08</span><h2>Produto por dentro</h2></div>
       <div class="prose">
         <p>Entramos logados nos três produtos e percorremos o mesmo caminho em cada um: tela inicial, atendimento, chat, arquivos, personalização e documento final. Nenhum atendimento foi gravado e nenhum dado de paciente foi usado nesta página.</p>
       </div>
@@ -705,7 +1012,7 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
 
     <!-- atendimento real -->
     <section class="s" id="consultareal">
-      <div class="s-head"><span class="s-num">07</span><h2>Atendimento real na Lya B2C</h2></div>
+      <div class="s-head"><span class="s-num">09</span><h2>Atendimento real na Lya B2C</h2></div>
       <div class="prose"><p>Gravamos um atendimento simulado de dermatologia na conta B2C de teste (plano Gratuito, sem integração), do início ao relatório. Foi o teste que mais mudou o protótipo.</p></div>
       <div class="scroll-x">
         <table class="metrics">
@@ -726,7 +1033,7 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
 
     <!-- 05 -->
     <section class="s" id="aprendizados">
-      <div class="s-head"><span class="s-num">08</span><h2>O que aprendemos</h2></div>
+      <div class="s-head"><span class="s-num">10</span><h2>O que aprendemos</h2></div>
       <div class="learn">
         <div><h4>Todos ficaram parecidos</h4><p>Creme, serifa, fotografia quente. A categoria escolheu “acolhimento” como linguagem e ficou indistinguível.</p><p class="so"><b>Para a Lya:</b> diferenciar pela precisão. Visual de instrumento clínico, frio e legível, com o tempo real como único elemento vivo da tela.</p></div>
         <div><h4>O chat virou a porta de entrada</h4><p>O hero da Heidi é uma caixa de chat; a Voa nomeou o agente (Charcot); a Telepatia mostra o assistente já na tela de login.</p><p class="so"><b>Para a Lya:</b> o nome já é uma persona. “Fale com a Lya” dispensa criar outro personagem e reforça a marca.</p></div>
@@ -739,7 +1046,7 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
 
     <!-- 06 -->
     <section class="s" id="conceito">
-      <div class="s-head"><span class="s-num">09</span><h2>Conceito: Lya ao vivo</h2></div>
+      <div class="s-head"><span class="s-num">11</span><h2>Conceito: Lya ao vivo</h2></div>
       <div class="prose">
         <p>A frase que guia todas as decisões: <b>o atendimento acontece na tela enquanto o médico olha para o paciente.</b> Tudo o que a Lya mostra tem hora, origem e estado. Nada é mágico; tudo é rastreável até o trecho da conversa ou o exame que gerou.</p>
       </div>
@@ -753,7 +1060,7 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
 
     <!-- 07 -->
     <section class="s" id="site">
-      <div class="s-head"><span class="s-num">10</span><h2>Site novo</h2></div>
+      <div class="s-head"><span class="s-num">12</span><h2>Site novo</h2></div>
       <div class="prose"><p>O hero troca a ilustração de laptop por um atendimento acontecendo. Abaixo, a prova social vira números legíveis. O azul elétrico de template sai e entra a paleta do protótipo, a mesma do produto: azul para ação e lilás para o que está ao vivo.</p></div>
 
       <div class="figure">
@@ -807,7 +1114,7 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
 
     <!-- 08 -->
     <section class="s" id="consulta">
-      <div class="s-head"><span class="s-num">11</span><h2>Tela de atendimento</h2></div>
+      <div class="s-head"><span class="s-num">13</span><h2>Tela de atendimento</h2></div>
       <div class="prose"><p>O atendimento acontece numa tela só, que muda de estado: ao vivo, gerando o relatório, antes de enviar e enviado. A primeira aba é <b>Em tempo real</b>, com os Prompts se preenchendo enquanto o paciente fala; o painel “Sugestões da Lya” traz avisos com a conclusão no título e a fonte sempre visível. O exemplo abaixo é o caso de dermatologia do atendimento real.</p></div>
 
       <div class="figure">
@@ -876,7 +1183,7 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
 
     <!-- 09 -->
     <section class="s" id="chat">
-      <div class="s-head"><span class="s-num">12</span><h2>Fale com a Lya</h2></div>
+      <div class="s-head"><span class="s-num">14</span><h2>Fale com a Lya</h2></div>
       <div class="prose">
         <p>O chat fecha o primeiro gap. Ele abre num <b>painel lateral de altura inteira</b>, no padrão que os médicos já conhecem do ChatGPT, do Gemini e do Claude, a partir do botão “Fale com a Lya” em qualquer tela. No atendimento, recebe como contexto a transcrição até o segundo atual, os Prompts, os Dados Clínicos e os exames anexados; fora dela, responde com as fontes ligadas. O protótipo traz a aba “Ações e regras” com 14 ações especificadas para o desenvolvimento.</p>
       </div>
@@ -895,7 +1202,7 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
 
     <!-- 10 -->
     <section class="s" id="exames">
-      <div class="s-head"><span class="s-num">13</span><h2>Upload de exames</h2></div>
+      <div class="s-head"><span class="s-num">15</span><h2>Upload de exames</h2></div>
       <div class="prose"><p>O segundo gap. O exame entra por três portas: arrastar no atendimento, clipe no chat ou importação do prontuário integrado. A Lya extrai cada analito, compara com a referência e com resultados anteriores, e acende os Prompts que dependem dele.</p></div>
 
       <div class="figure">
@@ -947,7 +1254,7 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
 
     <!-- 11 -->
     <section class="s" id="studio">
-      <div class="s-head"><span class="s-num">14</span><h2>Prompt Studio</h2></div>
+      <div class="s-head"><span class="s-num">16</span><h2>Prompt Studio</h2></div>
       <div class="prose">
         <p>Por dentro, descobrimos que a Lya já tem o mais granular criador de módulos da categoria: Prompt ou Agente; momento (tempo real, relatório, documento, estático); comportamento (texto, tag, checklist); entradas (transcrição, notas, integração, dados do paciente, descrição cirúrgica, outros Prompts); visibilidade; duplicação; tour guiado e Playground. São 119 Prompts só na organização de testes.</p>
         <p>A proposta deixa de ser uma feature nova e passa a ser a evolução do criador atual em quatro pontos: <b>prévia ao vivo lado a lado</b> (hoje o Playground é um passo à parte), <b>“Exames” como nova entrada</b>, <b>formatos Indicadores e Tabela</b> além de texto, tag e checklist, e <b>histórico de versões</b> para o gestor. Também sai o emoji dos ícones, trocado pelo selo de ícone do design system.</p>
@@ -988,7 +1295,7 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
 
     <!-- 12 -->
     <section class="s" id="ds">
-      <div class="s-head"><span class="s-num">15</span><h2>Design system</h2></div>
+      <div class="s-head"><span class="s-num">17</span><h2>Design system</h2></div>
       <div class="prose">
         <p>Partimos do design system da tela de atendimento que já existe (vermelho reservado à segurança, sem emoji) e das decisões do protótipo: uma paleta única para site e produto, com <b>azul para ação</b> e <b>lilás só para o que está ao vivo</b> (o verde fica para sucesso); aposentar o azul de template <span class="mono">#1E5EFF</span>; e trocar Nunito + Montserrat por Geist com Geist Mono para dados. A navy e o teal da CTC deixam de ser cores de interface, e o design system da tela de atendimento precisa ser atualizado.</p>
       </div>
@@ -1030,7 +1337,7 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
 
     <!-- 13 -->
     <section class="s" id="roadmap">
-      <div class="s-head"><span class="s-num">16</span><h2>Roadmap</h2></div>
+      <div class="s-head"><span class="s-num">18</span><h2>Roadmap</h2></div>
       <div class="prose"><p>Ordem pensada para entregar valor visível cedo (site e correções), e deixar as features novas para quando a base de componentes estiver pronta.</p></div>
       <div class="road">
         <div><span class="ph">0 · Correções rápidas</span><span class="wk">sem. 1</span><div><ul><li>“Insigths” e referências científicas no site (já em PR)</li><li>Textos do plano gratuito: período de teste x saldo de atendimentos</li><li>Formulário da Memed que não fecha</li></ul></div></div>
@@ -1061,7 +1368,7 @@ footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;colo
 
     <!-- 14 -->
     <section class="s" id="metricas">
-      <div class="s-head"><span class="s-num">17</span><h2>Métricas e decisões</h2></div>
+      <div class="s-head"><span class="s-num">19</span><h2>Métricas e decisões</h2></div>
       <div class="scroll-x">
         <table class="metrics">
           <thead><tr><th>Métrica</th><th>Por que importa</th><th>Onde medir</th></tr></thead>

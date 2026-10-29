@@ -654,7 +654,7 @@ body.hide-novo .protobar{display:none}
 .chfull{min-height:620px}
 
 /* rodapé da Home, passos do criador e captação */
-.hask.dock{position:sticky;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:15;margin:22px auto 0;padding:0;background:none;max-width:860px}
+.hask.dock{position:static;margin:0;padding:0;background:none;max-width:none}
 .hask.dock .ch-comp.big{margin:0;padding:10px 10px 8px 18px;border-radius:22px;box-shadow:0 8px 28px rgba(12,26,44,.14),0 1px 3px rgba(12,26,44,.06)}
 .hask.dock .ch-comp.big textarea{min-height:24px;height:28px;font-size:15px;overflow:hidden}
 .hask.dock .hask-row{display:none}
@@ -1238,6 +1238,137 @@ body.r-atendimento,body.r-relatorio{overflow-x:clip}
 .tl-thumb{width:44px;height:30px;border-radius:6px;background:var(--surface-2);display:grid;place-items:center;color:var(--muted)}
 .tl-test{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--surface-2);font-size:12.5px}
 .tl-l{color:var(--muted)}.tl-m{height:6px;border-radius:999px;background:var(--line);overflow:hidden}.tl-m i{display:block;height:100%;background:var(--ok);border-radius:999px;transition:width .3s}
+/* versões dos documentos (IA x final) */
+.vgrid{display:grid;grid-template-columns:280px minmax(0,1fr);gap:16px;align-items:start}
+.vlist{display:grid;gap:6px}
+.vd{display:flex;align-items:center;gap:10px;padding:12px;border-radius:14px;border:1px solid var(--line);background:var(--surface);text-align:left;cursor:pointer;font:inherit;color:var(--ink)}
+.vd.on{border-color:var(--btn);background:var(--navy-tint)}.vd>svg{color:var(--btn);flex:none}.vd .memed{width:18px;height:18px}
+.vd-t{flex:1;display:grid;min-width:0}.vd-t b{font-size:13.5px}.vd-t small{font-size:12px;color:var(--muted)}
+.vtag{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:999px;font:600 10.5px var(--f-sans);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.vtag.ed{background:var(--warn-tint);color:var(--warn)}.vtag.ok{background:var(--navy-tint);color:var(--navy)}
+.vcard{padding:0;overflow:hidden}
+.vhead{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px 20px;border-bottom:1px solid var(--line)}
+.vleg{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 20px;background:var(--surface-2);font-size:12.5px}
+.vhdr{padding:12px 0 4px;border-bottom:1px solid var(--line)}.vhdr b{display:flex;align-items:center;gap:6px;font:600 11.5px var(--f-sans);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}.vhdr b:last-child{color:var(--navy)}
+.vbody{display:grid;gap:0;padding:6px 20px 10px}
+.vs,.vs2{padding:12px 0;border-bottom:1px solid var(--line)}.vs:last-child,.vs2:last-child{border-bottom:0}
+.vs-h{display:flex;align-items:center;gap:8px;font:600 12px var(--f-sans);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:6px}
+.vs p,.vs2 p{margin:0;font-size:14px;line-height:1.6}
+.vs.same{display:flex;align-items:center;justify-content:space-between;padding:9px 0}.vs.same .vs-h{margin:0}
+.vs2-c{display:grid;grid-template-columns:1fr 1fr;gap:18px}.vs2-c p:first-child{color:var(--muted)}
+.vs2.same .vs2-c p{color:var(--muted)}
+.vbody ins,.vleg ins{background:var(--ok-tint);color:var(--ok);text-decoration:none;border-radius:4px;padding:0 2px}
+.vbody del,.vleg del{background:var(--danger-tint);color:var(--danger);border-radius:4px;padding:0 2px}
+.vfoot{display:flex;gap:8px;padding:12px 20px;border-top:1px solid var(--line)}
+@media (max-width:900px){.vgrid{grid-template-columns:1fr}.vs2-c{grid-template-columns:1fr}}
+/* histórico: versões dentro das abas de documento */
+.cmain>.verwrap{margin:0!important}.verwrap{display:block;max-height:calc(100vh - 196px);overflow:auto}.verbar{position:sticky;top:0;z-index:2}.verwrap .vdoc{padding:20px 28px 28px;max-width:none}.verwrap .vdoc h3{margin:0 0 4px}.verwrap .vdoc p{margin:0;line-height:1.6}.verwrap .vdoc h4{margin:18px 0 6px}.verwrap .vdoc>p.small{margin-top:18px;padding-top:12px;border-top:1px solid var(--line)}.verwrap .vleg,.verwrap .vbody{padding-left:28px;padding-right:28px}.verbar{padding:12px 20px}
+.verbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.vb-ic{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--navy-tint);color:var(--btn)}
+.verbar b{font-size:14px}
+.verwrap .vleg{border-bottom:1px solid var(--line)}
+.verwrap .vbody{padding:4px 18px 12px}
+.vdoc h4{font:600 12px var(--f-sans);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:14px 0 4px}
+.vdoc.is-ia{background:repeating-linear-gradient(135deg,transparent 0 14px,color-mix(in srgb,var(--lilac-tint) 55%,transparent) 14px 15px)}
+.vdoc-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--lilac-tint);color:var(--lilac);font:500 12px var(--f-sans);margin-bottom:6px}
+.ctabs .ed-dot{width:7px;height:7px;border-radius:50%;background:var(--warn);display:inline-block}
+/* login */
+.login{position:fixed;inset:0;z-index:70;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:var(--bg)}
+.lg-brand{display:grid;align-content:space-between;padding:40px 48px;color:#fff;background:radial-gradient(120% 90% at 100% 100%,color-mix(in srgb,var(--teal) 70%,transparent),transparent 60%),linear-gradient(150deg,var(--btn),color-mix(in srgb,var(--btn) 70%,#000))}
+.lg-brand h2{font-size:32px;line-height:1.2;letter-spacing:-.02em;max-width:460px;margin:0 0 14px;color:#fff}.lg-brand p{max-width:440px;opacity:.85;font-size:15px;line-height:1.5}.lg-brand .small{opacity:.7}
+.lg-form{display:grid;place-items:center;padding:32px}
+.lg-box{width:min(380px,100%);display:grid;gap:14px}
+.lg-box h1{font-size:26px;letter-spacing:-.02em;margin:0}.lg-box>p{margin:-6px 0 4px}
+.lg-go{width:100%;justify-content:center;height:44px}
+.lg-forgot{justify-self:end;margin-top:-2px}
+.lg-or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12.5px}.lg-or::before,.lg-or::after{content:"";flex:1;height:1px;background:var(--line)}
+.lg-err{color:var(--danger);font-size:13px;margin:0}
+.lg-code{font:600 22px var(--f-mono);letter-spacing:.4em;text-align:center}
+.lg-orgs{display:grid;gap:8px}
+.lg-orgs button{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--surface);text-align:left;cursor:pointer;font:inherit;color:var(--ink)}
+.lg-orgs button span:nth-child(2){flex:1;display:grid}.lg-orgs small{color:var(--muted);font-size:12.5px}
+.lg-orgs button:hover{border-color:var(--btn);background:var(--navy-tint)}
+@media (max-width:860px){.login{grid-template-columns:1fr}.lg-brand{display:none}}
+/* microfone sem sinal */
+.hp2-pill.bad{border-color:color-mix(in srgb,var(--danger) 40%,var(--line))}
+.sig.bad i:first-child{background:var(--danger)}
+.hp2-micwarn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--danger);font-weight:500}
+.mic-l{display:grid;gap:8px;margin:0;padding:0;list-style:none}.mic-l li{display:flex;gap:8px;align-items:flex-start;font-size:13.5px}.mic-l svg{color:var(--btn);flex:none;margin-top:2px}
+/* etapa 3: estados vazios e ações do atendimento */
+.sa-wait{display:grid;gap:8px}.sw-bars{display:grid;gap:5px}.sw-bars i{display:block;height:8px;border-radius:999px;background:linear-gradient(90deg,var(--surface-2),color-mix(in srgb,var(--surface-2) 40%,var(--line)),var(--surface-2));background-size:200% 100%;animation:swb 1.6s linear infinite}
+.sw-bars i:nth-child(1){width:70%}.sw-bars i:nth-child(2){width:45%}
+@keyframes swb{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.sw-bars i{animation:none}}
+.tr-empty{display:grid;justify-items:center;text-align:center;gap:8px;padding:40px 24px;max-width:460px;margin:0 auto}
+.tr-empty b{font-size:15px}.tr-empty .wave{margin-bottom:4px}
+.tr-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.tr-q{max-width:260px}
+.ln2.tr-off{display:none}
+/* combo do microfone (mesmo modelo do agente) e aviso da telemedicina */
+.micw .agpop{width:300px}
+.micw .agb.bad{border-color:color-mix(in srgb,var(--danger) 40%,var(--line))}
+.mic-o{gap:10px}.mo-t{flex:1;display:grid;text-align:left}.mo-t small{font-size:11.5px;color:var(--muted);font-weight:400}.mo-sp{width:16px}
+.ag-test{display:flex;align-items:center;justify-content:center;gap:8px;height:36px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font:500 13px var(--f-sans);color:var(--navy);cursor:pointer;margin:2px}
+.ag-test:hover{background:var(--navy-tint)}
+.tl-note{display:flex;gap:8px;align-items:flex-start;padding:8px 10px;border-radius:10px;background:var(--warn-tint);color:var(--warn);font-size:12.5px;line-height:1.45;margin-bottom:6px}.tl-note svg{flex:none;margin-top:2px}
+/* citações do Fale com a Lya */
+.ch-found{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);margin-bottom:4px}.ch-found b{color:var(--ink);font-weight:600}
+.ch-kp{margin:0;padding-left:18px;display:grid;gap:6px}
+.ch-warn{display:flex;gap:6px;align-items:flex-start;padding:8px 10px;border-radius:10px;background:var(--danger-tint);color:var(--danger)}.ch-warn svg{flex:none;margin-top:3px}
+.cwrap{position:relative;display:inline}
+.cchip{display:inline-flex;align-items:center;gap:4px;vertical-align:1px;height:22px;padding:0 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);font:500 11.5px var(--f-sans);color:var(--navy);cursor:pointer;white-space:nowrap}
+.cchip svg{width:12px;height:12px}.cchip b{font-weight:600;color:var(--muted)}
+.cchip:hover,.cchip.on{background:var(--navy-tint);border-color:color-mix(in srgb,var(--btn) 35%,var(--line))}
+.cchip.t-inst svg,.ctag.t-inst svg{color:var(--btn)}.cchip.t-trans svg,.ctag.t-trans svg{color:var(--teal)}.cchip.t-pront svg,.ctag.t-pront svg{color:var(--ok)}.cchip.t-lit svg,.ctag.t-lit svg{color:var(--muted)}.cchip.t-lya svg,.ctag.t-lya svg{color:var(--lilac)}
+.cpop{position:absolute;left:0;top:calc(100% + 6px);z-index:30;width:min(340px,80vw);display:grid;gap:8px;padding:12px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--line);box-shadow:0 18px 44px rgba(12,26,44,.18);font-size:13px;line-height:1.45;white-space:normal;text-align:left}
+.cp-h{display:flex;align-items:center;gap:4px}
+.ctag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:999px;background:var(--surface-2);font:600 10.5px var(--f-sans);text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.cp-t{font-size:13.5px}.cp-q{padding:8px 10px;border-left:3px solid var(--btn);background:var(--surface-2);border-radius:0 8px 8px 0;color:var(--ink)}
+.cp-m{font-size:12px;color:var(--muted)}.cp-b{display:flex;gap:4px;flex-wrap:wrap}.cp-b .chip{height:20px;font-size:11px}
+.cp-a{display:flex;align-items:center;gap:4px}
+.ch-refs{border-top:1px solid var(--line);margin-top:8px;padding-top:6px}
+.cr-h{display:flex;align-items:center;gap:6px;border:0;background:transparent;font:600 12.5px var(--f-sans);color:var(--ink);cursor:pointer;padding:4px 0}
+.rot90{transform:rotate(90deg)}
+.cr-n{font-weight:500;color:var(--muted);background:var(--surface-2);padding:1px 8px;border-radius:999px;font-size:11.5px}
+.cr-l{margin:6px 0 0;padding-left:20px;display:grid;gap:10px;font-size:12.5px}
+.cr-l li{display:grid;gap:4px}.cr-t{display:grid;gap:3px}.cr-t small{color:var(--muted)}
+/* escopo das perguntas e uso por plano */
+.ch-scopes{display:flex;gap:4px;padding:3px;border-radius:10px;background:var(--surface-2);margin:0 0 6px;width:max-content;max-width:100%}
+.ch-scopes button{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 10px;border:0;border-radius:8px;background:transparent;font:500 12px var(--f-sans);color:var(--muted);cursor:pointer}
+.ch-scopes button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(12,26,44,.12)}
+.ch-scope{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;padding:2px 8px;border-radius:999px;margin-bottom:4px;justify-self:start}
+.ch-scope.pac{background:var(--lilac-tint);color:var(--lilac)}.ch-scope.geral{background:var(--surface-2);color:var(--muted)}
+.use-line{color:var(--muted)}.use-line.near{color:var(--warn);font-weight:500}
+.use-wall{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--warn-tint);color:var(--ink);border:1px solid color-mix(in srgb,var(--warn) 30%,transparent)}
+.use-wall>svg{color:var(--warn);flex:none;margin-top:3px}.use-wall>div{flex:1;display:grid;gap:4px;font-size:13px}.use-wall b{font-size:13.5px}
+.meter.warn i{background:var(--warn)!important}
+.use-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.use-it{display:grid;gap:4px}.use-it b{font-size:18px}.use-it small{font-size:12px;color:var(--muted);font-weight:400}
+/* etapa 4: protocolos */
+.sgp.k-rev i{background:var(--danger)!important}
+.rx-sug{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 12px;border-radius:12px;background:var(--lilac-tint);margin:6px 0}.rx-sug>svg{color:var(--lilac)}.rx-sug>div{flex:1;display:grid;font-size:13px;min-width:200px}
+.prevtx.rv{background:var(--warn-tint)}
+.prevtx.rv small{color:var(--warn);font-weight:600}
+/* etapa 6: relatório */
+.genbox b .btn{font-weight:500}
+.ns h4{display:flex;align-items:center;gap:8px}
+.ns-edb{opacity:0;transition:opacity .15s;margin-left:auto}.ns:hover .ns-edb,.ns-edb:focus-visible{opacity:1}
+.ed-tag{font:500 10.5px var(--f-sans);text-transform:uppercase;letter-spacing:.04em;padding:1px 7px;border-radius:999px;background:var(--warn-tint);color:var(--warn)}
+.ns-ta{width:100%;min-height:80px;resize:vertical;font:inherit;line-height:1.55}
+.nbar.resumed{background:var(--teal-tint)}
+body.r-atendimento .cleft .cmain,body.r-relatorio .cleft .cmain{max-height:calc(100vh - var(--cm-top,170px) - 14px);overflow-y:auto}
+body.r-atendimento #c-side .side-card.chs,body.r-relatorio #c-side .side-card.chs{max-height:calc(100vh - var(--cs-top,143px) - 14px);min-height:0;overflow:hidden}
+body.r-atendimento #c-side .chs .ch-body,body.r-relatorio #c-side .chs .ch-body{min-height:0;overflow-y:auto}
+.ns-eda{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px}
+/* etapa 7: envio ao prontuário */
+.empty-st{display:grid;justify-items:center;gap:8px;padding:36px 20px;text-align:center}.empty-st>svg{width:26px;height:26px;color:var(--muted)}
+.cpv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px}
+.pend-l{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.pend-l li{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--warn-tint)}
+.pend-l li span{flex:1;display:grid;gap:2px;font-size:13px}.pend-l small{color:var(--muted)}
+.int-msg{display:flex;align-items:flex-start;gap:10px;margin:12px 16px 0;padding:12px 14px;border-radius:14px;font-size:13px}
+.int-msg>div{flex:1;display:grid;gap:3px}.int-msg b{font-size:13.5px}.int-msg>svg{flex:none;margin-top:2px}
+.int-msg.ok{background:var(--ok-tint);color:var(--ink)}.int-msg.ok>svg{color:var(--ok)}
+.int-msg.fail{background:var(--danger-tint);color:var(--ink)}.int-msg.fail>svg{color:var(--danger)}
 .ln2.hl{background:var(--hl)!important;border-radius:8px}
 .sq li{will-change:transform}
 
@@ -1412,7 +1543,7 @@ const NAV=[
  ["Organização",[["configuracoes","Configurações","sliders","cfg"],["suporte","Suporte","msg","sup_open"],["ajuda","Ajuda","help",null]]]
 ];
 const GUARD={cadastro:"at_criar",questionario:null,planos:null,preparar:"at_criar",chat:"at_chat",conhecimento:"sa_list",atendimento:"at_criar",relatorio:null,smartapps:"sa_list","smartapp-novo":"sa_criar",smartapp:"sa_ver",assistentes:"as_list",assistente:"as_ver",usuarios:"us_list",usuario:"us_list",perfis:"us_perm",perfil:"us_perm",grupos:"gr_list",grupo:"gr_ver",governanca:"aud_view",auditoria:"aud_view",relatorios:"rel_view",integracao:"int_view",cirurgia:"cp_list",suporte:"sup_open",configuracoes:"cfg",calculadoras:"sa_list"};
-const TITLES={conta:"Minha conta",cadastro:"Novo paciente",questionario:"Questionário do paciente",planos:"Planos",preparar:"Preparar atendimento",chat:"Fale com a Lya",conhecimento:"Base de conhecimento",inicio:"Iniciar atendimento",atendimento:"Atendimento",relatorio:"Relatório clínico",historico:"Atendimentos",pacientes:"Pacientes",paciente:"Paciente",smartapps:"Prompts","smartapp-novo":"Novo Prompt",smartapp:"Editar Prompt",assistentes:"Agentes",assistente:"Agente",usuarios:"Usuários",usuario:"Usuário",perfis:"Perfis e permissões",perfil:"Perfil",grupos:"Grupos",grupo:"Grupo",governanca:"Mapa de acesso",auditoria:"Auditoria",relatorios:"Relatórios",integracao:"Integração",cirurgia:"Cirurgia",configuracoes:"Configurações",suporte:"Suporte",ajuda:"Ajuda"};
+const TITLES={login:"Entrar",versoes:"Versões dos documentos",conta:"Minha conta",cadastro:"Novo paciente",questionario:"Questionário do paciente",planos:"Planos",preparar:"Preparar atendimento",chat:"Fale com a Lya",conhecimento:"Base de conhecimento",inicio:"Iniciar atendimento",atendimento:"Atendimento",relatorio:"Relatório clínico",historico:"Atendimentos",pacientes:"Pacientes",paciente:"Paciente",smartapps:"Prompts","smartapp-novo":"Novo Prompt",smartapp:"Editar Prompt",assistentes:"Agentes",assistente:"Agente",usuarios:"Usuários",usuario:"Usuário",perfis:"Perfis e permissões",perfil:"Perfil",grupos:"Grupos",grupo:"Grupo",governanca:"Mapa de acesso",auditoria:"Auditoria",relatorios:"Relatórios",integracao:"Integração",cirurgia:"Cirurgia",configuracoes:"Configurações",suporte:"Suporte",ajuda:"Ajuda"};
 
 function go(r){if(r==="atendimento"&&S.route!=="atendimento"&&!(S.route==="anterior"&&S.c))newConsult("live");if(r==="relatorio")newConsult("rev");S.route=r;S.menu=false;try{history.replaceState(null,"","#"+r)}catch(e){}render();window.scrollTo(0,0)}
 function toast(t){S.toast=t;renderOverlay();clearTimeout(toast._t);toast._t=setTimeout(()=>{S.toast=null;renderOverlay()},2200)}
@@ -1464,7 +1595,7 @@ V.inicio=()=>{
   const med=can("at_criar");
   return `<div class="pghead one"><div><span class="muted small">Quinta-feira, 26 de outubro</span><h1>Bom dia, Dra. Helena</h1></div></div>
   <div class="home one"><div class="grid" style="gap:16px;align-content:start;min-width:0">
-   ${homePrep()}
+   ${homePrep()}${homeAsk()}
   </div>
   <div class="grid" style="gap:16px;align-content:start;min-width:0">
    ${newsCard()}
@@ -1494,6 +1625,12 @@ const AGENTS=[["Especialidades",["Clínica Médica","Gastroenterologia","Cardiol
  ["Multiprofissional",["Enfermagem · triagem","Enfermagem · evolução","Fisioterapia","Psicologia","Nutrição","Fonoaudiologia"]]];
 const agNorm=x=>x.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 function agList(q){const n=agNorm(q||"");let out="",tot=0;AGENTS.forEach(([g,l])=>{const f=l.filter(x=>agNorm(x).includes(n));if(!f.length)return;tot+=f.length;out+=`<div class="ag-g">${g}</div>`+f.map(x=>`<button type="button" role="option" class="ag-o ${S.prep.as===x?"on":""}" aria-selected="${S.prep.as===x}" data-act="ag-pick" data-val="${x}">${x}${S.prep.as===x?ic("check","i s"):""}</button>`).join("")});return out||`<p class="ag-none">Nenhum agente com “${q}”.</p>`}
+const MICS=[["Jabra Speak 510","USB",4],["Microfone interno","Notebook",2],["AirPods Pro","Bluetooth",3]];
+const sigBars=(n,bad)=>`<span class="sig ${bad?"bad":"ok"}" aria-hidden="true">${[1,2,3,4,5].map(i=>`<i class="${i<=n?"":"off"}"></i>`).join("")}</span>`;
+function micSel(){const cur=S.prep.mic||MICS[0][0],m=MICS.find(x=>x[0]===cur)||MICS[0],bad=!!S.micOff;
+ return `<div class="agw micw"><button type="button" class="hp2-pill agb ${bad?"bad":""}" data-act="mic-tg" aria-haspopup="listbox" aria-expanded="${!!S.micOpen}" title="${bad?"Sem sinal do microfone":"Microfone"}">${ic("mic","i s")}<span class="agv">${m[0]}</span>${sigBars(bad?1:m[2],bad)}${ic("chev","i s chev-d")}</button>
+  ${S.micOpen?`<div class="agpop" role="dialog" aria-label="Escolher microfone"><div class="ag-g">Microfones encontrados</div><div class="ag-l" role="listbox">${MICS.map(x=>`<button type="button" role="option" class="ag-o mic-o ${x[0]===m[0]?"on":""}" aria-selected="${x[0]===m[0]}" data-act="mic-pick" data-val="${x[0]}"><span class="mo-t"><span>${x[0]}</span><small>${x[1]}</small></span>${sigBars(x[0]===m[0]&&bad?1:x[2],x[0]===m[0]&&bad)}${x[0]===m[0]?ic("check","i s"):'<span class="mo-sp"></span>'}</button>`).join("")}</div>
+   <button type="button" class="ag-test" data-act="mic-test">${ic("mic","i s")}Testar o microfone</button></div>`:""}</div>${bad?`<span class="hp2-micwarn">${ic("alert","i s")}Sem sinal do microfone</span>`:""}`}
 function agSel(){const p=S.prep;return `<div class="agw"><button type="button" class="hp2-pill agb" data-act="ag-tg" aria-haspopup="listbox" aria-expanded="${!!S.agOpen}" title="Agente do atendimento">${ic("layers","i s")}<span class="agv">${p.as||"Clínica Médica"}</span>${ic("chev","i s chev-d")}</button>
   ${S.agOpen?`<div class="agpop" role="dialog" aria-label="Escolher agente"><label class="ag-s">${ic("search","i s")}<input id="ag-q" autocomplete="off" placeholder="Digite para buscar entre ${AGENTS.reduce((a,g)=>a+g[1].length,0)} agentes" aria-label="Buscar agente"></label><div class="ag-l" role="listbox" id="ag-l">${agList("")}</div></div>`:""}</div>`}
 function homePrep(mode){
@@ -1511,11 +1648,11 @@ function homePrep(mode){
     ${agSel()}
     <div class="hp2-seg" role="group" aria-label="Modalidade">${["Presencial","Telemedicina"].map(x=>`<button class="${p.mod===x?"on":""}" aria-pressed="${p.mod===x}" data-act="prep" data-k="mod" data-val="${x}">${x}</button>`).join("")}</div>
     ${can("at_exam")?`<label class="hp2-pill act" title="PDF ou imagem. A Lya lê e organiza em Dados Clínicos.">${ic("clip","i s")}<span>${files.length?files.length+(files.length>1?" exames anexados":" exame anexado"):"Anexar exame"}</span><input type="file" id="prep-file" accept=".pdf,image/*" multiple hidden></label>`:""}
-    <label class="hp2-pill sel mic" title="Microfone">${ic("mic","i s")}<select aria-label="Microfone"><option>Jabra Speak 510</option><option>Microfone interno</option></select><span class="sig ok" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="off"></i></span></label>
+    ${micSel()}
    </div>
    ${files.length?`<div class="hp2-files">${files.map((f,i)=>`<span class="hp2-file">${ic("file","i s")}${f.n}<small>${f.st==="lendo"?"lendo…":f.res}</small><button data-act="prep-unfile" data-val="${i}" aria-label="Remover ${f.n}">${ic("x","i s")}</button></span>`).join("")}</div>`:""}
-   ${p.mod==="Telemedicina"?`<div class="hp2-tele">${ic("video","i s")}<span><b>Telemedicina:</b> ao iniciar, você escolhe a aba da videochamada e compartilha o áudio dela. Assim a Lya ouve você pelo microfone e o paciente pela chamada.</span></div>`:""}
-   <div class="hp2-cta"><button class="hp2-go" data-act="hp-start"><span class="hp2-mic">${ic(p.mod==="Telemedicina"?"screen":"mic")}</span>${p.mod==="Telemedicina"?"Compartilhar e iniciar":"Iniciar atendimento"}</button><span class="small muted">${p.mod==="Telemedicina"?"Só a aba escolhida é compartilhada · a Lya não grava o vídeo":"A gravação começa ao clicar · atalho <b>Espaço</b>"}</span></div>
+   ${p.mod==="Telemedicina"?`<div class="hp2-tele">${ic("video","i s")}<span><b>Telemedicina:</b> abra a videochamada numa aba do navegador (Meet, Zoom ou Teams na versão web, WhatsApp Web). Ao iniciar, você escolhe essa aba e compartilha o áudio dela; assim a Lya ouve você pelo microfone e o paciente pela chamada. Aplicativos instalados no computador não são captados.</span></div>`:""}
+   <div class="hp2-cta"><button class="hp2-go" data-act="hp-start"><span class="hp2-mic">${ic(p.mod==="Telemedicina"?"screen":"mic")}</span>${p.mod==="Telemedicina"?"Compartilhar e iniciar":"Iniciar atendimento"}</button><span class="small muted">${p.mod==="Telemedicina"?"Só a aba escolhida é compartilhada · a Lya não grava o vídeo":"A gravação começa ao clicar"}</span></div>
   </section>`;
 }
 V.chat=()=>{const t=tabs("chatv",[["conv","Conversa"],["spec","Ações e regras",N("dev")]],"conv");return ph("Fale com a Lya","Chat clínico com fontes. Use também pelo botão flutuante em qualquer tela.")+t.html+(t.cur==="spec"?chatSpec():chatConv())};
@@ -1582,30 +1719,43 @@ CASES.derm.ins=CASES.derm.ins.filter(x=>x[2]!=="Ainda não perguntado");
 /* Protocolos de risco: critérios que colocaram o paciente no protocolo, com a origem, e a conduta padronizada da instituição.
    "Assumir conduta" leva a conduta para Avaliação e plano do relatório. */
 CASES.rcu.protos=[
- {k:"sepse",t:"Risco de sepse",lvl:["warn","Moderado"],score:"SIRS 1 de 4 · qSOFA 0",
-  crit:[["Frequência cardíaca 92 bpm (acima de 90)",42,1],["PCR 38 mg/L elevada","Laboratório 12/10",1],["Temperatura 36,5 °C",42,0],["Frequência respiratória 18 irpm",42,0]],
+ {k:"sepse",t:"Risco de sepse",ver:"4",lv:[[42,"line","Baixo","SIRS 1 de 4 · qSOFA 0"],[50,"warn","Moderado","SIRS 2 de 4 · qSOFA 0"]],
+  crit:[["Frequência cardíaca 92 bpm (acima de 90)",42,1],["PCR 38 mg/L elevada","Laboratório 12/10",1],["Calafrios no fim do dia",50,1],["Temperatura 36,5 °C",42,0],["Frequência respiratória 18 irpm",42,0]],
   cond:["Reavaliar sinais vitais em 6 horas","Hemograma, lactato e hemoculturas se febre ou piora","Orientar retorno imediato se febre ou calafrios"]},
- {k:"tep",t:"Risco de TEP",lvl:["line","Baixo"],score:"Wells 1,0 · probabilidade baixa",
+ {k:"tep",t:"Risco de TEP",ver:"3",lv:[[20,"line","Baixo","Wells 1,0 · probabilidade baixa"]],
   crit:[["Doença inflamatória intestinal em atividade","Prontuário",1],["Imobilização ou cirurgia recente","Prontuário",0],["Frequência cardíaca acima de 100 bpm",42,0],["Trombose ou embolia prévia","Prontuário",0]],
-  cond:["Profilaxia de tromboembolismo se houver internação","Orientar deambulação e hidratação"]}];
+  cond:["Profilaxia de tromboembolismo se houver internação","Orientar deambulação e hidratação"],rx:"Enoxaparina 40 mg SC 1x/dia, somente se houver internação"}];
+/* nível e escore do momento; o protocolo só existe depois que o primeiro critério aparece */
+const tNow=()=>S.c?(S.c.phase==="live"?S.c.t:C_END):C_END;
+function pNow(p){const t=tNow(),L=(p.lv||[]).filter(x=>t>=x[0]);return L.length?L[L.length-1]:null}
+CASES.rcu.protos.forEach(p=>{Object.defineProperty(p,"lvl",{get(){const n=pNow(p)||p.lv[0];return [n[1],n[2]]}});Object.defineProperty(p,"score",{get(){const n=pNow(p)||p.lv[0];return n[3]}})});
+const critHit=x=>x[2]&&(typeof x[1]!=="number"||tNow()>=x[1]);
+const protoVis=()=>(CS.protos||[]).filter(p=>pNow(p));
+/* estado da decisão: assumida (com o nível do momento), assumida mas o nível mudou (revisar), dispensada (Agora não) */
+function pState(p){const c=S.c||{},ok=(c.pOk||{})[p.k],no=(c.pNo||{})[p.k],lv=p.lvl[1];if(ok)return ok.lvl===lv?"ok":"rev";if(no&&no===lv)return "no";return "open"}
+/* medicamento de conduta assumida: aparece como sugestão na Prescrição; só entra com a confirmação do médico */
+function rxSug(){const c=S.c;if(!c||!c.pOk)return "";c.rxOk=c.rxOk||{};return (CS.protos||[]).filter(p=>p.rx&&c.pOk[p.k]&&!c.rxOk[p.k]).map(p=>`<div class="rx-sug">${ic("spark","i s")}<div><b>Sugestão do ${p.t.replace("Risco de","protocolo de")}</b><span>${p.rx}</span></div><button class="btn p sm" data-act="rx-add" data-val="${p.k}">Adicionar à prescrição</button><button class="btn q sm" data-act="rx-ign" data-val="${p.k}">Ignorar</button></div>`).join("")}
 function protoDrawer(){
   const p=CS.protos&&CS.protos.find(x=>x.k===S.c.pOpen);if(!p)return "";const ok=S.c.pOk&&S.c.pOk[p.k];
   return `<div class="scrim" data-act="c-proto-x"></div><div class="drawer" role="dialog" aria-label="${p.t}"><div class="dh"><h3>${p.t} <span class="chip ${p.lvl[0]}">${p.lvl[1]}</span></h3><button class="iconbtn" data-act="c-proto-x" aria-label="Fechar">${ic("x")}</button></div>
    <div class="db pp-d"><span class="pp-s">${p.score}</span>
     <b class="pp-k">Critérios que colocaram ${PT.nome.split(" ")[0]} neste protocolo</b>
-    <ul class="pp-c">${p.crit.map(x=>`<li class="${x[2]?"hit":""}"><span class="pc">${x[2]?"✓":"–"}</span><span>${x[0]}</span>${typeof x[1]==="number"?evT(x[1]):x[1]?evS(x[1]):""}</li>`).join("")}</ul>
+    <ul class="pp-c">${p.crit.filter(x=>typeof x[1]!=="number"||x[2]===0||tNow()>=x[1]).map(x=>`<li class="${critHit(x)?"hit":""}"><span class="pc">${critHit(x)?"✓":"–"}</span><span>${x[0]}</span>${typeof x[1]==="number"?evT(x[1]):x[1]?evS(x[1]):""}</li>`).join("")}</ul>
     <b class="pp-k">Conduta padronizada da instituição</b><ul class="pp-cd">${p.cond.map(x=>`<li>${x}</li>`).join("")}</ul>
-    ${ok?'<div class="banner" style="margin:0"><span class="sp small">Conduta assumida. Entra em Avaliação e plano ao gerar o relatório.</span></div>':`<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn p" data-act="c-proto-ok" data-val="${p.k}">Assumir conduta</button><button class="btn g" data-act="c-proto-x">Agora não</button></div><span class="small muted">Ao assumir, a conduta vai para Avaliação e plano no relatório, para você revisar.</span>`}</div></div>`;
+    ${p.rx?`<b class="pp-k">Medicamento sugerido pelo protocolo</b><span class="small">${p.rx} <span class="muted">· vai como sugestão na Prescrição, não entra sozinho</span></span>`:""}
+    ${(()=>{const st=pState(p);if(st==="ok")return `<div class="banner" style="margin:0"><span class="sp small">${ic("check","i s")} Conduta assumida às ${mmss(S.c.pOk[p.k].at)} (${S.c.pOk[p.k].lvl}). Entra em Avaliação e plano com os critérios presentes.</span></div><button class="btn q sm" style="justify-self:start" data-act="c-proto-undo" data-val="${p.k}">Desfazer</button>`;
+      if(st==="rev")return `<div class="banner warn" style="margin:0"><span class="sp small"><b>Os critérios mudaram</b> desde que você assumiu (${S.c.pOk[p.k].lvl} → ${p.lvl[1]}). O bloco no relatório está marcado “revisar” até você reconfirmar.</span></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn p" data-act="c-proto-ok" data-val="${p.k}">Reconfirmar conduta</button><button class="btn g" data-act="c-proto-undo" data-val="${p.k}">Retirar do relatório</button></div>`;
+      return `${st==="no"?`<span class="small muted">Você escolheu “Agora não” neste nível. O alerta volta se o risco mudar.</span>`:""}<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn p" data-act="c-proto-ok" data-val="${p.k}">Assumir conduta</button>${st==="no"?"":`<button class="btn g" data-act="c-proto-no" data-val="${p.k}">Agora não</button>`}</div><span class="small muted">Ao assumir, os critérios presentes e a conduta vão para Avaliação e plano, para você revisar. Nada entra sem esse clique.</span>`})()}</div></div>`;
 }
 function protoPanel(){
-  const L=CS.protos;if(!L||!S.c)return "";const c=S.c;c.pOk=c.pOk||{};
+  const L=protoVis();if(!L.length||!S.c)return "";const c=S.c;c.pOk=c.pOk||{};
   return `<div class="pp"><div class="pp-h"><b>${ic("alert","i s")}Protocolos de risco</b><span class="small muted">${L.length} ativos</span></div>
-   ${L.map(p=>{const ok=c.pOk[p.k];return `<button class="prk" data-act="c-proto" data-val="${p.k}" aria-haspopup="dialog" title="Ver critérios e conduta"><span class="prk-n">${p.t}</span><span class="prk-s">${ok?'<span class="chip ok">Assumida</span>':""}<span class="chip ${p.lvl[0]}">${p.lvl[1]}</span>${ic("chev","i s")}</span></button>`}).join("")}</div>`;
+   ${L.map(p=>{const ok=pState(p)==="ok";return `<button class="prk" data-act="c-proto" data-val="${p.k}" aria-haspopup="dialog" title="Ver critérios e conduta"><span class="prk-n">${p.t}</span><span class="prk-s">${ok?'<span class="chip ok">Assumida</span>':""}<span class="chip ${p.lvl[0]}">${p.lvl[1]}</span>${ic("chev","i s")}</span></button>`}).join("")}</div>`;
 }
 function useCase(k){CS=CASES[k];C_LINES=CS.lines;C_SECS=CS.secs;C_END=CS.end;C_INS=CS.ins;C_REV=CS.rev;PT=CS.pt}
 useCase("rcu");
 const C_GEN=["Juntando a transcrição completa","Conferindo fatos críticos: doses, alergias e valores","Organizando no modelo do agente","Montando a prescrição e os documentos","Separando o que você precisa conferir"];
-function newConsult(phase){delete S.dxOpen["Resumo do último atendimento"];useCase(isB2C()?"derm":"rcu");S.c={phase,t:phase==="live"?0:C_END,tab:phase==="live"?"apps":"nota",speed:1,res:{},gen:0,panel:true,ins:{},showEmpty:false,closed:phase!=="live",ev:phase==="live"?[[0,"Gravação iniciada · Jabra Speak"]]:[]};if(phase==="live"&&S.teleCfg){S.c.tele=S.teleCfg;S.c.ev.push([0,"Telemedicina · áudio da aba compartilhado ("+S.teleCfg.plat+")"]);S.teleCfg=null}}
+function newConsult(phase){S.chatMsgs=[];S.cite=null;S.citeRefs=null;delete S.dxOpen["Resumo do último atendimento"];useCase(isB2C()?"derm":"rcu");S.c={phase,t:phase==="live"?0:C_END,tab:phase==="live"?"apps":"nota",speed:1,res:{},gen:0,panel:true,ins:{},showEmpty:false,closed:phase!=="live",ev:phase==="live"?[[0,"Gravação iniciada · Jabra Speak"]]:[]};if(phase==="live"&&S.teleCfg){S.c.tele=S.teleCfg;S.c.ev.push([0,"Telemedicina · áudio da aba compartilhado ("+S.teleCfg.plat+")"]);S.teleCfg=null}}
 const cLog=(t)=>{if(S.c)S.c.ev.push([S.c.t,t])};
 const mmss=t=>String(Math.floor(t/60)).padStart(2,"0")+":"+String(Math.floor(t%60)).padStart(2,"0");
 const capd=()=>!isB2C()||S.c.t>=PT.cap||S.c.phase!=="live";
@@ -1621,16 +1771,16 @@ function langBtn(where){
   return `<span class="langw"><button class="langb" data-act="lang-tg" data-val="${where}" aria-expanded="${S.langOpen===where}" aria-haspopup="dialog" title="Idioma do atendimento">${ic("lang","i s")}<span>${lbl}</span></button>${pop}</span>`;
 }
 /* Telemedicina: a Lya ouve o médico pelo microfone e o paciente pelo áudio da aba da videochamada compartilhada. */
-const TELE_PLATS=["Google Meet","Zoom","Microsoft Teams","WhatsApp Web","Outra"];
-const TELE_TABS={"Google Meet":"Meet · Consulta Paulo Mendes","Zoom":"Zoom Meeting · Sala 4821","Microsoft Teams":"Teams · Teleconsulta","WhatsApp Web":"WhatsApp · Chamada de vídeo","Outra":"Plataforma do hospital · Teleconsulta"};
+const TELE_PLATS=["Google Meet","Zoom no navegador","Teams no navegador","WhatsApp Web","Outra no navegador"];
+const TELE_TABS={"Google Meet":"Meet · Consulta Paulo Mendes","Zoom no navegador":"Zoom · Sala 4821 (app.zoom.us)","Teams no navegador":"Teams · Teleconsulta (teams.microsoft.com)","WhatsApp Web":"WhatsApp · Chamada de vídeo","Outra no navegador":"Plataforma do hospital · Teleconsulta"};
 function teleChip(){const t=S.c.tele;return t.share?`<button class="tele-chip" data-act="tele-pop" title="Telemedicina · ${t.plat}">${ic("video","i s")}<span class="tc-src">Você <span class="sig" aria-hidden="true"><i></i><i></i><i></i><i></i></span></span><span class="tc-src">Paciente <span class="sig ok" aria-hidden="true"><i></i><i></i><i></i><i></i></span></span></button>${S.telePop?`<div class="tele-pop" role="dialog" aria-label="Telemedicina"><b>Telemedicina · ${t.plat}</b><span class="small muted">Aba compartilhada: ${t.tab}</span><span class="small muted">Você: Jabra Speak · Paciente: áudio da aba</span><button class="btn g sm" data-act="tele-stop">Simular queda do compartilhamento</button></div>`:""}`
  :`<button class="tele-off" data-act="tele-reshare" title="O compartilhamento parou. Clique para compartilhar a aba da chamada de novo.">${ic("alert","i s")}Paciente sem áudio<span>· Compartilhar</span></button>`}
 function teleDlg(){const t=S.tele||{};const ready=t.tab&&t.audio;
  return `<div class="scrim" data-act="close"></div><div class="dlg tele-dlg" role="dialog" aria-modal="true" aria-labelledby="tl-t"><h3 id="tl-t">${t.re?"Compartilhar a videochamada de novo":"Compartilhe a videochamada"}</h3>
   <p class="small muted" style="margin:0">A Lya ouve você pelo microfone e o paciente pelo áudio da aba da chamada. Só a aba escolhida é compartilhada; o vídeo não é gravado.</p>
-  <div class="field"><span class="lbl">1 · Onde está a chamada</span><div class="tl-plats">${TELE_PLATS.map(x=>`<button class="${t.plat===x?"on":""}" data-act="tele-plat" data-val="${x}">${x}</button>`).join("")}</div></div>
-  <div class="field"><span class="lbl">2 · Escolha a aba da chamada</span><div class="tl-tabs">${[TELE_TABS[t.plat]||TELE_TABS.Outra,"Lya Health · Atendimento","Gmail · Caixa de entrada"].map(x=>`<button class="${t.tab===x?"on":""}" data-act="tele-tab" data-val="${x}"><span class="tl-thumb">${ic(x.startsWith("Lya")||x.startsWith("Gmail")?"doc":"video","i s")}</span><span>${x}</span>${t.tab===x?ic("check","i s"):""}</button>`).join("")}</div>
-   ${t.tab&&t.tab!==(TELE_TABS[t.plat]||TELE_TABS.Outra)?`<span class="hint" style="color:var(--warn)">Essa aba não parece ser a da chamada. A Lya não vai ouvir o paciente.</span>`:""}</div>
+  <div class="field"><span class="lbl">1 · Onde está a chamada</span><span class="tl-note">${ic("alert","i s")}<span>A Lya capta o áudio de <b>abas do navegador</b>. Se a chamada estiver no aplicativo do Zoom ou do Teams instalado no computador, abra-a pelo navegador antes de começar.</span></span><div class="tl-plats">${TELE_PLATS.map(x=>`<button class="${t.plat===x?"on":""}" data-act="tele-plat" data-val="${x}">${x}</button>`).join("")}</div></div>
+  <div class="field"><span class="lbl">2 · Escolha a aba da chamada</span><div class="tl-tabs">${[TELE_TABS[t.plat]||TELE_TABS["Outra no navegador"],"Lya Health · Atendimento","Gmail · Caixa de entrada"].map(x=>`<button class="${t.tab===x?"on":""}" data-act="tele-tab" data-val="${x}"><span class="tl-thumb">${ic(x.startsWith("Lya")||x.startsWith("Gmail")?"doc":"video","i s")}</span><span>${x}</span>${t.tab===x?ic("check","i s"):""}</button>`).join("")}</div>
+   ${t.tab&&t.tab!==(TELE_TABS[t.plat]||TELE_TABS["Outra no navegador"])?`<span class="hint" style="color:var(--warn)">Essa aba não parece ser a da chamada. A Lya não vai ouvir o paciente.</span>`:""}</div>
   <div class="src"><div class="tx"><b>3 · Compartilhar o áudio da aba</b><small>${t.audio?"Ligado: a Lya ouve o paciente":"Desligado: a Lya não ouve o paciente"}</small></div>${sw(t.audio,"tele-audio")}</div>
   <div class="tl-test"><span class="tl-l">Você · Jabra Speak</span><span class="tl-m on"><i style="width:62%"></i></span><span class="tl-l">Paciente · áudio da chamada</span><span class="tl-m ${ready?"on":""}"><i style="width:${ready?48:0}%"></i></span></div>
   ${t.err?`<p class="small" style="color:var(--danger);margin:0">${t.err}</p>`:""}
@@ -1639,8 +1789,9 @@ function cHead(){
   const c=S.c;let ctl="";
   if(c.phase==="live")ctl=`${c.tele?teleChip():`<span class="dev" title="Jabra Speak">${ic("mic","i s")}<span class="dev-n">Jabra Speak</span><span class="sig" aria-hidden="true"><i></i><i></i><i></i><i></i></span></span>`}${langBtn("head")}${c.paused?`<span class="chip warn">${ic("pause","i s")}Pausado</span>`:`<span class="wave" aria-hidden="true">${"<i></i>".repeat(5)}</span>`}<span class="timer ${c.paused?"muted":""}" id="c-timer">${mmss(c.t)}</span><button class="btn ${c.paused?"live":"g"}" data-act="c-pause">${c.paused?ic("play","i s")+"Continuar":ic("pause","i s")+"Pausar"}</button><button class="btn p" data-act="c-fin" title="Gera o relatório com o que foi ouvido até agora. O atendimento continua aberto.">${ic("doc","i s")}Gerar relatório</button><button class="btn g" data-act="c-enc">Encerrar atendimento</button>`;
   else if(c.phase==="gen")ctl=`<span class="pill navy"><span class="spin"></span>${C_GEN[Math.min(c.gen,4)]}</span>`;
-  else if(c.phase==="rev"){const pend=C_REV.filter(r=>!c.res[r[0]]).length;ctl=c.closed?`<span class="chip line">${ic("lock","i s")}Atendimento encerrado · ${mmss(c.t)}</span>${can("at_criar")?`<button class="btn p" data-act="c-send" ${pend?"disabled title=\"Resolva as pendências antes de enviar\"":""}>${ic(isB2C()?"check":"link","i s")}${isB2C()?"Assinar e finalizar":"Assinar e enviar ao prontuário"}</button>`:""}`:`<span class="chip line">Relatório gerado · ${mmss(c.t)}</span>${can("at_criar")?`<button class="btn g" data-act="c-resume">${ic("mic","i s")}Retomar gravação</button><button class="btn p" data-act="c-enc">Encerrar atendimento</button>`:""}`}
-  else ctl=`<span class="chip ok">${ic("check","i s")}${isB2C()?"Assinado às 09:47":"Enviado ao prontuário às 09:47"}</span>${isB2C()?`<button class="btn g">${ic("down","i s")}Baixar PDF</button><button class="btn g" data-act="toast" data-msg="Enviado ao paciente por WhatsApp">Enviar ao paciente</button><button class="btn p" data-act="c-next">Novo atendimento</button>`:`<button class="btn g" data-go="inicio">Voltar ao início</button><button class="btn p" data-act="c-next">Próximo da fila: Luiza Campos</button>`}`;
+  else if(c.phase==="rev"){const pend=C_REV.filter(r=>!c.res[r[0]]).length;ctl=c.send==="sending"?`<span class="pill navy"><span class="spin"></span>${isB2C()?"Assinando o relatório…":"Assinando e enviando ao sistema do hospital…"}</span>`:c.send==="fail"?`<span class="chip danger">${ic("alert","i s")}Falha no envio</span><button class="btn p" data-act="c-send">${ic("hist","i s")}Tentar de novo</button>`:c.closed?`<span class="chip line">${ic("lock","i s")}Atendimento encerrado · ${mmss(c.t)}</span>${can("at_criar")?`<button class="btn p" data-act="c-send" title="${pend?"Há pendências para resolver antes":"Assina com seu certificado e envia ao prontuário"}">${ic(isB2C()?"check":"link","i s")}${isB2C()?"Assinar e finalizar":"Assinar e enviar ao prontuário"}${pend?` <span class="cnt">${pend}</span>`:""}</button>`:""}`:`<span class="chip line">Relatório gerado · ${mmss(c.t)}</span>${can("at_criar")?`<button class="btn g" data-act="c-resume">${ic("mic","i s")}Retomar gravação</button><button class="btn p" data-act="c-enc">Encerrar atendimento</button>`:""}`}
+  else if(c.hist)ctl=`<span class="chip line">${ic("lock","i s")}Encerrado em ${c.hist.when.split(" ")[0]} às ${c.hist.end} · somente leitura</span><span class="chip ok">${ic("check","i s")}Enviado ao prontuário</span><button class="btn g" data-go="historico">${ic("chevl","i s")}Histórico</button>`;
+  else ctl=`<span class="chip ok">${ic("check","i s")}${isB2C()?"Assinado às 09:47":"Integrado ao prontuário às 09:47"}</span>${isB2C()?`<button class="btn g">${ic("down","i s")}Baixar PDF</button><button class="btn g" data-act="toast" data-msg="Enviado ao paciente por WhatsApp">Enviar ao paciente</button><button class="btn p" data-act="c-next">Novo atendimento</button>`:`<button class="btn g" data-go="inicio">Voltar ao início</button><button class="btn p" data-act="c-next">Próximo da fila: Luiza Campos</button>`}`;
   return `<div class="ptwrap"><button class="pt2 ptbtn" data-act="c-pt" aria-expanded="${!!c.pop}" aria-haspopup="dialog"><span class="avatar">${PT.ini}</span><span style="text-align:left"><b>${PT.nome}</b> ${ic("chev","i s chev-d")}<small>${capd()?PT.idade:"Idade a confirmar"} · ${isB2C()?"Particular":"Unimed"} · ${c.tele?"Telemedicina":"Presencial"} · ${PT.asst}</small></span></button>${c.pop?ptPop():""}</div>${isB2C()&&capd()&&!c.ptok&&c.phase!=="sent"?`<button class="chip warn" style="cursor:pointer;border:0" data-act="c-pt">${ic("alert","i s")}Confirmar dados</button>`:""}<span class="sp"></span>${ctl}<span class="chead-u">${userTools()}</span>`;
 }
 /* Documentos do atendimento. Relatório e Prescrição (Memed) nascem ao gerar o relatório;
@@ -1653,17 +1804,21 @@ S.profDocs=Object.fromEntries(["admin","gestor","medico","enf","qa","ti","b2c"].
 const myDocs=()=>S.profDocs[S.role]||[];
 function cTabs(){
   const c=S.c,rep=c.repOk||c.phase!=="live";
-  const t=[["apps",`Em tempo real${c.phase==="live"?' <span class="ldot"></span>':' <span class="cnt">5</span>'}`],["ctx","Dados Clínicos"],["trans","Transcrição"],["calc","Calculadoras"],["notas",`Minhas notas${c.notes||(S.prep.files||[]).length?' <span class="dotn"></span>':""}`]];
-  if(rep){t.push(["nota",`${ic("doc","i s")}Relatório`],["receita",`${MEMED_IC}Prescrição`]);(c.docs||[]).forEach(k=>t.push([k,`${docName(k)}<span class="tx" role="button" aria-label="Remover ${docName(k)}" data-act="c-undoc" data-val="${k}">${ic("x","i s")}</span>`]))}
+  const t=[["apps",`Em tempo real${c.phase==="live"?' <span class="ldot"></span>':' <span class="cnt">5</span>'}`],["ctx","Dados Clínicos"],["trans","Transcrição"],["calc","Calculadoras"],["notas",`Minhas notas${c.notes||(c.hist?c.files:S.prep.files||[]).length?' <span class="dotn"></span>':""}`]];
+  if(rep){t.push(["nota",`${ic("doc","i s")}Relatório`],["receita",`${MEMED_IC}Prescrição`]);(c.docs||[]).forEach(k=>t.push([k,c.hist?docName(k):`${docName(k)}<span class="tx" role="button" aria-label="Remover ${docName(k)}" data-act="c-undoc" data-val="${k}">${ic("x","i s")}</span>`]))}
+  if(c.hist)t.forEach(x=>{const d=verDocOf(x[0]);if(d&&vChanged(d))x[1]+=' <span class="ed-dot" title="Editado pelo profissional"></span>'});
   const left=myDocs().filter(k=>!(c.docs||[]).includes(k));
-  return `<button class="ct-ar l" data-act="ct-scroll" data-val="-1" aria-label="Abas anteriores" title="Abas anteriores">${ic("chevl","i s")}</button><div class="ct-scroll">${t.map(([k,l])=>`<button class="${c.tab===k?"on":""}" data-act="c-tab" data-val="${k}">${l}</button>`).join("")}</div><button class="ct-ar r" data-act="ct-scroll" data-val="1" aria-label="Próximas abas" title="Próximas abas">${ic("chev","i s")}</button>`+(rep&&can("at_criar")?`<button class="crt" data-act="c-docmenu" aria-haspopup="menu" title="${left.length?"Documentos":"Nenhum outro documento liberado para o seu perfil"}" aria-label="Criar documento" ${left.length?"":"disabled"}>${ic("plus","i s")}Criar</button>`:"");
+  return `<button class="ct-ar l" data-act="ct-scroll" data-val="-1" aria-label="Abas anteriores" title="Abas anteriores">${ic("chevl","i s")}</button><div class="ct-scroll">${t.map(([k,l])=>`<button class="${c.tab===k?"on":""}" data-act="c-tab" data-val="${k}">${l}</button>`).join("")}</div><button class="ct-ar r" data-act="ct-scroll" data-val="1" aria-label="Próximas abas" title="Próximas abas">${ic("chev","i s")}</button>`+(rep&&can("at_criar")&&!c.hist?`<button class="crt" data-act="c-docmenu" aria-haspopup="menu" title="${left.length?"Documentos":"Nenhum outro documento liberado para o seu perfil"}" aria-label="Criar documento" ${left.length?"":"disabled"}>${ic("plus","i s")}Criar</button>`:"");
 }
 
+function intMsgHtml(c){return c.send==="fail"?`<div class="int-msg fail">${ic("alert","i s")}<div><b>Não foi possível integrar ao prontuário</b><span>O sistema do hospital não respondeu a tempo. Nada foi perdido: o relatório está salvo e assinado na Lya. A Lya tenta de novo sozinha a cada 5 minutos, por 1 hora, e avisa o resultado.</span></div><button class="btn p sm" data-act="c-send">${ic("hist","i s")}Tentar de novo</button><button class="btn q sm" data-act="int-detail">Ver detalhes</button></div>`
+   :c.phase==="sent"&&!isB2C()?`<div class="int-msg ok">${ic("check","i s")}<div><b>Integrado ao prontuário do Hospital Aurora · 09:47</b><span>Relatório, Prescrição${(c.docs||[]).length?` e ${c.docs.length} ${c.docs.length>1?"documentos":"documento"}`:""} enviados e assinados por ${S.c.hist?S.c.hist.who:"Dra. Helena Duarte"} · comprovante ${c.intId||"INT-2026-104582"}. Mudanças a partir de agora entram como adendo.</span></div><button class="btn q sm" data-act="int-detail">Ver comprovante</button></div>`
+   :c.phase==="sent"&&isB2C()?`<div class="int-msg ok">${ic("check","i s")}<div><b>Relatório assinado · 09:47</b><span>PDF pronto para baixar ou enviar ao paciente. Mudanças a partir de agora entram como adendo.</span></div></div>`:""}
 function noteHtml(){
   const c=S.c,cur=c.t,rev=c.phase!=="live";
   const filled=C_SECS.filter(s=>s[1].length);
   const done=filled.filter(s=>s[1].every(l=>l[0]<=cur)).length;
-  const status=c.phase==="live"?`<span class="ldot"></span>Escrevendo ao vivo · ${done} de ${filled.length} seções`:c.phase==="gen"?`<span class="ldot b"></span>Relatório final pronto. Trechos revisados em verde.`:c.phase==="rev"?`<span class="ldot a"></span>Pronto para conferir · pendências em amarelo`:`${ic("check","i s")}${isB2C()?"Assinado. Mudanças a partir de agora entram como adendo.":"Enviado ao prontuário. Mudanças a partir de agora entram como adendo."}`;
+  const status=c.phase==="live"?`<span class="ldot"></span>Escrevendo ao vivo · ${done} de ${filled.length} seções`:c.phase==="gen"?`<span class="ldot b"></span>Relatório final pronto. Trechos revisados em verde.`:c.phase==="rev"?`<span class="ldot a"></span>Pronto para conferir · pendências em amarelo`:`${ic("lock","i s")}Somente leitura · mudanças entram como adendo`;
   const empty=[];
   let secs=C_SECS.map(([title,lines])=>{
     const vis=lines.filter(l=>l[0]<=cur);
@@ -1674,24 +1829,30 @@ function noteHtml(){
     let body=vis.map(l=>{const txt=l[1]==="ALG"?`<span class="alg">${CS.alg}</span>`:l[1];const fresh=c.phase==="live"&&cur-l[0]<6;return `<span class="${fresh||c.phase==="gen"?"fresh":""}">${txt}</span>`}).join(" ");
     const ck=c.calcs?Object.keys(c.calcs).filter(k=>{const sec=(c.calcSec||{})[k]||"Exame físico";return sec===title||(sec==="Exame físico"&&title==="Exame dermatológico")}).map(k=>c.calcs[k]):[];
     if(ck.length){if(!lines.length)st="done";body+=(body?" ":"")+ck.map(t=>`<span class="prevtx">${t}. <small>calculado · confira</small></span>`).join(" ")}
-    const pk=CS.protos&&title==="Avaliação e plano"&&c.pOk?CS.protos.filter(p=>c.pOk[p.k]):[];
-    if(pk.length){if(!lines.length)st="done";body+=(body?" ":"")+pk.map(p=>`<span class="prevtx">${p.t.replace("Risco de","Protocolo de")}: ${p.cond.join("; ")}. <small>conduta padronizada assumida · confira</small></span>`).join(" ")}
+    const pk=CS.protos&&title==="Avaliação e plano"&&c.pOk?CS.protos.filter(p=>c.pOk[p.k]&&pNow(p)):[];
+    if(pk.length){if(!lines.length)st="done";body+=(body?" ":"")+pk.map(p=>{const lc=x=>/^[A-ZÀ-Ú][a-zà-ú]/.test(x)?x[0].toLowerCase()+x.slice(1):x,pres=p.crit.filter(critHit).map(x=>`${lc(x[0])} (${typeof x[1]==="number"?"atendimento "+mmss(x[1]):x[1].toLowerCase()})`),rv=pState(p)==="rev";return `<span class="prevtx ${rv?"rv":""}">${p.t.replace("Risco de","Protocolo de")} (${p.score.replace(" · ",", ")}). ${pres.length>1?"Critérios presentes":"Critério presente"}: ${pres.join("; ")}. Conduta: ${p.cond.map(lc).join("; ")}. <small>${rv?"revisar: critérios mudaram":"conduta padronizada assumida · confira"} · protocolo v${p.ver}</small></span>`}).join(" ")}
     if(br.length){if(!lines.length)st="done";body+=(body?" ":"")+br.map(p=>`<span class="prevtx">${p[2]===p[0]?"":"Em 12/08: "}${p[1]} <small>do atendimento de 12/08 · confirme</small></span>`).join(" ")}
     if(rv){body+=(body?" ":"")+(c.res[rv[0]]?`<span class="fresh">${rv[6]}</span>`:`<span class="pend">${rv[5]}</span>`);if(c.phase==="rev"&&!c.res[rv[0]])st="warn"}
-    return `<div class="ns ${st}"><span class="nd" aria-hidden="true"></span><div><h4>${title}</h4>${st==="todo"?`<span class="skel"></span>`:`<p>${body}</p>`}</div></div>`;
+    const ed=(c.edits||{})[title],editing=c.editSec===title,canEd=c.phase==="rev"&&can("at_criar");
+    if(editing)return `<div class="ns ${st} editing"><span class="nd" aria-hidden="true"></span><div><h4>${title}</h4><textarea class="input ns-ta" id="ns-ta" aria-label="Editar ${title}">${(ed!=null?ed:body.replace(/<small>.*?<\/small>/g,"").replace(/<[^>]+>/g,"")).trim()}</textarea><div class="ns-eda"><button class="btn p sm" data-act="sec-save" data-val="${title}">Salvar</button><button class="btn q sm" data-act="sec-x">Cancelar</button><span class="small muted">A versão da IA fica guardada para o histórico de versões.</span></div></div></div>`;
+    return `<div class="ns ${st} ${ed!=null?"edited":""}"><span class="nd" aria-hidden="true"></span><div><h4>${title}${ed!=null?'<span class="ed-tag">editado por você</span>':""}${canEd?`<button class="iconbtn sm ns-edb" data-act="sec-edit" data-val="${title}" aria-label="Editar ${title}" title="Editar">${ic("edit","i s")}</button>`:""}</h4>${st==="todo"?`<span class="skel"></span>`:`<p>${ed!=null?ed.replace(/</g,"&lt;"):body}</p>`}</div></div>`;
   }).join("");
   if(c.notesRep&&c.notes&&c.notes.trim())secs+=`<div class="ns done"><span class="nd" aria-hidden="true"></span><div><h4>Notas do médico</h4><p><span class="prevtx">${c.notes.replace(/</g,"&lt;")} <small>das suas notas · confira</small></span></p></div></div>`;
   const emptyRow=empty.length?`<div class="ns-empty"><button class="btn q sm" data-act="c-empty">${S.c.showEmpty?"Ocultar":"Mostrar"} ${empty.length} seções sem conteúdo neste atendimento</button>${S.c.showEmpty?`<span class="small muted">${empty.join(" · ")} · adicione texto se precisar, ou deixe de fora do documento.</span>`:""}</div>`:"";
   const pendN=C_REV.filter(r=>!c.res[r[0]]).length,sent=c.phase==="sent";
-  const genBox=c.phase==="gen"?`<div class="genbox"><b>${ic("spark","i s")}Gerando o relatório</b><ul class="gen">${C_GEN.map((g,i)=>`<li class="${i<c.gen?"ok":i===c.gen?"now":""}">${i<c.gen?ic("check","i s"):i===c.gen?'<span class="spin"></span>':'<span class="dotp"></span>'}${g}</li>`).join("")}</ul></div>`:"";
-  const acts=c.phase==="gen"?"":`<button class="iconbtn" aria-label="Ditado" title="Ditar no relatório">${ic("mic","i s")}</button><button class="btn g sm" data-act="toast" data-msg="Relatório copiado">${ic("copy","i s")}Copiar</button><button class="btn g sm" data-act="rep-print">${ic("file","i s")}Imprimir</button>${isB2C()?"":`<button class="btn p sm" data-act="rep-int" ${sent?"disabled":""} title="${pendN?"Resolva as pendências antes de integrar":"Envia o relatório ao prontuário"}">${ic("link","i s")}${sent?"Integrado":"Integrar ao prontuário"}</button>`}`;
-  return `<div class="nbar"><span class="small muted nst">${status}</span><span class="sp"></span>${acts}</div>${genBox}<div class="note">${secs}${emptyRow}</div>`;
+  const genBox=c.phase==="gen"?`<div class="genbox"><b>${ic("spark","i s")}${c.regen?"Gerando de novo":"Gerando o relatório"}<span class="sp"></span><button class="btn q sm" data-act="gen-cancel">Cancelar</button></b><span class="small muted">Leva alguns segundos. Você pode olhar as outras abas enquanto isso.</span><ul class="gen">${C_GEN.map((g,i)=>`<li class="${i<c.gen?"ok":i===c.gen?"now":""}">${i<c.gen?ic("check","i s"):i===c.gen?'<span class="spin"></span>':'<span class="dotp"></span>'}${g}</li>`).join("")}</ul></div>`:"";
+  const rgMax=USE_PLANS[usePlan()].regen,rgN=c.regen||0;
+  const acts=c.phase==="gen"?"":`${c.phase==="rev"&&!c.closed?`<button class="btn g sm" data-act="regen" ${rgN>=rgMax?`disabled title="Limite de ${rgMax} ${rgMax>1?"regenerações":"regeneração"} por relatório"`:`title="Refaz o relatório com tudo o que foi ouvido"`}>${ic("hist","i s")}Regenerar <span class="muted">${rgN}/${rgMax}</span></button>`:""}<button class="iconbtn" aria-label="Ditado" title="Ditar no relatório">${ic("mic","i s")}</button><button class="iconbtn" data-act="toast" data-msg="Relatório copiado" aria-label="Copiar" title="Copiar">${ic("copy","i s")}</button><button class="iconbtn" data-act="rep-print" aria-label="Imprimir" title="Imprimir">${ic("file","i s")}</button>${isB2C()?"":`<button class="btn p sm" data-act="rep-int" ${sent?"disabled":""} title="${pendN?"Resolva as pendências antes de integrar":"Envia o relatório ao prontuário"}">${ic("link","i s")}${sent?"Integrado":"Integrar ao prontuário"}</button>`}`;
+  const resumed=c.phase==="live"&&c.repOk&&c.regenAt!=null;
+  const intMsg=intMsgHtml(c);
+
+  return intMsg+`<div class="nbar ${resumed?"resumed":""}"><span class="small muted nst">${resumed?`<span class="ldot"></span><b>Gravação retomada.</b> O que for dito agora entra quando você gerar de novo.`:status}</span><span class="sp"></span>${resumed?`<button class="btn p sm" data-act="c-fin">${ic("doc","i s")}Gerar de novo</button>`:acts}</div>${genBox}<div class="note">${secs}${emptyRow}</div>`;
 }
 function transHtml(){
   const c=S.c;const lines=C_LINES.filter(l=>l[0]<=c.t);
-  if(!lines.length)return '<p class="muted small">A transcrição aparece aqui assim que alguém falar.</p>';
-  return `<div class="tr-legend small muted"><span><span class="fixd">termo</span> corrigido pelo vocabulário médico</span></div>
-   <div class="tr2">${(()=>{const hl=c.hl!=null?Math.max(...lines.filter(l=>l[0]<=c.hl).map(l=>l[0]),lines[0][0]):null;return lines.map(l=>`<div class="ln2 ${l[1]==="M"?"m":"p"} ${l[0]===hl?"hl":""}"><span class="tm">${mmss(l[0])}</span><p>${l[2]}</p></div>`).join("")})()}</div>`;
+  if(!lines.length)return `<div class="tr-empty"><span class="wave" aria-hidden="true">${"<i></i>".repeat(5)}</span><b>${c.paused?"Gravação pausada":"Ouvindo a conversa"}</b><span class="small muted">As falas aparecem aqui em segundos, com a hora de cada trecho. Termos médicos são corrigidos pelo vocabulário da instituição.</span><span class="small muted">Clique na hora ao lado de uma informação, em Em tempo real, para ver de qual trecho ela veio.</span></div>`;
+  return `<div class="tr-tools"><label class="search tr-q">${ic("search","i s")}<input id="tr-q" aria-label="Buscar na transcrição" placeholder="Buscar na transcrição" value="${c.trQ||""}"></label><span class="small muted" id="tr-n">${lines.length} trechos</span><span class="sp"></span><span class="small muted"><span class="fixd">termo</span> corrigido pelo vocabulário</span><button class="btn q sm" data-act="toast" data-msg="Transcrição copiada">${ic("copy","i s")}Copiar</button></div>
+   <div class="tr2">${(()=>{const hl=c.hl!=null?Math.max(...lines.filter(l=>l[0]<=c.hl).map(l=>l[0]),lines[0][0]):null;return lines.map(l=>`<div class="ln2 ${l[1]==="M"?"m":"p"} ${l[0]===hl?"hl":""}" data-tx="${l[2].replace(/<[^>]+>/g,"").toLowerCase().replace(/"/g,"")}"><span class="tm">${mmss(l[0])}</span><p>${l[2]}</p></div>`).join("")})()}</div>`;
 }
 function memedOk(){return !isB2C()||S.c.res.cpf}
 function cMain(){
@@ -1714,18 +1875,19 @@ function docHtml(k){
 }
 function trWrap(transBody){return transBody}
 function notasHtml(){
-  const c=S.c,files=(S.prep.files||[]);
+  const c=S.c,files=c.hist?c.files:(S.prep.files||[]),ro=!!c.hist;
   return `<div class="trpane"><div class="np-h"><b>${ic("edit","i s")}Minhas notas</b><span class="small muted">${c.notes?"Salvo automaticamente":"Só você vê, a menos que inclua no relatório"}</span></div>
-   <textarea id="c-notes" class="input notes" aria-label="Minhas notas" placeholder="Anote o que não é dito em voz alta: impressões, achados do exame, lembretes para o relatório.">${c.notes||""}</textarea>
-   <label class="small" style="display:flex;gap:8px;align-items:center"><input type="checkbox" data-act="notes-rep" ${c.notesRep?"checked":""}> Incluir no relatório como “Notas do médico”</label>
+   <textarea id="c-notes" class="input notes" ${ro?"readonly":""} aria-label="Minhas notas" placeholder="Anote o que não é dito em voz alta: impressões, achados do exame, lembretes para o relatório.">${c.notes||""}</textarea>
+   <label class="small" style="display:flex;gap:8px;align-items:center"><input type="checkbox" data-act="notes-rep" ${c.notesRep?"checked":""} ${ro?"disabled":""}> Incluir no relatório como “Notas do médico”</label>
    <div class="np-h" style="margin-top:6px"><b>${ic("clip","i s")}Arquivos${files.length?` <span class="cnt">${files.length}</span>`:""}</b></div>
-   <label class="dropz" title="PDF ou imagem">${ic("upload")}<b>Adicionar arquivos</b><span class="small muted">Arraste ou clique · PDF ou imagem · a Lya lê e organiza em Dados Clínicos</span><input type="file" id="c-file" accept=".pdf,image/*" multiple hidden></label>
-   ${files.length?`<div class="flist">${files.map((f,i)=>`<div class="fatt"><span class="ico">${ic("file","i s")}</span><span class="fatt-t"><b>${f.n}</b><small>${f.st==="lendo"?'<span class="spin"></span> Lendo o documento…':`${f.kb} · ${f.res}`}</small></span>${f.st==="ok"?`<button class="btn q sm" data-act="c-tab" data-val="ctx">Ver em Dados Clínicos</button>`:""}<button class="iconbtn sm" data-act="prep-unfile" data-val="${i}" aria-label="Remover ${f.n}">${ic("x","i s")}</button></div>`).join("")}</div>`:""}</div>`;
+   ${ro?"":`<label class="dropz" title="PDF ou imagem">${ic("upload")}<b>Adicionar arquivos</b><span class="small muted">Arraste ou clique · PDF ou imagem · a Lya lê e organiza em Dados Clínicos</span><input type="file" id="c-file" accept=".pdf,image/*" multiple hidden></label>`}
+   ${files.length?`<div class="flist">${files.map((f,i)=>`<div class="fatt"><span class="ico">${ic("file","i s")}</span><span class="fatt-t"><b>${f.n}</b><small>${f.st==="lendo"?'<span class="spin"></span> Lendo o documento…':`${f.kb} · ${f.res}`}</small></span>${f.st==="ok"?`<button class="btn q sm" data-act="c-tab" data-val="ctx">Ver em Dados Clínicos</button>`:""}${ro?"":`<button class="iconbtn sm" data-act="prep-unfile" data-val="${i}" aria-label="Remover ${f.n}">${ic("x","i s")}</button>`}</div>`).join("")}</div>`:""}</div>`;
 }
 function cMainInner(){
   const c=S.c;
   if(c.tab==="notas")return notasHtml();
   if(c.tab==="calc")return calcTab();
+  if(c.hist&&verDocOf(c.tab))return verHtml(c.tab);
   if(c.tab==="nota")return noteHtml();
   if(c.tab!=="trans"&&c.hl!=null)c.hl=null;
   if(c.tab==="trans")return trWrap(can("at_trtr")||c.phase!=="live"?(can("at_trrel")||c.phase==="live"?transHtml():lockBox("at_trrel","Transcrição oculta para este perfil")):lockBox("at_trtr","Transcrição ao vivo oculta para este perfil"));
@@ -1734,17 +1896,17 @@ function cMainInner(){
   if(!["apps","ctx","trans","nota","receita"].includes(c.tab)&&c.tab!=="exames"&&c.tab!=="parecer"&&c.tab!=="orient")return docHtml(c.tab);
   if(c.tab==="exames")return `<div class="doc"><h3>Solicitação de exames</h3><ol>${CS.exames.map(x=>`<li>${x}</li>`).join("")}</ol><p class="small muted">Indicação clínica: ${CS.exInd}</p></div>`;
   if(c.tab==="receita"){const r=CS.receita,ok=c.res[r[0]];
-    return `<div class="doc"><div class="card-h" style="margin:0"><h3 style="display:flex;gap:8px;align-items:center">${MEMED_IC}Prescrição</h3><span class="chip line">Gerada pela Lya · emitida na Memed</span></div>${memedOk()?"":`<div class="banner warn" style="margin:0">${ic("alert","i s")}<span class="sp small">Para emitir pela Memed faltam <b>CPF</b> e <b>telefone</b> do paciente. Complete sem sair do atendimento.</span><button class="btn g sm" data-act="c-res" data-val="cpf">Completar dados</button></div>`}<p>${ok||r[0]==="cpf"?`<span class="${ok?"fresh":""}">${r[1]}</span>`:`<span class="pend">${r[2]}</span>`}</p><p class="small" style="color:var(--danger)">${r[3]}</p><div class="chips"><button class="btn p sm" ${memedOk()?"":"disabled"}>Emitir na Memed</button></div></div>`}
+    return `<div class="doc"><div class="card-h" style="margin:0"><h3 style="display:flex;gap:8px;align-items:center">${MEMED_IC}Prescrição</h3><span class="chip line">Gerada pela Lya · emitida na Memed</span></div>${rxSug()}${memedOk()?"":`<div class="banner warn" style="margin:0">${ic("alert","i s")}<span class="sp small">Para emitir pela Memed faltam <b>CPF</b> e <b>telefone</b> do paciente. Complete sem sair do atendimento.</span><button class="btn g sm" data-act="c-res" data-val="cpf">Completar dados</button></div>`}<p>${ok||r[0]==="cpf"?`<span class="${ok?"fresh":""}">${r[1]}</span>`:`<span class="pend">${r[2]}</span>`}</p><p class="small" style="color:var(--danger)">${r[3]}</p><div class="chips"><button class="btn p sm" ${memedOk()?"":"disabled"}>Emitir na Memed</button></div></div>`}
   if(c.tab==="parecer")return `<div class="doc"><div class="doc-org">${isB2C()?B2C_LOGO:ORG_LOGO}<span><b>${isB2C()?"Consultório Dra. Helena Duarte":"Hospital Aurora"}</b><small>${isB2C()?"CRM 123456/SP":"CNPJ 00.000.000/0001-00 · Ala B"}</small></span></div><h3>Parecer técnico</h3>${CS.parecer.map(p=>`<p>${p}</p>`).join("")}<p class="small muted">Dra. Helena Duarte · CRM 123456/SP · 26/10/2026</p></div><p class="hint" style="margin:0 16px 16px">O que não foi tratado no atendimento fica de fora do texto, sem frases como “não mencionado”.</p>`;
   return `<div class="doc"><h3>Orientações ao paciente</h3><p>${CS.orient}</p><div class="chips"><button class="btn g sm">Enviar por WhatsApp</button><button class="btn g sm">Traduzir</button></div></div>`;
 }
 /* Sugestões da Lya numa faixa compacta entre o paciente e as abas. Cada pílula abre um balão com o detalhe e as ações.
    Ao vivo: avisos + protocolos de risco. Revisão: "Antes de enviar". Encerrado: registro de controle. Sem nada, a faixa não aparece. */
 function sgBar(){
-  const c=S.c;if(!c)return "";const g=x=>(CS.insg[x[2]]||["agora",[]]);const ord={c:0,w:1,r:2,i:3};const pills=[];
+  const c=S.c;if(!c||c.hist)return "";const g=x=>(CS.insg[x[2]]||["agora",[]]);const ord={c:0,w:1,r:2,i:3};const pills=[];
   if(c.phase==="live"){insVis().sort((a,b)=>ord[a[1]]-ord[b[1]]).forEach(x=>pills.push(`<button class="sgp k-${x[1]}" data-act="sg-open" data-val="${x[2]}"><i></i>${x[2]}</button>`));
-   (CS.protos||[]).forEach(p=>pills.push(`<button class="sgp k-p" data-act="c-proto" data-val="${p.k}"><i></i>${p.t} · ${p.lvl[1]}${c.pOk&&c.pOk[p.k]?" · assumida":""}</button>`))}
-  if(c.phase==="rev")C_REV.filter(r=>!c.res[r[0]]).forEach(r=>pills.push(`<button class="sgp k-w" data-act="sg-open" data-val="rev:${r[0]}"><i></i>${r[1]}</button>`));
+   protoVis().filter(p=>pState(p)!=="no").forEach(p=>{const st=pState(p);pills.push(`<button class="sgp k-p ${st==="rev"?"k-rev":""}" data-act="c-proto" data-val="${p.k}"><i></i>${p.t} · ${p.lvl[1]}${st==="ok"?" · assumida":st==="rev"?" · revisar":""}</button>`)})}
+  if(c.phase==="rev"){C_REV.filter(r=>!c.res[r[0]]).forEach(r=>pills.push(`<button class="sgp k-w" data-act="sg-open" data-val="rev:${r[0]}"><i></i>${r[1]}</button>`));protoVis().filter(p=>pState(p)==="rev").forEach(p=>pills.push(`<button class="sgp k-w" data-act="c-proto" data-val="${p.k}"><i></i>Reconfirmar conduta: ${p.t.replace("Risco de","protocolo de")}</button>`))}
   if(c.closed&&c.phase!=="gen"&&c.ev.length)pills.push(`<button class="sgp k-l" data-act="sg-log"><i></i>Registro de controle</button>`);
   if(!pills.length)return "";
   const max=c.sgAll?pills.length:4,more=pills.length-max;
@@ -1783,9 +1945,11 @@ function slideHtml(){
 function cSide(){
   if(!canChat())return "";
   const head=`<div class="chs-h"><b class="chs-t">${ic("spark","i s")}Fale com a Lya</b><button class="iconbtn sm" data-act="side-hide" aria-label="Ocultar painel" title="Ocultar Fale com a Lya">${ic("panel","i s")}</button></div>`;
-  const quick=S.chatMsgs.length?`<div class="ch-quick">${CHAT_QUICK.map(q=>`<button data-act="c-ask" data-val="${q[2]}">${ic(q[0],"i s")}${q[1]}</button>`).join("")}</div>`:"";
+  const quick=S.chatMsgs.length?`<div class="ch-quick">${chatQuick().map(q=>`<button data-act="c-ask" data-val="${q[2]}">${ic(q[0],"i s")}${q[1]}</button>`).join("")}</div>`:"";
   return `<div class="side-card chs">${head}<div class="ch-body" id="ch-body">${chatThread()}</div>${quick}${chatComposer()}</div>`;
 }
+const CHAT_QUICK_REV=[["list","Revisar pendências","O que falta conferir no relatório?"],["msg","Explicar ao paciente","Explique o plano ao paciente em linguagem simples"],["file","Orientações ao paciente","Gerar orientações ao paciente"],["alert","Checar a prescrição","Checar interações da prescrição"]];
+const chatQuick=()=>S.c&&S.c.phase!=="live"&&inSideChat()?CHAT_QUICK_REV:CHAT_QUICK;
 const CHAT_QUICK=[["doc","Resumir até agora","Resuma até agora"],["list","Perguntas que faltam","Que perguntas ainda faltam?"],["alert","Interações e alergias","Checar interações"],["gauge","Escore de gravidade","Calcular escore de risco"]];
 
 /* Calculadoras clínicas (do wireframe v7): IMC e BSA prontas com peso e altura do cadastro;
@@ -1911,9 +2075,9 @@ function saGridDerm(){
   const abc=[["A","Assimetria","não descrita",0],["B","Bordas","irregulares",1],["C","Cor","escura, heterogênea",1],["D","Diâmetro","≈ 20 mm (> 6 mm)",1],["E","Evolução","cresceu e escureceu · questionário",1]];
   const ck=chkList([["Lesão descrita",17,1],["Critérios ABCDE avaliados",19,1],["História familiar perguntada",26],["Exposição solar avaliada",999],["Fotografia da lesão",999,1],["Consentimento do procedimento",999,1],["Anatomopatológico solicitado",31,1],["Fio de sutura registrado",38],["Orientação de curativo",44],["Retorno definido",44]],t);
   return `<div class="sagrid rt derm" style='--areas:${saAreas(["alg","qx","hip"],!(S.c&&S.c.ptok))}'>${S.c&&S.c.ptok?"":`<div class="a-cap">${capStrip(t)}</div>`}
-  <div class="sa a-qx"><div class="sa-h"><b>Queixa principal</b>${ts(12)}</div>${t>=8?`<div class="chips">${t>=12?'<span class="chip navy">Lesão pigmentada no antebraço</span>':""}<span class="chip navy">Perda de 15 kg</span>${evT(8)}${t>=12?evT(12):""}</div>`:wait}</div>
+  <div class="sa a-qx"><div class="sa-h"><b>Queixa principal</b>${ts(12)}</div>${t>=8?`<div class="chips">${t>=12?'<span class="chip navy">Lesão pigmentada no antebraço</span>':""}<span class="chip navy">Perda de 15 kg</span>${evT(8)}${t>=12?evT(12):""}</div>`:wt("qx")}</div>
   <div class="sa a-alg"><div class="sa-h"><b>${ic("alert","i s")}Alergias</b>${ts(1)}</div><span class="small muted">Nenhuma alergia relatada até agora. Pergunte antes de prescrever.</span></div>
-  <div class="sa a-hip ${t>=19?"crit":""}"><div class="sa-h"><b>Hipóteses diagnósticas</b>${t>=19?'<span class="chip red mono">ABCDE 4/5</span>':ts(19)}</div>${t>=19?hyp2([["Lesão melanocítica a esclarecer","D48.5",70,[17,"questionário 25/10"]],["Perda de peso anormal","R63.4",t>=26?55:45,[8]]],t,`<div class="abc-mini" title="Sinais de alerta da lesão">${abc.map(a=>`<span class="${a[3]?"hit":""}" title="${a[1]}: ${a[2]}"><b>${a[0]}</b>${a[1]}</span>`).join("")}</div>`):wait}</div>
+  <div class="sa a-hip ${t>=19?"crit":""}"><div class="sa-h"><b>Hipóteses diagnósticas</b>${t>=19?'<span class="chip red mono">ABCDE 4/5</span>':ts(19)}</div>${t>=19?hyp2([["Lesão melanocítica a esclarecer","D48.5",70,[17,"questionário 25/10"]],["Perda de peso anormal","R63.4",t>=26?55:45,[8]]],t,`<div class="abc-mini" title="Sinais de alerta da lesão">${abc.map(a=>`<span class="${a[3]?"hit":""}" title="${a[1]}: ${a[2]}"><b>${a[0]}</b>${a[1]}</span>`).join("")}</div>`):wt("hip")}</div>
   <div class="sa a-chk"><div class="sa-h"><b>Check-list do procedimento</b></div>${ck.html}</div></div>`;
 }
 
@@ -1966,6 +2130,9 @@ function dadosClinicos(){
   ${D.outros?`<section class="dx-area"><h3>${ic("file","i s")}Outros dados recebidos<span class="small muted">sem grupo definido</span></h3><div class="dxlist">${dcBlock("file","Outros dados",D.outros.src,D.outros.body(),D.outros.n,true,D.outros.sum)}</div></section>`:""}`;
 }
 
+/* Estado vazio dos cards: em vez de "não identificado", diz o que a Lya está esperando ouvir */
+const SA_HINT={alg:"Registra quando alguém falar de alergia ou reação a remédio. Confirme antes de prescrever.",qx:"Registra o motivo do atendimento assim que o paciente contar.",hip:"Sugere hipóteses com CID quando houver dados suficientes na conversa."};
+const wt=k=>`<div class="sa-wait"><span class="sw-bars" aria-hidden="true"><i></i><i></i></span><span class="small muted">${SA_HINT[k]}</span></div>`;
 /* Em tempo real: Prompts preenchidos conforme o atendimento avança */
 function saGridRcu(){
   const t=S.c?S.c.t:C_END, wait=`<span class="small muted">Ainda não identificado no atendimento</span>`;
@@ -1973,9 +2140,9 @@ function saGridRcu(){
   const q=[[8,"Diarreia 6–7x/dia"],[36,"Sangue e muco"]].filter(x=>t>=x[0]);
   const ck=chkList([["Queixa principal registrada",8],["Adesão ao tratamento avaliada",18],["Medicações revisadas",18,1],["Alergias confirmadas",27,1],["Sangue e febre investigados",36],["Sinais vitais",42,1],["Exame físico abdominal",42],["Peso registrado",999,1],["Sinais de alarme orientados",999],["Plano e retorno definidos",50,1]],t);
   return `<div class="sagrid rt" style='--areas:${saAreas(["alg","qx","hip"])}'>
-  <div class="sa a-alg ${t>=27?"crit":""}"><div class="sa-h"><b>${ic("alert","i s")}Alergias</b>${t>=27?'<span class="chip red mono">CRÍTICO</span>':ts(27)}</div>${t>=27?`<div class="chips"><span class="chip red">Metoclopramida</span></div><span class="evrow">${evT(27,"transcrição")}${evS("confirmada no prontuário")}</span>`:wait}</div>
-  <div class="sa a-qx ${t>=8&&t<14?"flash":""}"><div class="sa-h"><b>Queixa principal</b>${ts(8)}</div>${q.length?`<div class="chips">${q.map(x=>`<span class="chip navy">${x[1]}</span>`).join("")}</div><span class="evrow">${q.map(x=>evT(x[0])).join("")}</span>`:wait}</div>
-  <div class="sa a-hip"><div class="sa-h"><b>Hipóteses diagnósticas</b>${ts(20)}</div>${t>=20?hyp2([["Retocolite ulcerativa em atividade","K51.9",t>=36?78:60,[8,18,...(t>=36?[36]:[]),"Hemograma 12/10"]],["Má adesão à mesalazina","Z91.1",62,[18]]],t):wait}</div>
+  <div class="sa a-alg ${t>=27?"crit":""}"><div class="sa-h"><b>${ic("alert","i s")}Alergias</b>${t>=27?'<span class="chip red mono">CRÍTICO</span>':ts(27)}</div>${t>=27?`<div class="chips"><span class="chip red">Metoclopramida</span></div><span class="evrow">${evT(27,"transcrição")}${evS("confirmada no prontuário")}</span>`:wt("alg")}</div>
+  <div class="sa a-qx ${t>=8&&t<14?"flash":""}"><div class="sa-h"><b>Queixa principal</b>${ts(8)}</div>${q.length?`<div class="chips">${q.map(x=>`<span class="chip navy">${x[1]}</span>`).join("")}</div><span class="evrow">${q.map(x=>evT(x[0])).join("")}</span>`:wt("qx")}</div>
+  <div class="sa a-hip"><div class="sa-h"><b>Hipóteses diagnósticas</b>${ts(20)}</div>${t>=20?hyp2([["Retocolite ulcerativa em atividade","K51.9",t>=36?78:60,[8,18,...(t>=36?[36]:[]),"Hemograma 12/10"]],["Má adesão à mesalazina","Z91.1",62,[18]]],t):wt("hip")}</div>
   <div class="sa a-chk"><div class="sa-h"><b>Check-list</b></div>${ck.html}</div></div>`;
 }
 function consultView(){
@@ -1990,12 +2157,13 @@ function flipPlay(m){
    if(k in m){const dy=m[k]-top;if(Math.abs(dy)>1)e.animate([{transform:`translateY(${dy}px)`},{transform:"none"}],{duration:520,easing:"cubic-bezier(.2,.7,.2,1)"})}
    else if(Object.keys(m).length)e.animate([{opacity:0,transform:"translateY(-6px)"},{opacity:1,transform:"none"}],{duration:380,easing:"ease-out"})});
 }
-function tabsFit(){const w=document.getElementById("c-tabs");if(!w)return;const sc=w.querySelector(".ct-scroll");if(!sc)return;const upd=()=>{w.classList.toggle("ovf",sc.scrollWidth>sc.clientWidth+2);w.classList.toggle("end",sc.scrollLeft+sc.clientWidth>=sc.scrollWidth-2);w.classList.toggle("st",sc.scrollLeft>2)};const on=sc.querySelector("button.on");if(on){const l=on.offsetLeft,r=l+on.offsetWidth;if(l<sc.scrollLeft||r>sc.scrollLeft+sc.clientWidth)sc.scrollLeft=Math.max(0,r-sc.clientWidth+24)}upd();sc.onscroll=upd}
+function fitMain(){const m=document.getElementById("c-main");if(!m)return;document.documentElement.style.setProperty("--cm-top",Math.round(m.getBoundingClientRect().top+window.scrollY)+"px");const sd=document.getElementById("c-side");if(sd)document.documentElement.style.setProperty("--cs-top",Math.round(sd.getBoundingClientRect().top+window.scrollY)+"px")}
+function tabsFit(){fitMain();const w=document.getElementById("c-tabs");if(!w)return;const sc=w.querySelector(".ct-scroll");if(!sc)return;const upd=()=>{w.classList.toggle("ovf",sc.scrollWidth>sc.clientWidth+2);w.classList.toggle("end",sc.scrollLeft+sc.clientWidth>=sc.scrollWidth-2);w.classList.toggle("st",sc.scrollLeft>2)};const on=sc.querySelector("button.on");if(on){const l=on.offsetLeft,r=l+on.offsetWidth;if(l<sc.scrollLeft||r>sc.scrollLeft+sc.clientWidth)sc.scrollLeft=Math.max(0,r-sc.clientWidth+24)}upd();sc.onscroll=upd}
 addEventListener("resize",()=>tabsFit());
 function sideFit(){const el=document.getElementById("c-slide");if(!el)return;const key=S.c?(S.c.pOpen||S.calcOpen||(S.logOpen?"log":"")):"";const h=slideHtml();const isNew=key&&key!==sideFit.k;sideFit.k=key;el.innerHTML=h;const p=el.querySelector(".spanel");if(p){if(isNew)p.classList.add("in");const cb=document.querySelector(".cbody"),top=cb.getBoundingClientRect().top,sd=document.getElementById("c-side"),cr=cb.getBoundingClientRect();el.style.right="auto";el.style.left=(sd?sd.getBoundingClientRect().left-cr.left:Math.max(0,cr.width-420))+"px";el.style.width=(sd?sd.getBoundingClientRect().width:420)+"px";p.style.height=Math.max(360,innerHeight-top-12)+"px"}}
 function fitSplit(){const ch=document.querySelector(".cside .chs");if(ch)ch.style.height=Math.max(360,innerHeight-ch.getBoundingClientRect().top-12)+"px"}
 addEventListener("resize",fitSplit);
-function refreshConsult(parts){
+function refreshConsult(parts){setTimeout(fitMain,0);
   const set=(id,h)=>{const el=document.getElementById(id);if(el)el.innerHTML=h};
   if(parts.includes("head"))set("c-head",cHead());
   if(parts.includes("tabs")){set("c-tabs",cTabs());tabsFit()}
@@ -2004,21 +2172,89 @@ function refreshConsult(parts){
   {const sg=document.getElementById("c-sg");if(sg)sg.innerHTML=sgBar()}
 }
 V.atendimento=()=>{if(!S.c)newConsult("live");return consultView()};
-V.relatorio=()=>{if(!S.c)newConsult("rev");return consultView()};
+V.relatorio=()=>{if(S.histPending){S.histPending=false;histSnap()}if(!S.c)newConsult("rev");return consultView()};
+/* Histórico: o atendimento como ficou ao encerrar (somente leitura) + versões IA x final de cada documento */
+function histSnap(){const h=HIST[S.histSel||0]||HIST[0];newConsult("rev");const c=S.c;Object.assign(c,{phase:h[4]==="Erro de envio"?"rev":"sent",send:h[4]==="Erro de envio"?"fail":null,closed:true,repOk:true,t:C_END,tab:"nota",hist:{who:h[2],when:h[3],end:"09:48"},
+ notes:"Paciente preocupado com a piora. Reforçar adesão à mesalazina e explicar sinais de alarme. Rever peso no retorno.",notesRep:true,docs:["atestado","orient"],
+ files:[{n:"Hemograma_12-10.pdf",kb:"220 KB",st:"ok",res:"3 alterados de 18"},{n:"Calprotectina_12-10.pdf",kb:"140 KB",st:"ok",res:"640 µg/g · alto"}],verView:{}});C_REV.forEach(r=>c.res[r[0]]=true)}
+function verDocOf(k){return VERS.find(d=>d.k===k)}
+function verHtml(k){const c=S.c,d=verDocOf(k),v=c.verView[k]||"final",ch=vChanged(d),[na,nr]=vCount(d);
+ const seg=`<div class="seg" role="group" aria-label="Versão">${[["final","Final (salvo)"],["ia","Original (IA)"],["cmp","Comparar"]].map(([x,l])=>`<button class="${v===x?"on":""}" data-act="ver-view" data-val="${x}" ${x==="cmp"&&!ch?"disabled title=\"A versão final é igual à gerada pela IA\"":""}>${l}</button>`).join("")}</div>`;
+ const bar=`<div class="verbar"><span class="vb-ic">${ic("hist","i s")}</span><b>Versões do documento</b><span class="vtag ${ch?"ed":"ok"}">${ch?"Editado":"Final = IA"}</span><span class="small muted">IA às ${d.ia} · salvo por ${c.hist.who} às ${d.fim}${ch?` · ${na} ${na===1?"inclusão":"inclusões"}, ${nr} ${nr===1?"remoção":"remoções"}`:""}</span><span class="sp"></span>${seg}</div>`;
+ const mark=(parts,side)=>parts.map(p=>p[0]==="="?p[1]:p[0]==="+"?(side!=="ia"?`<ins>${p[1]}</ins>`:""):(side!=="fim"?`<del>${p[1]}</del>`:"")).join("");
+ let body;
+ if(v==="cmp")body=`<div class="vleg"><span><ins>texto incluído pelo profissional</ins></span><span><del>texto da IA removido</del></span></div><div class="vbody"><div class="vs2-c vhdr"><b>${ic("spark","i s")}Original (IA) · ${d.ia}</b><b>${ic("user","i s")}Final (salvo) · ${d.fim}</b></div>${d.secs.map(([t,a,b])=>{const same=a===b,df=same?null:wdiff(a,b);return `<div class="vs2 ${same?"same":""}"><span class="vs-h">${t}${same?"":'<span class="vtag ed">Editado</span>'}</span><div class="vs2-c"><p>${same?a:mark(df,"ia")}</p><p>${same?b:mark(df,"fim")}</p></div></div>`}).join("")}</div>`;
+ else{const ia=v==="ia";body=`<div class="doc vdoc ${ia?"is-ia":""}">${ia?`<div class="vdoc-tag">${ic("spark","i s")}Versão gerada pela IA · ${d.ia} · não foi a enviada</div>`:""}<h3>${d.n}</h3>${d.secs.map(([t,a,b])=>`${d.secs.length>1?`<h4>${t}</h4>`:""}<p>${ia?a:b}</p>`).join("")}<p class="small muted">${c.hist.who} · CRM 123456/SP · 26/10/2026${ia?"":` · salvo às ${d.fim}`}</p></div>`}
+ return `${intMsgHtml(c)}<div class="verwrap">${bar}${body}</div>`}
 
-const HIST=[["Paulo Mendes","Clínica Médica","Dra. Helena Duarte","26/10 09:21","Aguarda validação","warn"],["Ana Ribeiro","Cardiologia","Dr. Rafael Nunes","25/10 16:02","Validado","ok"],["Sem cadastro","Pronto-socorro","Dr. Rafael Nunes","25/10 14:40","Validado","ok"],["Marcos Lima","Urologia","Dra. Júlia Prado","25/10 11:12","Não sumarizado","red"],["Clara Souza","Pediatria","Enf. Tiago Rocha","24/10 18:30","Validado","ok"],["Sem cadastro","Clínica Médica","Dra. Helena Duarte","24/10 10:05","Validado","ok"]];
+
+const HIST=[["Paulo Mendes","Clínica Médica","Dra. Helena Duarte","26/10 09:21","Para revisar","warn",0,2],["Ana Ribeiro","Cardiologia","Dr. Rafael Nunes","25/10 16:02","Integrado","ok",1,1],["Sem cadastro","Pronto-socorro","Dr. Rafael Nunes","25/10 14:40","Integrado","ok",1,0],["Marcos Lima","Urologia","Dra. Júlia Prado","25/10 11:12","Não sumarizado","line",1,0],["Clara Souza","Pediatria","Enf. Tiago Rocha","24/10 18:30","Erro de envio","red",3,1],["Beatriz Lopes","Clínica Médica","Dra. Helena Duarte","24/10 15:20","Integrado","ok",2,0],["Sem cadastro","Clínica Médica","Dra. Helena Duarte","24/10 10:05","Integrado","ok",7,2],["Rogério Alves","Gastroenterologia","Dra. Helena Duarte","20/10 08:40","Erro de envio","red",6,0]];
+/* Histórico: abas por status, busca e filtros que funcionam, ação conforme o status, escopo por permissão e exportação registrada.
+   HIST: [paciente, agente, profissional, data, status, cor, dias atrás, documentos editados] */
+const HTABS=[["all","Todos"],["Para revisar","Para revisar"],["Integrado","Integrados"],["Erro de envio","Com erro de envio"],["Não sumarizado","Não sumarizados"]];
+function histRows(){const org=can("at_org"),f=S.hf||{},q=(f.q||"").toLowerCase(),per={hoje:0,"7":7,"30":30}[f.per||"30"];
+ return HIST.map((r,i)=>({r,i})).filter(({r})=>(org||r[2]==="Dra. Helena Duarte")&&r[6]<=per&&(!q||(r[0]+" "+r[1]).toLowerCase().includes(q))&&(!f.ag||r[1]===f.ag)&&(!f.prof||r[2]===f.prof)&&(!f.ed||r[7]>0))}
 V.historico=()=>{
-  const org=can("at_org");
-  const rows=org?HIST:HIST.filter(r=>r[2]==="Dra. Helena Duarte");
-  return ph("Histórico de atendimentos",org?"Todos os atendimentos da organização.":"Somente seus atendimentos. Ver a organização inteira depende do perfil.")+`
-  <div class="tabs" role="tablist">${[["Todas",org?"1.284":"312"],["Para revisar","2"],["Enviadas","309"],["Com erro de envio","1"]].map((x,i)=>`<button role="tab" class="${i===0?"on":""}" aria-selected="${i===0}">${x[0]} <span class="cnt">${x[1]}</span></button>`).join("")}</div>
-  <div class="filters"><label class="search">${ic("search","i s")}<input aria-label="Buscar" placeholder="Paciente, código de aviso ou ID externo"></label>
-   <select class="input" style="width:auto" aria-label="Agente"><option>Todos os agentes</option></select><select class="input" style="width:auto" aria-label="Status"><option>Todos os status</option></select><span class="chip ${org?"navy":"line"}">${ic(org?"eye":"user","i s")}${org?"Escopo: organização":"Escopo: meus atendimentos"}</span></div>
-  <div class="tw"><table class="t"><thead><tr><th>Paciente</th><th>Agente</th><th>Profissional</th><th>Data</th><th>Status</th><th>Transcrição</th></tr></thead><tbody>
-  ${rows.map(r=>`<tr class="click" data-go="relatorio"><td><div class="who"><span class="avatar">${r[0].split(" ").map(x=>x[0]).join("").slice(0,2)}</span><b>${r[0]}</b></div></td><td>${r[1]}</td><td>${r[2]}</td><td class="mono">${r[3]}</td><td><span class="chip ${r[5]}">${r[4]}</span></td><td>${can("at_trhist")?`<span class="chip line">${ic("eye","i s")}Ver</span>`:`<span class="chip">${ic("lock","i s")}Restrita</span>`}</td></tr>`).join("")}
-  </tbody></table></div><div class="pager"><span>${rows.length} de ${org?"1.284":"312"} registros</span><span class="mono">1 2 3 … 52</span></div>`;
+  const org=can("at_org"),f=S.hf||(S.hf={tab:"all",per:"30"}),base=histRows(),rows=base.filter(({r})=>f.tab==="all"||r[4]===f.tab);
+  const cnt=k=>k==="all"?base.length:base.filter(({r})=>r[4]===k).length;
+  const ags=[...new Set(HIST.map(r=>r[1]))],profs=[...new Set(HIST.map(r=>r[2]))];
+  const act=({r,i})=>{const own=r[2]==="Dra. Helena Duarte";if(r[4]==="Para revisar")return own&&can("at_criar")?`<button class="btn p sm" data-act="hist-open" data-val="${i}">Continuar revisão</button>`:`<button class="btn q sm" data-act="hist-ver" data-val="${i}">Ver</button>`;if(r[4]==="Erro de envio")return own?`<button class="btn t sm" data-act="hist-ver" data-val="${i}">${ic("hist","i s")}Reenviar</button>`:`<button class="btn q sm" data-act="hist-ver" data-val="${i}">Ver</button>`;if(r[4]==="Não sumarizado")return `<button class="btn q sm" data-act="toast" data-msg="Sem relatório: a gravação durou 00:12, curta demais para sumarizar">Por quê?</button>`;return `<button class="btn q sm" data-act="hist-ver" data-val="${i}">Ver</button>`};
+  return ph("Atendimentos",org?"Todos os atendimentos da organização, como ficaram ao encerrar.":"Os seus atendimentos, como ficaram ao encerrar. Ver os da organização depende do perfil.",`<button class="btn g" data-act="hist-exp">${ic("down","i s")}Exportar</button>`)+`
+  <div class="tabs" role="tablist">${HTABS.map(([k,l])=>`<button role="tab" class="${f.tab===k?"on":""}" aria-selected="${f.tab===k}" data-act="hf" data-k="tab" data-val="${k}">${l} <span class="cnt">${cnt(k)}</span></button>`).join("")}</div>
+  <div class="filters"><label class="search">${ic("search","i s")}<input id="hist-q" aria-label="Buscar" placeholder="Paciente ou agente" value="${f.q||""}"></label>
+   <select class="input" style="width:auto" aria-label="Período" data-hf="per">${[["hoje","Hoje"],["7","Últimos 7 dias"],["30","Últimos 30 dias"]].map(o=>`<option value="${o[0]}" ${(f.per||"30")===o[0]?"selected":""}>${o[1]}</option>`).join("")}</select>
+   <select class="input" style="width:auto" aria-label="Agente" data-hf="ag"><option value="">Todos os agentes</option>${ags.map(a=>`<option ${f.ag===a?"selected":""}>${a}</option>`).join("")}</select>
+   ${org?`<select class="input" style="width:auto" aria-label="Profissional" data-hf="prof"><option value="">Todos os profissionais</option>${profs.map(a=>`<option ${f.prof===a?"selected":""}>${a}</option>`).join("")}</select>`:""}
+   <label class="small" style="display:flex;gap:6px;align-items:center"><input type="checkbox" data-hf="ed" ${f.ed?"checked":""}> Só com documentos editados</label>
+   <span class="chip ${org?"navy":"line"}">${ic(org?"eye":"user","i s")}${org?"Escopo: organização":"Escopo: meus atendimentos"}</span></div>
+  ${rows.length?`<div class="tw"><table class="t"><thead><tr><th>Paciente</th><th>Agente</th>${org?"<th>Profissional</th>":""}<th>Data</th><th>Status</th><th>Documentos</th><th>Transcrição</th><th></th></tr></thead><tbody>
+  ${rows.map(o=>{const r=o.r;return `<tr><td><div class="who"><span class="avatar">${r[0].split(" ").map(x=>x[0]).join("").slice(0,2)}</span><b>${r[0]}</b></div></td><td>${r[1]}</td>${org?`<td>${r[2]}</td>`:""}<td class="mono">${r[3]}</td><td><span class="chip ${r[5]}">${r[4]}</span></td><td>${r[4]==="Não sumarizado"?`<span class="small muted">Sem documentos</span>`:r[7]?`<span class="chip warn">${ic("edit","i s")}${r[7]} ${r[7]>1?"editados":"editado"}</span>`:`<span class="chip line">${ic("check","i s")}Sem edição</span>`}</td><td>${can("at_trhist")?`<span class="chip line">${ic("eye","i s")}Disponível</span>`:`<span class="chip">${ic("lock","i s")}Restrita</span>`}</td><td style="text-align:right">${act(o)}</td></tr>`}).join("")}
+  </tbody></table></div>`:`<div class="card empty-st">${ic("search")}<b>Nenhum atendimento com esses filtros</b><span class="small muted">Mude o período, o status ou limpe a busca.</span><button class="btn g sm" data-act="hf-clear">Limpar filtros</button></div>`}
+  <div class="pager"><span>${rows.length} de ${org?"1.284":"312"} registros</span><span class="small muted">${ic("lock","i s")} Transcrições guardadas por 90 dias · relatórios, versões e logs pelo prazo do prontuário</span></div>`;
 };
 
+
+/* Versões dos documentos: o front recebe a versão que a IA gerou e a versão que o profissional salvou.
+   O Histórico mostra as duas, por documento, com as alterações marcadas palavra a palavra. Somente leitura. */
+const VERS=[
+ {k:"nota",n:"Relatório clínico",ia:"09:41",fim:"09:47",secs:[
+  ["Queixa principal","Diarreia 6 a 7 vezes ao dia há 3 semanas.","Diarreia 6 a 7 vezes ao dia há 3 semanas."],
+  ["História atual","Piora após suspender a mesalazina há 2 semanas, por falta de receita. Sangue e muco nas fezes. Nega febre.","Piora após suspender a mesalazina há 2 semanas, por falta de receita. Sangue e muco nas fezes. Nega febre."],
+  ["Exame físico","PA 110/70 mmHg, FC 92 bpm. Dor à palpação em fossa ilíaca esquerda.","PA 110/70 mmHg, FC 92 bpm, peso 78 kg. Dor leve à palpação em fossa ilíaca esquerda, sem sinais de peritonite."],
+  ["Hipóteses diagnósticas","Retocolite ulcerativa em atividade (K51.9).","Retocolite ulcerativa em atividade moderada (K51.9)."],
+  ["Avaliação e plano","Retomar mesalazina. Dose a definir. Solicitar coprocultura e toxina de C. difficile. Colonoscopia em 7 dias.","Retomar mesalazina 4,8 g/dia por 8 semanas. Solicitar coprocultura e toxina de C. difficile. Colonoscopia na próxima consulta, se não houver melhora."]]},
+ {k:"receita",n:"Prescrição",ia:"09:41",fim:"09:46",secs:[["Medicamentos","Mesalazina 800 mg, 2 comprimidos de 8/8 h, por 8 semanas.","Mesalazina 800 mg, 2 comprimidos de 8/8 h, por 8 semanas."]]},
+ {k:"atestado",n:"Atestado médico",ia:"09:42",fim:"09:48",secs:[["Atestado","Atesto que Paulo Mendes esteve em atendimento médico nesta data e necessita de afastamento de suas atividades por 3 dias a partir de hoje.","Atesto que Paulo Mendes esteve em atendimento médico nesta data e necessita de afastamento de suas atividades por 5 dias a partir de hoje."]]},
+ {k:"orient",n:"Orientações ao paciente",ia:"09:42",fim:"09:42",secs:[["Orientações","Tome a mesalazina todos os dias, mesmo sem sintomas. Procure o pronto-socorro se tiver febre, sangramento intenso ou dor forte.","Tome a mesalazina todos os dias, mesmo sem sintomas. Procure o pronto-socorro se tiver febre, sangramento intenso ou dor forte."]]}];
+/* diferença palavra a palavra (LCS) */
+function wdiff(a,b){const tk=x=>x.split(/(\s+|[.,;:()])/).filter(t=>t!==""),A=tk(a),B=tk(b),n=A.length,m=B.length,L=Array.from({length:n+1},()=>new Int16Array(m+1));
+ for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)L[i][j]=A[i]===B[j]?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
+ const out=[];let i=0,j=0;const push=(t,x)=>{const l=out[out.length-1];if(l&&l[0]===t)l[1]+=x;else out.push([t,x])};
+ while(i<n&&j<m){if(A[i]===B[j]){push("=",A[i]);i++;j++}else if(L[i+1][j]>=L[i][j+1]){push("-",A[i]);i++}else{push("+",B[j]);j++}}
+ while(i<n)push("-",A[i++]);while(j<m)push("+",B[j++]);
+ /* junta mudanças vizinhas (separadas só por espaço) num trecho único: removido, depois incluído */
+ const res=[];let k=0;while(k<out.length){if(out[k][0]==="="){res.push(out[k]);k++;continue}let d="",ad="";
+  while(k<out.length&&(out[k][0]!=="="||(!out[k][1].trim()&&k+1<out.length&&out[k+1][0]!=="="))){const [t,x]=out[k];if(t==="-")d+=x;else if(t==="+")ad+=x;else{d+=x;ad+=x}k++}
+  if(d.trim())res.push(["-",d]);if(ad.trim())res.push(["+",ad]);if(res.length>1&&res[res.length-1][0]==="+"&&res[res.length-2][0]==="-")res.push(["="," "])}
+ return res.filter((x,i,a)=>!(x[0]==="="&&x[1]===" "&&(i===a.length-1||a[i+1][0]==="=")))}
+const vChanged=d=>d.secs.filter(x=>x[1]!==x[2]).length;
+function vCount(d){let a=0,r=0;d.secs.forEach(x=>{if(x[1]!==x[2])wdiff(x[1],x[2]).forEach(p=>{if(p[0]==="+")a++;if(p[0]==="-")r++})});return [a,r]}
+V.versoes=()=>{
+ const h=HIST[S.histSel||0]||HIST[0],cur=VERS.find(d=>d.k===S.verDoc)||VERS[0],mode=S.verMode||"diff",ch=vChanged(cur),[na,nr]=vCount(cur);
+ const list=VERS.map(d=>{const c=vChanged(d);return `<button class="vd ${d.k===cur.k?"on":""}" data-act="ver-doc" data-val="${d.k}">${d.k==="receita"?MEMED_IC:ic("doc","i s")}<span class="vd-t"><b>${d.n}</b><small>${c?`${c} ${c>1?"trechos alterados":"trecho alterado"}`:"Sem alterações"}</small></span><span class="vtag ${c?"ed":"ok"}">${c?"Editado":"Final = IA"}</span></button>`}).join("");
+ const mark=(parts,side)=>parts.map(p=>p[0]==="="?p[1]:p[0]==="+"?(side!=="ia"?`<ins>${p[1]}</ins>`:""):(side!=="fim"?`<del>${p[1]}</del>`:"")).join("");
+ const body=cur.secs.map(([t,a,b])=>{const same=a===b;
+  if(mode==="diff")return same?`<div class="vs same"><span class="vs-h">${t}</span><span class="small muted">Sem alterações</span></div>`:`<div class="vs"><span class="vs-h">${t}<span class="vtag ed">Editado</span></span><p>${mark(wdiff(a,b))}</p></div>`;
+  const d=same?null:wdiff(a,b);return `<div class="vs2 ${same?"same":""}"><span class="vs-h">${t}${same?"":'<span class="vtag ed">Editado</span>'}</span><div class="vs2-c"><p>${same?a:mark(d,"ia")}</p><p>${same?b:mark(d,"fim")}</p></div></div>`}).join("");
+ return `<div class="ant-bar"><button class="btn g" data-go="historico">${ic("chevl","i s")}Histórico</button><span class="small muted"><b>${h[0]}</b> · ${h[1]} · ${h[2]} · ${h[3]}</span><span class="sp"></span><button class="btn q sm" data-go="relatorio">${ic("eye","i s")}Abrir atendimento</button></div>
+  <div class="ph-h" style="margin:6px 0 14px"><h1 style="display:flex;align-items:center;gap:10px">${ic("hist")}Versões dos documentos</h1><p class="muted small" style="margin:4px 0 0">O que a IA gerou e o que foi salvo no final. Somente leitura: as duas versões ficam guardadas para auditoria.</p></div>
+  <div class="vgrid"><nav class="vlist" aria-label="Documentos">${list}</nav>
+   <section class="card vcard"><div class="vhead"><div><h3 style="margin:0">${cur.n}</h3><span class="small muted">Gerado pela IA às ${cur.ia} · salvo por ${h[2]} às ${cur.fim}${ch?` · ${na} ${na===1?"inclusão":"inclusões"}, ${nr} ${nr===1?"remoção":"remoções"}`:""}</span></div>
+     <div class="seg" role="group" aria-label="Visualização"><button class="${mode==="diff"?"on":""}" data-act="ver-mode" data-val="diff">Alterações</button><button class="${mode==="side"?"on":""}" data-act="ver-mode" data-val="side">Lado a lado</button></div></div>
+    ${ch?`<div class="vleg"><span><ins>texto incluído</ins></span><span><del>texto removido</del></span></div>`:`<div class="vleg"><span class="small muted">${ic("check","i s")} A versão final é igual à gerada pela IA.</span></div>`}
+    <div class="vbody">${mode==="side"?`<div class="vs2-c vhdr"><b>${ic("spark","i s")}Original (IA) · ${cur.ia}</b><b>${ic("user","i s")}Final (salvo) · ${cur.fim}</b></div>`:""}${body}</div>
+    <div class="vfoot"><button class="btn g sm" data-act="toast" data-msg="Versão final copiada">${ic("copy","i s")}Copiar versão final</button><button class="btn q sm" data-act="toast" data-msg="Baixando a versão original da IA em PDF">${ic("down","i s")}Baixar original (IA)</button></div></section></div>`;
+};
 V.pacientes=()=>ph("Pacientes","Busque pelo nome, setor, ID externo do prontuário ou código de aviso.",can("at_criar")?`<button class="btn g" data-go="atendimento">Atender sem cadastro</button><button class="btn p" data-act="reg-new">${ic("plus","i s")}Novo paciente</button>`:"")+`
   <div class="filters"><label class="search">${ic("search","i s")}<input aria-label="Buscar paciente" placeholder="Nome ou documento"></label><select class="input" style="width:auto" aria-label="Setor"><option>Todos os setores</option><option>Ala B</option><option>UTI adulto</option></select><div class="seg" role="group" aria-label="Período"><button>Hoje</button><button class="on">Últimas 36 h</button><button>Todos</button></div></div>
   <div class="tw"><table class="t"><thead><tr><th>Paciente</th><th>Setor</th><th>ID externo</th><th>Último atendimento</th><th style="text-align:right">Ações</th></tr></thead><tbody>
@@ -2273,7 +2509,7 @@ function intReq(){return `
 V.cirurgia=()=>{const t=tabs("cir",[["proc","Procedimentos"],["prest","Prestadores"]],"proc");return ph("Cirurgia","Catálogos usados pelo fluxo cirúrgico e pelos Prompts de OPME.",can("cp_criar")?`<button class="btn p">${ic("plus","i s")}${t.cur==="proc"?"Novo procedimento":"Novo prestador"}</button>`:"")+t.html+`<div class="filters"><label class="search">${ic("search","i s")}<input aria-label="Buscar" placeholder="Buscar"></label></div><div class="tw"><table class="t"><thead><tr>${t.cur==="proc"?"<th>Código TUSS</th><th>Descrição</th><th>Porte</th><th>OPME associada</th>":"<th>Nome</th><th>Atividade</th><th>Conselho</th><th>Status</th>"}</tr></thead><tbody>${(t.cur==="proc"?[["30715016","Artroplastia total de joelho","10A","Prótese de joelho"],["30912105","Colecistectomia videolaparoscópica","7B","Clipes, trocarte"],["31009336","Angioplastia coronária com stent","9C","Stent farmacológico"]]:[["Dr. Eduardo Faria","Cirurgião ortopédico","CRM 99120/SP","Ativo"],["Dra. Lívia Castro","Anestesista","CRM 120554/SP","Ativo"],["Dr. Paulo Viana","Cirurgião geral","CRM 87001/SP","Inativo"]]).map(r=>`<tr>${r.map((c,i)=>`<td class="${i===0&&t.cur==="proc"?"mono":""}">${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`};
 
 V.configuracoes=()=>{
-  const t=tabs("cfg",isB2C()?[["pref","Minhas preferências"],["org","Consultório"],["ass","Plano e assinatura"]]:can("org_edit")?[["pref","Minhas preferências"],["org","Organização"],["at","Atendimento"],["seg","Segurança",N()],["ass","Assinatura"]]:[["pref","Minhas preferências"]],"pref");
+  const t=tabs("cfg",isB2C()?[["pref","Minhas preferências"],["org","Consultório"],["ass","Plano e assinatura"]]:can("org_edit")?[["pref","Minhas preferências"],["org","Organização"],["at","Atendimento"],["uso","Uso e limites"],["seg","Segurança",N()],["ass","Assinatura"]]:[["pref","Minhas preferências"]],"pref");
   let b="";
   if(t.cur==="pref")b=`<div class="grid g2">
    <div class="card grid" style="gap:12px"><h3>Atendimento</h3><div class="field"><label for="pf-a">Agente padrão</label><select id="pf-a" class="input"><option>Clínica Médica</option></select></div><div class="field"><label for="pf-m">Microfone</label><select id="pf-m" class="input"><option>Jabra Speak 510 · USB</option><option>Microfone interno</option></select></div><div class="field"><span class="lbl">Idioma do atendimento</span><div class="seg"><button class="on">Português (Brasil)</button><button>Espanhol</button></div></div><div class="src"><div class="tx"><b>Atalhos de teclado</b><small class="mono">Espaço inicia · P pausa · F finaliza · / prompts · [ menu</small></div></div></div>
@@ -2285,6 +2521,13 @@ V.configuracoes=()=>{
    <div class="card grid" style="gap:10px"><h3>Recursos</h3>${[["Prompts em tempo real","",true],["Salvar transcrições","",true],["Exibir progresso de áudio","",true],["Teste de microfone antes do atendimento","",true],["Fale com a Lya","",true,1],["Novidades da Lya na Home","",true,1],["Upload de exames","",true,1]].map(r=>`<div class="src"><div class="tx"><b>${r[0]} ${r[3]?N():""}</b></div>${r[0]==="Fale com a Lya"?sw(S.orgChat,"org-chat"):r[0]==="Novidades da Lya na Home"?sw(S.orgNews,"org-news"):sw(r[2],"tog")}</div>${r[0]==="Fale com a Lya"?`<span class="hint" style="margin-top:-4px">Liga o chat para toda a organização. Cada perfil ainda precisa da permissão “Usar o Fale com a Lya”.</span>`:""}`).join("")}</div></div>`;
   else if(t.cur==="seg")b=can("sec_pol")?`<div class="grid g2"><div class="card grid" style="gap:10px"><h3>Autenticação</h3>${[["Exigir 2FA para perfis com permissões sensíveis",true],["Exigir 2FA para todos",false],["Login único (SSO) com o diretório do hospital",false]].map(r=>`<div class="src"><div class="tx"><b>${r[0]}</b></div>${sw(r[1],"tog")}</div>`).join("")}<div class="field"><label for="c-ss">Encerrar sessão após inatividade</label><select id="c-ss" class="input"><option>30 minutos</option><option>2 horas</option></select></div></div>
     <div class="card grid" style="gap:10px"><h3>Dados</h3><div class="field"><label for="c-rt">Reter transcrições por</label><select id="c-rt" class="input"><option>90 dias</option><option>1 ano</option><option>Não reter</option></select></div>${[["Mascarar CPF em telas e exportações",true],["Bloquear exportação de transcrições",true]].map(r=>`<div class="src"><div class="tx"><b>${r[0]}</b></div>${sw(r[1],"tog")}</div>`).join("")}</div></div>`:lockBox("sec_pol","Política de segurança restrita");
+  else if(t.cur==="uso"){const P=USE_PLANS.org;b=`<div class="grid g3" style="margin-bottom:14px">${["at","perg","pag"].map(k=>{const u=useOf(k);return `<div class="card grid" style="gap:6px"><span class="small muted">${USE_N[k][1][0].toUpperCase()+USE_N[k][1].slice(1)} em outubro</span><b style="font-size:20px">${u.used.toLocaleString("pt-BR")} <small class="muted" style="font-size:13px">de ${u.lim.toLocaleString("pt-BR")}</small></b><div class="meter ${u.pct>=.9?"warn":""}" style="height:6px"><i style="width:${u.pct*100}%"></i></div></div>`}).join("")}</div>
+   <div class="grid g2"><div class="card grid" style="gap:12px"><h3>Franquia e política</h3><span class="small muted">Contrato Institucional · ${P.lic} licenças · franquia mensal compartilhada pela organização (250 atendimentos e 400 perguntas por licença).</span>
+    <div class="field"><label for="u-pol">Ao chegar a 100% da franquia</label><select id="u-pol" class="input"><option>Avisar e liberar excedente até 110%, cobrado à parte</option><option>Bloquear novos atendimentos e perguntas</option><option>Liberar excedente sem limite, cobrado à parte</option></select><span class="hint">Atendimento em andamento nunca é interrompido.</span></div>
+    <div class="field"><label for="u-al">Avisar gestores em</label><select id="u-al" class="input"><option>70%, 90% e 100%</option><option>80% e 100%</option></select></div>
+    <div class="field"><label for="u-dur">Duração máxima de um atendimento</label><select id="u-dur" class="input"><option>90 minutos (aviso aos 75)</option><option>60 minutos (aviso aos 50)</option><option>120 minutos (aviso aos 100)</option></select></div></div>
+    <div class="card grid" style="gap:10px"><h3>Cotas por grupo</h3><span class="small muted">Opcional. Sem cota, o grupo usa a franquia comum.</span><div class="tw"><table class="t" style="min-width:0"><thead><tr><th>Grupo</th><th>Uso no mês</th><th>Cota</th></tr></thead><tbody>${[["Pronto-socorro","18.240 atend.","25.000"],["Clínica Médica","9.870 atend.","Sem cota"],["Centro cirúrgico","4.310 atend.","8.000"],["Enfermagem","6.020 atend.","Sem cota"]].map(r=>`<tr><td>${r[0]}</td><td class="mono small">${r[1]}</td><td><button class="btn q sm" data-act="toast" data-msg="Cota de ${r[0]} em edição">${r[2]}</button></td></tr>`).join("")}</tbody></table></div>
+     <div class="field"><label for="u-pu">Limite por profissional</label><select id="u-pu" class="input"><option>Até 60 perguntas por dia</option><option>Até 120 perguntas por dia</option><option>Sem limite individual</option></select><span class="hint">Evita que uma pessoa consuma a franquia de todos.</span></div></div></div>`}
   else if(t.cur==="ass")b=isB2C()?planoResumo():can("org_bill")?`<div class="card">Plano Institucional · 250 licenças</div>`:lockBox("org_bill","Assinatura e cobrança restritas. Nem o Administrador tem esta permissão por padrão.");
   return ph("Configurações","Dados e políticas da organização.",`<button class="btn p" data-act="toast" data-msg="Configurações salvas">Salvar</button>`)+t.html+b;
 };
@@ -2319,6 +2562,7 @@ V.conta=()=>{
   else if(t.cur==="fat"){const inv=[["Outubro/2026","01/10/2026","R$ 0,00","Gratuito"],["Setembro/2026","01/09/2026","R$ 0,00","Gratuito"]];
    b=`<div class="grid g3" style="margin-bottom:14px"><div class="card kpi"><div class="v">Gratuito</div><div class="l">Plano atual</div></div><div class="card kpi"><div class="v">${PLAN.used} de ${PLAN.limit}</div><div class="l">Atendimentos em outubro</div></div><div class="card kpi"><div class="v">01/11</div><div class="l">Próxima renovação</div></div></div>
    <div class="grid g2">
+    <div class="card grid" style="gap:10px;grid-column:1/-1"><h3>Uso do mês</h3><div class="use-grid">${["at","perg","pag"].map(k=>{const u=useOf(k);return `<div class="use-it"><span class="small muted">${USE_N[k][1][0].toUpperCase()+USE_N[k][1].slice(1)}</span><b>${u.used.toLocaleString("pt-BR")} <small>de ${u.lim.toLocaleString("pt-BR")}</small></b><div class="meter ${u.pct>=.9?"warn":""}" style="height:6px"><i style="width:${u.pct*100}%"></i></div></div>`}).join("")}</div><span class="hint">Limites do plano ${USE_PLANS[usePlan()].n}: atendimentos de até ${USE_PLANS[usePlan()].dur} min, ${USE_PLANS[usePlan()].regen} ${USE_PLANS[usePlan()].regen>1?"regenerações":"regeneração"} por relatório. Avisamos aos 80% e aos 100%.</span></div>
     <div class="card grid" style="gap:10px;align-content:start"><h3>Plano</h3>${planMeter()}<span class="small muted">${PLAN.used} de ${PLAN.limit} atendimentos usados. No Unlimited, R$ 199/mês, os atendimentos são ilimitados.</span><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn p" data-go="planos">Mudar de plano</button><button class="btn q" data-act="toast" data-msg="No produto, aqui abre o cancelamento com confirmação">Cancelar assinatura</button></div></div>
     <div class="card grid" style="gap:10px;align-content:start"><h3>Forma de pagamento</h3><div class="src"><div class="tx"><b>Nenhum cartão cadastrado</b><small>Cartão de crédito ou Pix recorrente</small></div><button class="btn g sm" data-act="toast" data-msg="No produto, aqui abre o cadastro seguro do cartão">Adicionar</button></div>${tg("Enviar fatura por e-mail","helena.duarte@exemplo.com.br",true)}</div>
     <div class="card grid" style="gap:12px"><h3>Dados para a nota fiscal</h3>${seg("Emitir em nome de",["Pessoa física","Pessoa jurídica"],"Pessoa jurídica")}${fld("ft-doc","CNPJ","12.345.678/0001-90")}${fld("ft-rz","Razão social","Helena Duarte Serviços Médicos Ltda.")}${fld("ft-end","Endereço de cobrança","Av. Paulista, 1000, sala 801 · São Paulo, SP")}</div>
@@ -2332,8 +2576,25 @@ V.suporte=()=>{const nt=(S.tickets||[]).length;return ph("Suporte","Chamados com
 V.ajuda=()=>ph("Ajuda","Documentação, tutoriais e novidades.")+`<div class="grid gauto">${[["Guia do médico","Como atender, revisar e validar o relatório"],["Guia do gestor","Prompts, agentes e grupos"],["Governança","Perfis, permissões sensíveis e auditoria"],["API de integração","Endpoints, payloads e códigos de erro"]].map(r=>`<a class="card" style="text-decoration:none;color:inherit;display:grid;gap:6px" href="https://produtos-ctc.gitbook.io/lya_health/" target="_blank" rel="noopener"><b>${r[0]}</b><span class="small muted">${r[1]}</span><span class="small" style="color:var(--navy)">Abrir documentação ${ic("chev","i s")}</span></a>`).join("")}</div>`;
 
 /* ---------- B2C: médico particular, sem integração ---------- */
-const PLAN={used:7,limit:10};
-function planMeter(){return `<div class="meter" style="height:6px"><i style="width:${PLAN.used/PLAN.limit*100}%"></i></div>`}
+const PLAN={get used(){return useOf("at").used},get limit(){return useOf("at").lim}};
+/* Uso por tipo de cliente. Unidade interna: crédito de IA (≈ 10 mil tokens do modelo padrão). O usuário vê limites em linguagem simples
+   (atendimentos, perguntas, páginas de exame); o crédito serve para custo e franquia B2B. Números iniciais, a calibrar com a telemetria real. */
+const USE_PLANS={
+ free:{n:"Gratuito",at:10,perg:30,pag:10,dur:30,regen:1},
+ pro:{n:"Unlimited",at:300,perg:600,pag:200,dur:60,regen:3,dia:60},
+ org:{n:"Institucional",at:62500,perg:100000,pag:25000,dur:90,regen:3,lic:250}};
+const usePlan=()=>isB2C()?(S.b2cPlan||"free"):"org";
+const USE_LVL={ok:{at:.7,perg:.4,pag:.3},near:{at:.9,perg:.9,pag:.85},out:{at:1,perg:1,pag:1}};
+function useOf(k){const P=USE_PLANS[usePlan()],lim=P[k],f=(USE_LVL[S.useLvl||"ok"]||USE_LVL.ok)[k]||.5;S.useExtra=S.useExtra||{};const used=Math.min(lim,Math.round(lim*f)+(S.useExtra[k]||0));return {used,lim,pct:used/lim}}
+const useBlocked=k=>{const u=useOf(k);return u.used>=u.lim};
+function useAdd(k){S.useExtra=S.useExtra||{};S.useExtra[k]=(S.useExtra[k]||0)+1}
+const USE_N={at:["atendimento","atendimentos"],perg:["pergunta","perguntas"],pag:["página de exame","páginas de exame"]};
+function useLine(k){const u=useOf(k),p=usePlan();if(p!=="free"&&u.pct<.8)return "";return `<span class="use-line ${u.pct>=.8?"near":""}">${u.used} de ${u.lim.toLocaleString("pt-BR")} ${USE_N[k][1]} ${p==="org"?"da organização ":""}em outubro · renova em 01/11</span>`}
+function useWall(k){const p=usePlan(),u=useOf(k);
+ const msg=p==="free"?`Você usou ${u.lim} ${USE_N[k][1]} do plano Gratuito em outubro. Renova em 01/11, ou mude para o Unlimited.`:p==="pro"?`Você chegou ao limite de uso justo do mês (${u.lim} ${USE_N[k][1]}). Fale com o suporte se precisar de mais.`:`A franquia de ${USE_N[k][1]} da organização acabou neste mês. ${can("org_edit")?"Amplie a franquia ou libere excedente em Configurações › Uso e limites.":"O gestor da organização foi avisado."}`;
+ const act=p==="free"?`<button class="btn p sm" data-go="planos">Ver planos</button>`:p==="pro"?`<button class="btn g sm" data-go="suporte">Falar com o suporte</button>`:can("org_edit")?`<button class="btn p sm" data-act="go-uso">Uso e limites</button>`:"";
+ return `<div class="use-wall">${ic("lock","i s")}<div><b>${k==="perg"?"Perguntas do mês esgotadas":"Limite do mês atingido"}</b><span>${msg}</span>${k==="perg"?'<span class="small muted">O atendimento continua normalmente; só o chat fica pausado.</span>':""}</div>${act}</div>`}
+function planMeter(){const u=useOf("at");return `<div class="meter ${u.pct>=.9?"warn":""}" style="height:6px"><i style="width:${u.pct*100}%"></i></div>`}
 function ptPop(){
   const b2c=isB2C(),cap=capd(),c=S.c;
   const tag=b2c?(cap?`<span class="chip teal">Captado ${mmss(PT.cap)}</span>`:`<span class="chip line">Aguardando</span>`):`<span class="chip navy">Prontuário</span>`;
@@ -2395,7 +2656,7 @@ function dadosB2C(){
 function inicioB2C(){
   return `<div class="pghead"><div><span class="muted small">Quinta-feira, 26 de outubro</span><h1>Bom dia, Dra. Helena</h1></div><span class="chip warn">${PLAN.used} de ${PLAN.limit} atendimentos do plano gratuito</span></div>
   <div class="home"><div class="grid" style="gap:16px;align-content:start;min-width:0">
-   ${homePrep()}
+   ${homePrep()}${homeAsk()}
    <div class="card"><div class="card-h"><h3>Últimos atendimentos</h3><button class="btn q sm" data-go="historico">Ver todas ${ic("chev","i s")}</button></div>
     ${[["Hoje 09:21","Paulo Mendes","Retorno · retocolite","Revisar relatório","warn","relatorio"],["Ontem 16:02","Ana Ribeiro","Primeiro atendimento","Finalizado","ok","relatorio"],["Ontem 14:40","Sem identificação","Atendimento avulso","Finalizado","ok","relatorio"]].map(r=>`<div class="ag" data-go="${r[5]}"><span class="mono tm2" style="width:84px">${r[0]}</span><span style="flex:1;min-width:0"><b>${r[1]}</b><br><span class="small muted">${r[2]}</span></span><span class="chip ${r[4]}">${r[3]}</span></div>`).join("")}</div>
   </div><div class="grid" style="gap:16px;align-content:start;min-width:0">${newsCard()}
@@ -2418,17 +2679,41 @@ function pacienteB2C(){
    <div class="grid" style="gap:14px;align-content:start"><div class="card grid" style="gap:8px"><h3>Dados do paciente</h3>${[["Nascimento","01/07/1995"],["Peso","55 kg"],["Altura","1,70 m"],["IMC","19,0 kg/m²"],["Celular","(11) 9****-3021"],["CPF",'<span class="chip warn">Pendente para Memed</span>']].map(r=>`<div class="pp-r"><span class="pp-l">${r[0]}</span><span class="pp-v">${r[1]}</span><span></span></div>`).join("")}</div>
    <div class="card"><h3 style="margin-bottom:10px">Linha do tempo</h3><div class="timeline">${[["26/10","Atendimento · Dermatologia · biópsia excisional"],["25/10","Questionário respondido pelo paciente"],["25/10","Cadastro e envio do questionário por WhatsApp"]].map(e=>`<div class="ev2"><span class="mono muted small">${e[0]}</span><span class="dot"></span><span>${e[1]}</span></div>`).join("")}</div></div></div></div>`;
 }
-V.inicio=()=>(isB2C()?inicioB2C():(S.emptyDay?inicioVazio():_inicio()))+homeAsk();
+V.inicio=()=>isB2C()?inicioB2C():(S.emptyDay?inicioVazio():_inicio());
 function protoBar(){return `<div class="protobar"><span class="small muted">Protótipo · estados da tela inicial:</span><div class="seg"><button class="${S.emptyDay?"":"on"}" data-act="${S.emptyDay?"empty-day":""}">Com paciente em espera</button><button class="${S.emptyDay?"on":""}" data-act="${S.emptyDay?"":"empty-day"}">Sem pacientes</button></div></div>`}
 function inicioVazio(){
   const med=can("at_criar");
   return `<div class="pghead one"><div><span class="muted small">Quinta-feira, 26 de outubro</span><h1>Bom dia, Dra. Helena</h1></div></div>
   <div class="home one"><div class="grid" style="gap:16px;align-content:start;min-width:0">
-   ${homePrep("vazio")}
+   ${homePrep("vazio")}${homeAsk()}
   </div><div class="grid" style="gap:16px;align-content:start;min-width:0">${newsCard()}
   </div></div>`;
 }
 V.pacientes=()=>isB2C()?pacientesList():_pacientes();
+
+/* Entrada: login (e-mail e senha ou conta da instituição), verificação em duas etapas, escolha da organização
+   e tela inicial conforme o perfil (quem atende cai em Iniciar atendimento). */
+const ORGS=[["admin","Hospital Aurora","Administrador · 3 unidades"],["medico","Hospital Aurora","Médico · Clínica Médica"],["b2c","Consultório Dra. Helena","Médico particular · plano Gratuito"]];
+function landRoute(){if(can("at_criar"))return "inicio";const pref=["relatorios","auditoria","smartapps","usuarios","historico"];return pref.find(r=>!GUARD[r]||can(GUARD[r]))||"historico"}
+V.login=()=>{const L=S.login||(S.login={step:"cred"});
+ const brand=`<div class="lg-brand"><img src="assets/lya-logo-branco.png" alt="Lya Health" height="30"><div><h2>A Lya ouve o atendimento e organiza o que importa.</h2><p>Você conversa com o paciente; a Lya escreve, sugere e confere. Nada vai para o prontuário sem a sua revisão.</p></div><span class="small">© 2026 CTC · Lya Health</span></div>`;
+ let f;
+ if(L.step==="cred")f=`<h1>Entrar na Lya</h1><p class="muted">Use o e-mail da sua conta ou a conta da instituição.</p>
+  <div class="field"><label for="lg-e">E-mail</label><input id="lg-e" class="input" type="email" autocomplete="username" value="${L.e||"helena.duarte@exemplo.com.br"}"></div>
+  <div class="field"><label for="lg-p">Senha</label><input id="lg-p" class="input" type="password" autocomplete="current-password" value="prototipo"><button class="btn q sm lg-forgot" data-act="toast" data-msg="Enviamos um link para trocar a senha">Esqueci minha senha</button></div>
+  ${L.err?`<p class="lg-err">${L.err}</p>`:""}
+  <label class="small" style="display:flex;gap:8px;align-items:center"><input type="checkbox" checked> Manter conectado neste computador</label>
+  <button class="btn p lg-go" data-act="lg-cred">Entrar</button>
+  <div class="lg-or"><span>ou</span></div>
+  <button class="btn g lg-go" data-act="lg-sso">${ic("shield","i s")}Entrar com a conta da instituição</button>`;
+ else if(L.step==="code")f=`<button class="btn q sm" style="justify-self:start;padding-left:0" data-act="lg-back">${ic("chevl","i s")}Voltar</button><h1>Confirme que é você</h1><p class="muted">Enviamos um código de 6 dígitos para o celular terminado em <b>6655</b>.</p>
+  <div class="field"><label for="lg-c">Código</label><input id="lg-c" class="input lg-code" inputmode="numeric" maxlength="6" placeholder="000000" autocomplete="one-time-code"></div>
+  ${L.err?`<p class="lg-err">${L.err}</p>`:""}
+  <button class="btn p lg-go" data-act="lg-code">Confirmar</button><button class="btn q sm" style="justify-self:start" data-act="toast" data-msg="Novo código enviado">Reenviar código</button>`;
+ else f=`<h1>Onde você vai trabalhar hoje?</h1><p class="muted">Sua conta está em mais de uma organização. Dá para trocar depois pelo menu do perfil.</p>
+  <div class="lg-orgs">${ORGS.map(o=>`<button data-act="lg-org" data-val="${o[0]}"><span class="avatar">${o[1].split(" ").map(x=>x[0]).join("").slice(0,2)}</span><span><b>${o[1]}</b><small>${o[2]}</small></span>${ic("chev","i s")}</button>`).join("")}</div>`;
+ return `<div class="login">${brand}<div class="lg-form"><div class="lg-box">${f}</div></div></div>`};
+
 
 /* ---------- cadastro de paciente com questionário pré-atendimento ---------- */
 S.pts=[
@@ -2559,29 +2844,69 @@ const canChat=()=>S.orgChat&&can("at_chat");
 function orgChatOff(){return `<div class="noacc card"><div class="grid" style="gap:12px"><span class="ico">${ic("msg")}</span><h2 style="font-size:20px">Fale com a Lya está desligado</h2><p class="muted">A organização ainda não liberou o chat clínico. Quem administra a conta pode ligar em Configurações › Atendimento.</p>${can("org_edit")?`<button class="btn p" style="justify-self:start" data-go="configuracoes">Abrir configurações</button>`:""}</div></div>`}
 /* ---------- Fale com a Lya: chat no estilo dos agentes de IA ---------- */
 function chatCtx(){const inC=(S.route==="atendimento"||S.route==="relatorio")&&S.c;return {inC,label:inC?`${PT.nome} · atendimento em andamento`:"Sem paciente selecionado"}}
+/* Citações do Fale com a Lya (modelo Heidi + Telepatia): cada afirmação leva um chip com a fonte; o chip abre o trecho exato
+   que sustenta a frase, com tipo, força ou versão e ações; no fim, "Referências" com todas as fontes citadas.
+   Tipos: inst (protocolo da instituição), pront (prontuário/exames), trans (fala do atendimento), lit (literatura), lya (prompt da Lya). */
+const CITE_T={inst:["Instituição","shield"],pront:["Prontuário","doc"],trans:["Transcrição","mic"],lit:["Literatura","file"],lya:["Lya","spark"]};
+const CITE={
+ dii:{t:"inst",n:"Protocolo DII",ti:"Protocolo de doença inflamatória intestinal · Hospital Aurora, p. 4",q:"Na reagudização após suspensão do 5-ASA, retomar mesalazina em dose otimizada (4,8 g/dia) e excluir infecção, inclusive C. difficile, antes de escalonar o tratamento.",m:"Versão 3 · aprovado em 08/2026",b:["Da instituição","Vigente"]},
+ hemo:{t:"pront",n:"Hemograma 12/10",ti:"Laboratório · 12/10/2026 · 3 alterados de 18",q:"Hemoglobina 10,9 g/dL (baixa) · PCR 38 mg/L (alta) · Calprotectina fecal 640 µg/g (alta).",m:"Recebido do sistema do hospital",b:["Dado do paciente"]},
+ t18:{t:"trans",n:"Transcrição 00:18",ti:"Fala do paciente · 00:18",q:"“Parei a mesalazina faz umas duas semanas, acabou a receita e não consegui marcar.”",m:"Atendimento de hoje",b:["Dito no atendimento"],at:18},
+ t08:{t:"trans",n:"Transcrição 00:08",ti:"Fala do paciente · 00:08",q:"“Tô indo ao banheiro umas seis, sete vezes por dia, faz umas três semanas.”",m:"Atendimento de hoje",b:["Dito no atendimento"],at:8},
+ t36:{t:"trans",n:"Transcrição 00:36",ti:"Fala do paciente · 00:36",q:"“Tem saído sangue e um muco junto. Febre não tive.”",m:"Atendimento de hoje",b:["Dito no atendimento"],at:36},
+ ecco:{t:"lit",n:"Diretriz ECCO",ti:"ECCO Guidelines on Therapeutics in Ulcerative Colitis · 2022",q:"Em retocolite leve a moderada em atividade, recomenda-se 5-ASA oral em dose ≥ 2,4 g/dia; doses maiores aumentam a chance de remissão.",m:"Força da evidência: alta · Sociedade médica",b:["Confiável","Global"]},
+ tw:{t:"lit",n:"Truelove e Witts",ti:"Classificação de gravidade da retocolite ulcerativa",q:"Atividade moderada: mais de 4 evacuações com sangue por dia com sinais sistêmicos mínimos; grave se ≥ 6 com FC > 90, temperatura > 37,8 °C, Hb < 10,5 ou VHS > 30.",m:"Escore clássico · Sociedade médica",b:["Confiável","Global"]},
+ alg:{t:"pront",n:"Lista de alergias",ti:"Alergias registradas · Prontuário",q:"Metoclopramida · reação cutânea · registrada em 2024.",m:"Confirmada no atendimento às 00:27",b:["Dado do paciente"]},
+ lexi:{t:"lit",n:"Base de interações",ti:"Base de interações medicamentosas",q:"Mesalazina: sem interação relevante com os medicamentos em uso informados.",m:"Atualizada em 10/2026",b:["Confiável","Global"]},
+ sinus:{t:"inst",n:"Protocolo de rinossinusite",ti:"Protocolo de rinossinusite aguda · Hospital Aurora",q:"Amoxicilina 875 mg de 12/12 h por 5 a 7 dias como primeira escolha, na ausência de alergia a betalactâmicos.",m:"Versão 2 · aprovado em 03/2026",b:["Da instituição","Vigente"]},
+ bula:{t:"lit",n:"Bula da amoxicilina",ti:"Bula do profissional · Anvisa",q:"Clearance de creatinina < 30 mL/min: não usar a apresentação de 875 mg; ajustar o intervalo de dose.",m:"Fonte regulatória",b:["Confiável","Brasil"]},
+ aafp:{t:"lit",n:"AFP 2025",ti:"Acute Rhinosinusitis: Rapid Evidence Review · American Family Physician, 2025",q:"Amoxicilina é a opção inicial para rinossinusite bacteriana aguda em adultos sem alergia a betalactâmicos.",m:"Força da evidência: moderada · Revista médica",b:["Confiável","Fora da região"]},
+ sug:{t:"lya",n:"Sugestões de perguntas",ti:"Prompt Sugestões de perguntas · agente Clínica Médica",q:"Compara o que já foi perguntado com o roteiro de investigação de diarreia com sangue.",m:"Prompt da instituição",b:["Prompt"]},
+ sbd:{t:"lit",n:"Diretriz SBD",ti:"Diretriz de melanoma cutâneo · Sociedade Brasileira de Dermatologia",q:"Margens de ampliação conforme Breslow: in situ 0,5 a 1 cm; até 1 mm, 1 cm; 1 a 2 mm, 1 a 2 cm; acima de 2 mm, 2 cm.",m:"Força da evidência: alta · Sociedade médica",b:["Confiável","Brasil"]},
+ t17:{t:"trans",n:"Transcrição 00:17",ti:"Fala do médico · 00:17",q:"“A lesão tem borda irregular, cor heterogênea e uns dois centímetros.”",m:"Atendimento de hoje",b:["Dito no atendimento"],at:17},
+ abcde:{t:"lit",n:"Critérios ABCDE",ti:"Critérios ABCDE para lesões melanocíticas",q:"Assimetria, Bordas irregulares, Cor variada, Diâmetro > 6 mm e Evolução indicam suspeita de melanoma.",m:"Critério clínico consagrado",b:["Confiável","Global"]},
+ modelo:{t:"inst",n:"Modelo da instituição",ti:"Modelos de documentos · Hospital Aurora",q:"Modelo de atestado com identificação do paciente, período de afastamento e assinatura digital.",m:"Versão 1",b:["Da instituição"]}
+};
+const cmark=(...k)=>`{${k.join(",")}}`;
 function answerFor(q,inC){
   const t=q.toLowerCase(),der=CS===CASES.derm;
-  if(/amoxicilina/.test(t))return ["875 mg de 12/12 h por 5 a 7 dias, se não houver alergia a penicilinas. Em insuficiência renal com clearance abaixo de 30 mL/min, aumente o intervalo para 24 h.",["Protocolo de sinusite da instituição","Bula da amoxicilina"]];
-  if(/resum/.test(t))return inC?[der?"Fernando, 31 anos, com lesão pigmentada de 2 cm no antebraço, irregular e escura, que cresceu nos últimos meses. Perdeu 15 kg sem causa definida e o pai teve câncer de pele. Foi feita biópsia excisional; aguarda anatomopatológico.":"Paulo, 54 anos, com retocolite ulcerativa, piorou após suspender a mesalazina há duas semanas: 6 a 7 evacuações por dia com sangue, perda de 4 kg, PCR 38 mg/L. Plano: retomar mesalazina e investigar infecção.",["Transcrição até agora","Dados Clínicos"]]:["Não há paciente em contexto. Abra um atendimento ou a ficha de um paciente para eu resumir.",[]];
-  if(/pergunta/.test(t))return [der?"Ainda faltam: há quanto tempo a lesão existe e se coça ou sangra; se há outras lesões parecidas no corpo; e se a perda de peso foi intencional.":"Ainda faltam: uso recente de antibiótico, sintomas noturnos e viagens recentes.",["Prompt Sugestões de perguntas"]];
-  if(/intera/.test(t))return [der?"Paracetamol não tem interação relevante com os medicamentos registrados. Não há alergias relatadas.":"Mesalazina, sem interações relevantes com os medicamentos em uso. Alergia a metoclopramida registrada: evite em caso de náusea e prefira ondansetrona.",["Base de interações","Lista de alergias"]];
-  if(/escore|risco/.test(t))return [der?"Pelos critérios ABCDE, 4 de 5 presentes (bordas, cor, diâmetro e evolução). Assimetria não foi descrita. Com história familiar, o risco justifica a biópsia já feita.":"Truelove-Witts: 6 a 7 evacuações com sangue e FC 92 indicam atividade moderada. Faltam temperatura e VHS para fechar a classificação.",["Critérios ABCDE","Diretriz ECCO"]];
-  if(/atestado|documento|orienta/.test(t))return ["Criei um rascunho na aba do documento. Revise antes de assinar: o texto usa os dados deste atendimento e nada é emitido sem o seu clique.",["Modelo da instituição"]];
-  if(inC)return der?["Depende da espessura de Breslow no anatomopatológico. Até 1 mm, margem de 1 cm; de 1 a 2 mm, 1 a 2 cm; acima de 2 mm, 2 cm. Por ora, aguarde o laudo da biópsia excisional.",["Diretriz SBD de melanoma","00:17 transcrição"]]:["Retome a mesalazina em dose otimizada e descarte infecção, inclusive C. difficile, antes de escalonar. A suspensão há duas semanas explica parte da piora.",["Protocolo DII da instituição, p. 4","Hemograma 12/10"]];
-  return ["Aqui está o que encontrei nas fontes ligadas. Se quiser, abra um paciente para eu responder com o contexto dele.",["Protocolos da instituição","Literatura"]];
+  if(/falta conferir|pend[eê]nc/.test(t)&&inC){const pend=C_REV.filter(r=>!S.c.res[r[0]]);return [pend.length?`<ul class="ch-kp">${pend.map(r=>`<li><b>${r[1]}</b>: ${r[2]}</li>`).join("")}</ul><p>Resolva em “Antes de enviar” para integrar.</p>`:`<p>Nenhuma pendência. O relatório está pronto para encerrar e integrar.</p>`,[],"Antes de enviar"]}
+  if(/linguagem simples|explique|explicar/.test(t)&&inC&&!der)return [`<p>Paulo, a sua retocolite voltou a ficar ativa porque o remédio (mesalazina) foi interrompido ${cmark("t18")}. Vamos voltar com ele numa dose maior por 8 semanas ${cmark("dii")} e fazer exames de fezes para descartar infecção. Procure o pronto-socorro se tiver febre, muito sangue ou dor forte.</p><p class="small muted">Texto para ler ou enviar ao paciente. Revise antes.</p>`,["t18","dii"],"Explicação para o paciente"];
+  if(/prescri/.test(t)&&inC)return [`<p>Mesalazina 4,8 g/dia: <b>sem interações relevantes</b> com os medicamentos em uso ${cmark("lexi")}.</p><p class="ch-warn">${ic("alert","i s")}Não há metoclopramida na prescrição; a alergia está respeitada ${cmark("alg")}.</p>`,["lexi","alg"],"Checagem da prescrição"];
+  if(/amoxicilina/.test(t))return [`<p><b>Amoxicilina 875 mg de 12/12 h por 5 a 7 dias</b>, se não houver alergia a penicilinas ${cmark("sinus","aafp")}.</p><p>Com clearance abaixo de 30 mL/min, não use a apresentação de 875 mg e ajuste o intervalo ${cmark("bula")}.</p>`,["sinus","aafp","bula"],"Rinossinusite bacteriana aguda em adulto"];
+  if(/resum/.test(t))return inC?(der?[`<p>Fernando, 31 anos, lesão pigmentada de 2 cm no antebraço, irregular e escura, que cresceu nos últimos meses ${cmark("t17")}; 4 de 5 critérios ABCDE ${cmark("abcde")}. Biópsia excisional feita; aguarda anatomopatológico.</p>`,["t17","abcde"],"Resumo do atendimento"]:[`<ul class="ch-kp"><li>Paulo, 54 anos, retocolite ulcerativa, <b>piorou após suspender a mesalazina</b> há duas semanas ${cmark("t18")}.</li><li>6 a 7 evacuações por dia há 3 semanas, com sangue e muco, sem febre ${cmark("t08","t36")}.</li><li>Hb 10,9, PCR 38 e calprotectina 640 ${cmark("hemo")}.</li><li>Alergia a metoclopramida confirmada ${cmark("alg")}.</li></ul>`,["t18","t08","t36","hemo","alg"],"Resumo do atendimento até agora"]):[`<p>Não há paciente em contexto. Abra um atendimento ou a ficha do paciente para eu resumir.</p>`,[],""];
+  if(/pergunta/.test(t))return [der?`<p>Ainda faltam: há quanto tempo a lesão existe e se coça ou sangra; se há outras lesões parecidas; e se a perda de peso foi intencional ${cmark("sug")}.</p>`:`<ul class="ch-kp"><li>Uso recente de antibiótico (risco de C. difficile) ${cmark("sug","dii")}.</li><li>Sintomas noturnos e perda de peso.</li><li>Viagens recentes e contatos com diarreia.</li></ul>`,der?["sug"]:["sug","dii"],"Perguntas que faltam"];
+  if(/intera/.test(t))return [der?`<p>Paracetamol não tem interação relevante com os medicamentos registrados ${cmark("lexi")}. Não há alergias relatadas.</p>`:`<p>Mesalazina, <b>sem interações relevantes</b> com os medicamentos em uso ${cmark("lexi")}.</p><p class="ch-warn">${ic("alert","i s")}Alergia a metoclopramida registrada: evite em caso de náusea e prefira ondansetrona ${cmark("alg")}.</p>`,der?["lexi"]:["lexi","alg"],"Interações e alergias"];
+  if(/escore|risco/.test(t))return [der?`<p>Pelos critérios ABCDE, 4 de 5 presentes (bordas, cor, diâmetro e evolução) ${cmark("abcde","t17")}. Com história familiar, o risco justifica a biópsia já feita.</p>`:`<p>Truelove e Witts: 6 a 7 evacuações com sangue e FC 92 indicam <b>atividade moderada</b> ${cmark("tw","t08")}. Faltam temperatura e VHS para fechar a classificação.</p>`,der?["abcde","t17"]:["tw","t08"],"Escore de gravidade"];
+  if(/atestado|documento|orienta/.test(t))return [`<p>Criei um rascunho na aba do documento ${cmark("modelo")}. Revise antes de assinar: nada é emitido sem o seu clique.</p>`,["modelo"],""];
+  if(inC)return der?[`<p>Depende da espessura de Breslow no anatomopatológico: até 1 mm, margem de 1 cm; de 1 a 2 mm, 1 a 2 cm; acima de 2 mm, 2 cm ${cmark("sbd")}. Por ora, aguarde o laudo da biópsia ${cmark("t17")}.</p>`,["sbd","t17"],"Conduta"]:[`<ul class="ch-kp"><li><b>Retome a mesalazina em dose otimizada (4,8 g/dia)</b> ${cmark("dii","ecco")}.</li><li>Descarte infecção, inclusive C. difficile, antes de escalonar ${cmark("dii")}.</li><li>A suspensão há duas semanas explica parte da piora ${cmark("t18","hemo")}.</li></ul>`,["dii","ecco","t18","hemo"],"Conduta para a reagudização"];
+  return [`<p>Não encontrei uma resposta segura nas fontes ligadas para essa pergunta. Tente reformular, ou abra um paciente para eu responder com o contexto dele.</p>`,[],""];
 }
-function chatAsk(q){if(!q||!q.trim())return;if(/chamado|suporte|senha|login|meu plano|pagamento|fatura|como (eu )?(gero|fa[çc]o|crio|configuro|instalo|uso a lya)|n[aã]o (est[aá] )?funciona|erro na (lya|plataforma)/i.test(q)){S.chatMsgs.push({q:q.trim(),a:"Essa é uma dúvida sobre a plataforma, então quem responde é a Ajuda da Lya. Lá eu não levo os dados do paciente.",src:[],help:q.trim()});return}const {inC}=chatCtx();const [a,src]=answerFor(q,inC);S.chatMsgs.push({q:q.trim(),a,src});S.chatPlus=false;S.chatFontes=false;S.chatDocs=null}
+function citeChips(i,html){return html.replace(/\{([a-z0-9_,]+)\}/g,(m0,ks,off)=>{const k=ks.split(","),c=CITE[k[0]];if(!c)return "";const id=`${i}:${off}`,open=S.cite&&S.cite.id===id;const T=CITE_T[c.t];
+ return `<span class="cwrap"><button class="cchip t-${c.t} ${open?"on":""}" data-act="cite-open" data-val="${id}|${ks}" aria-expanded="${open}" title="${c.ti}">${ic(T[1],"i s")}${c.n}${k.length>1?` <b>+${k.length-1}</b>`:""}</button>${open?citePop(k,S.cite.pg||0):""}</span>`})}
+function citePop(k,pg){const c=CITE[k[pg]],T=CITE_T[c.t];
+ return `<span class="cpop" role="dialog" aria-label="Fonte"><span class="cp-h">${k.length>1?`<button class="iconbtn sm" data-act="cite-pg" data-val="-1" aria-label="Fonte anterior">${ic("chevl","i s")}</button><span class="small muted">${pg+1} de ${k.length}</span><button class="iconbtn sm" data-act="cite-pg" data-val="1" aria-label="Próxima fonte">${ic("chev","i s")}</button>`:""}<span class="sp"></span><span class="ctag t-${c.t}">${ic(T[1],"i s")}${T[0]}</span><button class="iconbtn sm" data-act="cite-x" aria-label="Fechar">${ic("x","i s")}</button></span>
+  <b class="cp-t">${c.ti}</b><span class="cp-q">${c.q}</span><span class="cp-m">${c.m}</span><span class="cp-b">${c.b.map(x=>`<span class="chip line">${x}</span>`).join("")}</span>
+  <span class="cp-a">${c.at!=null&&S.c&&inSideChat()?`<button class="btn t sm" data-act="c-ev" data-val="${c.at}">${ic("mic","i s")}Ir ao trecho</button>`:`<button class="btn t sm" data-act="toast" data-msg="Abrindo ${c.n}">${ic("eye","i s")}Abrir fonte</button>`}<span class="sp"></span><button class="iconbtn sm" data-act="toast" data-msg="Fonte marcada como útil" aria-label="Fonte útil">${ic("check","i s")}</button><button class="iconbtn sm" data-act="toast" data-msg="Obrigado: vamos revisar esta fonte" aria-label="Fonte não útil">${ic("x","i s")}</button></span></span>`}
+function citeRefs(i,keys){if(!keys.length)return "";const open=S.citeRefs===i;
+ return `<div class="ch-refs"><button class="cr-h" data-act="cite-refs" data-val="${i}" aria-expanded="${open}">${ic("chev",open?"i s rot90":"i s")}Referências<span class="cr-n">${keys.length} ${keys.length>1?"citadas":"citada"}</span></button>${open?`<ol class="cr-l">${keys.map(k=>{const c=CITE[k];if(!c)return "";const T=CITE_T[c.t];return `<li><span class="ctag t-${c.t}">${ic(T[1],"i s")}${T[0]}</span><span class="cr-t"><b>${c.ti}</b><small>${c.m}</small><span class="cp-b">${c.b.map(x=>`<span class="chip line">${x}</span>`).join("")}</span></span></li>`}).join("")}</ol>`:""}</div>`}
+/* No atendimento, cada pergunta tem um escopo: "Sobre o paciente" (usa os dados do atendimento, fica no registro dele e pode ir ao relatório)
+   ou "Pergunta geral" (sem dados do paciente, não entra no registro nem no relatório). O médico escolhe; a Lya detecta perguntas gerais. */
+const GERAL_RX=/^(qual|quais|o que|como)\b.*\b(dose|posologia|diretriz|protocolo de|crit[eé]rio|defini[cç][aã]o|tratamento de|indica[cç][aã]o)\b|amoxicilina|dose de|o que [eé]/i;
+const PAC_RX=/\b(paciente|ele|ela|dele|dela|paulo|fernando|este atendimento|até agora|resum|faltam|intera|escore|risco|alergi|atestado|documento|orienta)/i;
+function chatScopeOf(q){const {inC}=chatCtx();if(!inC)return "geral";if(S.chatScope==="geral")return "geral";return GERAL_RX.test(q)&&!PAC_RX.test(q)?"geral":"pac"}
+function chatAsk(q){if(!q||!q.trim())return;S.cite=null;if(useBlocked("perg")){toast("Limite de perguntas do mês atingido");return}useAdd("perg");if(/chamado|suporte|senha|login|meu plano|pagamento|fatura|como (eu )?(gero|fa[çc]o|crio|configuro|instalo|uso a lya)|n[aã]o (est[aá] )?funciona|erro na (lya|plataforma)/i.test(q)){S.chatMsgs.push({q:q.trim(),a:"Essa é uma dúvida sobre a plataforma, então quem responde é a Ajuda da Lya. Lá eu não levo os dados do paciente.",src:[],help:q.trim()});return}const {inC}=chatCtx();const sc=chatScopeOf(q);const [a,src,ttl]=answerFor(q,inC&&sc==="pac");S.chatMsgs.push({q:q.trim(),a,src,ttl,sc:inC?sc:null,auto:inC&&S.chatScope!=="geral"&&sc==="geral"});S.chatPlus=false;S.chatFontes=false;S.chatDocs=null}
 function chatThread(){
   const {inC}=chatCtx();
   if(!S.chatMsgs.length){
-    const sug=inC?[["doc","Resumir até agora","Resuma até agora"],["list","Perguntas que faltam","Que perguntas ainda faltam?"],["alert","Interações e alergias","Checar interações"],["gauge","Escore de gravidade","Calcular escore de risco"]]:[["flask","Dose de medicamento","Dose de amoxicilina para sinusite em adulto?"],["alert","Interações entre medicamentos","Interações entre losartana e ibuprofeno"],["file","Gerar um atestado","Gerar atestado de 3 dias"],["book","Buscar protocolo da instituição","Protocolo de sepse da instituição"]];
+    const sug=inC&&S.c.phase!=="live"?CHAT_QUICK_REV:inC?[["doc","Resumir até agora","Resuma até agora"],["list","Perguntas que faltam","Que perguntas ainda faltam?"],["alert","Interações e alergias","Checar interações"],["gauge","Escore de gravidade","Calcular escore de risco"]]:[["flask","Dose de medicamento","Dose de amoxicilina para sinusite em adulto?"],["alert","Interações entre medicamentos","Interações entre losartana e ibuprofeno"],["file","Gerar um atestado","Gerar atestado de 3 dias"],["book","Buscar protocolo da instituição","Protocolo de sepse da instituição"]];
     return `<div class="ch-empty"><span class="ch-logo">${ic("spark")}</span><h2>Olá, Dra. Helena</h2>${inC?`<p class="muted ch-intro">Posso resumir o atendimento, checar interações e alergias e buscar nos protocolos da instituição, sempre mostrando a fonte.</p>`:`<p class="muted">Como posso ajudar hoje?</p>`}
      <div class="ch-sug">${sug.map(s=>`<button data-act="c-ask" data-val="${s[2]}">${ic(s[0]==="book"?"doc":s[0],"i s")}<span>${s[1]}</span></button>`).join("")}</div></div>`;
   }
   return S.chatMsgs.map((m,i)=>`<div class="ch-u"><p>${m.q}</p></div>
-   <div class="ch-a"><span class="ch-av">${ic("spark","i s")}</span><div class="ch-at"><p>${m.a}</p>${m.help?`<button class="btn t sm" style="justify-self:start" data-act="lya-to-help" data-val="${i}">${ic("help","i s")}Ir para a Ajuda</button>`:""}${m.src.length?`<div class="ch-src">${m.src.map((x,j)=>`<span class="cite">${j+1} · ${x}</span>`).join("")}</div>`:""}
+   <div class="ch-a"><span class="ch-av">${ic("spark","i s")}</span><div class="ch-at">${m.sc?`<span class="ch-scope ${m.sc}">${m.sc==="pac"?`${ic("user","i s")}Sobre ${PT.nome} · fica no registro do atendimento`:`${ic("search","i s")}Pergunta geral · sem dados do paciente${m.auto?" (detectada pela Lya)":""}`}</span>`:""}${m.src.length&&CITE[m.src[0]]?`<div class="ch-found">${ic("search","i s")}${m.ttl?`<b>${m.ttl}</b> · `:""}${m.src.length} ${m.src.length>1?"fontes consultadas":"fonte consultada"}</div>`:""}${/^<(p|ul)/.test(m.a)?citeChips(i,m.a):`<p>${m.a}</p>`}${m.help?`<button class="btn t sm" style="justify-self:start" data-act="lya-to-help" data-val="${i}">${ic("help","i s")}Ir para a Ajuda</button>`:""}${m.src.length&&CITE[m.src[0]]?citeRefs(i,m.src):m.src.length?`<div class="ch-src">${m.src.map((x,j)=>`<span class="cite">${j+1} · ${x}</span>`).join("")}</div>`:""}
     <div class="ch-tools"><button class="iconbtn sm" data-act="chat-act" data-val="Resposta copiada" aria-label="Copiar" title="Copiar">${ic("copy","i s")}</button><button class="iconbtn sm" data-act="chat-act" data-val="Gerando outra versão" aria-label="Refazer" title="Refazer">${ic("hist","i s")}</button><button class="iconbtn sm" data-act="chat-act" data-val="Obrigado pela avaliação" aria-label="Resposta útil" title="Útil">${ic("check","i s")}</button><button class="iconbtn sm" data-act="chat-act" data-val="Conte o que faltou" aria-label="Resposta não útil" title="Não útil">${ic("x","i s")}</button>
-     <span class="sp"></span>${inC&&can("at_criar")?`<button class="btn q sm" data-act="chat-act" data-val="Inserido no relatório como pendência de revisão">${ic("doc","i s")}Inserir no relatório</button>`:""}${can("at_criar")?`<div class="dd"><button class="btn q sm" data-act="chat-docs" data-val="${i}">${ic("file","i s")}Gerar documento</button>${S.chatDocs===String(i)?`<div class="dd-menu up" role="menu">${CHAT_DOCS.map(d=>`<button role="menuitem" data-act="chat-act" data-val="${d}: rascunho criado na aba do documento">${d}</button>`).join("")}</div>`:""}</div>`:""}</div>
+     <span class="sp"></span>${inC&&m.sc!=="geral"&&can("at_criar")?`<button class="btn q sm" data-act="chat-act" data-val="${S.c&&S.c.phase==="sent"?"Inserido como adendo ao relatório integrado":"Inserido no relatório como pendência de revisão"}">${ic("doc","i s")}${S.c&&S.c.phase==="sent"?"Inserir como adendo":"Inserir no relatório"}</button>`:""}${can("at_criar")?`<div class="dd"><button class="btn q sm" data-act="chat-docs" data-val="${i}">${ic("file","i s")}Gerar documento</button>${S.chatDocs===String(i)?`<div class="dd-menu up" role="menu">${CHAT_DOCS.map(d=>`<button role="menuitem" data-act="chat-act" data-val="${d}: rascunho criado na aba do documento">${d}</button>`).join("")}</div>`:""}</div>`:""}</div>
    </div></div>`).join("");
 }
 function chatComposer(o){
@@ -2590,7 +2915,9 @@ function chatComposer(o){
   const fontes=[["pront",isB2C()?"Atendimentos na Lya":"Prontuário"],["proto","Protocolos da instituição"],["lit","Literatura"]];
   const on=fontes.filter(f=>S.chatSrc[f[0]]).length;
   const menu=S.chatMenuFor===id;
-  return `<div class="ch-comp ${o.big?"big":""}">
+  const scope=inC&&!o.big?`<div class="ch-scopes" role="group" aria-label="Escopo da pergunta"><button class="${S.chatScope!=="geral"?"on":""}" data-act="chat-scope" data-val="pac">${ic("user","i s")}Sobre ${PT.nome.split(" ")[0]}</button><button class="${S.chatScope==="geral"?"on":""}" data-act="chat-scope" data-val="geral">${ic("search","i s")}Pergunta geral</button></div>`:"";
+  if(useBlocked("perg"))return scope+useWall("perg");
+  return scope+`<div class="ch-comp ${o.big?"big":""}">
    <textarea id="${id}" rows="${o.big?2:1}" aria-label="Pergunta para a Lya" placeholder="${o.ph||(inC?"Pergunte o que quiser sobre este paciente":"Fale com a Lya")}"></textarea>
    <div class="ch-row">
     <div class="dd"><button class="ch-ico bare" data-act="chat-plus" data-val="${id}" aria-label="Mais opções" aria-expanded="${menu&&S.chatPlus}">${ic("plus")}</button>${menu&&S.chatPlus?`<div class="dd-menu ${o.big?"":"up"}" role="menu"><button role="menuitem" data-act="chat-act" data-val="Escolha um PDF ou imagem">${ic("clip","i s")} Anexar exame ou arquivo</button><button role="menuitem" data-act="chat-act" data-val="Prompts salvos: digite / no campo">${ic("list","i s")} Prompts salvos</button><button role="menuitem" data-act="chat-act" data-val="Escolha o paciente para dar contexto">${ic("user","i s")} Escolher paciente</button></div>`:""}</div>
@@ -2598,7 +2925,7 @@ function chatComposer(o){
     <div class="dd"><button class="ch-mode" data-act="chat-fontes" data-val="${id}" aria-expanded="${menu&&S.chatFontes}">Fontes <span class="muted">${on} de 3</span> ${ic("chev","i s chev-d")}</button>${menu&&S.chatFontes?`<div class="dd-menu ${o.big?"":"up"} right" role="menu">${fontes.map(([k,l])=>`<button role="menuitemcheckbox" aria-checked="${!!S.chatSrc[k]}" data-act="chat-src" data-val="${k}"><span class="ck ${S.chatSrc[k]?"on":""}">${S.chatSrc[k]?ic("check","i s"):""}</span>${l}</button>`).join("")}</div>`:""}</div>
     <button class="ch-ico bare" data-act="chat-act" data-val="Ditado ligado: fale a pergunta" aria-label="Ditar pergunta">${ic("mic")}</button>
     <button class="ch-send" data-act="chat-send" data-val="${id}" aria-label="Enviar">${ic("up","i s")}</button>
-   </div></div>${o.big?"":`<p class="ch-foot">A Lya pode errar. Confira as fontes; a conduta é do médico.</p>`}`;
+   </div></div>${o.big?"":`<p class="ch-foot">${useLine("perg")||"A Lya pode errar. Confira as fontes; a conduta é do médico."}</p>`}`;
 }
 const inSideChat=()=>!!(S.c&&(S.route==="atendimento"||S.route==="relatorio"));
 /* Controles que existem só no protótipo (perfil simulado, velocidade, estados de tela). Ficam fora da interface real. */
@@ -2667,6 +2994,11 @@ function protoDock(){
    <label class="pd-f"><span>Ver como</span><select data-act="viewas" aria-label="Ver como">${VIEWAS.map(v=>`<option value="${v}" ${v===S.role?"selected":""}>${prof(v).name}</option>`).join("")}</select></label>
    ${atd?`<div class="pd-f"><span>Velocidade da simulação</span>${seg("c-speed",String(S.c.speed),[["1","1x"],["4","4x"]])}</div>`:""}
    <div class="pd-f"><span>Cores</span><div class="pal-l">${Object.entries(PALS).map(([k,P])=>`<button class="pal-o ${(S.pal||"lilas")===k?"on":""}" data-act="pal" data-val="${k}" aria-pressed="${(S.pal||"lilas")===k}"><span class="pal-sw">${[0,4,7].map(i=>`<i style="background:${P[2][i]}"></i>`).join("")}</span><span class="pal-t"><b>${P[0]}</b><small>${P[1]}</small></span></button>`).join("")}</div></div>
+   ${!isB2C()?`<div class="pd-f"><span>Integração</span>${seg("pd-int",S.intFail?"1":"0",[["0","Envia com sucesso"],["1","Falha no 1º envio"]])}</div>`:""}
+   <div class="pd-f"><span>Uso do plano</span>${seg("pd-use",S.useLvl||"ok",[["ok","Normal"],["near","Perto do limite"],["out","Esgotado"]])}</div>
+   ${isB2C()?`<div class="pd-f"><span>Plano B2C</span>${seg("pd-plan",S.b2cPlan||"free",[["free","Gratuito"],["pro","Unlimited"]])}</div>`:""}
+   <div class="pd-f"><span>Jornada</span><button class="btn g sm" data-act="go-login">${ic("user","i s")}Começar pelo login</button></div>
+   ${S.route==="inicio"?`<div class="pd-f"><span>Microfone</span>${seg("pd-mic",S.micOff?"1":"0",[["0","Com sinal"],["1","Sem sinal"]])}</div>`:""}
    ${S.route==="inicio"&&!isB2C()?`<div class="pd-f"><span>Estado do início</span>${seg("pd-empty",S.emptyDay?"1":"0",[["0","Com paciente"],["1","Sem pacientes"]])}</div>`:""}</div>`:""}
    <button class="pd-btn" data-act="pdock" aria-expanded="${!!S.pdock}" title="Controles do protótipo">${ic("sliders","i s")}Protótipo · ${prof(S.role).name}</button></div>`;
 }
@@ -2676,6 +3008,7 @@ const CLIN_ROUTES=["inicio","atendimento","relatorio","anterior","pacientes","pa
 const isClinRoute=()=>CLIN_ROUTES.includes(S.route)&&canChat();
 function renderFab(){
   const el=document.getElementById("fab");
+  if(S.route==="login"){el.innerHTML=protoDock();return}
   const side=inSideChat(),clin=isClinRoute();
   if(!clin&&S.lyaMode!=="help")S.lyaMode="help";
   const mode=S.lyaMode||"clin";
@@ -2744,7 +3077,7 @@ const chatConv=()=>`<div class="chatpage"><aside class="card chat-list"><button 
 
 function chatRefresh(){if(S.route==="chat")render();else if(inSideChat()&&canChat()){refreshConsult(["side"]);const b=document.getElementById("ch-body");if(b)b.scrollTop=b.scrollHeight}else renderFab();setTimeout(()=>{const i=document.getElementById("chat-in");if(i)i.focus()},40)}
 document.addEventListener("keydown",e=>{if(e.target.id==="help-in"&&e.key==="Enter"&&e.target.value.trim()){e.preventDefault();helpAsk(e.target.value);renderFab();setTimeout(()=>{const n=document.getElementById("help-in");if(n)n.focus()},40)}});
-document.addEventListener("keydown",e=>{if((e.target.id==="chat-in"||e.target.id==="home-in"||e.target.id==="full-in")&&e.key==="Enter"&&!e.shiftKey){e.preventDefault();if(e.target.value.trim()){chatAsk(e.target.value);if(e.target.id==="home-in"){S.chatOpen=true;renderFab()}else chatRefresh()}}});
+document.addEventListener("keydown",e=>{if((e.target.id==="chat-in"||e.target.id==="home-in"||e.target.id==="full-in")&&e.key==="Enter"&&!e.shiftKey){e.preventDefault();if(e.target.value.trim()){chatAsk(e.target.value);e.target.value="";if(e.target.id==="home-in"){S.chatOpen=false;S.tab.chatv="conv";go("chat")}else chatRefresh()}}});
 /* ---------- render ---------- */
 function render(){
   document.body.classList.toggle("hide-novo",!S.novo);[...document.body.classList].filter(x=>x.startsWith("r-")).forEach(x=>document.body.classList.remove(x));document.body.classList.add("r-"+S.route);
@@ -2771,12 +3104,30 @@ function renderOverlay(){
 }</pre><p class="hint">Este acesso foi registrado na auditoria.</p>`:lockBox("int_payload","Conteúdo do payload restrito. Perfis com acesso: Integração TI.")}</div></div>`}
   if(S.drawer==="encerrar"&&S.c)h+=encDlg();
   if(S.drawer==="tele")h+=teleDlg();
+  if(S.drawer==="hexp"){const hf=S.hf||{},n=histRows().filter(({r})=>!hf.tab||hf.tab==="all"||r[4]===hf.tab).length,org=can("at_org");h+=`<div class="scrim" data-act="close"></div><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="hx-t"><h3 id="hx-t">Exportar ${n} ${n>1?"atendimentos":"atendimento"}</h3><p class="small muted" style="margin:0">Usa os filtros da tela (${org?"organização":"seus atendimentos"}). A exportação fica registrada na Auditoria com quem, quando e o que foi exportado.</p>
+   <div class="field"><span class="lbl">Formato</span><div class="seg"><button class="on" data-act="seg-pick">Planilha (CSV)</button><button data-act="seg-pick">PDF dos relatórios</button></div></div>
+   <div class="src"><div class="tx"><b>Relatórios finais</b><small>Texto integrado ao prontuário</small></div>${sw(true,"tog")}</div>
+   <div class="src"><div class="tx"><b>Versões IA × final</b><small>Para auditoria de qualidade</small></div>${sw(org,"tog")}</div>
+   <div class="src"><div class="tx"><b>Transcrições</b><small>${can("at_trhist")?"Só as dos últimos 90 dias":"Seu perfil não pode exportar transcrições"}</small></div>${sw(false,"tog","",!can("at_trhist"))}</div>
+   <div class="src"><div class="tx"><b>Mascarar CPF e telefone</b><small>Política da organização</small></div><span class="chip line">${ic("lock","i s")}Sempre</span></div>
+   <div class="dlg-a"><button class="btn q" data-act="close">Cancelar</button><button class="btn p" data-act="hist-exp-go">${ic("down","i s")}Exportar</button></div></div>`}
+  if(S.drawer==="comprov"&&S.c){const c=S.c;h+=`<div class="scrim" data-act="close"></div><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="cp-t"><h3 id="cp-t">Comprovante de integração</h3><div class="cpv">${[["Comprovante",c.intId||"INT-2026-104582"],["Destino","Prontuário do Hospital Aurora · evolução do atendimento 0098231"],["Paciente",PT.nome],["Enviado em","26/10/2026 às 09:47"],["Assinado por","Dra. Helena Duarte · CRM 123456/SP · certificado ICP-Brasil"],["Documentos",["Relatório","Prescrição (Memed)",...(c.docs||[]).map(docName)].join(", ")],["Resposta do hospital","201 · recebido e gravado"],["Integridade","hash SHA-256 9f3a…c71e registrado na Auditoria"]].map(r=>`<span class="small muted">${r[0]}</span><span class="small">${r[1]}</span>`).join("")}</div><div class="dlg-a"><button class="btn g" data-act="toast" data-msg="Comprovante copiado">${ic("copy","i s")}Copiar</button><button class="btn p" data-act="close">Fechar</button></div></div>`}
+  if(S.drawer==="pend"&&S.c){const pl=pendList();h+=`<div class="scrim" data-act="close"></div><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="pd-t"><h3 id="pd-t">${pl.length?`Antes de enviar, ${pl.length>1?`resolva ${pl.length} pendências`:"resolva 1 pendência"}`:"Tudo certo para enviar"}</h3>${pl.length?`<ul class="pend-l">${pl.map(x=>`<li><span><b>${x.t}</b><small>${x.d}</small></span>${x.a}</li>`).join("")}</ul><p class="small muted" style="margin:0">O relatório só vai ao prontuário sem pendências, para não enviar dose, alergia ou conduta sem conferência.</p>`:`<p class="small muted" style="margin:0">Todas as pendências foram resolvidas.</p>`}<div class="dlg-a"><button class="btn q" data-act="close">${pl.length?"Voltar ao relatório":"Fechar"}</button>${pl.length?"":`<button class="btn p" data-act="c-send">${ic("link","i s")}Continuar o envio</button>`}</div></div>`}
+  if(S.drawer==="regen"&&S.c){const mx=USE_PLANS[usePlan()].regen,n=(S.c.regen||0)+1,ne=Object.keys(S.c.edits||{}).length;h+=`<div class="scrim" data-act="close"></div><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="rg-t"><h3 id="rg-t">Gerar o relatório de novo?</h3><p class="small muted" style="margin:0">A Lya refaz o relatório com tudo o que foi ouvido até agora (${mmss(S.c.t)}). ${ne?`Suas edições em ${ne} ${ne>1?"seções":"seção"} são mantidas.`:"Não há edições suas para perder."} Condutas assumidas e calculadoras continuam.</p><p class="small" style="margin:0">Esta será a regeneração <b>${n} de ${mx}</b> do seu plano para este relatório.</p><div class="dlg-a"><button class="btn q" data-act="close">Cancelar</button><button class="btn p" data-act="regen-go">${ic("hist","i s")}Gerar de novo</button></div></div>`}
+  if(S.drawer==="useat")h+=`<div class="scrim" data-act="close"></div><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="ua-t"><h3 id="ua-t">Não é possível iniciar um novo atendimento</h3>${useWall("at")}<p class="small muted" style="margin:0">Atendimentos já gravados continuam disponíveis no Histórico. Um atendimento em andamento nunca é interrompido pelo limite.</p><div class="dlg-a"><button class="btn q" data-act="close">Fechar</button></div></div>`;
+  if((S.drawer==="few"||S.drawer==="none")&&S.c){const n=C_LINES.filter(l=>l[0]<=S.c.t).length;h+=`<div class="scrim" data-act="close"></div><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="few-t"><h3 id="few-t">${S.drawer==="none"?"A Lya ainda não ouviu a conversa":"Ainda há pouco para o relatório"}</h3>
+   <p class="small muted" style="margin:0">${S.drawer==="none"?"Não há nenhuma fala transcrita até agora. Converse com o paciente e gere o relatório depois; se o microfone estiver com problema, confira o sinal no cabeçalho.":`A Lya ouviu ${n} ${n>1?"trechos":"trecho"} (${mmss(S.c.t)}). Um relatório agora sai incompleto, com seções vazias para você preencher.`}</p>
+   <div class="dlg-a">${S.drawer==="none"?`<button class="btn p" data-act="close">Continuar ouvindo</button>`:`<button class="btn q" data-act="few-go">Gerar mesmo assim</button><button class="btn p" data-act="close">Continuar ouvindo</button>`}</div></div>`}
+  if(S.drawer==="mic")h+=`<div class="scrim" data-act="close"></div><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="mic-t"><h3 id="mic-t">A Lya não está ouvindo o microfone</h3><p class="small muted" style="margin:0">Sem áudio não há transcrição. Confira antes de começar:</p>
+   <ul class="mic-l"><li>${ic("plug","i s")}O microfone está conectado e ligado.</li><li>${ic("lock","i s")}O navegador tem permissão para usar o microfone (cadeado na barra de endereço).</li><li>${ic("mic","i s")}O microfone certo está escolhido.</li></ul>
+   <div class="field"><label for="mic-s">Microfone</label><select id="mic-s" class="input"><option>Jabra Speak 510</option><option>Microfone interno</option></select></div>
+   <div class="dlg-a"><button class="btn q" data-act="close">Cancelar</button><button class="btn p" data-act="mic-test">${ic("mic","i s")}Testar de novo</button></div></div>`;
   if(S.docMenu&&S.c){const left=myDocs().filter(k=>!(S.c.docs||[]).includes(k));h+=`<div class="scrim clear" data-act="c-docmenu-x"></div><div class="dd-menu docmenu" role="menu" style="left:${S.docMenu.x}px;top:${S.docMenu.y}px"><span class="dm-h">Documentos complementares</span>${left.map(k=>{const d=DOCS.find(x=>x[0]===k);return `<button role="menuitem" data-act="c-doc" data-val="${k}">${ic(d[2],"i s")}${d[1]}</button>`}).join("")}</div>`}
 
   if(S.cfgOpen)h+=calcCfgDrawer();
   if(S.sgOpen)h+=sgPop();
 
-  if(S.umenu)h+=`<div class="scrim clear" data-act="umenu-x"></div><div class="dd-menu umenu" role="menu" style="left:${S.umenu.x}px;top:${S.umenu.y}px"><div class="um-h"><span class="avatar">HD</span><span><b>Dra. Helena Duarte</b><small>CRM 123456/SP · ${prof(S.role).name}</small></span></div><button role="menuitem" data-act="conta" data-val="perfil">${ic("user","i s")}Meu perfil</button><button role="menuitem" data-act="conta" data-val="pref">${ic("sliders","i s")}Minhas preferências</button>${isB2C()?`<button role="menuitem" data-act="conta" data-val="fat">${ic("doc","i s")}Faturamento</button>`:""}<button role="menuitem" data-act="toast" data-msg="Sessão encerrada">${ic("x","i s")}Sair</button></div>`;
+  if(S.umenu)h+=`<div class="scrim clear" data-act="umenu-x"></div><div class="dd-menu umenu" role="menu" style="left:${S.umenu.x}px;top:${S.umenu.y}px"><div class="um-h"><span class="avatar">HD</span><span><b>Dra. Helena Duarte</b><small>CRM 123456/SP · ${prof(S.role).name}</small></span></div><button role="menuitem" data-act="conta" data-val="perfil">${ic("user","i s")}Meu perfil</button><button role="menuitem" data-act="conta" data-val="pref">${ic("sliders","i s")}Minhas preferências</button>${isB2C()?`<button role="menuitem" data-act="conta" data-val="fat">${ic("doc","i s")}Faturamento</button>`:""}<button role="menuitem" data-act="go-login">${ic("x","i s")}Sair</button></div>`;
   if(S.toast)h+=`<div class="toast" role="status">${S.toast}</div>`;
   document.getElementById("overlay").innerHTML=h;
   document.getElementById("side").classList.toggle("open",S.menu);
@@ -2784,7 +3135,8 @@ function renderOverlay(){
 
 /* ---------- eventos ---------- */
 const langRefresh=()=>{if(S.route==="atendimento"&&S.c)refreshConsult(["head"]);else render()};
-document.addEventListener("click",e=>{if(S.langOpen&&!e.target.closest(".langw")){S.langOpen=null;langRefresh()}if(S.agOpen&&!e.target.closest(".agw")){S.agOpen=false;render()}},true);
+document.addEventListener("click",e=>{if(S.langOpen&&!e.target.closest(".langw")){S.langOpen=null;langRefresh()}if(S.agOpen&&!e.target.closest(".agw:not(.micw)")){S.agOpen=false;render()}if(S.micOpen&&!e.target.closest(".micw")){S.micOpen=false;render()}},true);
+document.addEventListener("input",e=>{if(e.target.id==="hist-q"){S.hf=S.hf||{};S.hf.q=e.target.value;const pos=e.target.selectionStart;render();const n=document.getElementById("hist-q");if(n){n.focus();n.setSelectionRange(pos,pos)}return}if(e.target.id!=="tr-q")return;const q=e.target.value.trim().toLowerCase();S.c.trQ=e.target.value;let n=0;document.querySelectorAll(".tr2 .ln2").forEach(l=>{const ok=!q||l.dataset.tx.includes(q);l.classList.toggle("tr-off",!ok);if(ok)n++});const c=document.getElementById("tr-n");if(c)c.textContent=q?`${n} de ${document.querySelectorAll(".tr2 .ln2").length} trechos`:`${n} trechos`});
 document.addEventListener("input",e=>{if(e.target.id==="ag-q"){const l=document.getElementById("ag-l");if(l)l.innerHTML=agList(e.target.value)}});
 document.addEventListener("keydown",e=>{if(e.target.id!=="ag-q")return;if(e.key==="Escape"){S.agOpen=false;render();const b=document.querySelector(".agb");if(b)b.focus()}if(e.key==="Enter"){const f=document.querySelector("#ag-l .ag-o");if(f)f.click()}if(e.key==="ArrowDown"){e.preventDefault();const f=document.querySelector("#ag-l .ag-o");if(f)f.focus()}});
 document.addEventListener("keydown",e=>{const o=e.target.closest&&e.target.closest(".ag-o");if(!o)return;if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();const all=[...document.querySelectorAll("#ag-l .ag-o")],i=all.indexOf(o);const n=all[i+(e.key==="ArrowDown"?1:-1)];if(n)n.focus();else if(e.key==="ArrowUp")document.getElementById("ag-q").focus()}if(e.key==="Escape"){S.agOpen=false;render()}});
@@ -2823,9 +3175,15 @@ document.addEventListener("click",e=>{
    case"conta":S.umenu=null;S.tab.conta=v;renderOverlay();go("conta");break;
    case"pdock":S.pdock=!S.pdock;renderFab();break;
    case"ct-scroll":{const sc=document.querySelector("#c-tabs .ct-scroll");if(sc)sc.scrollBy({left:Number(v)*Math.max(160,sc.clientWidth*.6),behavior:"smooth"});break}
-   case"ag-tg":S.agOpen=!S.agOpen;render();if(S.agOpen){const q=document.getElementById("ag-q");if(q)q.focus();const on=document.querySelector("#ag-l .ag-o.on");if(on)on.scrollIntoView({block:"center"})}break;
+   case"ag-tg":S.agOpen=!S.agOpen;S.micOpen=false;render();if(S.agOpen){const q=document.getElementById("ag-q");if(q)q.focus();const on=document.querySelector("#ag-l .ag-o.on");if(on)on.scrollIntoView({block:"center"})}break;
+   case"mic-tg":S.micOpen=!S.micOpen;S.agOpen=false;render();break;
+   case"mic-pick":S.prep.mic=v;S.micOpen=false;if(S.micOff){S.micOff=false;toast(v+" · sinal bom")}else toast("Microfone: "+v);render();break;
    case"ag-pick":S.prep.as=v;S.agOpen=false;render();toast("Agente: "+v);break;
    case"pal":applyPal(v);renderFab();toast("Cores: "+PALS[v][0]);break;
+   case"pd-use":S.useLvl=v;S.useExtra={};render();break;
+   case"pd-plan":S.b2cPlan=v;S.useExtra={};render();break;
+   case"go-uso":S.tab.cfg="uso";go("configuracoes");break;
+   case"pd-mic":S.micOff=v==="1";render();break;
    case"pd-empty":S.emptyDay=v==="1";render();break;
    case"empty-day":S.emptyDay=!S.emptyDay;render();break;
    case"lang-tg":S.langOpen=S.langOpen===v?null:v;langRefresh();break;
@@ -2834,7 +3192,17 @@ document.addEventListener("click",e=>{
    case"c-empty":S.c.showEmpty=!S.c.showEmpty;refreshConsult(["main"]);break;
    case"c-proto":S.calcOpen=null;S.logOpen=false;S.c.pOpen=v;sideFit();break;
    case"c-proto-x":S.c.pOpen=null;sideFit();break;
-   case"c-proto-ok":S.c.pOk=S.c.pOk||{};S.c.pOk[v]=true;cLog("Conduta do protocolo assumida: "+CS.protos.find(p=>p.k===v).t);S.c.pOpen=null;sideFit();refreshConsult(["main"]);toast("Conduta assumida. Vai para Avaliação e plano no relatório.");break;
+   case"rx-add":S.c.rxOk=S.c.rxOk||{};S.c.rxOk[v]="add";cLog("Medicamento do protocolo adicionado à prescrição");refreshConsult(["main"]);toast("Adicionado à prescrição na Memed");break;
+   case"rx-ign":S.c.rxOk=S.c.rxOk||{};S.c.rxOk[v]="ign";cLog("Sugestão de medicamento do protocolo ignorada");refreshConsult(["main"]);break;
+   case"gen-cancel":S.c.phase="live";S.c.gen=0;cLog("Geração do relatório cancelada");refreshConsult(["head","tabs","main","side"]);toast("Geração cancelada. A Lya continua ouvindo.");break;
+   case"regen":S.drawer="regen";renderOverlay();break;
+   case"regen-go":S.drawer=null;renderOverlay();S.c.regen=(S.c.regen||0)+1;cLog("Relatório regenerado ("+S.c.regen+")");runGen();break;
+   case"sec-edit":S.c.editSec=v;refreshConsult(["main"]);setTimeout(()=>{const t=document.getElementById("ns-ta");if(t){t.focus();t.style.height=t.scrollHeight+"px"}},40);break;
+   case"sec-x":S.c.editSec=null;refreshConsult(["main"]);break;
+   case"sec-save":{const t=document.getElementById("ns-ta");S.c.edits=S.c.edits||{};S.c.edits[v]=t?t.value:"";S.c.editSec=null;cLog("Seção editada: "+v);refreshConsult(["main"]);toast("Seção salva. A versão da IA fica no histórico.");break}
+   case"c-proto-no":{const p=CS.protos.find(x=>x.k===v);S.c.pNo=S.c.pNo||{};S.c.pNo[v]=p.lvl[1];cLog("Protocolo dispensado (Agora não): "+p.t+" · "+p.lvl[1]);S.c.pOpen=null;sideFit();refreshConsult(["main"]);toast("Ok. O alerta volta se o risco mudar.");break}
+   case"c-proto-undo":{const p=CS.protos.find(x=>x.k===v);if(S.c.pOk)delete S.c.pOk[v];cLog("Conduta retirada do relatório: "+p.t);sideFit();refreshConsult(["main"]);toast("Conduta retirada do relatório");break}
+   case"c-proto-ok":{const pp=CS.protos.find(p=>p.k===v);S.c.pOk=S.c.pOk||{};const re=!!S.c.pOk[v];S.c.pOk[v]={lvl:pp.lvl[1],at:S.c.t};if(S.c.pNo)delete S.c.pNo[v];cLog((re?"Conduta reconfirmada: ":"Conduta do protocolo assumida: ")+pp.t+" · "+pp.lvl[1]+" · v"+pp.ver);}S.c.pOpen=null;sideFit();refreshConsult(["main"]);toast("Conduta assumida. Vai para Avaliação e plano no relatório.");break;
    case"sg-open":{const r=a.getBoundingClientRect();S.sgOpen={k:v,x:Math.min(r.left,innerWidth-340),y:r.bottom+6};renderOverlay();break}
    case"sg-all":S.c.sgAll=!S.c.sgAll;{const sg=document.getElementById("c-sg");if(sg)sg.innerHTML=sgBar()}fitSplit();break;
    case"sg-x":S.sgOpen=null;renderOverlay();break;
@@ -2843,7 +3211,7 @@ document.addEventListener("click",e=>{
    case"ficha-edit":S.fichaEdit=!S.fichaEdit;render();break;
    case"ficha-save":S.fichaEdit=false;render();toast("Ficha atualizada. Alterações registradas na auditoria.");break;
    case"rep-print":toast("Abrindo a impressão do relatório");setTimeout(()=>{try{window.print()}catch(_){}},300);break;
-   case"rep-int":{const n=C_REV.filter(r=>!S.c.res[r[0]]).length;if(n){toast(`Resolva ${n} ${n>1?"pendências":"pendência"} em “Antes de enviar” para integrar`);break}if(!S.c.closed){S.drawer="encerrar";renderOverlay();toast("Encerre o atendimento para integrar ao prontuário");break}S.c.phase="sent";cLog("Relatório integrado ao prontuário");refreshConsult(["head","tabs","main","side"]);toast("Relatório integrado ao prontuário às 09:47");break}
+   case"rep-int":doSend();break;
    case"c-stab":S.c.sideTab=v;refreshConsult(["side"]);break;
    case"calc-open":S.c.pOpen=null;S.logOpen=false;S.calcOpen=v;S.calcV=null;calcRefresh();break;
    case"calc-x":S.calcOpen=null;calcRefresh();break;
@@ -2867,12 +3235,15 @@ document.addEventListener("click",e=>{
    case"c-docmenu-x":S.docMenu=null;renderOverlay();break;
    case"c-doc":S.docMenu=null;S.c.docs=[...(S.c.docs||[]),v];S.c.tab=v;renderOverlay();refreshConsult(["tabs","main"]);toast(docName(v)+" gerado a partir do relatório");break;
    case"c-speed":S.c.speed=+v;refreshConsult(["head"]);renderFab();break;
-   case"c-fin":runGen();break;
+   case"c-fin":{const heard=C_LINES.filter(l=>l[0]<=S.c.t).length;if(S.c.phase==="live"&&heard<3){S.drawer=heard?"few":"none";renderOverlay();break}runGen();break}
+   case"few-go":S.drawer=null;renderOverlay();runGen();break;
    case"c-enc":S.drawer="encerrar";renderOverlay();break;
-   case"c-enc-ok":{S.drawer=null;const c=S.c;c.paused=false;c.closed=true;c.pop=false;cLog("Atendimento encerrado · dados fechados");renderOverlay();if(c.phase==="live")runGen();else refreshConsult(["head","tabs","main","side"]);toast("Atendimento encerrado. Logs de controle registrados na Auditoria.");break}
+   case"c-enc-ok":{S.drawer=null;const c=S.c;c.paused=false;c.closed=true;c.pop=false;cLog("Atendimento encerrado · dados fechados");renderOverlay();if(c.phase==="live")runGen();else{refreshConsult(["head","tabs","main","side"]);if(c.sendAfter){c.sendAfter=false;setTimeout(doSend,300)}}toast("Atendimento encerrado. Logs de controle registrados na Auditoria.");break}
    case"c-panel":S.c.panel=!S.c.panel;render();break;
-   case"c-res":S.sgOpen=null;renderOverlay();if(v==="cpf"){S.c.pop=true;refreshConsult(["head"]);window.scrollTo(0,0);break}S.c.res[v]=true;refreshConsult(["head","main","side"]);toast("Aplicado no relatório e na receita");break;
-   case"c-send":cLog(isB2C()?"Relatório assinado":"Relatório assinado e enviado ao prontuário");S.c.phase="sent";refreshConsult(["head","tabs","main","side"]);toast("Assinado e enviado ao prontuário às 09:47");break;
+   case"c-res":S.sgOpen=null;if(S.drawer!=="pend")S.drawer=S.drawer;renderOverlay();if(v==="cpf"){S.c.pop=true;refreshConsult(["head"]);window.scrollTo(0,0);break}S.c.res[v]=true;refreshConsult(["head","main","side"]);toast("Aplicado no relatório e na receita");break;
+   case"c-send":doSend();break;
+   case"int-detail":S.drawer=S.c&&S.c.phase==="sent"?"comprov":"payload";renderOverlay();break;
+   case"pd-int":S.intFail=v==="1";render();break;
    case"c-resume":if(S.c.closed)break;S.c.phase="live";cLog("Gravação retomada");refreshConsult(["head","tabs","main","side"]);break;
    case"c-dis":S.sgOpen=null;renderOverlay();S.c.ins[v]=true;refreshConsult(["side"]);if(a.dataset.why==="na")toast("Anotado. A Lya vai mostrar menos avisos como este.");break;
    case"c-insmore":S.c.insMore=!S.c.insMore;refreshConsult(["side"]);break;
@@ -2880,8 +3251,13 @@ document.addEventListener("click",e=>{
    case"c-renew":S.sgOpen=null;renderOverlay();S.c.ins[v]=true;refreshConsult(["side"]);toast(v.startsWith("Receita")?"Renovação da mesalazina incluída no relatório e na receita":"Colonoscopia incluída no pedido de exames");break;
    case"c-bring":S.c.brought=S.c.brought||{};S.c.brought[v]=true;if(S.route==="anterior")render();else refreshConsult(["side","main"]);toast(S.c.repOk||S.c.phase!=="live"?"Trazido para o relatório. Confira na aba Relatório.":"Guardado. Entra no relatório quando você gerar.");break;
    case"c-ask":if(canChat()){if(inSideChat()){}else if(S.route!=="chat")S.chatOpen=true;chatAsk(v||"");chatRefresh()}break;
-   case"chat-send":{const id=v||"chat-in",i=document.getElementById(id);if(i&&i.value.trim()){chatAsk(i.value);if(id==="home-in"){S.chatOpen=true;renderFab()}else chatRefresh()}break}
-   case"chat-new":S.chatMsgs=[];chatRefresh();break;
+   case"chat-send":{const id=v||"chat-in",i=document.getElementById(id);if(i&&i.value.trim()){chatAsk(i.value);i.value="";if(id==="home-in"){S.chatOpen=false;S.tab.chatv="conv";go("chat")}else chatRefresh()}break}
+   case"chat-scope":S.chatScope=v;chatRefresh();break;
+   case"chat-new":S.chatMsgs=[];S.cite=null;chatRefresh();break;
+   case"cite-open":{const [id,ks]=v.split("|");S.cite=S.cite&&S.cite.id===id?null:{id,k:ks.split(","),pg:0};chatRefresh();break}
+   case"cite-pg":if(S.cite){S.cite.pg=(S.cite.pg+Number(v)+S.cite.k.length)%S.cite.k.length;chatRefresh()}break;
+   case"cite-x":S.cite=null;chatRefresh();break;
+   case"cite-refs":S.citeRefs=S.citeRefs===+v?null:+v;chatRefresh();break;
    case"chat-plus":S.chatMenuFor=v;S.chatPlus=!S.chatPlus;S.chatFontes=false;v==="home-in"?render():chatRefresh();break;
    case"chat-fontes":S.chatMenuFor=v;S.chatFontes=!S.chatFontes;S.chatPlus=false;v==="home-in"?render():chatRefresh();break;
    case"news-n":S.newsI++;render();break;
@@ -2916,7 +3292,23 @@ document.addEventListener("click",e=>{
    case"only-sens":S.onlySens=a.checked;render();break;
    case"payload":S.drawer="payload";renderOverlay();break;
    case"close":S.drawer=null;renderOverlay();break;
-   case"hp-start":if(S.prep.mod==="Telemedicina"){S.tele={plat:"Google Meet",tab:null,audio:true};S.drawer="tele";renderOverlay()}else go("atendimento");break;
+   case"lg-cred":{const e=(document.getElementById("lg-e")||{}).value||"",pw=(document.getElementById("lg-p")||{}).value||"";if(!/.+@.+\..+/.test(e)){S.login.err="Digite um e-mail válido.";render();break}if(!pw){S.login.err="Digite a senha.";render();break}S.login={step:"code",e};render();setTimeout(()=>{const c=document.getElementById("lg-c");if(c)c.focus()},40);break}
+   case"lg-sso":S.login={step:"org"};render();toast("Conta da instituição confirmada");break;
+   case"lg-code":{const c=((document.getElementById("lg-c")||{}).value||"").replace(/\D/g,"");if(c.length!==6){S.login.err="Digite os 6 dígitos do código.";render();setTimeout(()=>{const x=document.getElementById("lg-c");if(x)x.focus()},40);break}S.login={step:"org"};render();break}
+   case"lg-back":S.login={step:"cred"};render();break;
+   case"lg-org":S.role=v;S.login=null;S.c=null;go(landRoute());toast(can("at_criar")?"Bem-vinda, Dra. Helena":"Entrou como "+prof(S.role).name);break;
+   case"go-login":S.login={step:"cred"};S.umenu=null;renderOverlay();go("login");break;
+   case"mic-test":S.micOff=false;S.micOpen=false;S.drawer=null;renderOverlay();render();toast("Microfone funcionando · sinal bom");break;
+   case"hist-ver":S.histSel=+v;S.histPending=true;go("relatorio");break;
+   case"hist-open":S.histSel=+v;go("relatorio");toast("Revisão retomada: relatório pronto para conferir");break;
+   case"hf":S.hf=S.hf||{};S.hf[a.dataset.k]=v;render();break;
+   case"hf-clear":S.hf={tab:"all",per:"30"};render();break;
+   case"hist-exp":S.drawer="hexp";renderOverlay();break;
+   case"hist-exp-go":S.drawer=null;renderOverlay();toast("Exportação pronta. O download começa em instantes e fica registrado na Auditoria.");break;
+   case"ver-view":S.c.verView[S.c.tab]=v;refreshConsult(["main"]);break;
+   case"ver-doc":S.verDoc=v;render();break;
+   case"ver-mode":S.verMode=v;render();break;
+   case"hp-start":if(useBlocked("at")){S.drawer="useat";renderOverlay();break}if(S.micOff){S.drawer="mic";renderOverlay();break}if(S.prep.mod==="Telemedicina"){S.tele={plat:"Google Meet",tab:null,audio:true};S.drawer="tele";renderOverlay()}else go("atendimento");break;
    case"tele-plat":S.tele.plat=v;S.tele.tab=null;S.tele.err=null;renderOverlay();break;
    case"tele-tab":S.tele.tab=v;S.tele.err=null;renderOverlay();break;
    case"tele-audio":S.tele.audio=!S.tele.audio;S.tele.err=null;renderOverlay();break;
@@ -2941,6 +3333,7 @@ document.addEventListener("click",e=>{
   }
 });
 document.addEventListener("change",e=>{
+  if(e.target.dataset.hf){S.hf=S.hf||{};S.hf[e.target.dataset.hf]=e.target.type==="checkbox"?e.target.checked:e.target.value;render();return}
   if(e.target.dataset.lang){const L=S.lang;L[e.target.dataset.lang]=e.target.value;const n=x=>x==="auto"?"detecção automática":(LANGS.find(y=>y[0]===x)||[])[1];langRefresh();toast(e.target.dataset.lang==="in"?"Entrada: "+n(L.in):"Saída: "+n(L.out));return}
   if(e.target.id==="prep-file"||e.target.id==="c-file"){const fs=[...e.target.files];if(!fs.length)return;S.prep.files=S.prep.files||[];
    fs.forEach(f=>{const it={n:f.name,kb:f.size>1048576?(f.size/1048576).toFixed(1).replace(".",",")+" MB":Math.max(1,Math.round(f.size/1024))+" KB",st:"lendo",res:""};S.prep.files.push(it);
@@ -2984,6 +3377,15 @@ function logCard(){
    <div class="clog-m small"><div><span class="muted">Duração ouvida</span><b>${mmss(c.t)}</b></div><div><span class="muted">Pausas</span><b>${c.ev.filter(e=>e[1].startsWith("Pausa")).length}</b></div><div><span class="muted">Responsável</span><b>Dra. Helena Costa</b></div><div><span class="muted">Integridade</span><b class="mono">sha256 9f2c…a71e</b></div></div>
    <button class="btn g sm" data-go="auditoria">Ver na Auditoria</button></div>`;
 }
+/* Envio ao prontuário: resolve pendências → encerra (fecha dados e logs) → assina e envia → integrado ou falha com nova tentativa.
+   Nada se perde numa falha: o relatório fica salvo na Lya e o envio pode ser refeito. */
+const pendList=()=>{const c=S.c;return [...C_REV.filter(r=>!c.res[r[0]]).map(r=>({t:r[1],d:r[2],a:`<button class="btn t sm" data-act="c-res" data-val="${r[0]}">${r[3]}</button>`})),...protoVis().filter(p=>pState(p)==="rev").map(p=>({t:"Reconfirmar conduta: "+p.t.replace("Risco de","protocolo de"),d:"Os critérios mudaram depois que você assumiu a conduta.",a:`<button class="btn t sm" data-act="c-proto" data-val="${p.k}">Abrir</button>`}))]};
+function doSend(){const c=S.c;if(!c)return;const pl=pendList();
+ if(pl.length){S.drawer="pend";renderOverlay();return}
+ if(!c.closed){c.sendAfter=true;S.drawer="encerrar";renderOverlay();return}
+ c.send="sending";cLog(isB2C()?"Assinatura do relatório iniciada":"Assinatura e envio ao prontuário iniciados");refreshConsult(["head","main"]);
+ setTimeout(()=>{if(!S.c||S.c!==c)return;if(S.intFail&&!isB2C()&&!c.failedOnce){c.failedOnce=true;c.send="fail";cLog("Falha no envio ao prontuário: tempo esgotado (sistema do hospital)");refreshConsult(["head","main","side"]);toast("Não foi possível integrar. O relatório está salvo na Lya.");return}
+  c.send=null;c.phase="sent";c.intId="INT-2026-104582";cLog(isB2C()?"Relatório assinado":"Relatório integrado ao prontuário · "+c.intId);refreshConsult(["head","tabs","main","side"]);toast(isB2C()?"Relatório assinado":"Integrado ao prontuário do Hospital Aurora")},1600)}
 function encDlg(){
   const c=S.c;
   return `<div class="scrim" data-act="close"></div><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="enc-t"><h3 id="enc-t">Encerrar o atendimento?</h3>
@@ -2991,12 +3393,12 @@ function encDlg(){
    <ul class="enc-l"><li>${ic("mic","i s")}<span><b>Fecha a gravação.</b> Pausar, Continuar e Retomar gravação deixam de funcionar.</span></li>
    <li>${ic("file","i s")}<span><b>Fecha os dados.</b> Transcrição, Prompts e dados captados ficam somente leitura.</span></li>
    <li>${ic("list","i s")}<span><b>Cria os logs de controle.</b> Início, pausas, geração do relatório, fim, duração, responsável e hash de integridade, enviados à Auditoria.</span></li>
-   ${c.phase==="live"?`<li>${ic("doc","i s")}<span><b>Gera o relatório</b> com tudo o que foi ouvido, para você revisar e assinar.</span></li>`:""}</ul>
-   <div class="dlg-a"><button class="btn g" data-act="close">Cancelar</button><button class="btn p" data-act="c-enc-ok">${ic("lock","i s")}Encerrar atendimento</button></div></div>`;
+   ${c.phase==="live"?`<li>${ic("doc","i s")}<span><b>Gera o relatório</b> com tudo o que foi ouvido, para você revisar e assinar.</span></li>`:""}${c.sendAfter?`<li>${ic("link","i s")}<span><b>Em seguida, assina e envia</b> o relatório ao prontuário.</span></li>`:""}</ul>
+   <div class="dlg-a"><button class="btn g" data-act="close">Cancelar</button><button class="btn p" data-act="c-enc-ok">${ic("lock","i s")}${c.sendAfter?"Encerrar e enviar":"Encerrar atendimento"}</button></div></div>`;
 }
 function runGen(){
   S.c.phase="gen";S.c.gen=0;S.c.paused=false;S.c.tab="nota";S.c.repOk=true;cLog("Relatório gerado com "+mmss(S.c.t)+" de atendimento");refreshConsult(["head","tabs","main","side"]);
-  const step=()=>{if(!S.c||S.c.phase!=="gen")return;S.c.gen++;if(S.c.gen>=C_GEN.length){S.c.phase="rev";refreshConsult(["head","tabs","main","side"]);return}refreshConsult(["head","side"]);setTimeout(step,650)};
+  const step=()=>{if(!S.c||S.c.phase!=="gen")return;S.c.gen++;if(S.c.gen>=C_GEN.length){S.c.phase="rev";S.c.regenAt=S.c.t;refreshConsult(["head","tabs","main","side"]);const n=C_REV.filter(r=>!S.c.res[r[0]]).length;toast(n?`Relatório pronto. ${n} ${n>1?"pendências":"pendência"} em amarelo para conferir`:"Relatório pronto para conferir");return}refreshConsult(["head","side"]);setTimeout(step,650)};
   setTimeout(step,650);
 }
 

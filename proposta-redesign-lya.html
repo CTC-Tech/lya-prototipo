@@ -1,0 +1,1171 @@
+<title>Lya ao vivo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap">
+<style>
+/* Paleta do protótipo: azul #2450E6 para ação, lilás #7C5CFA para o que está ao vivo, verde só para sucesso. Layout: documento de leitura com sumário fixo à esquerda; mockups saem da coluna de texto e ocupam a largura total. */
+:root{
+  --bg:#F3F5F9; --surface:#FFFFFF; --surface-2:#EBEFF5; --ink:#0C1A2C; --muted:#5A6884; --line:#DCE2EB;
+  --navy:#1536A8; --navy-tint:#E6ECFF; --btn:#2450E6; --on-btn:#FFFFFF;
+  --teal:#7C5CFA; --teal-ink:#5B3FD0; --teal-tint:#EFEAFE;
+  --danger:#B8302A; --danger-tint:#FCE6E4; --warn:#9A5B00; --warn-tint:#FDF0D9; --ok:#087A5D;
+  --hl:rgba(124,92,250,.16);
+  --shadow:0 1px 2px rgba(13,27,42,.06),0 10px 28px rgba(0,70,148,.08);
+  --f-sans:"Geist",ui-sans-serif,system-ui,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+  --heidi-bg:#FBF6EF; --heidi-ink:#2B0A18; --heidi-acc:#F7EE7C;
+  --tele-bg:#F3F1E8; --tele-ink:#0F4D33; --tele-acc:#1A1A16;
+  --voa-bg:#FFFFFF; --voa-ink:#111111; --voa-acc:#7A3EE0;
+  --lya-old:#1E5EFF;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A1018; --surface:#111A27; --surface-2:#172231; --ink:#E7ECF4; --muted:#9AA8BC; --line:#263346;
+  --navy:#9DB2FF; --navy-tint:#1A2650; --btn:#3A63F0; --on-btn:#FFFFFF;
+  --teal:#A996FF; --teal-ink:#BBAAFF; --teal-tint:#241D44;
+  --danger:#FF8A80; --danger-tint:#3A1715; --warn:#F5B54A; --warn-tint:#33250D; --ok:#4BD9B2;
+  --hl:rgba(169,150,255,.18);
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1018; --surface:#111A27; --surface-2:#172231; --ink:#E7ECF4; --muted:#9AA8BC; --line:#263346;
+  --navy:#9DB2FF; --navy-tint:#1A2650; --btn:#3A63F0; --on-btn:#FFFFFF;
+  --teal:#A996FF; --teal-ink:#BBAAFF; --teal-tint:#241D44;
+  --danger:#FF8A80; --danger-tint:#3A1715; --warn:#F5B54A; --warn-tint:#33250D; --ok:#4BD9B2;
+  --hl:rgba(169,150,255,.18);
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--navy)}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:4px}
+h1,h2,h3,h4{text-wrap:balance;margin:0;line-height:1.15;letter-spacing:-.02em}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+.shell{display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;max-width:1320px;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 96px}
+@media (max-width:980px){.shell{grid-template-columns:minmax(0,1fr);gap:24px;padding-block:24px 64px}}
+
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;font-size:13.5px}
+nav.toc .brand{display:flex;align-items:center;gap:10px;font-weight:600;margin-bottom:20px}
+nav.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px;counter-reset:t}
+nav.toc li{counter-increment:t}
+nav.toc a{display:flex;gap:10px;padding:5px 8px;border-radius:6px;color:var(--muted);text-decoration:none}
+nav.toc a::before{content:counter(t,decimal-leading-zero);font-family:var(--f-mono);font-size:11.5px;color:var(--muted);opacity:.7;padding-top:2px}
+nav.toc a:hover{background:var(--surface-2);color:var(--ink)}
+@media (max-width:980px){nav.toc{position:static}nav.toc ol{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}}
+
+.mark{width:26px;height:26px;border-radius:7px;background:conic-gradient(from 45deg,var(--teal),#2450E6,var(--teal));position:relative;flex:none}
+.mark::after{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--surface)}
+
+main{min-width:0}
+.cover{padding-block:8px 40px;border-bottom:1px solid var(--line);margin-bottom:56px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cover h1{font-size:clamp(44px,7vw,84px);font-weight:600;letter-spacing:-.045em;margin:14px 0 18px;display:flex;align-items:center;gap:.25em;flex-wrap:wrap}
+.live-dot{width:.32em;height:.32em;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 var(--hl);animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 var(--hl)}70%{box-shadow:0 0 0 .35em transparent}100%{box-shadow:0 0 0 0 transparent}}
+.lede{font-size:20px;line-height:1.5;max-width:44ch;color:var(--ink)}
+.meta{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:28px;font-size:13.5px;color:var(--muted)}
+.meta b{color:var(--ink);font-weight:500}
+
+section.s{margin-bottom:88px}
+.s-head{display:flex;align-items:baseline;gap:14px;margin-bottom:20px}
+.s-num{font-family:var(--f-mono);font-size:13px;color:var(--teal-ink)}
+.s h2{font-size:clamp(28px,3.4vw,38px);font-weight:600}
+.s h3{font-size:20px;font-weight:600;margin:36px 0 12px}
+.prose{max-width:68ch;display:grid;gap:14px}
+.prose p,.prose li{color:var(--ink)}
+.prose ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.muted{color:var(--muted)}
+.small{font-size:13.5px}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:28px}
+.kpi{background:var(--surface);padding:18px 20px}
+.kpi .v{font-size:30px;font-weight:600;letter-spacing:-.03em}
+.kpi .l{font-size:13.5px;color:var(--muted);line-height:1.45;margin-top:4px}
+
+.callout{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:20px 22px;max-width:76ch}
+.callout h4{font-size:15px;margin-bottom:6px}
+
+/* problemas */
+.issues{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:20px}
+.issue{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:6px;align-content:start}
+.issue .tag{justify-self:start}
+.issue h4{font-size:15.5px;font-weight:600}
+.issue p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag.crit{color:var(--danger);border-color:currentColor;background:var(--danger-tint)}
+.tag.high{color:var(--warn);border-color:currentColor;background:var(--warn-tint)}
+.tag.med{color:var(--navy);border-color:currentColor;background:var(--navy-tint)}
+
+/* concorrentes */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:24px}
+.comp{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.comp-hero{padding:22px 20px 18px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;gap:16px}
+.comp-hero .name{font-weight:600;font-size:13px;letter-spacing:.02em;display:flex;justify-content:space-between;gap:8px}
+.comp-hero .claim{font-family:Georgia,"Times New Roman",serif;font-size:26px;line-height:1.1;letter-spacing:-.01em}
+.c-heidi{background:var(--heidi-bg);color:var(--heidi-ink)}
+.c-heidi .claim em{font-style:italic}
+.c-tele{background:var(--tele-bg);color:var(--tele-ink)}
+.c-voa{background:var(--voa-bg);color:var(--voa-ink);border-bottom:1px solid #ECECEC}
+.c-voa .claim span{color:var(--voa-acc)}
+.c-lya{background:#FFFFFF;color:#1B2433;border-bottom:1px solid #ECECEC}
+.c-lya .claim{font-family:"Geist",system-ui,sans-serif;font-weight:600;font-size:23px;letter-spacing:-.02em}
+.c-lya .claim span{color:var(--lya-old)}
+.swatches{display:flex;gap:6px}
+.sw{width:18px;height:18px;border-radius:50%;border:1px solid rgba(0,0,0,.12)}
+.comp-body{padding:16px 20px 20px;display:grid;gap:12px;font-size:14.5px;line-height:1.5}
+.comp-body dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.comp-body dd{margin:0}
+.comp-body dl{margin:0;display:grid;gap:12px}
+
+/* matriz */
+.scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-top:20px}
+table.matrix{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}
+.matrix th,.matrix td{padding:11px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.matrix thead th{font-weight:600;font-size:13px;background:var(--surface-2);position:sticky;top:0}
+.matrix thead th.lya{color:var(--navy)}
+.matrix td.lya{background:color-mix(in srgb,var(--navy-tint) 55%,transparent)}
+.matrix tbody tr:last-child td,.matrix tbody tr:last-child th{border-bottom:0}
+.matrix tbody th{font-weight:500;width:26%}
+.matrix tr.gap th{color:var(--danger)}
+.cell{display:flex;gap:8px;align-items:flex-start}
+.cell small{color:var(--muted);font-size:12.5px;line-height:1.4}
+.matrix td > small{display:block;color:var(--ink);font-size:13px;line-height:1.5;min-width:180px}
+.dot{flex:none;width:12px;height:12px;border-radius:50%;margin-top:4px;border:1.5px solid var(--ink)}
+.dot.f{background:var(--ink)}
+.dot.h{background:linear-gradient(90deg,var(--ink) 50%,transparent 50%)}
+.dot.n{background:transparent}
+.dot.q{border-style:dashed;border-color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;color:var(--muted);margin-top:12px}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.legend .dot{margin-top:0}
+
+.learn{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:24px}
+.learn > div{background:var(--surface);padding:20px 22px;display:grid;gap:8px;align-content:start}
+.learn h4{font-size:16px;font-weight:600}
+.learn p{font-size:14.5px;color:var(--muted);line-height:1.55}
+.learn .so{font-size:14px;color:var(--ink);border-top:1px dashed var(--line);padding-top:10px;margin-top:4px}
+.learn .so b{color:var(--teal-ink);font-weight:600}
+
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:24px}
+.pillar{border-top:2px solid var(--ink);padding-top:14px;display:grid;gap:8px;align-content:start}
+.pillar .k{font-family:var(--f-mono);font-size:12px;color:var(--teal-ink)}
+.pillar h4{font-size:18px;font-weight:600}
+.pillar p{font-size:14.5px;color:var(--muted);line-height:1.55}
+
+/* ===== mockups ===== */
+.figure{margin-top:28px}
+.figcap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:10px}
+.frame{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.chrome{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.chrome i{width:10px;height:10px;border-radius:50%;background:var(--line);display:block}
+.chrome .url{flex:1;font-family:var(--f-mono);font-size:12px;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:3px 10px;max-width:340px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.btn{font:600 14px/1 var(--f-sans);padding:11px 16px;border-radius:8px;border:1px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;text-decoration:none}
+.btn.p{background:var(--btn);color:var(--on-btn)}
+.btn.g{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.btn.sm{font-size:12.5px;padding:7px 11px}
+
+/* site hero */
+.site{padding:0}
+.site-nav{display:flex;align-items:center;gap:24px;padding:16px 28px;border-bottom:1px solid var(--line);font-size:14px;flex-wrap:wrap}
+.site-nav .links{display:flex;gap:20px;color:var(--muted);flex:1;flex-wrap:wrap}
+.site-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:40px;padding:48px 28px 40px;align-items:center}
+@media (max-width:860px){.site-hero{grid-template-columns:minmax(0,1fr);padding:28px 18px}.site-nav{padding:14px 18px}}
+.site-hero h3{font-size:clamp(32px,4.2vw,52px);font-weight:600;letter-spacing:-.04em;line-height:1.04;margin:0}
+.site-hero h3 span{color:var(--teal-ink)}
+.site-hero .sub{font-size:17px;color:var(--muted);margin:18px 0 26px;max-width:44ch}
+.site-hero .ctas{display:flex;gap:10px;flex-wrap:wrap}
+.site-hero .fine{font-size:12.5px;color:var(--muted);margin-top:12px}
+.proof{display:flex;gap:28px;flex-wrap:wrap;padding:18px 28px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+.proof b{display:block;color:var(--ink);font-size:22px;letter-spacing:-.02em;font-weight:600}
+@media (max-width:860px){.proof{padding:16px 18px}}
+
+.livecard{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:10px;min-width:0}
+.livecard .top{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:6px;font:500 11.5px/1 var(--f-mono);padding:5px 9px;border-radius:999px;background:var(--teal-tint);color:var(--teal-ink);white-space:nowrap}
+.pill .d{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 1.6s infinite}
+.pill.red{background:var(--danger-tint);color:var(--danger)}
+.pill.red .d{background:var(--danger)}
+.lines{display:grid;gap:6px;font-size:13px}
+.ln{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;line-height:1.45}
+.ln .t{font-family:var(--f-mono);font-size:11px;color:var(--muted);padding-top:2px}
+.ln .who{font-weight:600;font-size:11.5px;color:var(--muted);margin-right:4px}
+mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12px;font-weight:500;padding:4px 9px;border-radius:999px;background:var(--navy-tint);color:var(--navy);white-space:nowrap}
+.chip.red{background:var(--danger-tint);color:var(--danger)}
+.chip.teal{background:var(--teal-tint);color:var(--teal-ink)}
+.chip.mono{font-family:var(--f-mono);font-size:11px}
+.new-in{animation:newin .5s ease-out}
+@keyframes newin{from{background:var(--hl)}to{background:transparent}}
+
+/* atendimento */
+.app{font-size:13px}
+.app-top{display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.app-top .pt{display:flex;align-items:center;gap:10px;min-width:0}
+.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--teal),#2450E6);color:#fff;display:grid;place-items:center;font-weight:600;font-size:12px;flex:none}
+.app-top .pt b{font-size:14px;display:block;line-height:1.2}
+.app-top .pt small{color:var(--muted);font-size:12px}
+.app-top .sp{flex:1}
+.timer{font-family:var(--f-mono);font-size:15px;font-weight:500}
+.app-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.55fr) minmax(0,1.1fr);background:var(--bg)}
+@media (max-width:1100px){.app-body{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.app-body .col.chat{grid-column:1/-1}}
+@media (max-width:700px){.app-body{grid-template-columns:minmax(0,1fr)}}
+.col{padding:14px;display:grid;gap:12px;align-content:start;min-width:0;border-right:1px solid var(--line)}
+.col:last-child{border-right:0}
+.col-h{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);font-weight:500}
+.col-h b{color:var(--ink);font-size:13px;font-weight:600}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:8px;min-width:0;transition:box-shadow .3s}
+.card.flash{box-shadow:0 0 0 2px var(--teal)}
+.card-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.card-h b{font-size:13px;font-weight:600}
+.card-h .ts{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);white-space:nowrap}
+.card.crit{border-color:var(--danger);box-shadow:0 0 0 3px var(--danger-tint)}
+.sa-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:520px){.sa-grid{grid-template-columns:minmax(0,1fr)}}
+.hyp{display:grid;gap:7px}
+.hyp-row{display:grid;grid-template-columns:minmax(0,1fr) 60px;gap:8px;align-items:center;font-size:12.5px}
+.bar{height:6px;border-radius:3px;background:var(--surface-2);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--navy);border-radius:3px}
+.ev{font-family:var(--f-mono);font-size:10.5px;color:var(--teal-ink);text-decoration:underline dotted;text-underline-offset:2px}
+.qs{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:12.5px}
+.qs li{display:grid;grid-template-columns:14px minmax(0,1fr);gap:8px;align-items:start}
+.qs .c{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--line);margin-top:3px}
+.qs .c.ok{background:var(--teal-ink);border-color:var(--teal-ink)}
+.qs .done{color:var(--muted);text-decoration:line-through}
+.lab{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:4px 10px;font-size:12.5px;align-items:center}
+.lab .v{font-family:var(--f-mono);font-size:12px}
+.flag{font-family:var(--f-mono);font-size:10.5px;padding:1px 6px;border-radius:4px}
+.flag.lo{background:var(--warn-tint);color:var(--warn)}
+.flag.hi{background:var(--danger-tint);color:var(--danger)}
+.flag.nm{background:var(--surface-2);color:var(--muted)}
+.wave{display:flex;gap:2px;align-items:center;height:16px}
+.wave i{width:2px;border-radius:1px;background:var(--teal-ink);animation:wv 1s ease-in-out infinite}
+.wave i:nth-child(2){animation-delay:.15s}.wave i:nth-child(3){animation-delay:.3s}.wave i:nth-child(4){animation-delay:.45s}.wave i:nth-child(5){animation-delay:.6s}
+@keyframes wv{0%,100%{height:4px}50%{height:14px}}
+.transcript{display:grid;gap:9px;max-height:430px;overflow:auto;padding-right:4px}
+.transcript .ln{font-size:12.5px}
+
+.chatbox{display:grid;gap:10px}
+.msg{padding:10px 12px;border-radius:10px;font-size:12.5px;line-height:1.5}
+.msg.me{background:var(--navy-tint);color:var(--ink);justify-self:end;max-width:88%}
+.msg.ai{background:var(--surface);border:1px solid var(--line)}
+.msg.ai .cites{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.cite{font-family:var(--f-mono);font-size:10.5px;padding:2px 7px;border-radius:5px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.msg.ai .acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.sugg{display:flex;flex-wrap:wrap;gap:6px}
+.sugg span{font-size:12px;padding:5px 9px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.composer{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 10px}
+.composer .ph{flex:1;color:var(--muted);font-size:12.5px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ic{width:28px;height:28px;border-radius:7px;display:grid;place-items:center;border:1px solid var(--line);color:var(--muted);flex:none}
+.ic svg{width:15px;height:15px}
+.ic.send{background:var(--btn);border-color:var(--btn);color:var(--on-btn)}
+.app-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 16px;border-top:1px solid var(--line);flex-wrap:wrap;font-size:12px;color:var(--muted)}
+
+/* upload */
+.up{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.6fr);gap:0}
+@media (max-width:860px){.up{grid-template-columns:minmax(0,1fr)}}
+.up-left{padding:18px;border-right:1px solid var(--line);display:grid;gap:12px;align-content:start}
+.drop{border:1.5px dashed var(--line);border-radius:12px;padding:22px;text-align:center;display:grid;gap:6px;justify-items:center;background:var(--bg)}
+.drop b{font-size:14px}
+.drop small{color:var(--muted);font-size:12px}
+.file{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:12.5px}
+.file .fi{width:30px;height:36px;border-radius:5px;background:var(--surface-2);display:grid;place-items:center;font-family:var(--f-mono);font-size:9px;color:var(--muted)}
+.file b{display:block;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file small{color:var(--muted)}
+.prog{height:4px;border-radius:2px;background:var(--surface-2);margin-top:5px;overflow:hidden}
+.prog i{display:block;height:100%;width:62%;background:var(--teal-ink);animation:load 2.4s ease-in-out infinite alternate}
+@keyframes load{from{width:35%}to{width:82%}}
+.up-right{padding:18px;display:grid;gap:12px;align-content:start;min-width:0}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table.labs{border-collapse:collapse;width:100%;min-width:520px;font-size:12.5px}
+.labs th,.labs td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+.labs th{font-weight:500;color:var(--muted);font-size:11.5px;background:var(--surface-2)}
+.labs td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.labs tr:last-child td{border-bottom:0}
+.spark{display:block}
+
+/* studio */
+.studio{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}
+@media (max-width:860px){.studio{grid-template-columns:minmax(0,1fr)}}
+.st-left{padding:18px;border-right:1px solid var(--line);display:grid;gap:14px;align-content:start}
+.field{display:grid;gap:6px}
+.field label{font-size:12px;font-weight:600}
+.field .hint{font-size:11.5px;color:var(--muted)}
+.input{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface);font-size:13px;color:var(--ink);font-family:var(--f-sans)}
+.input.ta{font-family:var(--f-mono);font-size:12px;line-height:1.55;min-height:96px;white-space:pre-wrap}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;flex-wrap:wrap}
+.seg span{flex:1;text-align:center;font-size:12px;padding:7px 8px;color:var(--muted);border-right:1px solid var(--line);white-space:nowrap}
+.seg span:last-child{border-right:0}
+.seg span.on{background:var(--navy-tint);color:var(--navy);font-weight:600}
+.checks{display:flex;flex-wrap:wrap;gap:6px}
+.checks span{font-size:12px;padding:5px 9px;border-radius:6px;border:1px solid var(--line)}
+.checks span.on{border-color:var(--navy);color:var(--navy);background:var(--navy-tint)}
+.st-right{padding:18px;background:var(--bg);display:grid;gap:12px;align-content:start}
+.risk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.risk div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px;display:grid;gap:2px}
+.risk b{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.risk small{font-size:11px;color:var(--muted)}
+
+/* design system */
+.palette{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:20px}
+.swatch{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.swatch .c{height:64px}
+.swatch .i{padding:10px 12px;font-size:12.5px;display:grid;gap:2px}
+.swatch .i b{font-weight:600}
+.swatch .i span{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.type-spec{display:grid;gap:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-top:20px;overflow:hidden}
+.type-spec > div{display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:14px 18px;border-bottom:1px solid var(--line);align-items:baseline}
+.type-spec > div:last-child{border-bottom:0}
+.type-spec .lbl{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+@media (max-width:600px){.type-spec > div{grid-template-columns:minmax(0,1fr);gap:4px}}
+.comp-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:20px}
+.comp-list div{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--surface);font-size:13.5px;display:grid;gap:4px}
+.comp-list b{font-weight:600}
+.comp-list span{color:var(--muted);font-size:12.5px;line-height:1.45}
+.comp-list .new{font-family:var(--f-mono);font-size:10.5px;color:var(--teal-ink)}
+
+/* sitemap */
+.steps{counter-reset:st;list-style:none;margin:20px 0 0;padding:0;display:grid;gap:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.steps li{counter-increment:st;display:grid;grid-template-columns:48px minmax(0,1fr);gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.steps li:last-child{border-bottom:0}
+.steps li::before{content:counter(st,decimal-leading-zero);font-family:var(--f-mono);font-size:12px;color:var(--teal-ink);padding-top:3px}
+.steps b{font-weight:600}
+.steps p{font-size:14px;color:var(--muted);line-height:1.5;margin-top:2px}
+
+/* roadmap */
+.road{display:grid;gap:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden;margin-top:20px}
+.road > div{display:grid;grid-template-columns:150px 110px minmax(0,1fr);gap:16px;padding:16px 18px;border-bottom:1px solid var(--line);font-size:14px;line-height:1.5}
+.road > div:last-child{border-bottom:0}
+.road .ph{font-weight:600}
+.road .wk{font-family:var(--f-mono);font-size:12.5px;color:var(--muted)}
+.road ul{margin:0;padding-left:18px;display:grid;gap:3px;color:var(--ink)}
+.road .why{color:var(--muted);font-size:13px;margin-top:6px}
+@media (max-width:700px){.road > div{grid-template-columns:minmax(0,1fr);gap:4px}}
+.gantt{display:grid;grid-template-columns:150px repeat(16,minmax(0,1fr));gap:3px 0;margin-top:16px;font-size:12px;align-items:center}
+.gantt .lb{color:var(--muted);padding-right:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gantt .hd{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);text-align:center}
+.gantt .b{height:14px;border-radius:4px;background:var(--navy)}
+.gantt .b.t{background:var(--teal-ink)}
+.gantt .b.s{background:var(--muted)}
+.gwrap{overflow-x:auto}
+.gwrap .gantt{min-width:640px}
+
+table.metrics{border-collapse:collapse;width:100%;min-width:620px;font-size:14px}
+.metrics th,.metrics td{padding:11px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.metrics thead th{background:var(--surface-2);font-weight:600;font-size:13px}
+.metrics tbody tr:last-child td{border-bottom:0}
+
+.decisions{display:grid;gap:12px;margin-top:20px}
+.decision{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.decision .q{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--navy);color:var(--navy);display:grid;place-items:center;font:600 12px var(--f-mono)}
+.decision h4{font-size:15.5px;font-weight:600;margin-bottom:4px}
+.decision p{font-size:14px;color:var(--muted);line-height:1.5}
+.decision p b{color:var(--ink);font-weight:500}
+
+footer.end{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:var(--muted);display:grid;gap:6px}
+
+/* logos, decisões do protótipo e recorte do atendimento */
+.brand .logo{height:24px;width:auto;max-width:none}
+.brand .logo.dk{display:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .brand .logo.lt{display:none}:root:not([data-theme="light"]) .brand .logo.dk{display:block}}
+:root[data-theme="dark"] .brand .logo.lt{display:none}
+:root[data-theme="dark"] .brand .logo.dk{display:block}
+.tag.ok{color:var(--ok);border-color:currentColor;background:var(--teal-tint)}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:20px}
+.dcard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:8px;align-content:start}
+.dcard .tag{justify-self:start}
+.dcard h4{font-size:15.5px;font-weight:600}
+.dcard p{font-size:14px;color:var(--muted);line-height:1.5}
+.sws{display:flex;gap:6px}
+.sws i{width:22px;height:22px;border-radius:6px;border:1px solid var(--line)}
+.cmock{font-size:13px}
+.cm-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--line)}
+.cm-head .sp{flex:1}
+.cm-pt small{display:block;color:var(--muted);font-size:12px}
+.cm-tabs{display:flex;gap:4px;padding:8px 12px 0;border-bottom:1px solid var(--line);overflow-x:auto}
+.cm-tabs span{padding:8px 12px;color:var(--muted);white-space:nowrap;display:inline-flex;gap:6px;align-items:center}
+.cm-tabs span.on{color:var(--ink);font-weight:600;box-shadow:inset 0 -2px 0 var(--btn)}
+.ldot{width:7px;height:7px;border-radius:50%;background:var(--teal);display:inline-block}
+.cm-body{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:14px;padding:14px;background:var(--bg)}
+@media (max-width:860px){.cm-body{grid-template-columns:minmax(0,1fr)}}
+.cm-main{display:grid;gap:12px;min-width:0}
+.cm-side{display:grid;gap:10px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px}
+.badge{min-width:20px;height:20px;border-radius:999px;background:var(--btn);color:var(--on-btn);font:600 11px var(--f-mono);display:inline-grid;place-items:center;padding:0 6px}
+.lcm{border-radius:10px;padding:10px;display:grid;gap:3px;font-size:12.5px}
+.lcm span{color:var(--muted)}
+.lcm.c{background:var(--danger-tint);border:1px solid var(--danger)}.lcm.c b{color:var(--danger)}
+.lcm.w{background:var(--warn-tint)}.lcm.w b{color:var(--warn)}
+.abcde{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+@media (max-width:600px){.abcde{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.abcde div{border:1px solid var(--line);border-radius:8px;padding:6px 8px;display:grid;gap:1px;background:var(--surface)}
+.abcde div.hit{border-color:var(--danger);background:var(--danger-tint)}
+.abcde b{font-size:15px}.abcde div.hit b{color:var(--danger)}
+.abcde span{font-size:11.5px;font-weight:600}.abcde small{font-size:11px;color:var(--muted)}
+</style>
+
+<div class="shell">
+  <nav class="toc" aria-label="Sumário">
+    <div class="brand"><img class="logo lt" src="assets/lya-logo.png" alt="Lya Health" height="24"><img class="logo dk" src="assets/lya-logo-branco.png" alt="Lya Health" height="24"><span class="muted small" style="font-weight:400">Redesign</span></div>
+    <ol>
+      <li><a href="#resumo">Resumo</a></li>
+      <li><a href="#decisoes">Decisões do protótipo</a></li>
+      <li><a href="#hoje">A Lya hoje</a></li>
+      <li><a href="#benchmark">Concorrentes</a></li>
+      <li><a href="#matriz">Matriz de recursos</a></li>
+      <li><a href="#dentro">Produto por dentro</a></li>
+      <li><a href="#consultareal">Atendimento real</a></li>
+      <li><a href="#aprendizados">O que aprendemos</a></li>
+      <li><a href="#conceito">Conceito</a></li>
+      <li><a href="#site">Site novo</a></li>
+      <li><a href="#consulta">Tela de atendimento</a></li>
+      <li><a href="#chat">Fale com a Lya</a></li>
+      <li><a href="#exames">Upload de exames</a></li>
+      <li><a href="#studio">Prompt Studio</a></li>
+      <li><a href="#ds">Design system</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+      <li><a href="#metricas">Métricas e decisões</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="cover">
+      <div class="eyebrow">CTC · Lya Health · Benchmark e proposta de redesign · Outubro 2026</div>
+      <h1><span class="live-dot" aria-hidden="true"></span>Lya ao vivo</h1>
+      <p class="lede">Um redesign do site e do produto que coloca no centro o que só a Lya faz: mostrar o atendimento sendo entendido enquanto ela acontece, no nível de detalhe que cada médico e cada hospital configura.</p>
+      <div class="meta">
+        <span><b>Escopo</b> site lyahealth.com.br e tela de atendimento</span>
+        <span><b>Benchmarks</b> Heidi, Telepatia, Voa</span>
+        <span><b>Coleta</b> sites públicos e áreas logadas de Lya, Voa e Telepatia em 26/10/2026</span>
+        <span><b>Protótipo</b> <a href="https://claude.ai/artifact/LJdk2XHdSbZD8nmqcvrj92" target="_blank" rel="noopener">Lya Protótipo</a> · atualizado com atendimento real</span>
+      </div>
+    </header>
+
+    <!-- 01 -->
+    <section class="s" id="resumo">
+      <div class="s-head"><span class="s-num">01</span><h2>Resumo</h2></div>
+      <div class="prose">
+        <p>Os três concorrentes convergiram para a mesma promessa (o prontuário se escreve sozinho) e para a mesma estética: fundos creme, títulos em serifa, tom acolhedor. Também convergiram em produto: os três têm um <b>chat clínico</b> como porta de entrada, e a Voa já conversa com <b>exames do paciente</b>. São exatamente os dois gaps da Lya.</p>
+        <p>A Lya tem um ativo que nenhum deles mostra com a mesma força: <b>Prompts que se atualizam durante o atendimento</b> e que o próprio cliente monta, com prompt, fonte e formato de saída. Hoje esse diferencial aparece no site como uma lista de cards estáticos e um print pequeno.</p>
+        <p>A proposta é um reposicionamento visual em torno de “ao vivo”: uma identidade de instrumento clínico (precisa, fria, orientada a dados, com tempo real como sinal visual), um site que demonstra o atendimento acontecendo, e três adições ao produto que fecham os gaps sem copiar os concorrentes: <b>Fale com a Lya</b> (chat que já conhece o atendimento em curso), <b>Exames</b> (upload com extração estruturada que alimenta chat e Prompts) e a evolução do <b>criador de Prompts</b>, que já é o mais granular da categoria e merece aparecer no site e na demo.</p>
+        <p>A visita às áreas logadas confirmou a tese: nem Voa nem Telepatia mostram informação estruturada durante a gravação, e nenhuma das duas transforma exame em dado. O que elas fazem melhor que a Lya hoje é ter o chat ao lado do atendimento e um documento final mais limpo.</p>
+        <p>As decisões foram levadas a um <b>protótipo navegável</b> com todas as telas da Lya, nas visões B2B e B2C, e testadas contra um atendimento real gravado no produto. A próxima seção resume o que ficou decidido.</p>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="v">3 de 3</div><div class="l">concorrentes com chat clínico como recurso central</div></div>
+        <div class="kpi"><div class="v">0 de 2</div><div class="l">concorrentes testados por dentro que transformam exame em dado estruturado (Voa guarda como arquivo; Telepatia não tem upload)</div></div>
+        <div class="kpi"><div class="v">0 de 3</div><div class="l">concorrentes que deixam o médico criar módulos próprios de visualização ao vivo</div></div>
+        <div class="kpi"><div class="v">16 sem.</div><div class="l">roadmap proposto, do design system ao upload de exames em produção</div></div>
+      </div>
+    </section>
+
+    <!-- decisões do protótipo -->
+    <section class="s" id="decisoes">
+      <div class="s-head"><span class="s-num">02</span><h2>Decisões do protótipo</h2></div>
+      <div class="prose">
+        <p>Depois do benchmark, construímos um protótipo navegável com todas as telas da Lya e o validamos contra o produto real, uma referência visual interna e um atendimento gravado na conta B2C. As decisões abaixo já estão no protótipo e substituem o que esta proposta dizia antes sobre os mesmos pontos.</p>
+        <p><a class="btn p" href="https://claude.ai/artifact/LJdk2XHdSbZD8nmqcvrj92" target="_blank" rel="noopener">Abrir o protótipo da Lya</a></p>
+      </div>
+      <div class="dgrid">
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Paleta: azul para ação, lilás para o que está ao vivo</h4><div class="sws"><i style="background:#2450E6"></i><i style="background:#7C5CFA"></i><i style="background:#087A5D"></i><i style="background:#9A5B00"></i><i style="background:#B8302A"></i><i style="background:#0C1A2C"></i><i style="background:#F3F5F9"></i></div><p>Azul <span class="mono">#2450E6</span> em botões e seleção. Lilás <span class="mono">#7C5CFA</span> (botões em <span class="mono">#6E4FE0</span>) no que acontece agora: “Iniciar atendimento”, gravação, onda de áudio, card recém-atualizado. Verde fica só para sucesso (enviado, respondido, sincronizado). Âmbar e vermelho só para alerta clínico.</p></div>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Logos da Lya e menu recolhido</h4><p>Menu em barra de ícones de 68 px, com o símbolo da Lya no topo e “Novo atendimento” logo abaixo. Abre com um clique (ou a tecla <span class="mono">[</span>) e mostra o logo completo. A escolha fica salva.</p></div>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Atendimento em uma tela só</h4><p>Ao vivo → gerando o relatório → antes de enviar → enviado, sem trocar de página. Durante a gravação, só <b>Em tempo real · Dados Clínicos · Transcrição</b>. Relatório e Prescrição aparecem ao gerar o relatório.</p></div>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Relatório, Prescrição e documentos por perfil</h4><p>“Gerar relatório” cria duas abas automáticas: <b>Relatório</b> e <b>Prescrição</b>, com o ícone da Memed, já montada pela Lya para emitir. O botão “Criar” adiciona os complementares a partir do relatório: atestado, solicitação de exames, encaminhamento, orientações ao paciente, parecer técnico, relatório técnico, relatório para convênio, relatório de auditoria e declaração de comparecimento. Cada perfil libera quais pode usar, em Perfis › Documentos do atendimento.</p></div>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Dados Clínicos em grupos fixos</h4><p>Não sabemos o que cada cliente envia, então a Lya encaixa cada dado recebido num grupo fixo, em duas áreas: <b>Ficha do paciente</b> e <b>Dados cirúrgicos</b>. Cada grupo tem um formato de exibição; grupo sem dados não aparece; o que não for reconhecido vai para “Outros dados recebidos”. No topo, um resumo com alergia, diagnóstico, medicação e exames alterados. Sem integração, os grupos mostram o que foi digitado, dito no atendimento ou respondido no questionário.</p></div>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Ficha do paciente no nome</h4><p>A alergia saiu do cabeçalho. O nome abre a ficha com nascimento, peso, altura, IMC, convênio e os dados que a Memed exige (CPF e telefone), cada um com a origem: prontuário, digitado ou captado na fala.</p></div>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Visão B2C para o médico particular</h4><p>Início com o uso do plano, upgrade no menu, tela de planos (Gratuito, Unlimited, Institucional), pacientes com cadastro e “Assinar e finalizar” no lugar do envio ao prontuário.</p></div>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Cadastro com questionário pré-atendimento</h4><p>Começa em Pacientes: dados mínimos, questionário sugerido pelo motivo do atendimento e envio por WhatsApp, e-mail, tablet ou durante o atendimento. O paciente responde no celular e as respostas entram em Dados Clínicos e nos Prompts.</p></div>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Governança B2B visível</h4><p>“Ver como” para simular cada perfil, as 64 permissões reais e mais 6 propostas, marcação de permissões sensíveis, mapa de acesso e trilha de auditoria. O criador de Prompt vira uma tela com seis decisões e prévia ao vivo.</p></div>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Telemedicina com a aba da chamada compartilhada</h4><p>Hoje a Lya trata Telemedicina como uma opção na janela de início, com o mesmo passo de microfone do presencial: nada garante que a Lya ouça o paciente. No novo fluxo, ao escolher Telemedicina, “Iniciar atendimento” vira <b>“Compartilhar e iniciar”</b> e abre três passos: <b>onde está a chamada</b> (Google Meet, Zoom, Microsoft Teams, WhatsApp Web ou outra), <b>qual aba compartilhar</b> (com aviso se a aba não for a da chamada) e <b>compartilhar o áudio da aba</b>, com teste de dois medidores, “Você” e “Paciente”. Só a aba escolhida é compartilhada e o vídeo não é gravado.</p>
+         <p>Durante o atendimento, o cabeçalho mostra as duas fontes de áudio no lugar do microfone. Se o compartilhamento cair, aparece <b>“Paciente sem áudio · Compartilhar”</b> em vermelho, que retoma sem perder o atendimento; início, queda e retomada entram no registro de controle.</p></div>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Novos nomes: Agentes e Prompts</h4><p>“Assistentes” passam a se chamar <b>Agentes</b> e “Smart Apps” passam a se chamar <b>Prompts</b> em toda a plataforma: menu, telas, permissões, filtros e respostas da Ajuda. O agente é o que o médico escolhe ao iniciar (especialidade ou setor); os prompts são as funções de IA que o agente executa no atendimento e no relatório. A Lya oferece agentes prontos, que podem ser usados ou copiados e ajustados.</p></div>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Uma porta “Lya”, dois modos: Clínico e Ajuda</h4><p>O chat clínico (<b>Fale com a Lya</b>, antes “Pergunte à Lya”) e o chatbot de ajuda da plataforma passam a ter <b>uma só entrada</b>, com dois modos separados que não se misturam. Motivo: o clínico usa dados do paciente e protocolos; a Ajuda usa a documentação e abre chamados para o time de suporte, que <b>não podem levar dados de paciente</b>. Cada um fica registrado no seu lugar (atendimento ou Suporte).</p>
+         <p><b>Onde aparece.</b> O Fale com a Lya fica só onde há paciente ou contexto clínico: painel lateral fixo no atendimento e no relatório; campo de pergunta em Iniciar atendimento; botão “Lya” em Pacientes, ficha e Atendimentos. Nas telas administrativas (Prompts, Agentes, Calculadoras, Perfis, Auditoria, Configurações, Minha conta, Faturamento) o botão “Lya” abre direto na <b>Ajuda</b>. O ícone <b>?</b> do topo abre a Ajuda em qualquer tela, inclusive no atendimento, sem fechar o painel clínico.</p>
+         <p><b>Como se conversam.</b> Pergunta de plataforma feita no modo Clínico (“como gero a receita?”, “abrir chamado”) recebe a indicação e o botão “Ir para a Ajuda”, e o contrário também. Ao entrar na Ajuda o contexto do paciente sai, com o aviso “Sem dados de pacientes aqui”. Atalhos da Ajuda: Transcrição e atendimento, Prompts, Agentes, Documentos e Prescrição, Conta e Acesso, Planos e Pagamentos. Quando a resposta não resolve, “Abrir chamado” vem preenchido com o resumo da conversa, a tela e a versão, e o chamado aparece em Suporte.</p></div>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Pausar e continuar o atendimento</h4><p>“Pausar” para o cronômetro e a escuta, mostra o selo “Pausado” e uma faixa explicando que nada está sendo ouvido. Prompts e relatório ficam como estão; “Continuar” retoma de onde parou.</p></div>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Início simples, focado no atendimento</h4><p>A Lya não agenda atendimentos: o paciente chega pelo atendimento aberto no sistema do hospital. A tela inicial tem uma coluna: o paciente em espera com “Iniciar atendimento”, as Novidades da Lya e o campo “Fale com a Lya”. Sem agenda, sem lista de pendências e sem tela de tarefas. Sem atendimento aberto, o cartão diz “Comece um novo atendimento” e oferece “Novo atendimento” e “Cadastrar paciente”.</p></div>
+        <div class="dcard"><span class="tag ok">Decidido</span><h4>Novidades, identidade e ajuda</h4><p>Carrossel “Novidades da Lya” na Home, ligado por organização e ocultável. Logo da instituição no menu, nas configurações e nos documentos. “Ajuda” abre a documentação em produtos-ctc.gitbook.io/lya_health.</p></div>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section class="s" id="hoje">
+      <div class="s-head"><span class="s-num">03</span><h2>A Lya hoje</h2></div>
+      <div class="prose">
+        <p>Navegamos em lyahealth.com.br (Home, Produto, Preços), no app logado (app.lyahealth.com.br, organização de testes) e lemos o código do site neste repositório. O site é construído sobre um template de painel administrativo (Elstar, React + Tailwind), com a paleta <span class="mono">lya</span> centrada em <span class="mono">#1E5EFF</span> e a fonte Inter.</p>
+        <p><b>O que funciona:</b> a promessa “insights em tempo real” já está no título; há depoimentos institucionais fortes (Moinhos de Vento, Dr. On-line); a página de Produto explica Prompts, perfis por especialidade, prompts próprios e integrações; o preço é claro (Gratuito com 10 atendimentos, Unlimited a R$ 199/mês por usuário).</p>
+      </div>
+      <div class="issues">
+        <div class="issue"><span class="tag crit">Crítico</span><h4>O diferencial não aparece em movimento</h4><p>“Tempo real” é dito, nunca mostrado. O hero tem um print estático do produto e o modal de sumário. Os concorrentes mostram a nota se formando (Telepatia: “Transcrevendo ao vivo 00:04”).</p></div>
+        <div class="issue"><span class="tag crit">Crítico</span><h4>Duas marcas em paralelo</h4><p>O site usa azul elétrico <span class="mono">#1E5EFF</span>; a tela de atendimento no design system da Lya usa navy CTC <span class="mono">#004694</span> e teal <span class="mono">#00CDCD</span>. O médico que sai do site e entra no produto troca de identidade.</p></div>
+        <div class="issue"><span class="tag high">Alto</span><h4>Erro de digitação no título da página</h4><p>“Insigths” aparece no <span class="mono">&lt;title&gt;</span> e no texto do hero. Afeta SEO e credibilidade com público médico.</p></div>
+        <div class="issue"><span class="tag high">Alto</span><h4>Referência científica inconsistente</h4><p>O card “Tethered to the EHR” cita autores e periódico de outro artigo (o estudo é de Arndt et al., Annals of Family Medicine, 2017). Em saúde, citação errada derruba confiança.</p></div>
+        <div class="issue"><span class="tag high">Alto</span><h4>Sem seção de segurança e regulação</h4><p>Voa e Telepatia dedicam blocos a LGPD, HIPAA e à Resolução CFM 2.454/2026. A Lya só tem a política de privacidade no rodapé.</p></div>
+        <div class="issue"><span class="tag med">Médio</span><h4>Aparência de template</h4><p>Cards genéricos com ícone + título + texto, carrossel de logos “1 2 3”, números sem fonte (“até 40%”). Nada na página é específico da Lya.</p></div>
+        <div class="issue"><span class="tag med">Médio</span><h4>Sem chat e sem exames</h4><p>Os dois gaps de produto também são gaps de narrativa: o site não tem onde mostrar a Lya respondendo a uma pergunta ou lendo um laudo.</p></div>
+        <div class="issue"><span class="tag high">Alto</span><h4>No app, os Prompts começam recolhidos</h4><p>Na tela de atendimento, Alergias, Hipóteses, Check-list e Sugestões abrem como acordeões fechados. O diferencial ao vivo fica escondido atrás de um clique.</p></div>
+        <div class="issue"><span class="tag med">Médio</span><h4>Relatório cheio de “Sem informação”</h4><p>O relatório clínico mostra todas as seções fixas mesmo vazias. Em atendimentos curtos, a maior parte da tela é “Sem informação.”, o que esconde o que importa.</p></div>
+        <div class="issue"><span class="tag med">Médio</span><h4>Studio poderoso, pouco visível</h4><p>O criador de Prompts já tem tipo, momento, formato, entradas, agentes e Playground. Nada disso aparece no site, e no app os cards usam emoji como ícone, o que o próprio design system proíbe.</p></div>
+        <div class="issue"><span class="tag med">Médio</span><h4>Prova social subutilizada</h4><p>“96% de aprovação” e “19 de 20 casos complexos” estão escondidos no fim da página, em texto corrido. São os melhores números da página.</p></div>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section class="s" id="benchmark">
+      <div class="s-head"><span class="s-num">04</span><h2>Concorrentes</h2></div>
+      <div class="prose">
+        <p>Cada card abaixo reproduz o tom visual de cada site (paleta aproximada, tipo de letra e frase de abertura) para facilitar a comparação lado a lado. As áreas logadas não foram acessadas; tudo o que está aqui vem das páginas públicas.</p>
+      </div>
+      <div class="comp-grid">
+        <article class="comp">
+          <div class="comp-hero c-heidi">
+            <div class="name"><span>Heidi · heidihealth.com</span><span class="swatches"><i class="sw" style="background:#FBF6EF"></i><i class="sw" style="background:#2B0A18"></i><i class="sw" style="background:#F7EE7C"></i></span></div>
+            <div class="claim"><em>Relief</em> in every visit</div>
+          </div>
+          <div class="comp-body"><dl>
+            <div><dt>Posicionamento</dt><dd>“AI Care Partner”: plataforma completa para o clínico e para a instituição. Global, foco em escala (contador de atendimentos da semana no hero).</dd></div>
+            <div><dt>Produto visível</dt><dd>Scribe, Dictate, Evidence (perguntas com fontes), “Remote” com microfone de lapela para rounds, tarefas pós-atendimento (cartas, códigos, CDI, follow-up), integrações com prontuários.</dd></div>
+            <div><dt>Linguagem visual</dt><dd>Creme quente, berinjela escura, amarelo-manteiga nos CTAs, display em serifa com itálico, fotografia desfocada. Hero é uma caixa de chat com atalhos (Look up, Research, Treat, Explain).</dd></div>
+            <div><dt>O que levar</dt><dd>Chat como ponto de entrada; ações rápidas como chips; página por produto com uma promessa por tela.</dd></div>
+          </dl></div>
+        </article>
+
+        <article class="comp">
+          <div class="comp-hero c-tele">
+            <div class="name"><span>Telepatia · telepatia.ai</span><span class="swatches"><i class="sw" style="background:#F3F1E8"></i><i class="sw" style="background:#0F4D33"></i><i class="sw" style="background:#1A1A16"></i></span></div>
+            <div class="claim">O seu prontuário é escrito enquanto você atende</div>
+          </div>
+          <div class="comp-body"><dl>
+            <div><dt>Posicionamento</dt><dd>IA médica para a América Latina, forte em instituições: integra com os principais prontuários hospitalares, audita 100% das notas, CDSS que segue os protocolos da instituição. Individual a USD 99/mês.</dd></div>
+            <div><dt>Produto visível</dt><dd>IA Escriba, IA CDSS (interações, alergias, doses, com fonte e aceitar/rejeitar), Telepatia Intelligence (agente que também escuta o atendimento). App Scribe com login simples e prévia do assistente no cadastro.</dd></div>
+            <div><dt>Linguagem visual</dt><dd>Off-white, verde-floresta, serifa no display, foto real de consultório em tom escuro. Muito espaço, pouco texto, sobriedade institucional.</dd></div>
+            <div><dt>O que levar</dt><dd>Bloco de segurança objetivo (“nunca treina um modelo”); números de impacto clínico; tela de login que já demonstra o produto.</dd></div>
+          </dl></div>
+        </article>
+
+        <article class="comp">
+          <div class="comp-hero c-voa">
+            <div class="name"><span>Voa · voa.health</span><span class="swatches"><i class="sw" style="background:#FFFFFF"></i><i class="sw" style="background:#111111"></i><i class="sw" style="background:#7A3EE0"></i></span></div>
+            <div class="claim">Você decide. A Voa <span>executa</span>.</div>
+          </div>
+          <div class="comp-body"><dl>
+            <div><dt>Posicionamento</dt><dd>Incumbente B2C no Brasil: 60.765+ médicos, plano Free com 10 atendimentos e 10 tarefas do Charcot. Expande para o consultório inteiro (Voa Ultra: WhatsApp, agenda, pagamentos).</dd></div>
+            <div><dt>Produto visível</dt><dd>Documentação em modelos próprios; Charcot, agente nomeado que consulta prontuários, exames e conversas, pesquisa com referências, gera receita assinada (VIDaaS), LME, SP/SADT e apoio a TISS/glosa.</dd></div>
+            <div><dt>Linguagem visual</dt><dd>Branco, preto, roxo como acento, serifa no display. Screenshot real do produto (menu lateral com Chat, Atendimentos, Pacientes, Modelos, Base de Conhecimento). Números grandes de uso.</dd></div>
+            <div><dt>O que levar</dt><dd>Nomear o agente; mostrar o produto real; FAQ regulatório (CFM 2.454/2026) com nota técnica.</dd></div>
+          </dl></div>
+        </article>
+
+        <article class="comp">
+          <div class="comp-hero c-lya">
+            <div class="name"><span>Lya · lyahealth.com.br (atual)</span><span class="swatches"><i class="sw" style="background:#FFFFFF"></i><i class="sw" style="background:#1E5EFF"></i><i class="sw" style="background:#EDF5FF"></i></span></div>
+            <div class="claim">Transforme seus atendimentos de saúde com o poder da <span>IA</span></div>
+          </div>
+          <div class="comp-body"><dl>
+            <div><dt>Posicionamento</dt><dd>IA para consultas com sumarização e insights em tempo real; B2B (hospitais, operadoras, telemedicina) e profissional individual. Respaldo da CTC, 30 anos em missão crítica em saúde.</dd></div>
+            <div><dt>Produto visível</dt><dd>Captura e transcrição em tempo real, sumarizador por tipo de atendimento, histórico do paciente, Prompts (Queixa principal, Hipóteses, Sugestão de perguntas, Análise multidimensional, Estratificação de risco), perfis por especialidade, prompts próprios, dashboard, integrações.</dd></div>
+            <div><dt>Linguagem visual</dt><dd>Template SaaS genérico: azul elétrico, gradiente claro, ilustração de laptop, cards com ícone.</dd></div>
+            <div><dt>Onde ganha</dt><dd>Granularidade (o médico define o que ver, como e quando) e informação durante o atendimento, não só depois.</dd></div>
+          </dl></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section class="s" id="matriz">
+      <div class="s-head"><span class="s-num">05</span><h2>Matriz de recursos</h2></div>
+      <div class="prose"><p>Lya, Voa e Telepatia foram avaliadas por dentro, com contas logadas (Voa em trial, Telepatia em plano pessoal). A Heidi foi avaliada só pelo site público; onde ele não deixa claro, a célula fica marcada como não verificada em vez de presumida.</p></div>
+      <div class="scroll-x">
+        <table class="matrix">
+          <thead><tr><th>Recurso</th><th class="lya">Lya</th><th>Heidi</th><th>Telepatia</th><th>Voa</th></tr></thead>
+          <tbody>
+            <tr><th>Transcrição em tempo real</th>
+              <td class="lya"><div class="cell"><i class="dot f"></i><small>Captura e transcrição ao vivo</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>Scribe e Dictate</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>“Transcrevendo ao vivo”</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>Transcrição PT-BR, até 3h</small></div></td></tr>
+            <tr><th>Insights exibidos durante o atendimento</th>
+              <td class="lya"><div class="cell"><i class="dot f"></i><small>Prompts de tempo real como cards (hoje começam recolhidos)</small></div></td>
+              <td><div class="cell"><i class="dot h"></i><small>Foco na nota; Evidence sob demanda</small></div></td>
+              <td><div class="cell"><i class="dot h"></i><small>Só o chat Tele ao lado; a nota sai no fim</small></div></td>
+              <td><div class="cell"><i class="dot h"></i><small>Só cronômetro e transcrição; documentos gerados ao finalizar</small></div></td></tr>
+            <tr><th>Módulos criados pelo cliente (prompt, fonte, formato)</th>
+              <td class="lya"><div class="cell"><i class="dot f"></i><small>119 Prompts na org; momento, formato, entradas, agentes e Playground</small></div></td>
+              <td><div class="cell"><i class="dot h"></i><small>Templates de nota</small></div></td>
+              <td><div class="cell"><i class="dot h"></i><small>Modelos e “Memórias” de estilo ensinadas pelo chat</small></div></td>
+              <td><div class="cell"><i class="dot h"></i><small>~50 modelos por especialidade e prompts salvos</small></div></td></tr>
+            <tr class="gap"><th>Chat com IA clínica</th>
+              <td class="lya"><div class="cell"><i class="dot n"></i><small>Gap (o botão flutuante é chat de suporte)</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>“Ask Heidi anything” no hero</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>Tele ao lado do atendimento; edita a nota e tira dúvidas</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>Charcot: tela própria e janela flutuante, esforço e voz</small></div></td></tr>
+            <tr class="gap"><th>Upload e leitura de exames</th>
+              <td class="lya"><div class="cell"><i class="dot n"></i><small>Gap (nenhuma entrada de exames nos Prompts)</small></div></td>
+              <td><div class="cell"><i class="dot q"></i><small>Não verificado no site</small></div></td>
+              <td><div class="cell"><i class="dot n"></i><small>Sem upload no plano pessoal</small></div></td>
+              <td><div class="cell"><i class="dot h"></i><small>Arquivos na ficha e anexo no chat; sem extração de valores visível</small></div></td></tr>
+            <tr><th>Apoio à decisão com fonte citada</th>
+              <td class="lya"><div class="cell"><i class="dot h"></i><small>Hipóteses e perguntas; fonte não exibida</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>Evidence</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>CDSS com fonte, aceitar ou rejeitar</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>Síntese com referências</small></div></td></tr>
+            <tr><th>Integração com prontuário</th>
+              <td class="lya"><div class="cell"><i class="dot h"></i><small>APIs e interoperabilidade CTC</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>Integrações e enterprise</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>Principais prontuários hospitalares</small></div></td>
+              <td><div class="cell"><i class="dot h"></i><small>WhatsApp, agenda, TISS</small></div></td></tr>
+            <tr><th>Documentos pós-atendimento e assinatura</th>
+              <td class="lya"><div class="cell"><i class="dot h"></i><small>Relatório, prescrição, atestado e encaminhamento; botão Integrar</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>Cartas, códigos, follow-up</small></div></td>
+              <td><div class="cell"><i class="dot h"></i><small>Plano com doses, CID-10</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>Receita assinada VIDaaS, LME, SP/SADT</small></div></td></tr>
+            <tr><th>Comunicação de segurança e regulação</th>
+              <td class="lya"><div class="cell"><i class="dot h"></i><small>Só política de privacidade</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>Página de segurança</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>LGPD, HIPAA, ficha de segurança</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>CFM 2.454/2026, LGPD, HIPAA</small></div></td></tr>
+            <tr><th>Indicadores e gestão</th>
+              <td class="lya"><div class="cell"><i class="dot f"></i><small>Dashboard de métricas do negócio</small></div></td>
+              <td><div class="cell"><i class="dot h"></i><small>Enterprise</small></div></td>
+              <td><div class="cell"><i class="dot f"></i><small>Auditoria e medição por médico</small></div></td>
+              <td><div class="cell"><i class="dot h"></i><small>Análises via Charcot</small></div></td></tr>
+            <tr><th>Entrada e preço</th>
+              <td class="lya"><div class="cell"><small>Gratuito 10 atendimentos; R$ 199/mês</small></div></td>
+              <td><div class="cell"><small>Plano gratuito</small></div></td>
+              <td><div class="cell"><small>USD 99/mês individual</small></div></td>
+              <td><div class="cell"><small>Free 10 atendimentos + 10 tarefas; Pro e Ultra</small></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <span><i class="dot f"></i>Completo e comunicado</span>
+        <span><i class="dot h"></i>Parcial</span>
+        <span><i class="dot n"></i>Ausente</span>
+        <span><i class="dot q"></i>Não verificado</span>
+      </div>
+    </section>
+
+    <!-- produto por dentro -->
+    <section class="s" id="dentro">
+      <div class="s-head"><span class="s-num">06</span><h2>Produto por dentro</h2></div>
+      <div class="prose">
+        <p>Entramos logados nos três produtos e percorremos o mesmo caminho em cada um: tela inicial, atendimento, chat, arquivos, personalização e documento final. Nenhum atendimento foi gravado e nenhum dado de paciente foi usado nesta página.</p>
+      </div>
+      <div class="scroll-x">
+        <table class="matrix">
+          <thead><tr><th>Momento</th><th class="lya">Lya</th><th>Voa</th><th>Telepatia</th></tr></thead>
+          <tbody>
+            <tr><th>Primeira tela</th>
+              <td class="lya"><small>Card “Iniciar atendimento” com seletor de agente, atalhos e últimos atendimentos. Menu longo, voltado a hospital (Conta, Integração, Cirurgia, Relatórios).</small></td>
+              <td><small>“Iniciar Atendimento” e “Perguntar ao Charcot” lado a lado, agenda da semana e novidades. Banners promocionais e modais de onboarding em sequência.</small></td>
+              <td><small>Uma ação só: habilitar o microfone. Tipo (presencial ou telemedicina), modelo e paciente no topo; chat Tele já aberto à direita.</small></td></tr>
+            <tr><th>Durante o atendimento</th>
+              <td class="lya"><small>Três áreas: transcrição, paciente e notas à esquerda; Prompts em acordeões fechados no centro; “Gerar Relatório Clínico” flutuante.</small></td>
+              <td><small>Editor de documentos com abas por modelo (contexto, especialidade, anamnese, +novo). Barra inferior com pausa, cronômetro e transcrição em popover pesquisável.</small></td>
+              <td><small>Tela limpa de gravação; o valor aparece no documento depois. Chat disponível o tempo todo.</small></td></tr>
+            <tr><th>Chat clínico</th>
+              <td class="lya"><small>Não existe. O botão flutuante abre suporte.</small></td>
+              <td><small>Charcot com tela própria e janela flutuante sobre o atendimento; nível de esforço (Baixo, Alto, Máximo), voz, anexo, base de conhecimento e atalhos por tema. Conversas ficam ligadas ao atendimento.</small></td>
+              <td><small>Tele fixo ao lado do atendimento e flutuante no documento. Serve para perguntas e para editar a nota (“Editar com IA” ou com voz, aceitar ou reverter).</small></td></tr>
+            <tr><th>Exames e arquivos</th>
+              <td class="lya"><small>Sem upload. Prompts recebem transcrição, notas, integração, dados do paciente, descrição cirúrgica e outros Prompts.</small></td>
+              <td><small>Arquivos na ficha do paciente (arrastar e soltar) e anexo no chat e no contexto do atendimento. O arquivo aparece como item; não vimos valores extraídos.</small></td>
+              <td><small>Sem upload no plano pessoal. A seção “Resultados laboratoriais e exames” do documento vem do que foi falado.</small></td></tr>
+            <tr><th>Ficha do paciente</th>
+              <td class="lya"><small>Busca por nome, setor, ID externo e código de aviso: pensada para hospital.</small></td>
+              <td><small>Resumo gerado com data e botão Atualizar, medicações em uso, comorbidades agrupadas por capítulo do CID com o trecho de origem, arquivos, próximos passos e linha do tempo.</small></td>
+              <td><small>Dados cadastrais básicos ligados aos atendimentos.</small></td></tr>
+            <tr><th>Personalização</th>
+              <td class="lya"><small>O mais completo dos três: Prompt ou Agente; momento (tempo real, relatório, documento, estático); formato (texto, tag, checklist); entradas; visibilidade; duplicar; Playground antes de salvar.</small></td>
+              <td><small>Cerca de 50 modelos de documento por especialidade com contador de uso, mais biblioteca de prompts para o Charcot.</small></td>
+              <td><small>Modelos e “Memórias”: instruções permanentes de estilo que o médico ensina conversando com o Tele.</small></td></tr>
+            <tr><th>Documento final</th>
+              <td class="lya"><small>Gaveta com relatório, prescrição, atestado e encaminhamento; Integrar, Copiar, imprimir, baixar. Seções vazias aparecem como “Sem informação.”.</small></td>
+              <td><small>Documento editável por aba com Assinar e imprimir, Melhorar com o Charcot e Gerar novamente.</small></td>
+              <td><small>Seções colapsáveis, CID-10 em chips, avaliação do resultado e carimbo automático “revisado, editado e validado por” com nome e horário.</small></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>O que isso muda na proposta</h3>
+      <div class="learn">
+        <div><h4>Ao vivo é território livre</h4><p>Nenhum dos dois concorrentes mostra informação estruturada durante a gravação. A Lya já tem o mecanismo; falta abrir os cards por padrão e sinalizar o que acabou de chegar.</p><p class="so"><b>Ajuste:</b> Prompts de tempo real abertos, com estado vazio informativo, em vez de acordeões fechados (seção 09).</p></div>
+        <div><h4>O chat precisa morar no atendimento</h4><p>Voa e Telepatia colocam o chat ao lado do atendimento e ligam a conversa a ele. Telepatia ainda usa o chat para ensinar estilo.</p><p class="so"><b>Ajuste:</b> Fale com a Lya também cria “preferências” que viram instrução de Prompt (seção 10).</p></div>
+        <div><h4>Exame estruturado continua sem dono</h4><p>A Voa guarda o arquivo; a Telepatia não recebe. A extração com referência e tendência segue como diferencial real.</p><p class="so"><b>Ajuste:</b> “Exames” entra como nova fonte no criador de Prompts que já existe (seção 11).</p></div>
+        <div><h4>O Studio já existe</h4><p>O criador de Prompts da Lya é mais granular que os modelos da Voa e as memórias da Telepatia, mas fica escondido em Ferramentas de IA e o Playground é um passo separado.</p><p class="so"><b>Ajuste:</b> a seção 12 deixa de ser feature nova e vira evolução do criador atual.</p></div>
+        <div><h4>Carimbo de validação</h4><p>A Telepatia assina o documento com quem revisou e quando. É uma resposta direta à Resolução CFM 2.454/2026.</p><p class="so"><b>Ajuste:</b> relatório da Lya ganha o carimbo e esconde seções sem informação.</p></div>
+        <div><h4>Menos interrupção</h4><p>Na Voa, três modais e dois banners aparecem antes de chegar ao chat. A Telepatia tem uma ação por tela.</p><p class="so"><b>Ajuste:</b> onboarding da Lya em uma dica por vez, dentro da própria tela, como o tour do criador de Prompts já faz.</p></div>
+      </div>
+    </section>
+
+    <!-- atendimento real -->
+    <section class="s" id="consultareal">
+      <div class="s-head"><span class="s-num">07</span><h2>Atendimento real na Lya B2C</h2></div>
+      <div class="prose"><p>Gravamos um atendimento simulado de dermatologia na conta B2C de teste (plano Gratuito, sem integração), do início ao relatório. Foi o teste que mais mudou o protótipo.</p></div>
+      <div class="scroll-x">
+        <table class="metrics">
+          <thead><tr><th>Etapa</th><th>O que a Lya fez</th><th>O que mudou no protótipo</th></tr></thead>
+          <tbody>
+            <tr><td>Dados do paciente</td><td>Captou nome, nascimento, peso e altura pela fala, sem integração. A data veio de um trecho mal ouvido (“um do set de 1995”) e foi gravada sem confirmação.</td><td>Ficha no nome com origem de cada dado (“Captado 00:02”) e botão Confirmar.</td></tr>
+            <tr><td>Transcrição</td><td>Parágrafo único, sem falantes e sem tempo. Erros de termo médico: “herese”, “vercril”, “gás”.</td><td>Uma linha por fala com tempo e falante; termos corrigidos pelo vocabulário médico ficam sublinhados.</td></tr>
+            <tr><td>Relatório</td><td>Completo e bem estruturado, mas com “Sem informação.” nas seções vazias e o erro “vercril” copiado da transcrição.</td><td>Seções vazias saem do documento e viram uma linha que pode ser aberta.</td></tr>
+            <tr><td>Hipóteses e alertas</td><td>Hipóteses vazias para lesão pigmentada de 2 cm, perda de 15 kg e pai com câncer de pele.</td><td>Card ABCDE em tempo real, aviso em “Sugestões da Lya” e pendência em “Antes de enviar” quando as hipóteses ficam vazias.</td></tr>
+            <tr><td>Parecer médico</td><td>Texto coerente, com frases de sistema como “Impressão clínica não mencionada”.</td><td>Parecer só com o que foi tratado, sem frases sobre o que faltou.</td></tr>
+            <tr><td>Prescrição (Memed)</td><td>Formulário obrigatório de CPF e telefone que Esc e clique fora não fecham; depois de cancelar, a tela fica em branco.</td><td>CPF e telefone pedidos no cadastro e na ficha; a receita avisa o que falta sem bloquear.</td></tr>
+            <tr><td>Plano gratuito</td><td>“O período de teste acabou!” ao lado de “Você ainda possui 39 atendimentos”, com barra de 0 a 10 cheia.</td><td>Uso do plano coerente (atendimentos usados de um limite) e tela de planos clara.</td></tr>
+            <tr><td>Pacientes</td><td>Não há cadastro de paciente no B2C; a busca mostra filtros de hospital (setor, ID externo, código de aviso).</td><td>Lista própria do B2C com “Novo paciente” e status do questionário.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section class="s" id="aprendizados">
+      <div class="s-head"><span class="s-num">08</span><h2>O que aprendemos</h2></div>
+      <div class="learn">
+        <div><h4>Todos ficaram parecidos</h4><p>Creme, serifa, fotografia quente. A categoria escolheu “acolhimento” como linguagem e ficou indistinguível.</p><p class="so"><b>Para a Lya:</b> diferenciar pela precisão. Visual de instrumento clínico, frio e legível, com o tempo real como único elemento vivo da tela.</p></div>
+        <div><h4>O chat virou a porta de entrada</h4><p>O hero da Heidi é uma caixa de chat; a Voa nomeou o agente (Charcot); a Telepatia mostra o assistente já na tela de login.</p><p class="so"><b>Para a Lya:</b> o nome já é uma persona. “Fale com a Lya” dispensa criar outro personagem e reforça a marca.</p></div>
+        <div><h4>O chat deles começa vazio</h4><p>Nos três, o agente responde perguntas; o contexto do atendimento entra quando o médico pede ou depois da transcrição.</p><p class="so"><b>Para a Lya:</b> chat que já sabe o que foi dito há 30 segundos, com citação do trecho da transcrição e do exame. Isso é coerente com o diferencial ao vivo.</p></div>
+        <div><h4>Exame é contexto, não arquivo</h4><p>A Voa trata exames como algo que o agente consulta. Ninguém mostra o exame virando dado estruturado na tela do atendimento.</p><p class="so"><b>Para a Lya:</b> upload que extrai analitos, compara com referência e histórico e acende os Prompts afetados.</p></div>
+        <div><h4>Confiança é seção obrigatória</h4><p>CFM 2.454/2026, LGPD e “não treinamos modelos com seus dados” aparecem acima da dobra do rodapé em Voa e Telepatia.</p><p class="so"><b>Para a Lya:</b> seção de segurança com a credencial CTC (30 anos em missão crítica) e nota técnica sobre a resolução.</p></div>
+        <div><h4>Mostrar o produto real vende</h4><p>Voa usa o screenshot real; Telepatia anima a nota se formando. Ilustração de laptop não comunica nada.</p><p class="so"><b>Para a Lya:</b> hero com a tela de atendimento animada em HTML, não imagem. Leve, nítida e editável.</p></div>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section class="s" id="conceito">
+      <div class="s-head"><span class="s-num">09</span><h2>Conceito: Lya ao vivo</h2></div>
+      <div class="prose">
+        <p>A frase que guia todas as decisões: <b>o atendimento acontece na tela enquanto o médico olha para o paciente.</b> Tudo o que a Lya mostra tem hora, origem e estado. Nada é mágico; tudo é rastreável até o trecho da conversa ou o exame que gerou.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><span class="k">Sinal ao vivo</span><h4>Lilás é tempo real</h4><p>O lilás passa a significar uma única coisa: informação que acabou de chegar. Ponto pulsando, onda de áudio, destaque que acende e apaga em 0,5 s. Nunca decorativo.</p></div>
+        <div class="pillar"><span class="k">Rastreabilidade</span><h4>Toda informação tem origem</h4><p>Cada hipótese, alergia ou valor de exame leva um carimbo (“04:12 transcrição”, “Hemograma 12/10”). Clicar leva ao trecho. Atende à lógica da CFM 2.454/2026: o médico revisa e decide.</p></div>
+        <div class="pillar"><span class="k">Granularidade</span><h4>O cliente monta a tela</h4><p>Prompts, perfis por especialidade e o novo Studio tornam visível o que hoje é configuração escondida. É o argumento de venda B2B mais forte da Lya.</p></div>
+        <div class="pillar"><span class="k">Calma</span><h4>Densidade sem ruído</h4><p>Fundo frio neutro, cards sem sombra pesada, tipografia com números tabulares, vermelho só para risco clínico. A tela pode ficar aberta 8 horas num plantão; por isso tem modo escuro.</p></div>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section class="s" id="site">
+      <div class="s-head"><span class="s-num">10</span><h2>Site novo</h2></div>
+      <div class="prose"><p>O hero troca a ilustração de laptop por um atendimento acontecendo. Abaixo, a prova social vira números legíveis. O azul elétrico de template sai e entra a paleta do protótipo, a mesma do produto: azul para ação e lilás para o que está ao vivo.</p></div>
+
+      <div class="figure">
+        <div class="frame site">
+          <div class="chrome"><i></i><i></i><i></i><span class="url">lyahealth.com.br</span></div>
+          <div class="site-nav">
+            <span style="display:flex;align-items:center;gap:8px;font-weight:600"><img src="assets/lya-simbolo.png" alt="" width="26" height="26" style="max-width:none">lya</span>
+            <span class="links"><span>Produto</span><span>Para hospitais</span><span>Para médicos</span><span>Segurança</span><span>Preços</span></span>
+            <span class="btn g sm">Entrar</span><span class="btn p sm">Testar grátis</span>
+          </div>
+          <div class="site-hero">
+            <div>
+              <span class="pill"><span class="d"></span>Inteligência durante o atendimento</span>
+              <h3 style="margin-top:16px">O paciente fala.<br>A Lya <span>organiza na hora.</span></h3>
+              <p class="sub">Hipóteses, alergias, exames e perguntas sugeridas aparecem na tela enquanto você atende. Cada informação mostra de onde veio. Você revisa e decide.</p>
+              <div class="ctas"><span class="btn p">Testar com 10 atendimentos grátis</span><span class="btn g">Falar com o time de hospitais</span></div>
+              <p class="fine">Sem cartão de crédito. Dados criptografados e tratados conforme a LGPD.</p>
+            </div>
+            <div class="livecard" aria-label="Demonstração do atendimento ao vivo">
+              <div class="top"><span class="pill"><span class="d"></span>Ouvindo · <span class="mono" id="heroTimer">03:41</span></span><span>Clínica geral</span></div>
+              <div class="lines" id="heroLines">
+                <div class="ln"><span class="t">03:12</span><span><span class="who">Paciente</span>Faz umas três semanas que sinto <mark>dor do lado esquerdo da barriga</mark>.</span></div>
+                <div class="ln"><span class="t">03:26</span><span><span class="who">Médico</span>Teve sangue nas fezes ou mudança no intestino?</span></div>
+                <div class="ln"><span class="t">03:35</span><span><span class="who">Paciente</span>Sim, <mark>diarreia com um pouco de sangue</mark>.</span></div>
+              </div>
+              <div class="chips" id="heroChips"><span class="chip">Dor abdominal · 3 sem</span><span class="chip">Diarreia com sangue</span><span class="chip red">Alergia: metoclopramida</span></div>
+            </div>
+          </div>
+          <div class="proof">
+            <span><b>96%</b>aprovação dos médicos, Hospital Moinhos de Vento</span>
+            <span><b>19 de 20</b>casos complexos com desempenho destacado, Dr. On-line</span>
+            <span><b>30 anos</b>de CTC em sistemas de missão crítica em saúde</span>
+          </div>
+        </div>
+        <div class="figcap"><span>Mockup do novo hero. A demonstração à direita é HTML animado, não imagem.</span><span class="mono">Desktop · tema segue o sistema</span></div>
+      </div>
+
+      <h3>Arquitetura da Home</h3>
+      <ol class="steps">
+        <li><div><b>Hero ao vivo</b><p>Promessa, demonstração animada do atendimento, dois CTAs (médico individual e hospital).</p></div></li>
+        <li><div><b>Prova</b><p>Logos de clientes estáticos (sem carrossel) e três números com fonte.</p></div></li>
+        <li><div><b>Como funciona em 3 momentos</b><p>Antes (histórico e exames), durante (Prompts e Fale com a Lya), depois (relatório e integração). Cada momento com um recorte real da interface.</p></div></li>
+        <li><div><b>Prompts</b><p>Galeria interativa: o visitante liga e desliga módulos e vê a tela de atendimento mudar. Fecha com “crie o seu” apontando para o Studio.</p></div></li>
+        <li><div><b>Por especialidade</b><p>Cardiologia, Pronto-socorro, Pediatria, UTI, Enfermagem, Nutrição: abas que trocam os Prompts padrão do perfil.</p></div></li>
+        <li><div><b>Para hospitais</b><p>Integração com prontuário, dashboard, governança de prompts, implantação com time CTC.</p></div></li>
+        <li><div><b>Segurança e regulação</b><p>LGPD, CFM 2.454/2026 (a Lya apoia, o médico decide), criptografia, política de não treinar modelos com dados de pacientes, link para nota técnica.</p></div></li>
+        <li><div><b>Evidência científica</b><p>Artigos com citação correta e resumo de uma linha. Revisar todas as referências atuais.</p></div></li>
+        <li><div><b>Preços e FAQ</b><p>Gratuito, Unlimited e Institucional, com perguntas sobre telemedicina, microfone, especialidades e dados.</p></div></li>
+      </ol>
+    </section>
+
+    <!-- 08 -->
+    <section class="s" id="consulta">
+      <div class="s-head"><span class="s-num">11</span><h2>Tela de atendimento</h2></div>
+      <div class="prose"><p>O atendimento acontece numa tela só, que muda de estado: ao vivo, gerando o relatório, antes de enviar e enviado. A primeira aba é <b>Em tempo real</b>, com os Prompts se preenchendo enquanto o paciente fala; o painel “Sugestões da Lya” traz avisos com a conclusão no título e a fonte sempre visível. O exemplo abaixo é o caso de dermatologia do atendimento real.</p></div>
+
+      <div class="figure">
+        <div class="frame cmock">
+          <div class="cm-head"><span class="avatar">FO</span><span class="cm-pt"><b>Fernando Oliveira ▾</b><small>31 anos · Particular · Dermatologia</small></span><span class="sp"></span><span class="pill"><span class="d"></span>Gravando</span><span class="timer">00:32</span><span class="btn g sm">Pausar</span><span class="btn g sm">Gerar relatório</span><span class="btn p sm">Encerrar atendimento</span></div>
+          <div class="cm-tabs"><span class="on">Em tempo real <i class="ldot"></i></span><span>Dados Clínicos</span><span>Transcrição</span></div>
+          <div class="cm-body">
+            <div class="cm-main">
+              <div class="card crit"><div class="card-h"><b>Sinais de alerta da lesão</b><span class="chip red mono">ATENÇÃO</span></div>
+                <div class="abcde"><div><b class="mono">A</b><span>Assimetria</span><small>não descrita</small></div><div class="hit"><b class="mono">B</b><span>Bordas</span><small>irregulares</small></div><div class="hit"><b class="mono">C</b><span>Cor</span><small>escura</small></div><div class="hit"><b class="mono">D</b><span>Diâmetro</span><small>≈ 20 mm</small></div><div class="hit"><b class="mono">E</b><span>Evolução</span><small>cresceu · questionário</small></div></div>
+                <span class="small">4 de 5 critérios · pai com câncer de pele · melanoma no diagnóstico diferencial</span><span class="ev">00:17 transcrição · questionário 25/10</span></div>
+              <div class="sa-grid">
+                <div class="card"><div class="card-h"><b>Queixa principal</b><span class="ts">00:12</span></div><div class="chips"><span class="chip">Lesão pigmentada no antebraço</span><span class="chip">Perda de 15 kg</span></div></div>
+                <div class="card"><div class="card-h"><b>Hipóteses diagnósticas</b><span class="ts">00:19</span></div><div class="hyp"><div class="hyp-row"><span>Lesão melanocítica <span class="mono muted">D48.5</span></span><span class="bar"><i style="width:70%"></i></span></div><div class="hyp-row"><span>Melanoma (diferencial) <span class="mono muted">C43.6</span></span><span class="bar"><i style="width:55%"></i></span></div></div></div>
+              </div>
+            </div>
+            <div class="cm-side"><b>Sugestões da Lya <span class="badge">2</span></b>
+              <div class="lcm c"><b>Lesão pigmentada com sinais de alerta</b><span>Com pai com câncer de pele, considere melanoma no diagnóstico diferencial.</span><span class="ev">00:17 · 00:26</span></div>
+              <div class="lcm w"><b>Perda de 15 kg sem causa definida</b><span>Perda involuntária acima de 5% merece investigação.</span><span class="ev">00:08</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="figcap"><span>Recorte estático da tela do protótipo. No protótipo o atendimento corre em tempo simulado.</span><span class="mono">Abas ao vivo: Em tempo real · Dados Clínicos · Transcrição</span></div>
+      </div>
+
+      <h3>Regras da tela</h3>
+      <div class="prose"><ul>
+        <li><b>Pausar e continuar.</b> O médico pausa a escuta quando precisa (exame físico, conversa fora do caso). O cronômetro para, aparece o selo “Pausado” e nada é gravado até continuar.</li>
+        <li><b>Documentos depois do relatório.</b> Relatório e Prescrição nascem juntos ao clicar em “Gerar relatório”. Os complementares entram pelo botão “Criar”, só os liberados para o perfil, cada um numa aba que pode ser removida.</li>
+        <li><b>Em tempo real primeiro.</b> O atendimento abre nos Prompts, todos abertos, com estado vazio que diz o que falta.</li>
+        <li><b>Origem em tudo.</b> Card, aviso e dado do paciente mostram de onde vieram: minuto da transcrição, integração, questionário ou digitado.</li>
+        <li><b>Antes de enviar.</b> Pendências aparecem em amarelo no relatório e no painel, cada uma com uma ação. “Assinar e enviar” só libera quando tudo está resolvido.</li>
+        <li><b>Relatório limpo.</b> Seções vazias saem do documento; o parecer não descreve o que não foi tratado. O rodapé leva “Revisado e validado por” com nome, registro e horário.</li>
+        <li><b>Transcrição legível.</b> Uma linha por fala, com tempo e falante, e termos médicos corrigidos sublinhados.</li>
+        <li><b>Vermelho só para risco.</b> Alergia crítica, gravação e sinais de alerta clínico. Valores alterados de exame usam âmbar e vermelho apenas no selo.</li>
+      </ul></div>
+      <h3>Dados Clínicos: estrutura de agrupamento</h3>
+      <div class="prose"><p>Cada cliente manda dados num formato diferente, e não sabemos de antemão o que vai chegar. Por isso a aba não depende do formato de origem: a integração classifica cada item recebido num grupo fixo, organizado como a ficha do paciente e os dados cirúrgicos. A tela segue sempre a mesma ordem, o médico aprende uma vez e encontra a informação no mesmo lugar em qualquer hospital.</p></div>
+      <div class="scroll-x">
+        <table class="metrics">
+          <thead><tr><th>Área</th><th>Grupo</th><th>Formato na tela</th><th>Campos esperados</th></tr></thead>
+          <tbody>
+            <tr><td><b>Ficha do paciente</b></td><td>Alergias e alertas</td><td>Lista com destaque</td><td>Alergias, reações, alertas clínicos</td></tr>
+            <tr><td></td><td>Triagem e sinais vitais</td><td>Classificação e medidas</td><td>Classificação de risco, queixa, PA, FC, FR, temperatura, SpO₂, dor, peso</td></tr>
+            <tr><td></td><td>Diagnósticos e problemas</td><td>Lista com código</td><td>Diagnóstico, CID, data de início</td></tr>
+            <tr><td></td><td>Medicações em uso</td><td>Lista</td><td>Medicamento, dose, posologia, situação</td></tr>
+            <tr><td></td><td>Exames</td><td>Tabela</td><td>Exame, valor, unidade, referência, data</td></tr>
+            <tr><td></td><td>Atendimentos anteriores</td><td>Linha do tempo</td><td>Data, especialidade, profissional, resumo</td></tr>
+            <tr><td><b>Dados cirúrgicos</b></td><td>Procedimentos</td><td>Lista com papel e código</td><td>Procedimento, principal ou secundário, código</td></tr>
+            <tr><td></td><td>Equipe</td><td>Pessoas</td><td>Função, nome, registro (CRM, COREN)</td></tr>
+            <tr><td></td><td>Aviso cirúrgico</td><td>Chave e valor</td><td>Número, sala, data e hora, convênio</td></tr>
+            <tr><td></td><td>Materiais e OPME</td><td>Lista</td><td>Material, quantidade, fornecedor</td></tr>
+            <tr><td></td><td>Anestesia</td><td>Chave e valor</td><td>Tipo, ASA, observações</td></tr>
+            <tr><td><b>Outros dados recebidos</b></td><td>Sem grupo definido</td><td>Chave e valor</td><td>Tudo o que a integração enviar e não for reconhecido</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose"><ul>
+        <li><b>Grupo vazio não aparece.</b> A área diz quantos grupos têm dados (“3 de 5 grupos com dados”) e lista os que vieram vazios.</li>
+        <li><b>Nada se perde.</b> Campos não reconhecidos vão para “Outros dados recebidos”, e a equipe de implantação mapeia cada um para um grupo em Integração › Agrupamento dos dados.</li>
+        <li><b>Resumo no topo.</b> Alergia, diagnóstico, medicação e exames alterados aparecem antes dos grupos.</li>
+        <li><b>Seções que abrem e fecham.</b> Fechada, cada seção mostra uma linha de resumo; a área cirúrgica começa fechada fora de atendimentos cirúrgicos. O que o médico abre continua aberto enquanto o atendimento atualiza a tela.</li>
+        <li><b>Origem em cada grupo.</b> Sistema e horário de onde o dado veio (por exemplo, “Pronto-socorro · 09:12”).</li>
+      </ul></div>
+    </section>
+
+    <!-- 09 -->
+    <section class="s" id="chat">
+      <div class="s-head"><span class="s-num">12</span><h2>Fale com a Lya</h2></div>
+      <div class="prose">
+        <p>O chat fecha o primeiro gap. Ele abre num <b>painel lateral de altura inteira</b>, no padrão que os médicos já conhecem do ChatGPT, do Gemini e do Claude, a partir do botão “Fale com a Lya” em qualquer tela. No atendimento, recebe como contexto a transcrição até o segundo atual, os Prompts, os Dados Clínicos e os exames anexados; fora dela, responde com as fontes ligadas. O protótipo traz a aba “Ações e regras” com 14 ações especificadas para o desenvolvimento.</p>
+      </div>
+      <div class="learn">
+        <div><h4>Onde vive</h4><p>Painel lateral aberto pelo botão “Fale com a Lya” em qualquer tela, com tela cheia e histórico de conversas. A conversa nova começa com saudação e quatro sugestões que mudam conforme há ou não paciente em contexto.</p></div>
+        <div><h4>Campo de pergunta</h4><p>Campo grande e arredondado com “+” (anexar exame, prompts salvos, gerar documento), seletor de fontes, ditado por voz e enviar. Enter envia; a frase “A Lya pode errar” fica abaixo.</p></div>
+        <div><h4>Acesso</h4><p>A organização liga o recurso em Configurações › Atendimento e cada perfil precisa de “Usar Fale com a Lya”. Desligado, somem o botão, o menu e os atalhos dos avisos.</p></div>
+        <div><h4>Respostas com origem</h4><p>Toda resposta lista as fontes como chips: minuto da transcrição, exame com data, diretriz. Sem fonte, a resposta diz que é conhecimento geral.</p></div>
+        <div><h4>Ações, não só texto</h4><p>“Inserir no relatório”, “Pedir exames”, “Criar lembrete de retorno”. Inserir passa a “Incluído no relatório” e depois a “Atualizar no relatório”, como já define o design system.</p></div>
+        <div><h4>Sugestões que mudam</h4><p>Os chips acima do campo mudam com o atendimento: escores pertinentes, interações com a prescrição, “resumir até agora”.</p></div>
+        <div><h4>Voz</h4><p>Durante o atendimento o médico não digita. Fase 2: “Lya, qual a última creatinina?” falado, respondido na tela sem áudio.</p></div>
+        <div><h4>Preferências que viram Prompt</h4><p>Como as “Memórias” da Telepatia, o médico pode dizer “sempre escreva a conduta numerada”. Na Lya isso vira uma instrução salva no Prompt de relatório, visível e editável no criador.</p></div>
+        <div><h4>Limites claros</h4><p>Rodapé fixo: a Lya apoia, o médico decide. Respostas sobre dose e interação sempre com fonte e botão de reportar erro.</p></div>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="s" id="exames">
+      <div class="s-head"><span class="s-num">13</span><h2>Upload de exames</h2></div>
+      <div class="prose"><p>O segundo gap. O exame entra por três portas: arrastar no atendimento, clipe no chat ou importação do prontuário integrado. A Lya extrai cada analito, compara com a referência e com resultados anteriores, e acende os Prompts que dependem dele.</p></div>
+
+      <div class="figure">
+        <div class="frame">
+          <div class="up">
+            <div class="up-left">
+              <div class="drop">
+                <span class="ic" style="width:36px;height:36px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></svg></span>
+                <b>Solte aqui PDF, foto ou laudo</b>
+                <small>Hemograma, bioquímica, imagem, anatomopatológico · até 20 MB</small>
+              </div>
+              <div class="file"><span class="fi">PDF</span><span><b>Hemograma_12-10-2026.pdf</b><small>18 analitos extraídos · 3 alterados</small></span><span class="chip teal">Pronto</span></div>
+              <div class="file"><span class="fi">PDF</span><span><b>Colonoscopia_laudo.pdf</b><small>Lendo laudo descritivo…</small><span class="prog"><i></i></span></span><span class="chip mono">62%</span></div>
+              <div class="file"><span class="fi">JPG</span><span><b>foto_exame_whatsapp.jpg</b><small>Leitura com baixa confiança em 2 valores</small></span><span class="chip red">Revisar</span></div>
+            </div>
+            <div class="up-right">
+              <div class="card-h"><b>Hemograma · 12/10/2026</b><span class="btn g sm">Ver documento original</span></div>
+              <div class="tbl-wrap">
+                <table class="labs">
+                  <thead><tr><th>Analito</th><th>Resultado</th><th>Referência</th><th>Últimos 3</th><th>Status</th></tr></thead>
+                  <tbody>
+                    <tr><td>Hemoglobina</td><td class="n">10,9 g/dL</td><td class="n">13,5–17,5</td><td><svg class="spark" width="72" height="20" viewBox="0 0 72 20" aria-hidden="true"><polyline points="2,5 36,9 70,15" fill="none" stroke="var(--warn)" stroke-width="1.6"/><circle cx="70" cy="15" r="2.4" fill="var(--warn)"/></svg></td><td><span class="flag lo">↓ baixo</span></td></tr>
+                    <tr><td>Leucócitos</td><td class="n">11.200 /µL</td><td class="n">4.000–10.000</td><td><svg class="spark" width="72" height="20" viewBox="0 0 72 20" aria-hidden="true"><polyline points="2,13 36,11 70,6" fill="none" stroke="var(--danger)" stroke-width="1.6"/><circle cx="70" cy="6" r="2.4" fill="var(--danger)"/></svg></td><td><span class="flag hi">↑ alto</span></td></tr>
+                    <tr><td>Plaquetas</td><td class="n">402.000 /µL</td><td class="n">150.000–450.000</td><td><svg class="spark" width="72" height="20" viewBox="0 0 72 20" aria-hidden="true"><polyline points="2,12 36,10 70,9" fill="none" stroke="var(--muted)" stroke-width="1.6"/><circle cx="70" cy="9" r="2.4" fill="var(--muted)"/></svg></td><td><span class="flag nm">normal</span></td></tr>
+                    <tr><td>PCR</td><td class="n">38 mg/L</td><td class="n">&lt; 5</td><td><svg class="spark" width="72" height="20" viewBox="0 0 72 20" aria-hidden="true"><polyline points="2,16 36,12 70,3" fill="none" stroke="var(--danger)" stroke-width="1.6"/><circle cx="70" cy="3" r="2.4" fill="var(--danger)"/></svg></td><td><span class="flag hi">↑ alto</span></td></tr>
+                    <tr><td>Ferritina</td><td class="n">14 ng/mL</td><td class="n">30–400</td><td><svg class="spark" width="72" height="20" viewBox="0 0 72 20" aria-hidden="true"><polyline points="2,6 36,10 70,15" fill="none" stroke="var(--warn)" stroke-width="1.6"/><circle cx="70" cy="15" r="2.4" fill="var(--warn)"/></svg></td><td><span class="flag lo">↓ baixo</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout" style="padding:12px 14px">
+                <h4 style="font-size:13px">Atualizou 2 Prompts</h4>
+                <p class="small muted">Hipóteses diagnósticas (anemia ferropriva associada) e Exames. Disponível como contexto para Fale com a Lya.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="figcap"><span>Valores de exemplo. O sparkline mostra os três últimos resultados do mesmo analito.</span><span class="mono">Estados: pronto · lendo · revisar</span></div>
+      </div>
+
+      <h3>Regras de extração</h3>
+      <div class="prose"><ul>
+        <li><b>O original sempre a um clique.</b> Toda linha extraída aponta para a página e a região do PDF.</li>
+        <li><b>Confiança visível.</b> Leitura de foto com baixa confiança vira “Revisar” e não alimenta Prompts até o médico confirmar.</li>
+        <li><b>Unidades normalizadas</b> com a unidade original preservada no tooltip.</li>
+        <li><b>Laudo descritivo</b> (imagem, anatomopatológico) vira resumo de achados com trechos citados, não tabela.</li>
+        <li><b>Prompts podem declarar “Exames” como fonte</b> no Studio, o que conecta os dois gaps à granularidade da Lya.</li>
+      </ul></div>
+    </section>
+
+    <!-- 11 -->
+    <section class="s" id="studio">
+      <div class="s-head"><span class="s-num">14</span><h2>Prompt Studio</h2></div>
+      <div class="prose">
+        <p>Por dentro, descobrimos que a Lya já tem o mais granular criador de módulos da categoria: Prompt ou Agente; momento (tempo real, relatório, documento, estático); comportamento (texto, tag, checklist); entradas (transcrição, notas, integração, dados do paciente, descrição cirúrgica, outros Prompts); visibilidade; duplicação; tour guiado e Playground. São 119 Prompts só na organização de testes.</p>
+        <p>A proposta deixa de ser uma feature nova e passa a ser a evolução do criador atual em quatro pontos: <b>prévia ao vivo lado a lado</b> (hoje o Playground é um passo à parte), <b>“Exames” como nova entrada</b>, <b>formatos Indicadores e Tabela</b> além de texto, tag e checklist, e <b>histórico de versões</b> para o gestor. Também sai o emoji dos ícones, trocado pelo selo de ícone do design system.</p>
+      </div>
+
+      <div class="figure">
+        <div class="frame">
+          <div class="studio">
+            <div class="st-left">
+              <div class="card-h"><b>Novo Prompt</b><span class="chip mono">rascunho</span></div>
+              <div class="field"><label>Nome</label><div class="input">Risco cardiovascular</div></div>
+              <div class="field"><label>Onde aparece</label><div class="seg"><span class="on">Tempo real</span><span>Relatório</span><span>Documento</span><span>Estático</span></div></div>
+              <div class="field"><label>O que a Lya recebe</label><div class="checks"><span class="on">Transcrição</span><span class="on">Dados do paciente</span><span>Minhas anotações</span><span>Integração</span><span class="on">Exames · novo</span></div></div>
+              <div class="field"><label>Comportamento</label><div class="seg"><span>Texto</span><span>Tag</span><span>Checklist</span><span class="on">Indicadores · novo</span><span>Tabela · novo</span></div></div>
+              <div class="field"><label>Instrução</label><div class="input ta">Calcule o escore de risco cardiovascular em 10 anos com idade, sexo, PA, colesterol e tabagismo. Se faltar dado, liste qual falta. Cite a origem de cada valor.</div><span class="hint">A Lya sugere melhorias na instrução conforme o modelo escolhido.</span></div>
+              <div class="field"><label>Disponível para</label><div class="checks"><span class="on">Cardiologia</span><span class="on">Clínico geral</span><span>Pronto-socorro</span></div></div>
+            </div>
+            <div class="st-right">
+              <div class="col-h"><b>Prévia</b><span>atendimento de exemplo</span></div>
+              <div class="card">
+                <div class="card-h"><b>Risco cardiovascular</b><span class="ts">agora</span></div>
+                <div class="risk">
+                  <div><b>14,2%</b><small>risco em 10 anos</small></div>
+                  <div><b class="mono" style="font-size:17px">148/92</b><small>PA, 09:14</small></div>
+                  <div><b class="mono" style="font-size:17px">232</b><small>CT mg/dL, exame</small></div>
+                </div>
+                <p class="small muted">Falta: HDL. Pergunte ao paciente ou anexe o lipidograma.</p>
+                <div class="chips"><span class="ev">09:14 transcrição</span><span class="ev">Lipidograma 02/08</span></div>
+              </div>
+              <div class="callout" style="padding:12px 14px"><p class="small muted">Testar em 3 atendimentos reais anonimizados antes de publicar para a equipe. Histórico de versões e quem alterou ficam no painel do gestor.</p></div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="btn g sm">Testar em outro atendimento</span><span class="btn p sm">Publicar para a equipe</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="figcap"><span>Campos reais do criador atual; marcados como “novo” os que a proposta adiciona.</span><span class="mono">Prévia ao vivo substitui o Playground separado</span></div>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section class="s" id="ds">
+      <div class="s-head"><span class="s-num">15</span><h2>Design system</h2></div>
+      <div class="prose">
+        <p>Partimos do design system da tela de atendimento que já existe (vermelho reservado à segurança, sem emoji) e das decisões do protótipo: uma paleta única para site e produto, com <b>azul para ação</b> e <b>lilás só para o que está ao vivo</b> (o verde fica para sucesso); aposentar o azul de template <span class="mono">#1E5EFF</span>; e trocar Nunito + Montserrat por Geist com Geist Mono para dados. A navy e o teal da CTC deixam de ser cores de interface, e o design system da tela de atendimento precisa ser atualizado.</p>
+      </div>
+
+      <h3>Cor</h3>
+      <div class="palette">
+        <div class="swatch"><div class="c" style="background:#2450E6"></div><div class="i"><b>Azul ação</b><span>#2450E6</span><span>botões, seleção</span></div></div>
+        <div class="swatch"><div class="c" style="background:#1536A8"></div><div class="i"><b>Azul texto</b><span>#1536A8</span><span>links e itens ativos</span></div></div>
+        <div class="swatch"><div class="c" style="background:#7C5CFA"></div><div class="i"><b>Lilás ao vivo</b><span>#7C5CFA</span><span>só tempo real</span></div></div>
+        <div class="swatch"><div class="c" style="background:#6E4FE0"></div><div class="i"><b>Lilás botão</b><span>#6E4FE0</span><span>“Iniciar atendimento”, continuar</span></div></div>
+        <div class="swatch"><div class="c" style="background:#087A5D"></div><div class="i"><b>Verde sucesso</b><span>#087A5D</span><span>enviado, respondido</span></div></div>
+        <div class="swatch"><div class="c" style="background:#0C1A2C"></div><div class="i"><b>Tinta</b><span>#0C1A2C</span><span>texto e faixa escura</span></div></div>
+        <div class="swatch"><div class="c" style="background:#F3F5F9"></div><div class="i"><b>Papel</b><span>#F3F5F9</span><span>fundo neutro</span></div></div>
+        <div class="swatch"><div class="c" style="background:#B8302A"></div><div class="i"><b>Crítico</b><span>#B8302A</span><span>alergia, alerta</span></div></div>
+        <div class="swatch"><div class="c" style="background:#9A5B00"></div><div class="i"><b>Atenção</b><span>#9A5B00</span><span>pendência, valor alterado</span></div></div>
+      </div>
+
+      <h3>Tipografia</h3>
+      <div class="type-spec">
+        <div><span class="lbl">Display · Geist 600</span><span style="font-size:36px;font-weight:600;letter-spacing:-.04em;line-height:1.1">O paciente fala.</span></div>
+        <div><span class="lbl">Título · Geist 600 / 20</span><span style="font-size:20px;font-weight:600">Hipóteses diagnósticas</span></div>
+        <div><span class="lbl">Texto · Geist 400 / 15</span><span style="font-size:15px">Diarreia com sangue há três semanas, sem febre.</span></div>
+        <div><span class="lbl">Dados · Geist Mono 500</span><span class="mono" style="font-size:15px;font-weight:500">12:48 · K51.9 · 10,9 g/dL · 148/92</span></div>
+      </div>
+      <p class="small muted" style="margin-top:10px;max-width:68ch">A mono é o traço de personalidade: tempo, CID, valores e unidades sempre nela, com números tabulares. Concorrentes usam serifa para parecer acolhedores; a Lya usa a mono para parecer exata.</p>
+
+      <h3>Componentes</h3>
+      <div class="comp-list">
+        <div><b>LiveSignal</b><span>Ponto, onda e destaque de 0,5 s. Único uso do lilás ao vivo.</span><span class="new">novo</span></div>
+        <div><b>SourceStamp</b><span>Carimbo de origem clicável: minuto, exame ou diretriz.</span><span class="new">novo</span></div>
+        <div><b>PromptCard</b><span>Ganha estado “agora”, carimbo e variante crítica.</span><span class="new">revisado</span></div>
+        <div><b>TranscriptLine</b><span>Falante, minuto e grifo sincronizado com chips.</span><span class="new">revisado</span></div>
+        <div><b>ChatPanel</b><span>Mensagem com fontes, ações e sugestões contextuais.</span><span class="new">revisado</span></div>
+        <div><b>ExamUpload</b><span>Drop, fila com estados pronto, lendo e revisar.</span><span class="new">novo</span></div>
+        <div><b>LabTable</b><span>Analito, referência, tendência e selo de status.</span><span class="new">novo</span></div>
+        <div><b>StudioForm</b><span>Segmentos, fontes e prévia ao vivo do Prompt.</span><span class="new">novo</span></div>
+      </div>
+    </section>
+
+    <!-- 13 -->
+    <section class="s" id="roadmap">
+      <div class="s-head"><span class="s-num">16</span><h2>Roadmap</h2></div>
+      <div class="prose"><p>Ordem pensada para entregar valor visível cedo (site e correções), e deixar as features novas para quando a base de componentes estiver pronta.</p></div>
+      <div class="road">
+        <div><span class="ph">0 · Correções rápidas</span><span class="wk">sem. 1</span><div><ul><li>“Insigths” e referências científicas no site (já em PR)</li><li>Textos do plano gratuito: período de teste x saldo de atendimentos</li><li>Formulário da Memed que não fecha</li></ul></div></div>
+        <div><span class="ph">1 · Fundação</span><span class="wk">sem. 1–3</span><div><ul><li>Tokens da nova paleta (claro e plantão) e logos</li><li>Geist e Geist Mono; menu recolhível</li><li>Componentes base: LiveSignal, SourceStamp, ficha do paciente</li></ul></div></div>
+        <div><span class="ph">2 · Site novo</span><span class="wk">sem. 3–7</span><div><ul><li>Home com hero ao vivo, Produto, Para hospitais, Segurança, Preços com FAQ</li><li>Sair do template Elstar</li></ul></div></div>
+        <div><span class="ph">3 · Atendimento em uma tela</span><span class="wk">sem. 5–10</span><div><ul><li>Fases ao vivo → relatório → antes de enviar → envio</li><li>Abas Em tempo real, Dados Clínicos e Transcrição; Relatório e Prescrição (Memed) ao gerar o relatório</li><li>Documentos complementares liberados por perfil</li><li>Dados Clínicos em grupos fixos, com mapeamento na Integração</li><li>Transcrição com falantes, tempo e vocabulário médico; relatório e parecer limpos</li></ul></div></div>
+        <div><span class="ph">4 · Cadastro e B2C</span><span class="wk">sem. 7–11</span><div><ul><li>Novo paciente com questionário pré-atendimento e visão no celular</li><li>Início B2C, uso do plano e tela de planos</li><li>Dados da Memed no cadastro e na ficha</li></ul></div></div>
+        <div><span class="ph">5 · Fale com a Lya</span><span class="wk">sem. 8–12</span><div><ul><li>Chat ao lado do atendimento e tela própria, com fontes e ações</li></ul></div></div>
+        <div><span class="ph">6 · Exames</span><span class="wk">sem. 10–16</span><div><ul><li>Upload, extração e LabTable; “Exames” como fonte no criador</li></ul></div></div>
+        <div><span class="ph">7 · Criador e governança</span><span class="wk">sem. 12–16</span><div><ul><li>Criador de Prompt em uma tela com prévia</li><li>Mapa de acesso, auditoria e permissões propostas</li></ul></div></div>
+      </div>
+      <div class="gwrap">
+        <div class="gantt" aria-label="Cronograma em semanas">
+          <span></span>
+          <span class="hd">1</span><span class="hd">2</span><span class="hd">3</span><span class="hd">4</span><span class="hd">5</span><span class="hd">6</span><span class="hd">7</span><span class="hd">8</span><span class="hd">9</span><span class="hd">10</span><span class="hd">11</span><span class="hd">12</span><span class="hd">13</span><span class="hd">14</span><span class="hd">15</span><span class="hd">16</span>
+          <span class="lb">0 · Correções</span><span class="b s" style="grid-column:2/3"></span>
+          <span class="lb" style="grid-column:1">1 · Fundação</span><span class="b" style="grid-column:2/5"></span>
+          <span class="lb" style="grid-column:1">2 · Site</span><span class="b" style="grid-column:4/9"></span>
+          <span class="lb" style="grid-column:1">3 · Atendimento</span><span class="b t" style="grid-column:6/12"></span>
+          <span class="lb" style="grid-column:1">4 · Cadastro e B2C</span><span class="b t" style="grid-column:8/13"></span>
+          <span class="lb" style="grid-column:1">5 · Chat</span><span class="b t" style="grid-column:9/14"></span>
+          <span class="lb" style="grid-column:1">6 · Exames</span><span class="b t" style="grid-column:11/18"></span>
+          <span class="lb" style="grid-column:1">7 · Criador e governança</span><span class="b" style="grid-column:13/18"></span>
+        </div>
+      </div>
+      <p class="small muted" style="margin-top:8px">Lilás marca as entregas que fecham os gaps e as novas do protótipo. Estimativa para um squad com 1 designer, 2 front-end e 1 back-end/IA; ajustar após a fase 1.</p>
+    </section>
+
+    <!-- 14 -->
+    <section class="s" id="metricas">
+      <div class="s-head"><span class="s-num">17</span><h2>Métricas e decisões</h2></div>
+      <div class="scroll-x">
+        <table class="metrics">
+          <thead><tr><th>Métrica</th><th>Por que importa</th><th>Onde medir</th></tr></thead>
+          <tbody>
+            <tr><td>Visita → cadastro grátis</td><td>Mede se o hero ao vivo convence mais que o print atual</td><td>Site, teste A/B do hero</td></tr>
+            <tr><td>Cadastro → 1º atendimento em 24 h</td><td>Ativação; a tela de login pode demonstrar o produto, como na Telepatia</td><td>Produto</td></tr>
+            <tr><td>Atendimentos com Fale com a Lya usado</td><td>Adoção do primeiro gap fechado</td><td>Produto</td></tr>
+            <tr><td>Exames anexados por atendimento</td><td>Adoção do segundo gap; deve subir com a integração com prontuário</td><td>Produto</td></tr>
+            <tr><td>Cliques em carimbos de origem</td><td>Confiança: o médico está conferindo as sugestões</td><td>Produto</td></tr>
+            <tr><td>Prompts criados por conta institucional</td><td>Prova de que a granularidade é usada e vendida</td><td>Studio</td></tr>
+            <tr><td>Tempo do fim do atendimento ao relatório</td><td>Promessa central da categoria</td><td>Produto</td></tr>
+            <tr><td>Questionários respondidos antes do atendimento</td><td>Mede se o cadastro com questionário traz contexto de verdade</td><td>Pacientes</td></tr>
+            <tr><td>Pendências resolvidas antes do envio</td><td>Mostra se “Antes de enviar” evita relatórios incompletos</td><td>Atendimento</td></tr>
+            <tr><td>Dados da ficha confirmados pelo médico</td><td>Confiança na captura sem integração</td><td>Atendimento B2C</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Decisões para a equipe</h3>
+      <div class="decisions">
+        <div class="decision"><span class="q">1</span><div><h4>Qual paleta unifica site e produto?</h4><p><b>Decidido: azul #2450E6 para ação e lilás #7C5CFA para o que está ao vivo; verde só para sucesso.</b> Substitui as propostas anteriores de navy e teal e de verde ao vivo. Falta atualizar o design system da tela de atendimento.</p></div></div>
+        <div class="decision"><span class="q">2</span><div><h4>Reescrever o site fora do template Elstar?</h4><p><b>Recomendação: sim, na fase 2.</b> O repositório carrega dependências de painel (calendário, mapas, kanban, tabelas) que um site institucional não usa. Um site novo e enxuto melhora desempenho e SEO.</p></div></div>
+        <div class="decision"><span class="q">3</span><div><h4>Chat com nome próprio ou “Lya”?</h4><p><b>Decidido: “Fale com a Lya”.</b> A Voa precisou criar o Charcot; a Lya já é uma persona com nome. Um segundo nome dilui a marca.</p></div></div>
+        <div class="decision"><span class="q">4</span><div><h4>Exames: extração própria ou apenas contexto para o chat?</h4><p><b>Recomendação: extração estruturada.</b> Só contexto iguala a Voa; tabela com referência e tendência alimentando Prompts é o que conversa com o diferencial ao vivo.</p></div></div>
+        <div class="decision"><span class="q">5</span><div><h4>Modo plantão (escuro) já na fase 3?</h4><p><b>Recomendação: sim.</b> Os tokens já nascem com os dois temas; o custo marginal é baixo e é um argumento para UTI e pronto-socorro, onde a Lya tem perfis próprios.</p></div></div>
+        <div class="decision"><span class="q">6</span><div><h4>Quem responde o questionário pré-atendimento?</h4><p><b>Premissa do protótipo: o paciente</b>, por link no WhatsApp ou e-mail, ou no tablet da recepção. Confirmar se a recepção também precisa preencher em nome do paciente.</p></div></div>
+        <div class="decision"><span class="q">7</span><div><h4>Captura de dados pela fala sem confirmação?</h4><p><b>Recomendação: nunca gravar sem confirmar.</b> Na atendimento real, a data de nascimento veio de um trecho mal ouvido. A ficha mostra a origem de cada dado e pede confirmação.</p></div></div>
+      </div>
+    </section>
+
+    <footer class="end">
+      <span>Fontes: lyahealth.com.br (Home, Produto, Preços) e app.lyahealth.com.br (organização de testes), heidihealth.com (Home, Scribe), telepatia.ai (Home, Médicos) e scribe.telepatia.ai (conta pessoal), voa.health (Home, Preços) e app.voa.health (conta trial), código deste repositório e o design system “Lya Health Design System”. Coleta em 26/10/2026.</span>
+      <span>A Heidi foi vista só pelo site público. Recursos de planos pagos ou institucionais de Voa e Telepatia podem não ter aparecido nas contas usadas. Um atendimento simulado foi gravado na conta B2C de teste em 26/10. O protótipo também se inspirou num protótipo visual interno da Lya (canvas “Lya · Design de Produto”). Nomes de pacientes e profissionais nos mockups são fictícios.</span>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function pad(n){return (n<10?'0':'')+n}
+  function tick(el, start){
+    if(!el) return;
+    var s = start;
+    setInterval(function(){ s++; el.textContent = pad(Math.floor(s/60))+':'+pad(s%60); }, 1000);
+  }
+  if(reduce) return;
+  tick(document.getElementById('heroTimer'), 221);
+  tick(document.getElementById('appTimer'), 768);
+
+  // hero: novas falas e chips
+  var heroLines = document.getElementById('heroLines');
+  var heroChips = document.getElementById('heroChips');
+  var heroScript = [
+    {t:'03:44', who:'Médico', txt:'Alguma alergia a medicamento?'},
+    {t:'03:49', who:'Paciente', txt:'Tenho <mark>alergia à metoclopramida</mark>.'},
+    {t:'03:58', who:'Paciente', txt:'E <mark>perdi uns quatro quilos</mark>.', chip:'Perda de peso 4 kg'}
+  ];
+  var hi = 0;
+  setInterval(function(){
+    if(!heroLines) return;
+    var item = heroScript[hi % heroScript.length]; hi++;
+    var d = document.createElement('div'); d.className='ln new-in';
+    d.innerHTML = '<span class="t">'+item.t+'</span><span><span class="who">'+item.who+'</span>'+item.txt+'</span>';
+    heroLines.appendChild(d);
+    while(heroLines.children.length > 4) heroLines.removeChild(heroLines.firstElementChild);
+    if(item.chip && heroChips && heroChips.children.length < 5){
+      var c = document.createElement('span'); c.className='chip new-in'; c.textContent=item.chip; heroChips.insertBefore(c, heroChips.lastElementChild);
+    }
+  }, 3200);
+
+  // consulta: transcrição avança e acende Prompts
+  var tr = document.getElementById('transcript');
+  var script = [
+    {t:'12:02', who:'Médico', txt:'Teve febre ou dor que acorda à noite?', card:'saPerg'},
+    {t:'12:09', who:'Paciente', txt:'Febre não. Mas <mark>acordo com dor</mark> algumas noites.', card:'saQueixa', chip:'Dor noturna'},
+    {t:'12:20', who:'Médico', txt:'Usou algum antibiótico recentemente?', card:'saPerg'},
+    {t:'12:26', who:'Paciente', txt:'Não, nada.', card:'saHip'},
+    {t:'12:41', who:'Médico', txt:'Vou pedir alguns exames de fezes antes de mudar o tratamento.', card:'saExam'}
+  ];
+  var i = 0;
+  function flash(id){
+    var c = document.getElementById(id); if(!c) return;
+    c.classList.add('flash');
+    var ts = c.querySelector('[data-ts]'); if(ts) ts.textContent = 'agora';
+    setTimeout(function(){ c.classList.remove('flash'); }, 900);
+  }
+  setInterval(function(){
+    if(!tr) return;
+    var item = script[i % script.length]; i++;
+    var d = document.createElement('div'); d.className='ln new-in';
+    d.innerHTML = '<span class="t">'+item.t+'</span><span><span class="who">'+item.who+'</span>'+item.txt+'</span>';
+    tr.appendChild(d);
+    while(tr.children.length > 7) tr.removeChild(tr.firstElementChild);
+    tr.scrollTop = tr.scrollHeight;
+    flash(item.card);
+    if(item.chip){
+      var qc = document.getElementById('queixaChips');
+      if(qc && !qc.querySelector('[data-added]')){ var c = document.createElement('span'); c.className='chip new-in'; c.setAttribute('data-added','1'); c.textContent=item.chip; qc.appendChild(c); }
+    }
+    if(item.card==='saPerg'){
+      var open = document.querySelector('#saPerg .qs .c:not(.ok)');
+      if(open){ open.classList.add('ok'); open.nextElementSibling.classList.add('done'); }
+    }
+  }, 3600);
+})();
+</script>

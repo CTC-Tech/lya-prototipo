@@ -863,7 +863,17 @@ button.ev:hover{opacity:1;color:var(--navy);text-decoration:underline}
 .pdock{position:fixed;left:calc(var(--sbw,68px) + 14px);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:44;display:grid;gap:8px;justify-items:start}
 .pd-btn{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:999px;border:1px dashed color-mix(in srgb,var(--muted) 60%,transparent);background:var(--surface);color:var(--muted);font:500 12px var(--f-sans);cursor:pointer;opacity:.85}
 .pd-btn:hover,.pdock.open .pd-btn{opacity:1;color:var(--ink);border-style:solid}
-.pd-panel{width:260px;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:12px;display:grid;gap:10px}
+.pd-panel{width:340px;max-height:calc(100vh - 80px);overflow:auto;overscroll-behavior:contain;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px;display:grid;gap:2px;align-content:start;scrollbar-width:thin}
+.pd-sec{border-top:1px solid var(--line)}
+.pd-sec>summary{list-style:none;display:flex;align-items:center;gap:8px;padding:11px 2px;cursor:pointer;font:600 12px var(--f-sans);color:var(--ink);letter-spacing:.01em}
+.pd-sec>summary::-webkit-details-marker{display:none}
+.pd-sec>summary svg{margin-left:auto;transform:rotate(90deg);transition:transform .15s;color:var(--muted)}
+.pd-sec[open]>summary svg{transform:rotate(-90deg)}
+.pd-b{display:grid;gap:12px;padding:0 2px 12px}
+.pd-d{font-size:11px;line-height:1.35;color:var(--muted)}
+.pd-cur{display:inline-flex;align-items:center;gap:6px;font-weight:400;color:var(--muted);margin-left:auto}
+.pd-cur+svg{margin-left:6px!important}
+.pd-h{padding-bottom:10px}
 .pd-h{display:grid;gap:1px}.pd-h b{font-size:13px}
 .pd-f{display:grid;gap:4px;font-size:12px;color:var(--muted)}
 .pd-f select{height:32px;border:1px solid var(--line);border-radius:8px;padding:0 8px;background:var(--surface);color:var(--ink);font:13px var(--f-sans)}
@@ -878,6 +888,11 @@ button.ev:hover{opacity:1;color:var(--navy);text-decoration:underline}
  body.r-atendimento .cside,body.r-relatorio .cside{top:12px}
 }
 .umenu{position:fixed;z-index:60;width:240px}
+.iconbtn.tsize{display:flex;align-items:baseline;justify-content:center;gap:0;padding-top:6px;color:var(--muted)}
+.iconbtn.ulang{width:auto;padding:0 9px;display:flex;gap:5px;font:600 12px var(--f-sans);color:var(--muted)}
+.ul-h{padding:8px 10px 6px;font-size:12px;font-weight:600;color:var(--muted)}
+.ul-c{display:inline-grid;place-items:center;width:26px;height:20px;border-radius:6px;background:var(--surface-2);font:600 11px var(--f-sans);color:var(--navy)}
+.ul-f{margin:4px 0 0;padding:8px 10px 4px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted)}
 .um-h{display:flex;gap:10px;align-items:center;padding:8px 10px 10px;border-bottom:1px solid var(--line);margin-bottom:4px}
 .um-h span:last-child{display:grid}.um-h small{font-size:11.5px;color:var(--muted)}
 /* check-list: painel de altura fixa, próximo em destaque, pendentes rolam, concluídos recolhidos */
@@ -1382,13 +1397,38 @@ body.r-atendimento #c-side .chs .ch-body,body.r-relatorio #c-side .chs .ch-body{
 .pr-h{display:flex;align-items:center;justify-content:space-between;padding:4px 6px 4px 10px}
 .pr-o{display:grid;gap:2px;text-align:left;border:0;background:transparent;padding:8px 10px;border-radius:10px;cursor:pointer;font:inherit;color:var(--ink)}.pr-o:hover{background:var(--navy-tint)}.pr-o b{font-size:13px}.pr-o small{font-size:12px;color:var(--muted)}
 .nbell{position:relative}.nb-dot{position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:var(--danger);color:#fff;font:600 10px/16px var(--f-sans)}
-.notif-p{width:340px;padding:6px}.nf-h{display:flex;align-items:center;justify-content:space-between;padding:6px 8px}
+.notif-p{position:fixed;z-index:60;width:340px;padding:6px;bottom:auto}.nf-h{display:flex;align-items:center;justify-content:space-between;padding:6px 8px}
 .nf-o{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;border:0;background:transparent;padding:10px;border-radius:10px;cursor:pointer;font:inherit;color:var(--ink)}
 .nf-o:hover{background:var(--surface-2)}.nf-o>svg{color:var(--btn);flex:none;margin-top:2px}.nf-o>span{display:grid;gap:2px;font-size:13px}.nf-o small{color:var(--muted);font-size:11.5px}
 .nf-o.new{background:var(--navy-tint)}
 .gd-l{margin:0;padding-left:18px;display:grid;gap:4px;font-size:13.5px}
 .input.err{border-color:var(--danger);box-shadow:0 0 0 3px var(--danger-tint)}
 .iconbtn.rec{color:#fff;background:var(--danger);animation:recp 1s ease-in-out infinite}
+/* selects no padrão do combo de agente: campo arredondado com a mesma seta e lista em cartão arredondado */
+select{-webkit-appearance:none;appearance:none;border-radius:12px;padding-right:36px!important;cursor:pointer;background-color:var(--surface);background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%)!important;background-position:calc(100% - 18px) 52%,calc(100% - 13px) 52%!important;background-size:5px 5px,5px 5px!important;background-repeat:no-repeat!important}
+select.input{border-radius:12px;min-height:40px}
+select:hover{border-color:color-mix(in srgb,var(--btn) 40%,var(--line))}
+select:focus-visible,select.sel-open{outline:none;border-color:var(--btn);box-shadow:0 0 0 3px var(--navy-tint)}
+.selpop{position:fixed;z-index:200;display:grid;gap:6px;padding:8px;border-radius:16px;background:var(--surface);border:1px solid var(--line);box-shadow:0 18px 44px rgba(12,26,44,.18);align-content:start}
+/* lista com altura própria (sem cortar a última opção) e barra de rolagem fina, dentro do cartão */
+.selpop .ag-l{max-height:236px;align-content:start;padding-right:4px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.selpop{grid-template-columns:minmax(0,1fr)}.selpop .ag-s input{flex:1;min-width:0;width:100%}.selpop .ag-o{min-width:0}
+.selpop .ag-l::-webkit-scrollbar{width:6px}.selpop .ag-l::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px}
+.selpop .ag-o{font-size:13.5px}
+/* espaçamento: atalhos do painel da Lya com margem; seletores com respiro interno, no mesmo desenho do Presencial/Telemedicina */
+.chpanel .ch-quick{padding:8px 14px 2px;margin:0}
+.seg{padding:3px;gap:2px;border-radius:12px;background:var(--surface-2);overflow:visible}
+.seg button{border-right:0!important;border-radius:9px}
+.seg button.on{background:var(--surface);color:var(--navy);box-shadow:0 1px 3px rgba(12,26,44,.12)}
+.pf-reg{grid-template-columns:1fr 1.2fr .8fr;gap:10px}
+.ud-end summary{cursor:pointer;font-weight:500;font-size:14px;padding:6px 0}
+/* consentimentos no perfil; perfil em três colunas para caber em 1366×768 */
+.cp-g{grid-template-columns:1fr 1fr 1.15fr;gap:16px;align-items:start}.cp-g .src{padding-top:8px;padding-bottom:8px}.cp-g>.grid{gap:12px!important}@media(max-width:1100px){.cp-g{grid-template-columns:1fr 1fr}}@media(max-width:720px){.cp-g{grid-template-columns:1fr}}
+.cp-ck{display:grid;gap:10px;margin-top:4px;padding-top:12px;border-top:1px solid var(--line)}
+.cp-ck label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.cp-ck input{margin-top:3px;width:16px;height:16px;accent-color:var(--btn);flex:none}
+.cp-ck span{display:grid;gap:2px}.cp-ck b{font-weight:500;font-size:13.5px}.cp-ck small{color:var(--muted);font-size:12px}
+.cp-ck a,.src a.lnk{color:var(--btn);text-decoration:underline}
 .ln2.hl{background:var(--hl)!important;border-radius:8px}
 .sq li{will-change:transform}
 
@@ -1589,7 +1629,7 @@ const isDark=()=>document.documentElement.getAttribute("data-theme")==="dark"||(
 /* Notificações: o que precisa de atenção, com atalho para a tela certa */
 const NOTIFS=[["doc","Relatório de Paulo Mendes pronto para revisar","há 5 min","relatorio",1],["file","Exame de Ana Ribeiro lido e organizado em Dados Clínicos","há 1 h","pacientes",1],["alert","Clara Souza: erro de envio ao prontuário","ontem","historico",0],["spark","Novidade: importe o catálogo de OPME por planilha","há 2 dias","inicio",0]];
 const notifUnread=()=>S.notifRead?0:NOTIFS.filter(n=>n[4]).length;
-const userTools=()=>`<span class="utools"><button class="iconbtn" data-act="theme" aria-label="Alternar tema" title="Tema claro ou escuro">${ic(isDark()?"sun":"moon")}</button><button class="iconbtn" data-act="help-open" aria-label="Ajuda da Lya" title="Ajuda: dúvidas e chamados">${ic("help")}</button><button class="iconbtn nbell" data-act="notif" aria-label="Notificações${notifUnread()?`: ${notifUnread()} novas`:""}" aria-expanded="${!!S.notif}" title="Notificações">${ic("bell")}${notifUnread()?`<span class="nb-dot">${notifUnread()}</span>`:""}</button><button class="avatar ubtn" data-act="umenu" aria-haspopup="menu" aria-expanded="${!!S.umenu}" title="Dra. Helena Duarte · seu perfil">HD</button></span>`;
+const userTools=()=>`<span class="utools"><button class="iconbtn ulang" data-act="uilang" aria-haspopup="menu" aria-expanded="${!!S.ulang}" aria-label="Idioma da plataforma: ${uiL()[1]}" title="Idioma da plataforma">${ic("lang","i s")}<span>${uiL()[2]}</span></button><button class="iconbtn tsize" data-act="usize" aria-haspopup="menu" aria-expanded="${!!S.usize}" aria-label="Tamanho da interface" title="Tamanho da interface"><span style="font:600 15px var(--f-sans)">T</span><span style="font:600 11px var(--f-sans)">t</span></button><button class="iconbtn" data-act="theme" aria-label="Alternar tema" title="Tema claro ou escuro">${ic(isDark()?"sun":"moon")}</button><button class="iconbtn" data-act="help-open" aria-label="Ajuda da Lya" title="Ajuda: dúvidas e chamados">${ic("help")}</button><button class="iconbtn nbell" data-act="notif" aria-label="Notificações${notifUnread()?`: ${notifUnread()} novas`:""}" aria-expanded="${!!S.notif}" title="Notificações">${ic("bell")}${notifUnread()?`<span class="nb-dot">${notifUnread()}</span>`:""}</button><button class="avatar ubtn" data-act="umenu" aria-haspopup="menu" aria-expanded="${!!S.umenu}" title="Dra. Helena Duarte · seu perfil">HD</button></span>`;
 function renderTop(){
   const dark=document.documentElement.getAttribute("data-theme")==="dark"||(!document.documentElement.getAttribute("data-theme")&&matchMedia("(prefers-color-scheme: dark)").matches);
   document.getElementById("top").innerHTML=`
@@ -1785,6 +1825,11 @@ const capd=()=>!isB2C()||S.c.t>=PT.cap||S.c.phase!=="live";
 
 /* Idioma do atendimento: entrada (o que a Lya ouve) e saída (o que a Lya escreve). */
 const LANGS=[["pt","Português (Brasil)"],["en","Inglês"],["es","Espanhol"]];
+/* Idioma da plataforma: só os textos da interface. A transcrição e o relatório seguem o idioma de entrada e saída do atendimento. */
+const UILANG=[["pt","Português (Brasil)","PT"],["en","English","EN"],["es","Español","ES"]];
+const uiL=()=>UILANG.find(x=>x[0]===(S.ui||"pt"));
+/* Tamanho da interface, no topo como na Lya atual: aumenta tudo na mesma proporção. */
+const USIZE=[["p","Padrão",1,"Tt"],["m","Grande",1.1,"Tt"],["g","Maior",1.2,"Tt"]];
 function langBtn(where){
   const L=S.lang||(S.lang={in:"pt",out:"pt"}),code=k=>k==="auto"?"Auto":k.toUpperCase(),lbl=L.in===L.out?code(L.in):`${code(L.in)} → ${code(L.out)}`;
   const opt=(sel,list)=>list.map(x=>`<option value="${x[0]}" ${sel===x[0]?"selected":""}>${x[1]}</option>`).join("");
@@ -2435,7 +2480,7 @@ V.usuarios=()=>ph("Usuários","248 profissionais · 231 ativos · 2FA ativo em 7
   ${USERS.map(u=>`<tr class="click" data-go="usuario"><td><input type="checkbox" aria-label="Selecionar ${u[0]}"></td><td><div class="who"><span class="avatar">${u[0].split(" ").map(x=>x[0]).join("")}</span><span><b>${u[0]}</b><small>${u[1]}</small></span></div></td><td class="mono small">${u[2]}</td><td>${u[3]?`<span class="chip navy">${prof(u[3]).name}</span>`:`<span class="chip red">Sem perfil</span>`}</td><td class="small">${u[4]}</td><td>${u[5]?`<span class="chip ok">${ic("check","i s")}Ativo</span>`:`<span class="chip warn">Pendente</span>`}</td><td><span class="chip ${u[6]==="Ativo"?"ok":u[6]==="Pendente"?"warn":""}">${u[6]}</span></td><td class="small muted">${u[7]}</td></tr>`).join("")}
   </tbody></table></div>`;
 V.usuario=()=>{
-  const t=tabs("usr",[["acesso","Acesso e permissões"],["dados","Dados profissionais"],["seg","Segurança"],["ativ","Atividade",N()]],"acesso");
+  const t=tabs("usr",[["acesso","Acesso e permissões"],["dados","Dados cadastrais"],["seg","Segurança"],["ativ","Atividade",N()]],"acesso");
   const p=prof("gestor");const sens=p.perms.filter(id=>PERMS.find(x=>x.id===id).sens).length;
   let b="";
   if(t.cur==="acesso")b=`<div class="grid g2"><div class="card grid" style="gap:12px"><div class="field"><label for="u-p">Perfil</label><select id="u-p" class="input" ${can("us_perm")?"":"disabled"}>${PROFILES.map(x=>`<option ${x.id==="gestor"?"selected":""}>${x.name}</option>`).join("")}</select><span class="hint">Define o que a pessoa pode fazer.</span></div><div class="field"><span class="lbl">Grupos</span><div class="chips"><span class="chip navy">Cardiologia</span><span class="chip navy">Padrão</span><button class="chip line" data-act="gdlg" data-val="addgrupo">${ic("plus","i s")}Grupo</button></div><span class="hint">Define quais agentes e Prompts a pessoa vê.</span></div><div class="field"><label for="u-a">Agente padrão</label><select id="u-a" class="input"><option>Cardiologia</option></select></div></div>
@@ -2443,7 +2488,10 @@ V.usuario=()=>{
     <div class="chips">${p.perms.filter(id=>PERMS.find(x=>x.id===id).sens).map(id=>`<span class="sens">${permLabel(id)}</span>`).join("")}</div>
     <div class="banner info" style="margin:0">${ic("shield")}<span class="sp small">Perfis com permissões sensíveis exigem 2FA pela política da organização.</span></div>
     <button class="btn g sm" style="justify-self:start" data-act="simulate" data-val="gestor">${ic("eye","i s")}Simular a Lya como esta pessoa</button></div></div>`;
-  else if(t.cur==="dados")b=`<div class="card grid g2">${[["Nome","Marina Alves"],["E-mail","marina.alves@hospitalaurora.org"],["Profissão","Médica"],["Especialidade","Cardiologia"],["Conselho","CRM"],["Número e UF","160220 / SP"],["Usuário de prontuário","malves"],["Telefone","(11) 90000-0000"]].map(f=>`<div class="field"><label>${f[0]}</label><input class="input" value="${f[1]}" aria-label="${f[0]}"></div>`).join("")}</div>`;
+  else if(t.cur==="dados"){const uf=(id,l,v,r)=>`<div class="field"><label for="${id}">${l}${r?` <span class="req">*</span>`:""}</label><input id="${id}" class="input" value="${v}"></div>`;
+   b=`<div class="grid g2" style="align-items:start"><div class="card grid" style="gap:12px"><h3>Dados pessoais</h3>${uf("ud-n","Nome do usuário","Marina Alves",1)}<div class="grid g2" style="gap:10px">${uf("ud-nasc","Data de nascimento","22/07/1985",1)}${uf("ud-cpf","CPF","•••.•••.•••-41",1)}</div><div class="grid g2" style="gap:10px">${uf("ud-e","E-mail","marina.alves@hospitalaurora.org",1)}${uf("ud-t","Telefone","(11) 90000-0000",1)}</div>${uf("ud-pr","Usuário de prontuário","malves")}
+    <details class="ud-end"><summary>Endereço <span class="muted small">opcional</span></summary><div class="grid g2" style="gap:10px;margin-top:10px">${uf("ud-cep","CEP","01310-100")}${uf("ud-rua","Rua","Av. Paulista")}${uf("ud-num","Número","1000")}${uf("ud-comp","Complemento","Conj. 52")}${uf("ud-bai","Bairro","Bela Vista")}${uf("ud-cid","Cidade e estado","São Paulo · SP")}</div></details></div>
+    <div class="card grid" style="gap:12px;align-content:start"><h3>Atuação profissional</h3>${profBlock("ud",{p:"Médico",esp:"Cardiologista",num:"160220",uf:"SP"})}<div class="field"><label for="ud-st">Status da conta <span class="req">*</span></label><select id="ud-st" class="input"><option selected>Ativo</option><option>Inativo</option></select><span class="hint">Inativo não entra na Lya, mas o histórico continua.</span></div></div></div>`}
   else if(t.cur==="seg")b=`<div class="grid g2"><div class="card grid" style="gap:10px"><h3>Segundo fator</h3><div class="src"><div class="tx"><b>App autenticador (TOTP)</b><small>Configurado em 02/09/2026</small></div><span class="chip ok">Ativo</span></div><button class="btn g sm" style="justify-self:start">Redefinir 2FA</button></div><div class="card grid" style="gap:10px"><h3>Sessões ativas</h3>${[["Chrome · Windows","Hospital Aurora · 10.0.4.21","agora"],["Safari · iPad","Ala B","há 2 h"]].map(r=>`<div class="src"><div class="tx"><b>${r[0]}</b><small>${r[1]} · ${r[2]}</small></div><button class="btn g sm">Encerrar</button></div>`).join("")}</div></div>`;
   else b=`<div class="card"><div class="timeline">${[["hoje 09:01","Editou o Prompt “Fatores de risco CV” (v3 → v4)"],["ontem 17:40","Publicou o agente Cardiologia"],["ontem 08:12","Login com 2FA"],["22/10 15:03","Exportou relatório de indicadores"]].map(e=>`<div class="ev2"><span class="mono muted small">${e[0]}</span><span class="dot"></span><span>${e[1]}</span></div>`).join("")}</div></div>`;
   return ph("Marina Alves","Gestora clínica · CRM 160220/SP · marina.alves@hospitalaurora.org",`<button class="btn g" data-go="usuarios">Voltar</button>${can("us_upd")?`<button class="btn p" data-act="toast" data-msg="Usuário atualizado">Salvar</button>`:""}`)+t.html+b;
@@ -2537,7 +2585,7 @@ V.configuracoes=()=>{
   if(t.cur==="pref")b=`<div class="grid g2">
    <div class="card grid" style="gap:12px"><h3>Atendimento</h3><div class="field"><label for="pf-a">Agente padrão</label><select id="pf-a" class="input"><option>Clínica Médica</option></select></div><div class="field"><label for="pf-m">Microfone</label><select id="pf-m" class="input"><option>Jabra Speak 510 · USB</option><option>Microfone interno</option></select></div><div class="field"><span class="lbl">Idioma do atendimento</span><div class="seg"><button class="on">Português (Brasil)</button><button>Espanhol</button></div></div><div class="src"><div class="tx"><b>Atalhos de teclado</b><small class="mono">Espaço inicia · P pausa · F finaliza · / prompts · [ menu</small></div></div></div>
    <div class="card grid" style="gap:10px"><h3>Avisos ao vivo</h3>${[["Alergias e interações",true],["Efeitos adversos",true],["Perguntas pendentes",true],["Sugestão de CID durante o atendimento",false]].map(r=>`<div class="src"><div class="tx"><b>${r[0]}</b></div>${sw(r[1],"tog")}</div>`).join("")}</div>
-   <div class="card grid" style="gap:10px"><h3>Assinatura digital</h3><div class="src"><div class="tx"><b>Certificado ICP-Brasil</b><small>Válido até 03/2027</small></div><span class="chip ok">Ativo</span></div></div>
+   <div class="card grid" style="gap:10px"><h3>Assinatura digital</h3><div class="src"><div class="tx"><b>Certificado do CFM</b><small>Válido até 03/2027</small></div><span class="chip ok">Ativo</span></div></div>
    <div class="card grid" style="gap:10px"><h3>Privacidade</h3><div class="src"><div class="tx"><b>Áudio</b><small>Apagado assim que o relatório é gerado</small></div></div><div class="src"><div class="tx"><b>Uso para treinamento</b><small>Desligado. Dados de pacientes não treinam modelos.</small></div></div><button class="btn g sm" style="justify-self:start" data-act="toast" data-msg="Registro de acesso: 4 acessos aos seus atendimentos nesta semana">Ver quem acessou meus atendimentos</button></div></div>`;
   if(t.cur==="org")b=`<div class="card grid" style="gap:12px;margin-bottom:14px"><h3>Identidade</h3><div class="logo-up">${isB2C()?B2C_LOGO:ORG_LOGO}<div style="display:grid;gap:4px"><b>${isB2C()?"Logo do consultório":"Logo da instituição"}</b><span class="hint">PNG ou SVG quadrado, mínimo 256 × 256 px. Aparece no menu, no cabeçalho dos relatórios e nos documentos impressos.</span><div style="display:flex;gap:8px"><button class="btn g sm" data-act="toast" data-msg="Escolha um arquivo PNG ou SVG">Trocar logo</button><button class="btn q sm" data-act="toast" data-msg="Logo removido">Remover</button></div></div></div></div>`+(isB2C()?`<div class="card grid" style="gap:10px;margin-bottom:14px"><h3>Recursos do consultório</h3><div class="src"><div class="tx"><b>Fale com a Lya ${N()}</b><small>Chat clínico com fontes. Incluído no plano Unlimited.</small></div>${sw(S.orgChat,"org-chat")}</div><div class="src"><div class="tx"><b>Novidades da Lya na Home</b><small>Mostra o carrossel de novidades no início.</small></div>${sw(S.orgNews,"org-news")}</div></div>`:"")+`<div class="card grid g2">${[["Nome da organização","Hospital Aurora"],["CNPJ","00.000.000/0001-00"],["Telefone","(11) 3000-0000"],["E-mail corporativo","ti@hospitalaurora.org"]].map(f=>`<div class="field"><label>${f[0]}</label><input class="input" value="${f[1]}" aria-label="${f[0]}"></div>`).join("")}</div>`;
   else if(t.cur==="at")b=`<div class="grid g2"><div class="card grid" style="gap:12px"><div class="field"><label for="c-as">Agente padrão da organização</label><select id="c-as" class="input"><option>Clínica Médica</option></select><span class="hint">Usado quando o profissional não definiu um padrão.</span></div><div class="field"><span class="lbl">Janela de atendimentos visíveis</span><div class="seg"><button class="on">Últimas 36 h</button><button>7 dias</button></div></div></div>
@@ -2555,32 +2603,60 @@ V.configuracoes=()=>{
   return ph("Configurações","Dados e políticas da organização.",`<button class="btn p" data-act="toast" data-msg="Configurações salvas">Salvar</button>`)+t.html+b;
 };
 
+/* Profissões de assistência à saúde (nomes como na Lya atual): conselho sugerido, especialidades e se prescreve pela Memed.
+   O tipo de registro é um campo próprio: a profissão só sugere o conselho, e a Lya avisa quando não confere.
+   Médicos usam o certificado digital do CFM; as demais profissões, certificado digital de certificadora credenciada. */
+const PROFS=[["Médico","CRM",["Clínico geral","Anestesiologista","Cardiologista","Cirurgião geral","Dermatologista","Endocrinologista","Gastroenterologista","Ginecologista","Médico de família","Neurologista","Oftalmologista","Oncologista","Ortopedista","Pediatra","Psiquiatra","Urologista"],1],
+ ["Enfermeiro","COREN",["Enfermagem geral","Terapia intensiva","Obstetrícia","Saúde da família","Estomaterapia"]],
+ ["Técnico de enfermagem","COREN",["Assistência geral","Instrumentação cirúrgica","Terapia intensiva"]],
+ ["Fisioterapeuta","CREFITO",["Respiratória","Traumato-ortopédica","Neurofuncional","Cardiovascular"]],
+ ["Terapeuta ocupacional","CREFITO",["Reabilitação física","Saúde mental"]],
+ ["Nutricionista","CRN",["Nutrição clínica","Nutrição esportiva","Materno-infantil"]],
+ ["Psicólogo","CRP",["Psicologia clínica","Psicologia hospitalar","Neuropsicologia"]],
+ ["Fonoaudiólogo","CRFa",["Audiologia","Disfagia","Linguagem","Voz"]],
+ ["Cirurgião-dentista","CRO",["Clínica geral","Ortodontia","Endodontia","Cirurgia bucomaxilofacial"],1],
+ ["Farmacêutico","CRF",["Farmácia clínica","Farmácia hospitalar"]],
+ ["Assistente social","CRESS",["Serviço social hospitalar","Saúde da família"]],
+ ["Biomédico","CRBM",["Análises clínicas","Imagenologia"]],
+ ["Profissional de educação física","CREF",["Reabilitação","Saúde do idoso"]],
+ ["Administrativo / TI","TI",["Tecnologia da Informação (TI)","Faturamento","Recepção","Qualidade"]]];
+const COUNCILS=["CRM","COREN","CREFITO","CRN","CRP","CRFa","CRO","CRF","CRESS","CRBM","CREF","TI"];
+/* Bloco "Atuação profissional", igual no Meu perfil e no cadastro de usuário (k separa o estado de cada tela). */
+function profBlock(k,def){
+  S.pf=S.pf||{};const st=S.pf[k]||(S.pf[k]={p:def.p,reg:null});
+  const pf=PROFS.find(x=>x[0]===st.p)||PROFS[0],reg=st.reg||pf[1];
+  const sl=(id,l,ops,cur,a)=>`<div class="field"><label for="${id}">${l} <span class="req">*</span></label><select id="${id}" class="input" ${a||""}>${ops.map(o=>`<option ${o===cur?"selected":""}>${o}</option>`).join("")}</select></div>`;
+  const esp=pf[2].includes(def.esp)?def.esp:pf[2][0];
+  return `<div class="grid g2" style="gap:10px">${sl(k+"-prof","Profissão",PROFS.map(x=>x[0]),pf[0],`data-pf="${k}"`)}${sl(k+"-esp",pf[1]!=="TI"?"Especialidade":"Área",[...pf[2],"Outra"],esp)}</div>`+
+   (`<div class="grid pf-reg">${sl(k+"-tipo","Tipo de registro",COUNCILS,reg,`data-pfreg="${k}"`)}<div class="field"><label for="${k}-num">Número do registro <span class="req">*</span></label><input id="${k}-num" class="input" value="${reg==="TI"?"":def.num}" placeholder="${reg==="TI"?"Matrícula":""}" inputmode="numeric"></div>${sl(k+"-uf","UF",["SP","RJ","MG","PR","RS","BA","AM"],def.uf)}</div>
+   ${reg!==pf[1]?`<p class="hint" style="color:var(--warn);margin:0">${ic("alert","i s")} Confira: para ${pf[0]} o esperado é ${pf[1]}.</p>`:reg==="TI"?`<p class="hint" style="margin:0">TI usa a matrícula interna e não assina documentos clínicos.</p>`:""}`);
+}
 /* Minha conta: Meu perfil, Minhas preferências e, no B2C, Faturamento (o médico é o cliente e controla a cobrança). */
 V.conta=()=>{
   const b2c=isB2C();
   const t=tabs("conta",[["perfil","Meu perfil"],["pref","Minhas preferências"],...(b2c?[["fat","Faturamento"]]:[])],"perfil");
   const fld=(id,l,v,h)=>`<div class="field"><label for="${id}">${l}</label><input id="${id}" class="input" value="${v||""}">${h?`<span class="hint">${h}</span>`:""}</div>`;
-  const sel=(id,l,ops,h)=>`<div class="field"><label for="${id}">${l}</label><select id="${id}" class="input">${ops.map(o=>`<option>${o}</option>`).join("")}</select>${h?`<span class="hint">${h}</span>`:""}</div>`;
+  const sel=(id,l,ops,h,cur)=>`<div class="field"><label for="${id}">${l}</label><select id="${id}" class="input">${ops.map(o=>`<option ${o===cur?"selected":""}>${o}</option>`).join("")}</select>${h?`<span class="hint">${h}</span>`:""}</div>`;
   const tg=(l,d,on)=>`<div class="src"><div class="tx"><b>${l}</b>${d?`<small>${d}</small>`:""}</div>${sw(on,"tog")}</div>`;
   const seg=(l,ops,cur)=>`<div class="field"><span class="lbl">${l}</span><div class="seg">${ops.map(o=>`<button class="${o===cur?"on":""}" data-act="seg-pick">${o}</button>`).join("")}</div></div>`;
+  const pf=PROFS.find(x=>x[0]===((S.pf||{}).cp||{}).p)||PROFS[0],med=pf[0]==="Médico";
   let b="";
-  if(t.cur==="perfil")b=`<div class="grid g2">
+  if(t.cur==="perfil")b=`<div class="grid cp-g">
    <div class="card grid" style="gap:12px"><div style="display:flex;align-items:center;gap:14px"><span class="avatar xl">HD</span><div style="display:grid;gap:4px"><b style="font-size:17px">Dra. Helena Duarte</b><span class="small muted">${b2c?"Consultório particular":"Hospital Aurora"} · ${prof(S.role).name}</span><label class="btn q sm" style="justify-self:start;padding-left:0;cursor:pointer">Trocar foto<input type="file" accept="image/*" data-upfile="Foto do perfil" hidden></label></div></div>
     ${fld("cp-n","Nome completo","Helena Duarte")}${fld("cp-s","Como quer ser chamada","Dra. Helena","Aparece na saudação e no Fale com a Lya.")}
-    <div class="grid g2" style="gap:10px">${fld("cp-crm","CRM","123456")}${sel("cp-uf","UF",["SP","RJ","MG","PR","RS"])}</div>
-    ${fld("cp-esp","Especialidades e RQE","Gastroenterologia · RQE 45871; Clínica Médica","Vão no rodapé dos relatórios e das receitas.")}</div>
-   <div class="card grid" style="gap:12px;align-content:start"><h3>Contato</h3>${fld("cp-e","E-mail","helena.duarte@exemplo.com.br","Usado para entrar na Lya e receber avisos.")}${fld("cp-t","Celular","(11) 98877-6655","Recebe o código da verificação em duas etapas.")}</div>
-   <div class="card grid" style="gap:10px"><h3>Assinatura dos documentos</h3><div class="src"><div class="tx"><b>Certificado digital ICP-Brasil</b><small>A3 em nuvem · válido até 03/2027</small></div><span class="chip ok">Ativo</span></div><div class="src"><div class="tx"><b>Memed</b><small>Conta vinculada para prescrições</small></div><span class="chip ok">Conectada</span></div><div class="src"><div class="tx"><b>Carimbo e assinatura no PDF</b><small>Imagem usada nos relatórios impressos</small></div><label class="btn g sm" style="cursor:pointer">Enviar imagem<input type="file" accept="image/png" data-upfile="Assinatura do PDF" hidden></label></div></div>
-   <div class="card grid" style="gap:10px"><h3>Acesso e segurança</h3><div class="src"><div class="tx"><b>Senha</b><small>Alterada há 2 meses</small></div><button class="btn g sm" data-act="toast" data-msg="Enviamos um link para trocar a senha">Trocar senha</button></div>${tg("Verificação em duas etapas","Código no celular a cada novo dispositivo",true)}<div class="src"><div class="tx"><b>Sessões ativas</b><small>Este computador · iPhone</small></div><button class="btn q sm" data-act="toast" data-msg="Outras sessões encerradas">Encerrar outras</button></div></div>
+    <div class="grid g2" style="gap:10px"><div class="field"><label for="cp-cpf">CPF</label><input id="cp-cpf" class="input" value="•••.•••.•••-09" readonly title="Só o administrador altera o CPF"></div>${fld("cp-nasc","Data de nascimento","14/03/1982")}</div>
+    <div class="grid g2" style="gap:10px">${fld("cp-e","E-mail","helena.duarte@exemplo.com.br")}${fld("cp-t","Celular","(11) 98877-6655")}</div><span class="hint" style="margin-top:-6px">O e-mail é o seu login na Lya.</span></div>
+   <div class="card grid" style="gap:12px;align-content:start"><h3>Atuação profissional</h3>${profBlock("cp",{p:"Médico",esp:"Gastroenterologista",num:"123456",uf:"SP"})}
+    ${b2c?"":`<div class="field"><label for="cp-pr">Usuário de prontuário</label><input id="cp-pr" class="input" value="hduarte" readonly><span class="hint">Definido pelo administrador.</span></div>`}
+    <div class="cp-ck"><label><input type="checkbox" checked><span><b>Aceito receber novidades da Lya por e-mail e telefone</b><small>Dá para cancelar quando quiser.</small></span></label>
+    <label><input type="checkbox" checked data-terms><span><b>Li e aceito os <a href="#" data-act="toast" data-msg="Abrindo os Termos de uso">Termos de uso</a> e a <a href="#" data-act="toast" data-msg="Abrindo a Política de privacidade">Política de privacidade</a> da Lya</b><small>Aceito em 02/09/2026 · versão 3</small></span></label></div></div>
+   <div class="grid" style="gap:16px;align-content:start"><div class="card grid" style="gap:10px"><h3>Assinatura dos documentos</h3>${med?`<div class="src"><div class="tx"><b>Certificado do CFM</b><small>Válido até 03/2027 · <a class="lnk" href="https://certificadodigital.cfm.org.br/" target="_blank" rel="noopener">Gerenciar no CFM</a></small></div><span class="chip ok">Ativo</span></div>`:`<div class="src"><div class="tx"><b>Certificado digital</b><small>Certificadora credenciada · válido até 03/2027</small></div><span class="chip ok">Ativo</span></div>`}${pf[3]?`<div class="src"><div class="tx"><b>Memed</b><small>Conta vinculada para prescrições</small></div><span class="chip ok">Conectada</span></div>`:""}<div class="src"><div class="tx"><b>Carimbo e assinatura no PDF</b><small>Usada nos relatórios impressos</small></div><label class="btn g sm" style="cursor:pointer">Enviar imagem<input type="file" accept="image/png" data-upfile="Assinatura do PDF" hidden></label></div></div>
+   <div class="card grid" style="gap:10px"><h3>Acesso e segurança</h3><div class="src"><div class="tx"><b>Senha</b><small>Alterada há 2 meses</small></div><button class="btn g sm" data-act="toast" data-msg="Enviamos um link para trocar a senha">Trocar senha</button></div><div class="src"><div class="tx"><b>Verificação em duas etapas</b><small>App Google ou Microsoft Authenticator</small></div><button class="btn g sm" data-act="gdlg" data-val="totp">Trocar app</button></div><div class="src"><div class="tx"><b>Sessões ativas</b><small>Este computador · iPhone</small></div><button class="btn q sm" data-act="toast" data-msg="Outras sessões encerradas">Encerrar outras</button></div></div></div>
   </div>`;
-  else if(t.cur==="pref")b=`<div class="grid g2">
-   <div class="card grid" style="gap:12px"><h3>Atendimento</h3>${sel("pf-as","Agente padrão",["Clínica Médica","Gastroenterologia","Cardiologia","Dermatologia"],"Sugerido ao iniciar. Dá para trocar em cada atendimento.")}${seg("Modalidade padrão",["Presencial","Telemedicina"],"Presencial")}${sel("pf-mic","Microfone",["Jabra Speak 510 · USB","Microfone interno"])}
-    <div class="grid g2" style="gap:10px">${sel("pf-li","Idioma de entrada",["Português (Brasil)","Detectar automaticamente","Inglês","Espanhol"],"Transcrição e ditado")}${sel("pf-lo","Idioma de saída",["Português (Brasil)","Inglês","Espanhol"],"Relatório e documentos")}</div></div>
+  else if(t.cur==="pref")b=`<div class="grid cp-g">
+   <div class="card grid" style="gap:12px"><h3>Atendimento</h3>${sel("pf-as","Agente padrão",["Clínica Médica","Gastroenterologia","Cardiologia","Dermatologia"],"Sugerido ao iniciar. Dá para trocar em cada atendimento.")}${seg("Modalidade padrão",["Presencial","Telemedicina"],"Presencial")}${sel("pf-mic","Microfone",["Jabra Speak 510 · USB","Microfone interno"])}    <div class="grid g2" style="gap:10px">${sel("pf-li","Idioma de entrada",["Português (Brasil)","Detectar automaticamente","Inglês","Espanhol"],"Transcrição e ditado")}${sel("pf-lo","Idioma de saída",["Português (Brasil)","Inglês","Espanhol"],"Relatório e documentos")}</div></div>
    <div class="card grid" style="gap:12px;align-content:start"><h3>Relatório</h3>${seg("Estilo do texto",["Conciso","Detalhado"],"Conciso")}${seg("Formato",["Tópicos","Texto corrido"],"Tópicos")}${tg("Incluir Minhas notas por padrão","Entram como “Notas do médico”",false)}${tg("Sugerir CID ao gerar o relatório","Primário e secundário, para você confirmar",true)}${tg("Abrir a prescrição na Memed ao gerar","",true)}</div>
-   <div class="card grid" style="gap:10px"><h3>Avisos durante o atendimento</h3>${tg("Alergias e interações","",true)}${tg("Riscos de protocolo","Sepse, TEP e outros da instituição",true)}${tg("Itens pendentes do check-list","",true)}${tg("Som ao surgir alerta crítico","",false)}</div>
-   <div class="card grid" style="gap:12px;align-content:start"><h3>Aparência e atalhos</h3>${seg("Tema",["Claro","Escuro","Automático"],"Automático")}${seg("Tamanho do texto",["Normal","Grande"],"Normal")}<div class="src"><div class="tx"><b>Atalhos de teclado</b><small>Espaço inicia ou pausa · Ctrl + J abre o Fale com a Lya</small></div></div></div>
-   <div class="card grid" style="gap:10px"><h3>Notificações</h3>${tg("Relatório pronto para revisar","No app e por e-mail",true)}${tg("Exame anexado foi lido","No app",true)}${tg("Novidades da Lya","Por e-mail, uma vez por mês",false)}</div>
-   <div class="card grid" style="gap:10px"><h3>Privacidade</h3><div class="src"><div class="tx"><b>Áudio</b><small>Apagado assim que o relatório é gerado</small></div></div><div class="src"><div class="tx"><b>Uso para treinamento</b><small>Desligado. Dados de pacientes não treinam modelos.</small></div></div><button class="btn g sm" style="justify-self:start" data-act="toast" data-msg="Registro de acesso: 4 acessos aos seus atendimentos nesta semana">Ver quem acessou meus atendimentos</button></div>
+   <div class="card grid" style="gap:12px;align-content:start"><h3>Aparência, idioma e atalhos</h3><div class="field"><span class="lbl">Idioma da plataforma</span><div class="seg">${UILANG.map(l=>`<button class="${l[0]===uiL()[0]?"on":""}" data-act="uilang-set" data-val="${l[0]}">${l[1].replace(" (Brasil)","")}</button>`).join("")}</div><span class="hint">Textos da plataforma. Também no cabeçalho.</span></div>${seg("Tema",["Claro","Escuro","Automático"],"Automático")}<div class="src"><div class="tx"><b>Atalhos de teclado</b><small>Ctrl + J abre o Fale com a Lya</small></div></div></div>
   </div>`;
   else if(t.cur==="fat"){const inv=[["Outubro/2026","01/10/2026","R$ 0,00","Gratuito"],["Setembro/2026","01/09/2026","R$ 0,00","Gratuito"]];
    b=`<div class="grid g3" style="margin-bottom:14px"><div class="card kpi"><div class="v">Gratuito</div><div class="l">Plano atual</div></div><div class="card kpi"><div class="v">${PLAN.used} de ${PLAN.limit}</div><div class="l">Atendimentos em outubro</div></div><div class="card kpi"><div class="v">01/11</div><div class="l">Próxima renovação</div></div></div>
@@ -2663,6 +2739,7 @@ const pickBtn=(x,sel)=>`<button class="ptopt ${x===sel?"on":""}" role="option" a
 function patientRow(){
   if(!isB2C())return ptRowB2B();
   const novo=S.prep.pt==="novo";
+  if(S.emptyDay&&!S.prep.pt)return `<div class="prow2"><span class="pl">Paciente</span><div class="pv col1"><div class="who"><span class="avatar" style="background:var(--surface-2);color:var(--muted)">?</span><span><span style="font-weight:600">Nenhum paciente escolhido</span><small>Escolha um paciente, cadastre um novo ou comece sem identificar. A Lya pede o nome antes de gerar o relatório.</small></span></div><div class="pv"><button class="optb" data-act="prep" data-k="pt" data-val="cad">Paciente cadastrado</button><button class="optb" data-act="prep" data-k="pt" data-val="novo">Novo paciente</button></div></div></div>`;
   return `<div class="prow2"><span class="pl">Paciente</span><div class="pv col1"><div class="pv"><button class="optb ${novo?"":"on"}" data-act="prep" data-k="pt" data-val="cad">Paciente cadastrado</button><button class="optb ${novo?"on":""}" data-act="prep" data-k="pt" data-val="novo">Novo paciente</button></div>
    ${novo?`<div class="grid g2" style="gap:10px"><div class="field"><label for="np-n">Nome</label><input id="np-n" class="input" placeholder="Nome completo"></div><div class="field"><label for="np-d">Data de nascimento</label><input id="np-d" class="input" placeholder="dd/mm/aaaa"></div><div class="field"><label for="np-p">Peso</label><input id="np-p" class="input" placeholder="kg"></div><div class="field"><label for="np-a">Altura</label><input id="np-a" class="input" placeholder="cm"></div></div><span class="hint">Só o nome é obrigatório. Se a data de nascimento, o peso e a altura forem ditos no atendimento, a Lya preenche e você confirma.</span>`
    :`<div class="who"><span class="avatar">FO</span><span><span style="font-weight:600">Fernando Oliveira</span> <span class="muted">· cadastrado hoje · Particular</span><small>Sem data de nascimento, peso e altura. A Lya completa pelo que for dito.</small></span></div>`}</div></div>`;
@@ -2729,10 +2806,10 @@ V.login=()=>{const L=S.login||(S.login={step:"cred"});
   <button class="btn p lg-go" data-act="lg-cred">Entrar</button>
   <div class="lg-or"><span>ou</span></div>
   <button class="btn g lg-go" data-act="lg-sso">${ic("shield","i s")}Entrar com a conta da instituição</button>`;
- else if(L.step==="code")f=`<button class="btn q sm" style="justify-self:start;padding-left:0" data-act="lg-back">${ic("chevl","i s")}Voltar</button><h1>Confirme que é você</h1><p class="muted">Enviamos um código de 6 dígitos para o celular terminado em <b>6655</b>.</p>
+ else if(L.step==="code")f=`<button class="btn q sm" style="justify-self:start;padding-left:0" data-act="lg-back">${ic("chevl","i s")}Voltar</button><h1>Confirme que é você</h1><p class="muted">Abra o <b>Google Authenticator</b> ou o <b>Microsoft Authenticator</b> e digite o código de 6 dígitos da Lya.</p>
   <div class="field"><label for="lg-c">Código</label><input id="lg-c" class="input lg-code" inputmode="numeric" maxlength="6" placeholder="000000" autocomplete="one-time-code"></div>
   ${L.err?`<p class="lg-err">${L.err}</p>`:""}
-  <button class="btn p lg-go" data-act="lg-code">Confirmar</button><button class="btn q sm" style="justify-self:start" data-act="toast" data-msg="Novo código enviado">Reenviar código</button>`;
+  <button class="btn p lg-go" data-act="lg-code">Confirmar</button><button class="btn q sm" style="justify-self:start" data-act="toast" data-msg="Peça ao administrador da sua organização para redefinir a verificação em duas etapas">Perdi o acesso ao app</button>`;
  else f=`<h1>Onde você vai trabalhar hoje?</h1><p class="muted">Sua conta está em mais de uma organização. Dá para trocar depois pelo menu do perfil.</p>
   <div class="lg-orgs">${ORGS.map(o=>`<button data-act="lg-org" data-val="${o[0]}"><span class="avatar">${o[1].split(" ").map(x=>x[0]).join("").slice(0,2)}</span><span><b>${o[1]}</b><small>${o[2]}</small></span>${ic("chev","i s")}</button>`).join("")}</div>`;
  return `<div class="login">${brand}<div class="lg-form"><div class="lg-box">${f}</div></div></div>`};
@@ -3016,19 +3093,36 @@ function palVars(v){const k=["btn","navy","navy-tint","hero","teal","teal-ink","
 function applyPal(id){const P=PALS[id]||PALS.lilas;S.pal=id;const r=document.documentElement;const dark=(r.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))==="dark";
  Object.entries(palVars(P[dark?3:2])).forEach(([k,v])=>r.style.setProperty(k,v));try{localStorage.setItem("lya-pal",id)}catch(e){}}
 try{new MutationObserver(()=>{if(S.pal)applyPal(S.pal)}).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>{if(S.pal)applyPal(S.pal)})}catch(e){}
+/* Controles do protótipo: simulam quem usa, o cenário da tela atual e a aparência.
+   Não fazem parte da Lya; servem para quem constrói ver cada estado que a plataforma precisa ter. */
+const PD_GO=["inicio","chat","historico","pacientes","conhecimento","smartapps","assistentes","usuarios","perfis","grupos","governanca","auditoria","relatorios","integracao","cirurgia","configuracoes","conta","planos","suporte","ajuda"];
 function protoDock(){
   const atd=S.c&&(S.route==="atendimento"||S.route==="relatorio")&&S.c.phase==="live";
   const seg=(act,cur,opts)=>`<div class="seg">${opts.map(o=>`<button class="${cur===o[0]?"on":""}" data-act="${act}" data-val="${o[0]}">${o[1]}</button>`).join("")}</div>`;
-  return `<div class="pdock ${S.pdock?"open":""}">${S.pdock?`<div class="pd-panel" role="dialog" aria-label="Controles do protótipo"><div class="pd-h"><b>Controles do protótipo</b><span class="small muted">Não fazem parte da Lya</span></div>
-   <label class="pd-f"><span>Ver como</span><select data-act="viewas" aria-label="Ver como">${VIEWAS.map(v=>`<option value="${v}" ${v===S.role?"selected":""}>${prof(v).name}</option>`).join("")}</select></label>
-   ${atd?`<div class="pd-f"><span>Velocidade da simulação</span>${seg("c-speed",String(S.c.speed),[["1","1x"],["4","4x"]])}</div>`:""}
-   <div class="pd-f"><span>Cores</span><div class="pal-l">${Object.entries(PALS).map(([k,P])=>`<button class="pal-o ${(S.pal||"lilas")===k?"on":""}" data-act="pal" data-val="${k}" aria-pressed="${(S.pal||"lilas")===k}"><span class="pal-sw">${[0,4,7].map(i=>`<i style="background:${P[2][i]}"></i>`).join("")}</span><span class="pal-t"><b>${P[0]}</b><small>${P[1]}</small></span></button>`).join("")}</div></div>
-   ${!isB2C()?`<div class="pd-f"><span>Integração</span>${seg("pd-int",S.intFail?"1":"0",[["0","Envia com sucesso"],["1","Falha no 1º envio"]])}</div>`:""}
-   <div class="pd-f"><span>Uso do plano</span>${seg("pd-use",S.useLvl||"ok",[["ok","Normal"],["near","Perto do limite"],["out","Esgotado"]])}</div>
-   ${isB2C()?`<div class="pd-f"><span>Plano B2C</span>${seg("pd-plan",S.b2cPlan||"free",[["free","Gratuito"],["pro","Unlimited"]])}</div>`:""}
-   <div class="pd-f"><span>Jornada</span><button class="btn g sm" data-act="go-login">${ic("user","i s")}Começar pelo login</button></div>
-   ${S.route==="inicio"?`<div class="pd-f"><span>Microfone</span>${seg("pd-mic",S.micOff?"1":"0",[["0","Com sinal"],["1","Sem sinal"]])}</div>`:""}
-   ${S.route==="inicio"&&!isB2C()?`<div class="pd-f"><span>Estado do início</span>${seg("pd-empty",S.emptyDay?"1":"0",[["0","Com paciente"],["1","Sem pacientes"]])}</div>`:""}</div>`:""}
+  const f=(l,ctl,d)=>`<div class="pd-f"><span>${l}</span>${ctl}${d?`<small class="pd-d">${d}</small>`:""}</div>`;
+  const sec=(k,t,body,open)=>{S.pdSec=S.pdSec||{};const o=S.pdSec[k]==null?open:S.pdSec[k];return `<details class="pd-sec" data-pdsec="${k}" ${o?"open":""}><summary>${t}${ic("chev","i s")}</summary><div class="pd-b">${body}</div></details>`};
+  const b2c=isB2C(),P=PALS[S.pal||"lilas"];
+  /* cenário: só o que muda a tela aberta agora */
+  let cen="";
+  if(S.route==="inicio"){
+   cen+=f("Paciente",seg("pd-empty",S.emptyDay?"1":"0",[["0","Com paciente"],["1","Sem paciente"]]),b2c?"Sem paciente: ninguém escolhido ainda; a Lya pede o nome antes do relatório.":"Sem paciente: nenhum paciente na espera nem atendimento aberto.");
+   cen+=f("Microfone",seg("pd-mic",S.micOff?"1":"0",[["0","Com sinal"],["1","Sem sinal"]]),"Sem sinal: aviso e botão de iniciar bloqueado.");
+  }
+  if(atd)cen+=f("Velocidade da simulação",seg("c-speed",String(S.c.speed),[["1","1x"],["4","4x"]]),"Acelera a transcrição e os alertas ao vivo.");
+  if(!b2c&&["atendimento","relatorio","historico","inicio"].includes(S.route))cen+=f("Integração com o prontuário",seg("pd-int",S.intFail?"1":"0",[["0","Envia com sucesso"],["1","Falha no 1º envio"]]),"Falha: o envio vai para Atendimentos › Erro de envio.");
+  cen+=f("Notificações",seg("pd-notif",S.notifRead?"1":"0",[["0","Com novas"],["1","Todas lidas"]]));
+  return `<div class="pdock ${S.pdock?"open":""}">${S.pdock?`<div class="pd-panel" role="dialog" aria-label="Controles do protótipo">
+   <div class="pd-h"><b>Controles do protótipo</b><span class="small muted">Simulam cenários para orientar a construção. Não fazem parte da Lya.</span></div>
+   ${sec("quem","Quem está usando",
+     f("Ver como",`<select data-act="viewas" aria-label="Ver como">${VIEWAS.map(v=>`<option value="${v}" ${v===S.role?"selected":""}>${prof(v).name}</option>`).join("")}</select>`,b2c?"Médico particular: é o cliente e controla o plano.":"Hospital: o perfil define menu, permissões e telas.")
+     +(b2c?f("Plano",seg("pd-plan",S.b2cPlan||"free",[["free","Gratuito"],["pro","Unlimited"]])):"")
+     +f("Uso do plano",seg("pd-use",S.useLvl||"ok",[["ok","Normal"],["near","Perto do limite"],["out","Esgotado"]]),"Mostra os avisos e as travas de uso."),true)}
+   ${sec("cen",`Cenário · ${TITLES[S.route]||"esta tela"}`,cen,true)}
+   ${sec("nav","Navegar",
+     f("Ir para a tela",`<select data-pdgo aria-label="Ir para a tela">${PD_GO.filter(r=>(r!=="planos"||b2c)&&(!GUARD[r]||can(GUARD[r]))).map(r=>`<option value="${r}" ${r===S.route?"selected":""}>${TITLES[r]}</option>`).join("")}</select>`)
+     +`<button class="btn g sm" style="justify-self:start" data-act="go-login">${ic("user","i s")}Começar pelo login</button>`,false)}
+   ${sec("cor",`Cores <span class="pd-cur"><span class="pal-sw">${[0,4,7].map(i=>`<i style="background:${P[2][i]}"></i>`).join("")}</span>${P[0]}</span>`,`<div class="pal-l">${Object.entries(PALS).map(([k,Q])=>`<button class="pal-o ${(S.pal||"lilas")===k?"on":""}" data-act="pal" data-val="${k}" aria-pressed="${(S.pal||"lilas")===k}"><span class="pal-sw">${[0,4,7].map(i=>`<i style="background:${Q[2][i]}"></i>`).join("")}</span><span class="pal-t"><b>${Q[0]}</b><small>${Q[1]}</small></span></button>`).join("")}</div>`,false)}
+  </div>`:""}
    <button class="pd-btn" data-act="pdock" aria-expanded="${!!S.pdock}" title="Controles do protótipo">${ic("sliders","i s")}Protótipo · ${prof(S.role).name}</button></div>`;
 }
 /* Porta única da Lya: modo Clínico (Fale com a Lya, só onde há paciente ou contexto clínico)
@@ -3141,7 +3235,7 @@ function renderOverlay(){
    <div class="src"><div class="tx"><b>Transcrições</b><small>${can("at_trhist")?"Só as dos últimos 90 dias":"Seu perfil não pode exportar transcrições"}</small></div>${sw(false,"tog","",!can("at_trhist"))}</div>
    <div class="src"><div class="tx"><b>Mascarar CPF e telefone</b><small>Política da organização</small></div><span class="chip line">${ic("lock","i s")}Sempre</span></div>
    <div class="dlg-a"><button class="btn q" data-act="close">Cancelar</button><button class="btn p" data-act="hist-exp-go">${ic("down","i s")}Exportar</button></div></div>`}
-  if(S.drawer==="comprov"&&S.c){const c=S.c;h+=`<div class="scrim" data-act="close"></div><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="cp-t"><h3 id="cp-t">Comprovante de integração</h3><div class="cpv">${[["Comprovante",c.intId||"INT-2026-104582"],["Destino","Prontuário do Hospital Aurora · evolução do atendimento 0098231"],["Paciente",PT.nome],["Enviado em","26/10/2026 às 09:47"],["Assinado por","Dra. Helena Duarte · CRM 123456/SP · certificado ICP-Brasil"],["Documentos",["Relatório","Prescrição (Memed)",...(c.docs||[]).map(docName)].join(", ")],["Resposta do hospital","201 · recebido e gravado"],["Integridade","hash SHA-256 9f3a…c71e registrado na Auditoria"]].map(r=>`<span class="small muted">${r[0]}</span><span class="small">${r[1]}</span>`).join("")}</div><div class="dlg-a"><button class="btn g" data-act="toast" data-msg="Comprovante copiado">${ic("copy","i s")}Copiar</button><button class="btn p" data-act="close">Fechar</button></div></div>`}
+  if(S.drawer==="comprov"&&S.c){const c=S.c;h+=`<div class="scrim" data-act="close"></div><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="cp-t"><h3 id="cp-t">Comprovante de integração</h3><div class="cpv">${[["Comprovante",c.intId||"INT-2026-104582"],["Destino","Prontuário do Hospital Aurora · evolução do atendimento 0098231"],["Paciente",PT.nome],["Enviado em","26/10/2026 às 09:47"],["Assinado por","Dra. Helena Duarte · CRM 123456/SP · certificado digital do CFM"],["Documentos",["Relatório","Prescrição (Memed)",...(c.docs||[]).map(docName)].join(", ")],["Resposta do hospital","201 · recebido e gravado"],["Integridade","hash SHA-256 9f3a…c71e registrado na Auditoria"]].map(r=>`<span class="small muted">${r[0]}</span><span class="small">${r[1]}</span>`).join("")}</div><div class="dlg-a"><button class="btn g" data-act="toast" data-msg="Comprovante copiado">${ic("copy","i s")}Copiar</button><button class="btn p" data-act="close">Fechar</button></div></div>`}
   if(S.drawer==="pend"&&S.c){const pl=pendList();h+=`<div class="scrim" data-act="close"></div><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="pd-t"><h3 id="pd-t">${pl.length?`Antes de enviar, ${pl.length>1?`resolva ${pl.length} pendências`:"resolva 1 pendência"}`:"Tudo certo para enviar"}</h3>${pl.length?`<ul class="pend-l">${pl.map(x=>`<li><span><b>${x.t}</b><small>${x.d}</small></span>${x.a}</li>`).join("")}</ul><p class="small muted" style="margin:0">O relatório só vai ao prontuário sem pendências, para não enviar dose, alergia ou conduta sem conferência.</p>`:`<p class="small muted" style="margin:0">Todas as pendências foram resolvidas.</p>`}<div class="dlg-a"><button class="btn q" data-act="close">${pl.length?"Voltar ao relatório":"Fechar"}</button>${pl.length?"":`<button class="btn p" data-act="c-send">${ic("link","i s")}Continuar o envio</button>`}</div></div>`}
   if(S.drawer==="regen"&&S.c){const mx=USE_PLANS[usePlan()].regen,n=(S.c.regen||0)+1,ne=Object.keys(S.c.edits||{}).length;h+=`<div class="scrim" data-act="close"></div><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="rg-t"><h3 id="rg-t">Gerar o relatório de novo?</h3><p class="small muted" style="margin:0">A Lya refaz o relatório com tudo o que foi ouvido até agora (${mmss(S.c.t)}). ${ne?`Suas edições em ${ne} ${ne>1?"seções":"seção"} são mantidas.`:"Não há edições suas para perder."} Condutas assumidas e calculadoras continuam.</p><p class="small" style="margin:0">Esta será a regeneração <b>${n} de ${mx}</b> do seu plano para este relatório.</p><div class="dlg-a"><button class="btn q" data-act="close">Cancelar</button><button class="btn p" data-act="regen-go">${ic("hist","i s")}Gerar de novo</button></div></div>`}
   if(S.drawer==="useat")h+=`<div class="scrim" data-act="close"></div><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="ua-t"><h3 id="ua-t">Não é possível iniciar um novo atendimento</h3>${useWall("at")}<p class="small muted" style="margin:0">Atendimentos já gravados continuam disponíveis no Histórico. Um atendimento em andamento nunca é interrompido pelo limite.</p><div class="dlg-a"><button class="btn q" data-act="close">Fechar</button></div></div>`;
@@ -3158,6 +3252,8 @@ function renderOverlay(){
   if(S.sgOpen)h+=sgPop();
 
   if(S.notif){const r=S.notif;h+=`<div class="scrim clear" data-act="notif"></div><div class="dd-menu notif-p" role="dialog" aria-label="Notificações" style="left:${r.x}px;top:${r.y}px"><div class="nf-h"><b>Notificações</b>${notifUnread()?`<button class="btn q sm" data-act="notif-read">Marcar todas como lidas</button>`:""}</div>${NOTIFS.map((n,k)=>`<button class="nf-o ${n[4]&&!S.notifRead?"new":""}" data-act="notif-go" data-val="${k}">${ic(n[0],"i s")}<span><span>${n[1]}</span><small>${n[2]}</small></span></button>`).join("")}</div>`}
+  if(S.ulang)h+=`<div class="scrim clear" data-act="uilang-x"></div><div class="dd-menu umenu" role="menu" aria-label="Idioma da plataforma" style="left:${S.ulang.x}px;top:${S.ulang.y}px"><div class="ul-h">Idioma da plataforma</div>${UILANG.map(l=>`<button role="menuitemradio" aria-checked="${l[0]===uiL()[0]}" data-act="uilang-set" data-val="${l[0]}"><span class="ul-c">${l[2]}</span>${l[1]}${l[0]===uiL()[0]?`<span style="margin-left:auto;color:var(--btn)">${ic("check","i s")}</span>`:""}</button>`).join("")}<p class="ul-f">Muda só os textos da plataforma. A transcrição segue o idioma do atendimento.</p></div>`;
+  if(S.usize)h+=`<div class="scrim clear" data-act="usize-x"></div><div class="dd-menu umenu" role="menu" aria-label="Tamanho da interface" style="left:${S.usize.x}px;top:${S.usize.y}px;width:220px"><div class="ul-h">Tamanho da interface</div>${USIZE.map((z,i)=>`<button role="menuitemradio" aria-checked="${z[0]===(S.zoom||"p")}" data-act="usize-set" data-val="${z[0]}"><span class="ul-c" style="font-size:${10+i*2}px">A</span>${z[1]}${z[0]===(S.zoom||"p")?`<span style="margin-left:auto;color:var(--btn)">${ic("check","i s")}</span>`:""}</button>`).join("")}</div>`;
   if(S.umenu)h+=`<div class="scrim clear" data-act="umenu-x"></div><div class="dd-menu umenu" role="menu" style="left:${S.umenu.x}px;top:${S.umenu.y}px"><div class="um-h"><span class="avatar">HD</span><span><b>Dra. Helena Duarte</b><small>CRM 123456/SP · ${prof(S.role).name}</small></span></div><button role="menuitem" data-act="conta" data-val="perfil">${ic("user","i s")}Meu perfil</button><button role="menuitem" data-act="conta" data-val="pref">${ic("sliders","i s")}Minhas preferências</button>${isB2C()?`<button role="menuitem" data-act="conta" data-val="fat">${ic("doc","i s")}Faturamento</button>`:""}<button role="menuitem" data-act="go-login">${ic("x","i s")}Sair</button></div>`;
   if(S.toast)h+=`<div class="toast" role="status">${S.toast}</div>`;
   document.getElementById("overlay").innerHTML=h;
@@ -3166,7 +3262,7 @@ function renderOverlay(){
 
 /* ---------- eventos ---------- */
 const langRefresh=()=>{if(S.route==="atendimento"&&S.c)refreshConsult(["head"]);else render()};
-document.addEventListener("click",e=>{if(S.langOpen&&!e.target.closest(".langw")){S.langOpen=null;langRefresh()}if(S.agOpen&&!e.target.closest(".agw:not(.micw)")){S.agOpen=false;render()}if(S.micOpen&&!e.target.closest(".micw")){S.micOpen=false;render()}},true);
+document.addEventListener("click",e=>{if(e.target.closest(".selpop"))return;if(S.langOpen&&!e.target.closest(".langw")){S.langOpen=null;langRefresh()}if(S.agOpen&&!e.target.closest(".agw:not(.micw)")){S.agOpen=false;render()}if(S.micOpen&&!e.target.closest(".micw")){S.micOpen=false;render()}},true);
 document.addEventListener("input",e=>{if(["home-in","full-in","chat-in"].includes(e.target.id)&&e.target.value==="/"){e.target.value="";S.chatPr=e.target.id;e.target.id==="chat-in"?chatRefresh():render();return}if(e.target.id==="hist-q"){S.hf=S.hf||{};S.hf.q=e.target.value;const pos=e.target.selectionStart;render();const n=document.getElementById("hist-q");if(n){n.focus();n.setSelectionRange(pos,pos)}return}if(e.target.id!=="tr-q")return;const q=e.target.value.trim().toLowerCase();S.c.trQ=e.target.value;let n=0;document.querySelectorAll(".tr2 .ln2").forEach(l=>{const ok=!q||l.dataset.tx.includes(q);l.classList.toggle("tr-off",!ok);if(ok)n++});const c=document.getElementById("tr-n");if(c)c.textContent=q?`${n} de ${document.querySelectorAll(".tr2 .ln2").length} trechos`:`${n} trechos`});
 document.addEventListener("input",e=>{if(e.target.id==="ag-q"){const l=document.getElementById("ag-l");if(l)l.innerHTML=agList(e.target.value)}});
 document.addEventListener("keydown",e=>{if(e.target.id!=="ag-q")return;if(e.key==="Escape"){S.agOpen=false;render();const b=document.querySelector(".agb");if(b)b.focus()}if(e.key==="Enter"){const f=document.querySelector("#ag-l .ag-o");if(f)f.click()}if(e.key==="ArrowDown"){e.preventDefault();const f=document.querySelector("#ag-l .ag-o");if(f)f.focus()}});
@@ -3206,6 +3302,13 @@ document.addEventListener("click",e=>{
    case"notif-go":{const n=NOTIFS[+v];S.notif=null;S.notifRead=true;renderOverlay();if(n[3]==="historico"){S.hf={tab:"Erro de envio",per:"30"}}go(n[3]);break}
    case"umenu":{const r=a.getBoundingClientRect();S.umenu=S.umenu?null:{x:Math.min(r.right-240,innerWidth-250),y:r.bottom+8};renderOverlay();break}
    case"umenu-x":S.umenu=null;renderOverlay();break;
+   case"uilang":{const r=a.getBoundingClientRect();S.ulang=S.ulang?null:{x:Math.max(8,Math.min(r.right-260,innerWidth-270)),y:r.bottom+8};S.umenu=null;S.notif=null;renderOverlay();renderTop();break}
+   case"uilang-um":{const b=document.querySelector(".ulang").getBoundingClientRect();S.umenu=null;S.ulang={x:Math.max(8,Math.min(b.right-260,innerWidth-270)),y:b.bottom+8};renderOverlay();break}
+   case"uilang-x":S.ulang=null;renderOverlay();renderTop();break;
+   case"usize":{const r=a.getBoundingClientRect();S.usize=S.usize?null:{x:Math.max(8,Math.min(r.right-220,innerWidth-230)),y:r.bottom+8};S.ulang=null;S.umenu=null;S.notif=null;renderOverlay();renderTop();break}
+   case"usize-x":S.usize=null;renderOverlay();renderTop();break;
+   case"usize-set":{S.zoom=v;S.usize=null;const z=USIZE.find(x=>x[0]===v);document.documentElement.style.zoom=z[2]===1?"":z[2];renderOverlay();renderTop();if(typeof fitMain==="function")fitMain();toast(`Tamanho da interface: ${z[1]}`);break}
+   case"uilang-set":{S.ui=v;S.ulang=null;renderOverlay();renderTop();if(S.route==="conta")render();toast(`Idioma da plataforma: ${uiL()[1]}`);break}
    case"seg-pick":a.parentElement.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===a));break;
    case"conta":S.umenu=null;S.tab.conta=v;renderOverlay();go("conta");break;
    case"pdock":S.pdock=!S.pdock;renderFab();break;
@@ -3219,7 +3322,8 @@ document.addEventListener("click",e=>{
    case"pd-plan":S.b2cPlan=v;S.useExtra={};render();break;
    case"go-uso":S.tab.cfg="uso";go("configuracoes");break;
    case"pd-mic":S.micOff=v==="1";render();break;
-   case"pd-empty":S.emptyDay=v==="1";render();break;
+   case"pd-empty":S.emptyDay=v==="1";if(S.prep)S.prep.pt=null;render();break;
+case"pd-notif":S.notifRead=v==="1";render();break;
    case"empty-day":S.emptyDay=!S.emptyDay;render();break;
    case"lang-tg":S.langOpen=S.langOpen===v?null:v;langRefresh();break;
    case"c-pt":S.c.pop=!S.c.pop;refreshConsult(["head"]);break;
@@ -3376,9 +3480,14 @@ document.addEventListener("click",e=>{
    case"tog":a.setAttribute("aria-checked",a.getAttribute("aria-checked")!=="true");break;
   }
 });
+document.addEventListener("toggle",e=>{const d=e.target;if(d.dataset&&d.dataset.pdsec){S.pdSec=S.pdSec||{};S.pdSec[d.dataset.pdsec]=d.open}},true);
 document.addEventListener("change",e=>{
   if(e.target.dataset.upfile){const fs=[...e.target.files].map(f=>f.name);if(!fs.length)return;toast(`${fs.length>1?fs.length+" arquivos enviados":fs[0]+" enviado"} · ${e.target.dataset.upfile}${/Exames|Base/.test(e.target.dataset.upfile)?" · a Lya está lendo":""}`);return}
   if(e.target.dataset.chatfile){const id=e.target.dataset.chatfile;const fs=[...e.target.files].map(f=>f.name);if(!fs.length)return;S.chatFiles=S.chatFiles||{};S.chatFiles[id]=(S.chatFiles[id]||[]).concat(fs);S.chatPlus=false;id==="home-in"||id==="full-in"?render():chatRefresh();toast(fs.length>1?`${fs.length} arquivos anexados à pergunta`:`${fs[0]} anexado à pergunta`);const ta=document.getElementById(id);if(ta)ta.focus();return}
+  if(e.target.dataset.pf){S.pf[e.target.dataset.pf]={p:e.target.value,reg:null};render();const pf=PROFS.find(x=>x[0]===e.target.value);toast(`Profissão: ${pf[0]} · registro sugerido ${pf[1]}`);return}
+  if(e.target.dataset.pfreg){S.pf[e.target.dataset.pfreg].reg=e.target.value;render();return}
+  if(e.target.dataset.terms!==undefined&&!e.target.checked){e.target.checked=true;toast("Sem o aceite dos termos não dá para usar a Lya");return}
+  if(e.target.dataset.pdgo!==undefined){go(e.target.value);return}
   if(e.target.dataset.hf){S.hf=S.hf||{};S.hf[e.target.dataset.hf]=e.target.type==="checkbox"?e.target.checked:e.target.value;render();return}
   if(e.target.dataset.lang){const L=S.lang;L[e.target.dataset.lang]=e.target.value;const n=x=>x==="auto"?"detecção automática":(LANGS.find(y=>y[0]===x)||[])[1];langRefresh();toast(e.target.dataset.lang==="in"?"Entrada: "+n(L.in):"Saída: "+n(L.out));return}
   if(e.target.id==="prep-file"||e.target.id==="c-file"){const fs=[...e.target.files];if(!fs.length)return;S.prep.files=S.prep.files||[];
@@ -3433,8 +3542,8 @@ function doSend(){const c=S.c;if(!c)return;const pl=pendList();
  setTimeout(()=>{if(!S.c||S.c!==c)return;if(S.intFail&&!isB2C()&&!c.failedOnce){c.failedOnce=true;c.send="fail";cLog("Falha no envio ao prontuário: tempo esgotado (sistema do hospital)");refreshConsult(["head","main","side"]);toast("Não foi possível integrar. O relatório está salvo na Lya.");return}
   c.send=null;c.phase="sent";c.intId="INT-2026-104582";cLog(isB2C()?"Relatório assinado":"Relatório integrado ao prontuário · "+c.intId);refreshConsult(["head","tabs","main","side"]);toast(isB2C()?"Relatório assinado":"Integrado ao prontuário do Hospital Aurora")},1600)}
 /* Diálogos simulados para criar, agir em massa, exportar e excluir: campos de exemplo, confirmação e registro na auditoria */
-const GD={
- convidar:{t:"Convidar usuário",f:[["E-mail","in","nome@hospitalaurora.com.br"],["Perfil","sel",["Médico","Enfermeiro","Gestor","Qualidade"]],["Grupo","sel",["Clínica Médica","Pronto-socorro","Centro cirúrgico"]]],ok:"Enviar convite",m:"Convite enviado. O acesso vale após o primeiro login com 2FA."},
+const GD={"totp":{t:"Trocar o app autenticador",d:"Abra o Google Authenticator ou o Microsoft Authenticator no celular, leia o QR code e digite o código de 6 dígitos que aparecer. O app anterior deixa de funcionar.",f:[["Código do app","","000000"]],ok:"Confirmar",m:"App autenticador atualizado"},
+ convidar:{t:"Convidar usuário",f:[["E-mail","in","nome@hospitalaurora.com.br"],["Profissão","sel",PROFS.map(x=>x[0])],["Perfil","sel",["Médico","Enfermeiro","Gestor","Qualidade"]],["Grupo","sel",["Clínica Médica","Pronto-socorro","Centro cirúrgico"]]],ok:"Enviar convite",m:"Convite enviado. No primeiro acesso a pessoa completa o registro no conselho e configura o app autenticador."},
  revisar:{t:"Usuários para revisar",l:["Marina Costa · sem perfil","Diego Ramos · sem grupo","Lúcia Faria · sem grupo","Pedro Alves · sem grupo"],f:[["Aplicar a todos","sel",["Perfil Médico + grupo Clínica Médica","Só o grupo Clínica Médica"]]],ok:"Aplicar",m:"4 usuários atualizados. Alteração registrada na Auditoria."},
  atribuir:{t:"Atribuir perfil aos selecionados",f:[["Perfil","sel",["Médico","Enfermeiro","Gestor","Qualidade"]]],ok:"Atribuir",m:"Perfil atribuído. Alteração registrada na Auditoria."},
  addgrupo:{t:"Adicionar a grupo",f:[["Grupo","sel",["Clínica Médica","Pronto-socorro","Centro cirúrgico","Enfermagem"]]],ok:"Adicionar",m:"Adicionado ao grupo."},
@@ -3494,4 +3603,38 @@ document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLower
 try{const pl=localStorage.getItem("lya-pal");if(pl&&PALS[pl])applyPal(pl)}catch(_){}
 {const h=(location.hash||"").slice(1);if(h&&(V[h]))S.route=h;}
 render();
+
+/* Lista própria para todo <select>: mesmo cartão do combo de agente, com busca quando há muitas opções e teclado (setas, Enter, Esc).
+   O valor continua no select original e dispara "change", então nenhuma tela precisa mudar. */
+(function(){
+  let pop=null,cur=null;
+  const close=(focus)=>{if(pop){pop.remove();pop=null}if(cur){cur.classList.remove("sel-open");if(focus)cur.focus()}cur=null};
+  const pick=(sel,i)=>{if(sel.selectedIndex!==i){sel.selectedIndex=i;sel.dispatchEvent(new Event("input",{bubbles:true}));sel.dispatchEvent(new Event("change",{bubbles:true}))}close(false)};
+  function open(sel){
+    close(false);if(sel.disabled||sel.multiple)return;cur=sel;sel.classList.add("sel-open");
+    const opts=[...sel.options],many=opts.length>8,r=sel.getBoundingClientRect();
+    pop=document.createElement("div");pop.className="selpop";pop.setAttribute("role","dialog");pop.setAttribute("aria-label",sel.getAttribute("aria-label")||"Escolher opção");
+    pop.innerHTML=(many?`<label class="ag-s">${ic("search","i s")}<input class="sp-q" autocomplete="off" placeholder="Digite para buscar" aria-label="Buscar opção"></label>`:"")+`<div class="ag-l" role="listbox">${opts.map((o,i)=>`<button type="button" role="option" class="ag-o ${i===sel.selectedIndex?"on":""}" aria-selected="${i===sel.selectedIndex}" data-i="${i}" ${o.disabled?"disabled":""}>${o.textContent}${i===sel.selectedIndex?ic("check","i s"):""}</button>`).join("")}</div>`;
+    document.body.appendChild(pop);
+    const w=Math.max(r.width,200),h=pop.offsetHeight,below=innerHeight-r.bottom-8;
+    pop.style.width=w+"px";pop.style.left=Math.min(r.left,innerWidth-w-8)+"px";
+    pop.style.top=(below<h&&r.top>h?r.top-h-6:r.bottom+6)+"px";
+    const on=pop.querySelector(".ag-o.on")||pop.querySelector(".ag-o");
+    const q=pop.querySelector(".sp-q");
+    if(q){q.focus();q.addEventListener("input",()=>{const t=q.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");pop.querySelectorAll(".ag-o").forEach(b=>b.hidden=!!t&&!b.textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").includes(t))})}
+    else if(on)on.focus();
+    if(on)on.scrollIntoView({block:"nearest"});
+    pop.addEventListener("click",e=>{const b=e.target.closest(".ag-o");if(b)pick(sel,+b.dataset.i)});
+    pop.addEventListener("keydown",e=>{const all=[...pop.querySelectorAll(".ag-o:not([hidden]):not([disabled])")],i=all.indexOf(document.activeElement);
+      if(e.key==="Escape"){e.preventDefault();close(true)}
+      else if(e.key==="ArrowDown"){e.preventDefault();(all[i+1]||all[0])?.focus()}
+      else if(e.key==="ArrowUp"){e.preventDefault();if(i<=0&&q)q.focus();else (all[i-1]||all[all.length-1])?.focus()}
+      else if(e.key==="Enter"&&document.activeElement===q){e.preventDefault();if(all[0])pick(sel,+all[0].dataset.i)}
+      else if(e.key==="Tab")close(false)});
+  }
+  document.addEventListener("mousedown",e=>{const sel=e.target.closest("select");if(sel&&!sel.multiple&&!sel.dataset.native){e.preventDefault();if(cur===sel){close(true);return}sel.focus();open(sel);return}if(pop&&!e.target.closest(".selpop"))close(false)},true);
+  document.addEventListener("keydown",e=>{const sel=e.target.closest&&e.target.closest("select");if(!sel||sel.multiple||sel.dataset.native)return;if(e.key===" "||e.key==="Enter"||(e.key==="ArrowDown"&&e.altKey)||e.key==="F4"){e.preventDefault();open(sel)}},true);
+  addEventListener("resize",()=>close(false));
+  document.addEventListener("scroll",e=>{if(pop&&!(e.target.closest&&e.target.closest(".selpop")))close(false)},true);
+})();
 </script>

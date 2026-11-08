@@ -631,6 +631,11 @@ pre.jr-code{margin:0;padding:14px 16px;border-radius:12px;background:#0F1B2D;col
         <div class="jr-st done"><i>06</i><b>Gerar relatório</b><span>Geração em etapas, abas Relatório e Prescrição, documentos com “Criar”.</span><span class="jr-tag">Ajustada</span></div>
         <div class="jr-st done"><i>07</i><b>Revisar, encerrar e integrar</b><span>Pendências, encerrar, assinar e enviar ao prontuário, confirmação de integrado.</span><span class="jr-tag">Ajustada</span></div>
         <div class="jr-st done"><i>08</i><b>Histórico</b><span>Atendimento congelado como terminou e versões IA × final de cada documento.</span><span class="jr-tag">Ajustada</span></div>
+        <div class="jr-st done"><i>09</i><b>Pacientes</b><span>Lista, ficha, atender e último atendimento.</span><span class="jr-tag">Verificada</span></div>
+        <div class="jr-st done"><i>10</i><b>Prompts</b><span>Lista, Novo Prompt, editor, teste e publicação.</span><span class="jr-tag">Verificada</span></div>
+        <div class="jr-st done"><i>11</i><b>Agentes</b><span>Estrutura do atendimento, recursos e integrações.</span><span class="jr-tag">Verificada</span></div>
+        <div class="jr-st done"><i>12</i><b>Calculadoras</b><span>Ativar, agentes e origem dos dados.</span><span class="jr-tag">Verificada</span></div>
+        <div class="jr-st done"><i>13</i><b>Base de conhecimento</b><span>Documentos, indexação e uso nos Prompts.</span><span class="jr-tag">Verificada</span></div>
       </div>
 
       <div class="scroll-x" style="margin:0 0 18px"><table class="metrics">
@@ -849,6 +854,62 @@ pre.jr-code{margin:0;padding:14px 16px;border-radius:12px;background:#0F1B2D;col
           <tr><td><b>Não sumarizado</b></td><td>“Sem documentos” e “Por quê?”.</td><td>Por quê?</td><td>Explica o motivo (ex.: atendimento curto demais para sumarizar).</td></tr>
           <tr><td><b>Exportar</b></td><td>“Exportar N atendimentos” com os filtros da tela: formato (CSV ou PDF dos relatórios), relatórios finais, versões IA × final, transcrições (só com permissão e até 90 dias), CPF e telefone sempre mascarados.</td><td>Exportar · Cancelar</td><td>Download preparado e exportação registrada na Auditoria (quem, quando, o quê).</td></tr>
         </tbody></table></div>
+          <div class="jr-h"><h3>09 · Pacientes</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Verificada</span></div>
+      <div class="scroll-x"><table class="metrics"><thead><tr><th>Tela · estado</th><th>Entradas</th><th>Saídas</th><th>Permissão</th><th>Verificação</th></tr></thead><tbody>
+          <tr><td><b>Lista</b></td><td>Busca (nome, setor ou ID externo), setor, período (Hoje, Últimas 36 h, Todos), página e tamanho da página.</td><td>Lista paginada com o total (“21–30 de 86 pacientes”). Sem resultado: estado vazio com “Limpar filtros”.</td><td>Ver a lista: perfil clínico. Ações pedem <span class="mono">at_criar</span>.</td><td>Cliques e filtros testados, sem erro.</td></tr>
+          <tr><td><b>Atender</b></td><td>Botão “Atender” na linha do paciente.</td><td>Abre a preparação do atendimento já com o paciente escolhido. Com agente de Fluxo cirúrgico, passa pelas etapas antes.</td><td><span class="mono">at_criar</span></td><td>Testado.</td></tr>
+          <tr><td><b>Último atendimento</b></td><td>Botão na linha ou na ficha.</td><td>Abre o atendimento como ficou ao encerrar, com “Voltar para Pacientes”. Paciente sem histórico abre o exemplo.</td><td><span class="mono">at_trhist</span></td><td>Testado. No protótipo só os 4 pacientes originais têm histórico próprio.</td></tr>
+          <tr><td><b>Ficha</b></td><td>Clique na linha ou em “Ficha”.</td><td>Ficha do paciente: dados do prontuário (somente leitura) e manuais (editáveis, marcados como Manual e auditados).</td><td><span class="mono">at_criar</span>, <span class="mono">at_exam</span> para anexos</td><td>Testado.</td></tr>
+          <tr><td><b>Novo paciente · Atender sem cadastro</b></td><td>Formulário de cadastro; ou entrada direta no atendimento sem identificação.</td><td>Paciente criado volta para a lista com selo “novo”; atendimento sem cadastro não gera ficha.</td><td><span class="mono">at_criar</span></td><td>Testado.</td></tr>
+        </tbody></table></div>
+
+
+      <div class="jr-h"><h3>10 · Prompts</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Verificada</span></div>
+      <div class="scroll-x"><table class="metrics"><thead><tr><th>Tela · estado</th><th>Entradas</th><th>Saídas</th><th>Permissão</th><th>Verificação</th></tr></thead><tbody>
+          <tr><td><b>Lista</b></td><td>Busca (nome ou descrição), aba Personalizados ou Padrão, tipo (Prompt, Função agente, Aviso fixo), momento (Tempo real, Relatório, Documento), ordenação (Mais novo, Mais usado, A a Z), página (12, 24 ou 48).</td><td>Cartões paginados. Cada cartão leva ao editor. Sem resultado: “Nenhum Prompt com esses filtros”.</td><td><span class="mono">sa_list</span>. “Novo Prompt”: <span class="mono">sa_criar</span>.</td><td>Ordenação não funcionava; corrigida. Demais controles testados.</td></tr>
+          <tr><td><b>Novo Prompt</b></td><td>Escolha do modelo (descrever ou subir documento, Relatório completo, Documento, Duplicar, Aviso fixo, Extrair, Função agente, Checklist, Classificar, Tabela).</td><td>Cria o rascunho e abre o editor. “Duplicar existente” abre o diálogo para escolher o Prompt de origem.</td><td>Tempo real e Função agente só com <span class="mono">sa_rt</span>.</td><td>Testado.</td></tr>
+          <tr><td><b>Editor · Prompt e Aviso fixo</b></td><td>Nome, texto colado ou PDF (“Estruturar com a Lya”), tipo, momento, campos de resposta, fontes, formato do cartão, texto do aviso.</td><td>Prévia ao vivo, estado Salvo ou Publicado, contrato e integração em JSON. “Publicar” só depois do teste e sem pendências.</td><td><span class="mono">sa_edit</span>, <span class="mono">sa_pub</span></td><td>Testado, inclusive Excluir (diálogo) e Publicar.</td></tr>
+          <tr><td><b>Editor · Função agente</b></td><td>Tudo do Prompt, mais: ferramenta (chamada de funções, arquivos ou busca na web) e <b>Como aparece no atendimento</b> (cartão ou alerta no topo, com campos de texto, conduta e nível lidos da resposta).</td><td>Contrato com <span class="mono">alerta</span> (titulo.campo, conduta.campo, nivel, exibir_quando).</td><td><span class="mono">sa_rt</span></td><td>Testado no editor. A faixa de Sugestões do atendimento ainda não lê esses alertas.</td></tr>
+          <tr><td><b>Teste</b></td><td>Texto de atendimento de exemplo ou colado.</td><td>Resultado simulado e marca “Testado”; abas Contrato e Integração.</td><td><span class="mono">sa_edit</span></td><td>Testado.</td></tr>
+        </tbody></table></div>
+
+
+      <div class="jr-h"><h3>11 · Agentes</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Verificada</span></div>
+      <div class="scroll-x"><table class="metrics"><thead><tr><th>Tela · estado</th><th>Entradas</th><th>Saídas</th><th>Permissão</th><th>Verificação</th></tr></thead><tbody>
+          <tr><td><b>Lista</b></td><td>Busca por nome, filtros de Prompt e Grupo, ordenação, aba Personalizados ou Padrão, página (12, 24 ou 48).</td><td>Cartões com o resumo do agente e o grupo (sem contagem de pessoas). “Novo agente” cria o rascunho e abre a tela do agente.</td><td><span class="mono">as_list</span>, <span class="mono">as_criar</span></td><td>Filtros Prompt, Grupo e Ordenação não funcionavam; corrigidos. Agente novo não entrava na lista; corrigido.</td></tr>
+          <tr><td><b>Tela do agente</b></td><td>Identidade e acesso (nome, descrição, grupos); Estrutura do atendimento (Em tempo real, Relatório, Documentos, com Inserir, subir, descer e remover); recursos (Atendimento anterior, Fluxo cirúrgico, Fale com a Lya, Anexos, Dados Clínicos, Calculadoras) e integrações (Memed, Mevo).</td><td>O atendimento passa a mostrar só o que o agente liga. Anexos desligado oculta o envio na tela inicial, em Minhas notas e em Dados Clínicos.</td><td><span class="mono">as_edit</span>; tempo real e Função agente: <span class="mono">sa_rt</span> e contrato.</td><td>Testado (41 controles).</td></tr>
+          <tr><td><b>Salvar</b></td><td>Botão Salvar.</td><td>Valida nome, descrição e ao menos um grupo; com falha mostra “Preencha … antes de salvar”. Salvo tira a marca de rascunho.</td><td><span class="mono">as_edit</span></td><td>Antes só mostrava o aviso; validação criada.</td></tr>
+          <tr><td><b>Duplicar e Excluir</b></td><td>Botões no topo da tela do agente.</td><td>Duplicar cria “Cópia de …” e abre a cópia. Excluir pede confirmação; quem usava passa ao Padrão da Lya e o evento vai para a Auditoria. O agente Padrão não se exclui.</td><td>Duplicar: <span class="mono">as_criar</span>. Excluir: <span class="mono">as_del</span>.</td><td>Criados nesta rodada e testados.</td></tr>
+        </tbody></table></div>
+
+
+      <div class="jr-h"><h3>12 · Calculadoras</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Verificada</span></div>
+      <div class="scroll-x"><table class="metrics"><thead><tr><th>Tela · estado</th><th>Entradas</th><th>Saídas</th><th>Permissão</th><th>Verificação</th></tr></thead><tbody>
+          <tr><td><b>Lista</b></td><td>Busca por nome, sigla ou fórmula; especialidade; situação (Todas, Ativas, Desativadas, Revisar); “Ativar as mais usadas”.</td><td>Catálogo de 74 calculadoras por especialidade, com quantas estão ativas.</td><td><span class="mono">sa_list</span></td><td>164 controles testados, sem erro.</td></tr>
+          <tr><td><b>Configuração de uma calculadora</b></td><td>Ativar, agentes em que aparece (todos ou escolhidos), de onde a Lya preenche cada campo (cadastro, Dados Clínicos, fala ou digitado) e onde o resultado entra no relatório.</td><td>A calculadora aparece na aba Calculadoras do atendimento dos agentes escolhidos. O agente pode ocultar a aba inteira.</td><td><span class="mono">sa_list</span></td><td>Testado.</td></tr>
+        </tbody></table></div>
+
+
+      <div class="jr-h"><h3>13 · Base de conhecimento</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Verificada</span></div>
+      <div class="scroll-x"><table class="metrics"><thead><tr><th>Tela · estado</th><th>Entradas</th><th>Saídas</th><th>Permissão</th><th>Verificação</th></tr></thead><tbody>
+          <tr><td><b>Lista</b></td><td>Busca por nome, tipo (Protocolo clínico, Diretriz, Tabela, Manual), situação (Indexado, Indexando, Erro de leitura), página.</td><td>Tabela paginada. Sem resultado: estado vazio com “Limpar filtros”.</td><td><span class="mono">sa_list</span></td><td>Era só uma tabela fixa; busca, filtros e paginação criados.</td></tr>
+          <tr><td><b>Enviar documento</b></td><td>Um ou mais arquivos.</td><td>O documento entra na lista como “Indexando” e o aviso diz que a Lya está lendo.</td><td><span class="mono">sa_edit</span></td><td>Criado e testado.</td></tr>
+          <tr><td><b>Reindexar e Excluir</b></td><td>Botões na linha do documento.</td><td>Reindexar volta o documento para “Indexando”. Excluir pede confirmação: a Lya deixa de citar o documento no chat e nos Prompts, e a exclusão vai para a Auditoria.</td><td><span class="mono">sa_edit</span></td><td>Criados e testados.</td></tr>
+        </tbody></table></div>
+
+
+      <div class="jr-h"><h3>Verificação das telas · Clínico e Inteligência · 08/11/2026</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Feita</span></div>
+      <div class="prose"><p><b>Como foi feito:</b> um roteiro automático clicou em cada controle de cada tela (mais de 520 controles, inclusive os diálogos que eles abrem), nos estados do atendimento (início, final e relatório), nos três tipos de Prompt e na tela do agente, e anotou erros de script e cliques sem efeito. Antes, uma varredura do código conferiu que toda ação tem tratamento, todo link aponta para uma tela existente e toda permissão usada está definida. Os cliques sem efeito que sobraram eram diálogos e menus que mudam fora da área comparada; foram conferidos à mão.</p></div>
+      <div class="scroll-x"><table class="metrics"><thead><tr><th>Resultado</th><th>O que foi achado</th><th>Situação</th></tr></thead><tbody>
+          <tr><td><b>Erros de script</b></td><td>Nenhum, em todas as telas e estados testados.</td><td><span class="tag ok">Sem erro</span></td></tr>
+          <tr><td><b>Controle sem efeito</b></td><td>Ordenação da lista de Prompts; filtros de Prompt, Grupo e Ordenação da lista de Agentes.</td><td><span class="tag ok">Corrigido</span></td></tr>
+          <tr><td><b>Quebra criada por mim</b></td><td>Agente novo não aparecia na lista de Agentes depois da paginação. Renomear agente aceitava nome repetido.</td><td><span class="tag ok">Corrigido</span></td></tr>
+          <tr><td><b>Faltando</b></td><td>Agente: validação ao salvar, Duplicar e Excluir. Base de conhecimento: busca, filtros, paginação, estado vazio, Reindexar, Excluir e entrada do documento enviado.</td><td><span class="tag ok">Criado</span></td></tr>
+          <tr><td><b>Faltando · em aberto</b></td><td>A faixa de Sugestões do atendimento ainda não lê os alertas criados no editor da Função agente.</td><td><span class="tag med">Aberto</span></td></tr>
+          <tr><td><b>Faltando · em aberto</b></td><td>Permissões que existem no perfil, mas ainda não mudam nenhuma tela: <span class="mono">at_listas</span>, <span class="mono">at_veras</span>, <span class="mono">at_ant</span>, <span class="mono">at_reproc</span>, <span class="mono">sa_prompt</span>, <span class="mono">sa_prev</span>, <span class="mono">sa_melh</span>, <span class="mono">sa_eint</span>, <span class="mono">sa_erep</span>, <span class="mono">sa_vint</span>, <span class="mono">sa_vrep</span> e o grupo legado <span class="mono">ag_*</span>. O back precisa aplicá-las; o protótipo ainda não as exercita.</td><td><span class="tag med">Aberto</span></td></tr>
+          <tr><td><b>Decisão pendente</b></td><td>Fluxo cirúrgico grava dados em Dados Clínicos: impedir o agente de ligar o Fluxo cirúrgico com Dados Clínicos desligado, ou deixar livre. Filtro “Tipo” aparece duas vezes na lista de Prompts. Médico particular criar Prompt de tempo real.</td><td><span class="tag med">Decidir</span></td></tr>
+          <tr><td><b>Limite do protótipo</b></td><td>Os dados são de exemplo. “Último atendimento” de um paciente gerado abre o exemplo; as listas paginam no front, e no produto vêm do servidor.</td><td><span class="tag ok">Conhecido</span></td></tr>
+      </tbody></table></div>
     </section>
 
     <section class="s" id="uso">

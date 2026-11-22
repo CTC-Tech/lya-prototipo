@@ -829,6 +829,23 @@ pre.jr-code{margin:0;padding:14px 16px;border-radius:12px;background:#0F1B2D;col
           <tr><td><b>Prescrição e documentos</b></td><td>Prescrição montada na Memed (com sugestões de protocolo para confirmar); “Criar” para documentos liberados ao perfil.</td><td>Adicionar/Ignorar sugestão · Criar documento · remover documento</td><td>Abas de documento podem rolar com setas quando não cabem.</td></tr>
         </tbody></table></div>
 
+      <div class="jr-h"><h3>06 · Avaliação do relatório</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">No protótipo</span></div>
+      <div class="prose"><p>Ao fim do relatório, abaixo das seções, um cartão pergunta <b>“Como você avaliaria este relatório?”</b> com 5 estrelas. É a nota do médico sobre o texto que a Lya escreveu, e alimenta o CSAT dos médicos na tela Relatórios.</p></div>
+      <div class="jr-spec">
+        <div class="box"><h4>Comportamento</h4><ul>
+          <li><b>Quando aparece:</b> só depois que o relatório está pronto (nunca durante o atendimento ou a geração). Não bloqueia revisar, assinar nem enviar ao prontuário.</li>
+          <li><b>4 ou 5 estrelas:</b> envia na hora e agradece. <b>3 ou menos:</b> pergunta o que pesou (Faltou informação, Informação errada, Texto longo demais, Formato ruim, Demorou muito, Outro) e aceita um comentário opcional, e só então envia.</li>
+          <li><b>Alterar:</b> o médico pode mudar a nota depois. Vale a última.</li>
+          <li><b>Quem avalia:</b> o profissional que atendeu (permissão <span class="mono">at_criar</span>). Atendimento aberto pelo Histórico também pode ser avaliado.</li>
+          <li><b>Histórico:</b> a lista mostra a nota de cada atendimento integrado (“★ 4”) ou um traço.</li>
+        </ul></div>
+        <div class="box"><h4>Como implementar</h4><ul>
+          <li><b>Evento</b> <span class="mono">relatorio.avaliado</span>: <span class="mono">{ atendimento_id, relatorio_id, nota (1 a 5), motivos[], comentario, agente, versoes_dos_prompts[], profissional, quando }</span>. Um por atendimento; novo envio substitui o anterior e mantém o registro.</li>
+          <li><b>Para melhorar os Prompts:</b> guardar a versão de cada Prompt que compôs o relatório, para cruzar nota × Prompt × agente e achar o que puxa a nota para baixo.</li>
+          <li><b>Relatórios:</b> o CSAT dos médicos é a média das notas no período, com o número de respostas e o filtro por agente. Notas de 1 e 2 entram numa lista para a gestão revisar.</li>
+          <li><b>Privacidade:</b> o comentário é texto livre e pode trazer dado do paciente; tratar como o resto do atendimento, com a mesma retenção e sem expor o nome do paciente na análise agregada.</li>
+        </ul></div>
+      </div>
       <div class="jr-h"><h3>07 · Revisar, encerrar e integrar</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Ajustada</span></div>
       <div class="prose"><p>Uma ação só, em dois lugares (cabeçalho “Assinar e enviar ao prontuário” e barra do relatório “Integrar ao prontuário”), que segue sempre a mesma ordem: <b>pendências → encerrar → assinar e enviar → integrado</b> (ou falha com nova tentativa).</p></div>
       <div class="scroll-x"><table class="metrics">
@@ -1528,6 +1545,46 @@ POST /v1/uso/checar
         <div><b>Banner</b><span>Faixa que fica na tela até ser fechada: informativa, verde (publicado), âmbar (atenção).</span><span class="new">revisado</span></div>
       </div>
     
+      <h3>Navegação pelo teclado (TAB)</h3>
+      <p class="small muted" style="max-width:72ch">O front novo precisa funcionar só com o teclado, de ponta a ponta. Vale para toda tela e todo componente novo.</p>
+      <div class="jr-spec">
+        <div class="box"><h4>Regras</h4><ul>
+          <li><b>Tudo o que se clica recebe foco.</b> Botão, link, cartão, linha de tabela, pílula e menu entram na ordem do TAB. Elemento que não é botão ou link de verdade leva <span class="mono">tabindex="0"</span>, papel (<span class="mono">role</span>) e nome, e responde a <b>Enter</b> e <b>Espaço</b>. Preferir sempre o elemento nativo.</li>
+          <li><b>Ordem de leitura:</b> segue a tela, da esquerda para a direita e de cima para baixo. Nunca usar <span class="mono">tabindex</span> maior que 0.</li>
+          <li><b>Foco sempre visível:</b> anel de 2 px, com contraste, em todo controle (inclusive campos de busca, o seletor de agente e o cartão escuro de avaliação). Nunca tirar o contorno sem pôr outro no lugar.</li>
+          <li><b>Pular para o conteúdo:</b> primeiro item do TAB, aparece ao receber foco e leva ao conteúdo da tela, depois do menu lateral e do cabeçalho.</li>
+          <li><b>Trocar de tela:</b> o foco vai para o título da nova tela, para quem usa leitor de tela ou teclado não ficar preso no menu.</li>
+          <li><b>Menu lateral:</b> recolhido mostra só ícones; ao receber foco ele abre e mostra os nomes.</li>
+          <li><b>Janelas e painéis:</b> o foco entra na janela, o TAB circula só dentro dela, <b>Esc</b> fecha e o foco volta ao botão que abriu. Fora delas, o fundo não recebe foco.</li>
+          <li><b>Menus e seletores:</b> Esc fecha e devolve o foco ao botão. Setas andam entre as opções.</li>
+          <li><b>Abas, grupos de opções e estrelas:</b> setas ← → (e Home, End) andam entre os itens; Enter ou Espaço escolhe.</li>
+          <li><b>Mensagens:</b> avisos (toast) e erros de formulário são anunciados por região viva (<span class="mono">aria-live</span>), sem roubar o foco.</li>
+        </ul></div>
+        <div class="box"><h4>Atalhos</h4><ul>
+          <li><span class="mono">Tab</span> e <span class="mono">Shift + Tab</span>: próximo e anterior.</li>
+          <li><span class="mono">Enter</span> ou <span class="mono">Espaço</span>: aciona o item em foco.</li>
+          <li><span class="mono">Esc</span>: fecha menu, painel ou janela.</li>
+          <li><span class="mono">← →</span>: entre abas, opções e estrelas.</li>
+          <li><span class="mono">Ctrl + J</span>: abre o Fale com a Lya. No campo de pergunta, <span class="mono">/</span> abre as perguntas prontas.</li>
+          <li>A Ajuda da Lya lista esses atalhos e responde “Quais atalhos de teclado posso usar?”.</li>
+        </ul></div>
+      </div>
+      <h3>Ajuda contextual</h3>
+      <p class="small muted" style="max-width:72ch">A Ajuda da Lya abre sabendo em que tela a pessoa está.</p>
+      <div class="jr-spec">
+        <div class="box"><h4>Como funciona</h4><ul>
+          <li><b>Quadro “Nesta tela”:</b> ao abrir a Ajuda, o primeiro quadro traz o nome da tela, o que ela faz, três dicas e perguntas prontas daquela tela, com o atalho “Como uso esta tela?”.</li>
+          <li><b>Pergunta livre:</b> “como uso esta tela?” e “quais atalhos posso usar?” são respondidas com o conteúdo da tela atual. O resto segue a documentação oficial.</li>
+          <li><b>Sem dado de paciente:</b> a Ajuda nunca recebe nem mostra dado clínico. Perguntas clínicas vão para o Fale com a Lya.</li>
+          <li><b>Chamado:</b> “Abrir chamado” leva junto a tela, a versão e o navegador.</li>
+        </ul></div>
+        <div class="box"><h4>Como implementar</h4><ul>
+          <li><b>Conteúdo por tela:</b> um registro por rota (<span class="mono">rota → título, descrição, dicas[], perguntas[]</span>), mantido pelo time de produto fora do código. O protótipo já cobre as telas de Clínico e Inteligência.</li>
+          <li><b>Contexto enviado ao abrir:</b> <span class="mono">{ rota, perfil, agente, fase do atendimento }</span>, para a dica mudar quando o atendimento muda de fase.</li>
+          <li><b>Medir:</b> perguntas mais feitas por tela e chamados abertos depois da Ajuda, para saber onde a tela precisa de mais clareza.</li>
+          <li><b>Próximo passo:</b> oferecer a ajuda sozinha na primeira vez que a pessoa entra numa tela nova, com “Não mostrar de novo”.</li>
+        </ul></div>
+      </div>
       <h3>Paginação das listas</h3>
       <p class="small muted" style="max-width:72ch">As listas do produto chegam a centenas ou milhares de registros. O front nunca recebe a lista inteira: pede uma página por vez e desenha o que veio.</p>
       <div class="scroll-x"><table class="metrics">

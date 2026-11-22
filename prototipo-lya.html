@@ -362,6 +362,12 @@ body:not(.nav-open):not(.nav-peek) .brand{justify-content:center;padding:0}
 @media (max-width:1000px){.cbody{grid-template-columns:minmax(0,1fr)}}
 .cmain{padding:0;overflow:hidden;min-height:420px}
 .cmain > *:not(.nbar):not(.note){margin:16px}
+.rate{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:14px 0 4px;padding:16px 20px;border-radius:16px;background:#14233B;color:#fff}
+.rate b{font-size:14.5px;font-weight:600;max-width:24ch;line-height:1.3}.rate .stars{display:flex;gap:6px}
+.rate .st{width:34px;height:34px;display:grid;place-items:center;border:0;background:transparent;color:#fff;cursor:pointer;border-radius:8px;padding:0}
+.rate .st svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round}.rate .st.on svg{fill:#F5C451;stroke:#F5C451}.rate .st:hover svg,.rate .st:focus-visible svg{stroke:#F5C451}
+.rate-x{display:grid;gap:10px;margin:0 0 4px;padding:14px 20px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.rate-x .chips button{cursor:pointer}.rate-ok{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;margin:10px 0 4px;padding:12px 16px;border-radius:12px;background:var(--ok-tint);color:var(--ok)}
 .nbar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line)}
 .nbar .sp{flex:1}
 .nst{display:inline-flex;gap:8px;align-items:center}
@@ -1644,8 +1650,17 @@ pre.code{margin:0;background:var(--surface-2);border-radius:8px;padding:12px;fon
   body.nav-peek:not(.nav-open) .side .nl,body.nav-peek:not(.nav-open) .side .nav-sec{animation:navfade .2s ease .08s both}
   @keyframes navfade{from{opacity:0}to{opacity:1}}
 }
+.skip{position:fixed;left:12px;top:-64px;z-index:9999;padding:10px 16px;border-radius:10px;background:var(--btn);color:#fff;font:600 13px var(--f-sans);border:0;cursor:pointer;transition:top .15s}.skip:focus{top:12px}
+#view:focus,#view h1:focus{outline:none}
+:is(.search,.composer,.ask,.ch-comp):focus-within{box-shadow:0 0 0 3px var(--navy-tint);border-color:var(--btn)}
+.hp2-pill:focus-within{outline:2px solid var(--teal);outline-offset:2px}
+tr.click:focus-visible{outline:2px solid var(--teal);outline-offset:-2px;background:var(--navy-tint)}
+.hp-ctx{display:grid;gap:8px;text-align:left;margin:14px 0 4px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.hp-ctx h3{font-size:13.5px;display:flex;gap:8px;align-items:center}.hp-ctx ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:13px}.hp-ctx .chips button{cursor:pointer}
+.hp-kb{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13px;margin:6px 0}.hp-kb kbd{font:600 11.5px var(--f-mono,monospace);padding:2px 7px;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;background:var(--surface-2);white-space:nowrap}
 </style>
 
+<button class="skip" type="button" data-act="skip">Pular para o conteúdo</button>
 <div class="shell">
   <aside class="side" id="side" aria-label="Menu principal"></aside>
   <div class="main">
@@ -1715,7 +1730,7 @@ const TITLES={login:"Entrar",versoes:"Versões dos documentos",conta:"Minha cont
 function go(r){
   /* agente com Fluxo cirúrgico: qualquer entrada para um novo atendimento passa pelas etapas antes (nunca cai no fluxo clínico) */
   if(r==="atendimento"&&S.route!=="atendimento"&&!(S.route==="anterior"&&S.c)&&!S.cirNext&&!isB2C()&&agcOf(S.prep.as).flux){S.cirEdit=false;S.cir=cirNew();S.drawer="cir";renderOverlay();return}
-  if(r==="atendimento"&&S.route!=="atendimento"&&!(S.route==="anterior"&&S.c))newConsult("live");if(r==="relatorio")newConsult("rev");S.route=r;S.menu=false;try{history.replaceState(null,"","#"+r)}catch(e){}render();window.scrollTo(0,0)}
+  if(r==="atendimento"&&S.route!=="atendimento"&&!(S.route==="anterior"&&S.c))newConsult("live");if(r==="relatorio")newConsult("rev");const prevR=S.route;S.route=r;S.menu=false;try{history.replaceState(null,"","#"+r)}catch(e){}render();window.scrollTo(0,0);if(prevR!==r)setTimeout(kbMain,30)}
 /* Resposta ao usuário (padrão da plataforma): toast com tipo, título, detalhe e ação opcional.
    toast("Rascunho salvo · Salvo às 14:32") ou toast("Publicado",{detail:"...",type:"ok",action:{label:"Ver na lista",go:"smartapps"}}).
    Sem tipo, ele é deduzido do texto: ok (concluído), warn (atenção ou bloqueio), err (falha) ou info. */
@@ -2023,6 +2038,17 @@ function cTabs(){
 function intMsgHtml(c){return c.send==="fail"?`<div class="int-msg fail">${ic("alert","i s")}<div><b>Não foi possível integrar ao prontuário</b><span>O sistema do hospital não respondeu a tempo. Nada foi perdido: o relatório está salvo e assinado na Lya. A Lya tenta de novo sozinha a cada 5 minutos, por 1 hora, e avisa o resultado.</span></div><button class="btn p sm" data-act="c-send">${ic("hist","i s")}Tentar de novo</button><button class="btn q sm" data-act="int-detail">Ver detalhes</button></div>`
    :c.phase==="sent"&&!isB2C()?`<div class="int-msg ok">${ic("check","i s")}<div><b>Integrado ao prontuário do Hospital Aurora · 09:47</b><span>${c.cir?"Descrição cirúrgica, OPME codificado, Prescrição":"Relatório, Prescrição"}${(c.docs||[]).length?` e ${c.docs.length} ${c.docs.length>1?"documentos":"documento"}`:""} enviados e assinados por ${S.c.hist?S.c.hist.who:"Dra. Helena Duarte"} · comprovante ${c.intId||"INT-2026-104582"}. Mudanças a partir de agora entram como adendo.</span></div><button class="btn q sm" data-act="int-detail">Ver comprovante</button></div>`
    :c.phase==="sent"&&isB2C()?`<div class="int-msg ok">${ic("check","i s")}<div><b>Relatório assinado · 09:47</b><span>PDF pronto para baixar ou enviar ao paciente. Mudanças a partir de agora entram como adendo.</span></div></div>`:""}
+/* Avaliação do relatório: 5 estrelas ao fim do relatório. 4 ou 5 envia na hora; 3 ou menos pergunta o motivo.
+   Guardada por atendimento (S.rt[chave]) e alimenta o CSAT em Relatórios. */
+const RATE_WHY=["Faltou informação","Informação errada","Texto longo demais","Formato ruim","Demorou muito","Outro"];
+const rateKey=()=>S.c&&S.c.hist?"h"+(S.histSel||0):"live";
+const rateOf=k=>{S.rt=S.rt||{};return S.rt[k]||(S.rt[k]={n:0,m:[],t:"",ok:false})};
+const ratePrev=i=>{const r=HIST[i];if(!r||r[4]!=="Integrado")return 0;return [5,4,5,4,3,5,4,2,5,4][(i*7+3)%10]};
+const STAR='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.6 5.5 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.5l6-.8z"/></svg>';
+function rateHtml(){const c=S.c;if(!c||c.phase==="live"||c.phase==="gen"||!can("at_criar"))return "";const r=rateOf(rateKey());
+ const stars=`<div class="stars" role="radiogroup" aria-label="Nota do relatório">${[1,2,3,4,5].map(n=>`<button class="st ${n<=r.n?"on":""}" role="radio" aria-checked="${n===r.n}" data-act="rate" data-val="${n}" aria-label="${n} ${n>1?"estrelas":"estrela"}">${STAR}</button>`).join("")}</div>`;
+ if(r.ok)return `<div class="rate-ok">${ic("check","i s")}<span><b>Obrigada pela avaliação.</b> Você deu ${r.n} ${r.n>1?"estrelas":"estrela"} a este relatório${r.m.length?" · "+r.m.join(", ").toLowerCase():""}.</span><span class="sp" style="flex:1"></span><button class="btn q sm" data-act="rate-edit">Alterar</button></div>`;
+ return `<div class="rate"><b>Como você avaliaria este relatório?</b>${stars}</div>${r.n&&r.n<=3?`<div class="rate-x"><span class="lbl">O que pesou na nota?</span><div class="chips">${RATE_WHY.map(x=>`<button class="chip ${r.m.includes(x)?"navy":"line"}" data-act="rate-m" data-val="${x}" aria-pressed="${r.m.includes(x)}">${x}</button>`).join("")}</div><textarea id="rate-t" class="input" style="min-height:64px" placeholder="Quer contar mais? (opcional)" aria-label="Comentário sobre a nota">${r.t}</textarea><div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn g sm" data-act="rate-edit">Cancelar</button><button class="btn p sm" data-act="rate-send">Enviar avaliação</button></div></div>`:""}`}
 function noteHtml(){
   const c=S.c,cur=c.t,rev=c.phase!=="live";
   const filled=C_SECS.filter(s=>s[1].length);
@@ -2055,7 +2081,7 @@ function noteHtml(){
   const resumed=c.phase==="live"&&c.repOk&&c.regenAt!=null;
   const intMsg=intMsgHtml(c);
 
-  return intMsg+`<div class="nbar ${resumed?"resumed":""}"><span class="small muted nst">${resumed?`<span class="ldot"></span><b>Atendimento retomado.</b> O que for dito agora entra quando você gerar de novo.`:status}</span><span class="sp"></span>${resumed?`<button class="btn p sm" data-act="c-fin">${ic("doc","i s")}Gerar de novo</button>`:acts}</div>${genBox}<div class="note">${repBlocks(secs)}</div>`;
+  return intMsg+`<div class="nbar ${resumed?"resumed":""}"><span class="small muted nst">${resumed?`<span class="ldot"></span><b>Atendimento retomado.</b> O que for dito agora entra quando você gerar de novo.`:status}</span><span class="sp"></span>${resumed?`<button class="btn p sm" data-act="c-fin">${ic("doc","i s")}Gerar de novo</button>`:acts}</div>${genBox}<div class="note">${repBlocks(secs)}</div>${rateHtml()}`;
 }
 function transHtml(){
   const c=S.c;const lines=C_LINES.filter(l=>l[0]<=c.t);
@@ -2471,8 +2497,8 @@ V.historico=()=>{
    ${org?`<select class="input" style="width:auto" aria-label="Profissional" data-hf="prof"><option value="">Todos os profissionais</option>${profs.map(a=>`<option ${f.prof===a?"selected":""}>${a}</option>`).join("")}</select>`:""}
    <label class="small" style="display:flex;gap:6px;align-items:center"><input type="checkbox" data-hf="ed" ${f.ed?"checked":""}> Só com documentos editados</label>
    <span class="chip ${org?"navy":"line"}">${ic(org?"eye":"user","i s")}${org?"Escopo: organização":"Escopo: meus atendimentos"}</span></div>
-  ${rows.length?`<div class="tw"><table class="t"><thead><tr><th>Paciente</th><th>Agente</th>${org?"<th>Profissional</th>":""}<th>Data</th><th>Status</th><th>Documentos</th><th>Transcrição</th><th></th></tr></thead><tbody>
-  ${pgS("hist",rows).map(o=>{const r=o.r;return `<tr><td><div class="who"><span class="avatar">${r[0].split(" ").map(x=>x[0]).join("").slice(0,2)}</span><b>${r[0]}</b></div></td><td>${r[1]}</td>${org?`<td>${r[2]}</td>`:""}<td class="mono">${r[3]}</td><td><span class="chip ${r[5]}">${r[4]}</span></td><td>${r[4]==="Não sumarizado"?`<span class="small muted">Sem documentos</span>`:r[7]?`<span class="chip warn">${ic("edit","i s")}${r[7]} ${r[7]>1?"editados":"editado"}</span>`:`<span class="chip line">${ic("check","i s")}Sem edição</span>`}</td><td>${can("at_trhist")?`<span class="chip line">${ic("eye","i s")}Disponível</span>`:`<span class="chip">${ic("lock","i s")}Restrita</span>`}</td><td style="text-align:right">${act(o)}</td></tr>`}).join("")}
+  ${rows.length?`<div class="tw"><table class="t"><thead><tr><th>Paciente</th><th>Agente</th>${org?"<th>Profissional</th>":""}<th>Data</th><th>Status</th><th>Avaliação</th><th>Documentos</th><th>Transcrição</th><th></th></tr></thead><tbody>
+  ${pgS("hist",rows).map(o=>{const r=o.r;return `<tr><td><div class="who"><span class="avatar">${r[0].split(" ").map(x=>x[0]).join("").slice(0,2)}</span><b>${r[0]}</b></div></td><td>${r[1]}</td>${org?`<td>${r[2]}</td>`:""}<td class="mono">${r[3]}</td><td><span class="chip ${r[5]}">${r[4]}</span></td><td class="small">${(()=>{const n=(S.rt&&S.rt["h"+o.i]&&S.rt["h"+o.i].n)||ratePrev(o.i);return n?`<span class="rt-s" title="${n} de 5">★ ${n}</span>`:`<span class="muted">—</span>`})()}</td><td>${r[4]==="Não sumarizado"?`<span class="small muted">Sem documentos</span>`:r[7]?`<span class="chip warn">${ic("edit","i s")}${r[7]} ${r[7]>1?"editados":"editado"}</span>`:`<span class="chip line">${ic("check","i s")}Sem edição</span>`}</td><td>${can("at_trhist")?`<span class="chip line">${ic("eye","i s")}Disponível</span>`:`<span class="chip">${ic("lock","i s")}Restrita</span>`}</td><td style="text-align:right">${act(o)}</td></tr>`}).join("")}
   </tbody></table></div>`:`<div class="card empty-st">${ic("search")}<b>Nenhum atendimento com esses filtros</b><span class="small muted">Mude o período, o status ou limpe a busca.</span><button class="btn g sm" data-act="hf-clear">Limpar filtros</button></div>`}
   ${pager("hist",rows.length,"atendimentos")}<div class="pager" style="padding-top:0"><span class="small muted">${ic("lock","i s")} Transcrições guardadas por 90 dias · relatórios, versões e logs pelo prazo do prontuário</span></div>`;
 };
@@ -3577,9 +3603,34 @@ function renderFab(){
   el.innerHTML=protoDock()+btn+panel;
   const b=document.getElementById(mode==="help"?"hp-body":"ch-body");if(b)b.scrollTop=b.scrollHeight;
 }
-const HELP_TOPICS=[["mic","Transcrição e atendimento","Como funciona a transcrição do atendimento?"],["apps","Prompts","O que são Prompts?"],["layers","Agentes","Como escolho ou copio um agente?"],["doc","Documentos e Prescrição","Como gero a prescrição na Memed?"],["lock","Conta e Acesso","Esqueci minha senha"],["file","Planos e Pagamentos","Como mudo meu plano?"]];
+/* Ajuda contextual: a Ajuda da Lya abre falando da tela em que a pessoa está (o que é, três dicas e perguntas prontas) e ensina os atalhos de teclado. */
+const HELP_CTX={
+ inicio:["Iniciar atendimento","Escolha o paciente e o agente e comece. A Lya só ouve depois que você iniciar.",["Digite o nome na busca para achar o paciente.","O agente define o que aparece no atendimento; troque antes de iniciar.","Telemedicina abre o compartilhamento da aba depois das etapas."],["Como inicio um atendimento sem cadastro?","Como troco o agente?"]],
+ preparar:["Preparar atendimento","Confirme paciente, agente, modalidade e idioma antes de começar.",["Anexos só aparecem se o agente permitir.","Com Fluxo cirúrgico, o atendimento passa por Atendimento, Procedimentos e Equipe.","Dá para trocar o agente aqui."],["Como funciona o Fluxo cirúrgico?","Como anexo um exame?"]],
+ atendimento:["Atendimento","A Lya escuta, organiza em tempo real e monta o relatório que você revisa.",["Clique na hora ao lado de uma informação para ver o trecho da fala.","As pílulas no topo são alertas e sugestões; clique para ver a conduta.","Ao gerar o relatório, revise as seções em amarelo e avalie o resultado."],["Como gero o relatório?","Como assumo uma conduta?"]],
+ pacientes:["Pacientes","Lista de pacientes do prontuário e dos cadastros feitos aqui.",["Busque por nome, setor ou ID externo.","“Atender” já abre o atendimento com o paciente escolhido.","“Último atendimento” mostra como ficou ao encerrar."],["Como cadastro um paciente?","Como vejo o último atendimento?"]],
+ paciente:["Ficha do paciente","Dados do prontuário, resumo clínico e atendimentos anteriores.",["Campos do prontuário são só leitura; os manuais ficam marcados e auditados.","Use “Iniciar atendimento” para atender este paciente.","Os anexos aparecem em Exames."],["Como edito um dado da ficha?"]],
+ historico:["Histórico","Atendimentos como ficaram ao encerrar, com as versões da IA e a final.",["Use as abas para ver só o que precisa de revisão ou deu erro de envio.","A coluna Avaliação mostra a nota que o médico deu ao relatório.","Exportar registra o pedido na Auditoria."],["Como reenvio um relatório com erro?","Quem vê os atendimentos da organização?"]],
+ chat:["Fale com a Lya","Perguntas clínicas com fontes, em conversa livre.",["Digite “/” para abrir perguntas prontas.","Escolha o escopo: sobre o paciente ou geral.","“Levar ao relatório” leva a resposta com as citações."],["Como a Lya cita as fontes?"]],
+ smartapps:["Prompts","Funções de IA que rodam no atendimento. Cada agente escolhe quais usar.",["Filtre por tipo e momento: Tempo real, Relatório ou Documento.","“Novo Prompt” começa colando um texto e a Lya estrutura.","Prompts de tempo real e Função agente exigem permissão específica."],["O que é uma Função agente?","Como publico um Prompt?"]],
+ "smartapp-novo":["Novo Prompt","Escolha por onde começar; o editor abre em seguida.",["“Descrever ou subir um documento” é o caminho mais rápido.","“Duplicar existente” parte de um Prompt pronto.","Aviso fixo não usa IA."],["Qual modelo escolho?"]],
+ smartapp:["Editor de Prompt","Nome, instruções, campos de resposta e fontes, com prévia ao vivo.",["Teste com um texto de atendimento antes de publicar.","Publicar só libera sem pendências.","Na Função agente, “Como aparece no atendimento” define se vira cartão ou alerta no topo."],["Como testo meu Prompt?","Como faço um alerta no topo?"]],
+ assistentes:["Agentes","Cada agente monta o atendimento de uma equipe ou especialidade.",["Filtre por Prompt, grupo e ordenação.","“Duplicar” e “Excluir” ficam dentro do agente.","Agentes padrão da Lya podem ser copiados e ajustados."],["Como crio um agente?"]],
+ assistente:["Agente","Identidade, estrutura do atendimento, recursos e integrações.",["“Estrutura do atendimento” diz o que aparece em tempo real, no relatório e nos documentos.","Desligar Anexos oculta o envio de arquivos na tela inicial, em Minhas notas e em Dados Clínicos.","Memed e Mevo são conectadas no Lya admin; aqui só liga ou desliga."],["Como ligo o Fluxo cirúrgico?","Quantos Prompts cabem em cada momento?"]],
+ calculadoras:["Calculadoras","Escolha quais calculadoras aparecem no atendimento e de onde a Lya preenche os dados.",["Filtre por especialidade ou situação.","Cada calculadora define os agentes em que aparece.","O resultado entra na seção do relatório que você escolher."],["Como ativo uma calculadora?"]],
+ conhecimento:["Base de conhecimento","Protocolos e documentos que a Lya consulta no chat e nos Prompts.",["“Enviar documento” coloca na fila de indexação.","Reindexar refaz a leitura; Excluir tira o documento das respostas.","Cada resposta cita a página do documento."],["Quanto tempo leva para indexar?"]],
+ usuarios:["Usuários","Quem usa a Lya na organização, com perfil, grupos e 2FA.",["Busque por nome, função ou registro.","Ações em massa valem para os selecionados.","Sem perfil, a pessoa não consegue operar."],["Como convido alguém?"]],
+ perfis:["Perfis e permissões","O que cada perfil pode fazer.",["Permissões sensíveis exigem 2FA.","Compare perfis na tela Mapa de acesso."],["Como crio um perfil?"]],
+ auditoria:["Auditoria","Trilha imutável de alterações, acessos sensíveis e exportações.",["Busque por pessoa, objeto ou ação.","Retenção de 5 anos."],["O que fica registrado?"]],
+ relatorios:["Relatórios","Indicadores de uso e qualidade.",["CSAT dos médicos é a média das notas dos relatórios.","Filtre pelo período no topo."],["Como exporto os indicadores?"]]
+};
+const HELP_KEYS=[["Tab","Vai para o próximo campo ou botão"],["Shift + Tab","Volta para o anterior"],["Enter ou Espaço","Aciona o botão, o cartão ou a linha em foco"],["Esc","Fecha menu, painel ou janela e devolve o foco"],["← →","Anda entre abas, opções e estrelas"],["Ctrl + J","Abre o Fale com a Lya"],["/","No campo de pergunta, abre as perguntas prontas"]];
+function helpCtxCard(){const c=HELP_CTX[S.route];if(!c)return "";return `<div class="hp-ctx" role="group" aria-label="Ajuda desta tela"><h3>${ic("help","i s")}Nesta tela · ${c[0]}</h3><p class="small muted" style="margin:0">${c[1]}</p><ul>${c[2].map(x=>`<li>${x}</li>`).join("")}</ul><div class="chips"><button class="chip navy" data-act="help-ask" data-val="Como uso esta tela?">Como uso esta tela?</button>${c[3].map(q=>`<button class="chip line" data-act="help-ask" data-val="${q}">${q}</button>`).join("")}</div></div>`}
+const HELP_TOPICS=[["grid","Atalhos de teclado","Quais atalhos de teclado posso usar?"],["mic","Transcrição e atendimento","Como funciona a transcrição do atendimento?"],["apps","Prompts","O que são Prompts?"],["layers","Agentes","Como escolho ou copio um agente?"],["doc","Documentos e Prescrição","Como gero a prescrição na Memed?"],["lock","Conta e Acesso","Esqueci minha senha"],["file","Planos e Pagamentos","Como mudo meu plano?"]];
 function helpAnswer(q){
   const t=q.toLowerCase();
+  if(/atalho|teclado|\btab\b|navegar sem mouse/.test(t))return {a:"Dá para usar a Lya só com o teclado. "+HELP_KEYS.map(k=>k[0]+": "+k[1]).join(". ")+".",doc:"Guia · Teclado e acessibilidade"};
+  if(/(esta|nesta) tela|como uso/.test(t)){const c=HELP_CTX[S.route];if(c)return {a:c[0]+": "+c[1]+" "+c[2].join(" "),doc:"Guia · "+c[0]}}
   if(/dose|intera|diagn|conduta|exame d|cid|paciente|alergi|medica/.test(t))return {a:"Isso parece uma pergunta clínica. Quem responde é o Fale com a Lya, que trabalha com o contexto do paciente. Aqui na Ajuda eu não uso dados de pacientes.",clin:q};
   if(/transcri|grava|microfone|atendimento/.test(t))return {a:"A Lya transcreve o atendimento enquanto você conversa. Ao clicar em Iniciar atendimento, a Lya começa a ouvir; dá para pausar e continuar. Ao gerar o relatório, o áudio é apagado. Se o microfone não captar, confira o dispositivo em Minhas preferências.",doc:"Guia do médico · Atendimento"};
   if(/smart ?app|prompt/.test(t))return {a:"Prompts são pequenas funções de IA que rodam no atendimento, como Alergias, Queixa principal e Check-list. Cada agente define quais Prompts aparecem. Quem tem permissão cria ou edita em Inteligência › Prompts.",doc:"Guia do gestor · Prompts"};
@@ -3594,7 +3645,7 @@ function helpAsk(q){if(!q||!q.trim())return;S.helpMsgs=S.helpMsgs||[];const r=he
 function helpBody(){
   const m=S.helpMsgs||[],tk=S.ticket;
   let body;
-  if(!m.length&&!tk)body=`<div class="hp-empty"><span class="hp-logo">${ic("help")}</span><h2>Como posso ajudar?</h2><p class="muted">Tiro dúvidas sobre como usar a Lya e abro chamados para o time de suporte.</p><span class="hp-safe">${ic("lock","i s")}Sem dados de pacientes aqui</span>
+  if(!m.length&&!tk)body=`<div class="hp-empty"><span class="hp-logo">${ic("help")}</span><h2>Como posso ajudar?</h2><p class="muted">Tiro dúvidas sobre como usar a Lya e abro chamados para o time de suporte.</p><span class="hp-safe">${ic("lock","i s")}Sem dados de pacientes aqui</span>${helpCtxCard()}
    <div class="hp-topics">${HELP_TOPICS.map(t=>`<button data-act="help-ask" data-val="${t[2]}">${ic(t[0],"i s")}<span>${t[1]}</span>${ic("chev","i s")}</button>`).join("")}<button data-act="help-ticket">${ic("plus","i s")}<span>Abrir chamado</span>${ic("chev","i s")}</button></div></div>`;
   else body=m.map((x,i)=>`<div class="ch-u"><p>${x.q}</p></div><div class="ch-a"><span class="ch-av hp">${ic("help","i s")}</span><div class="ch-at"><p>${x.a}</p>${x.doc?`<a class="hp-doc" href="https://produtos-ctc.gitbook.io/lya_health/" target="_blank" rel="noopener">${ic("doc","i s")}${x.doc}</a>`:""}
     ${x.clin?(isClinRoute()?`<button class="btn t sm" data-act="lya-to-clin" data-val="${i}">${ic("spark","i s")}Perguntar no Fale com a Lya</button>`:`<span class="small muted">Abra um atendimento ou a ficha do paciente para usar o Fale com a Lya.</span>`)
@@ -3628,6 +3679,29 @@ function chatRefresh(){if(S.route==="chat")render();else if(inSideChat()&&canCha
 document.addEventListener("keydown",e=>{if(e.target.id==="help-in"&&e.key==="Enter"&&e.target.value.trim()){e.preventDefault();helpAsk(e.target.value);renderFab();setTimeout(()=>{const n=document.getElementById("help-in");if(n)n.focus()},40)}});
 document.addEventListener("keydown",e=>{if((e.target.id==="chat-in"||e.target.id==="home-in"||e.target.id==="full-in")&&e.key==="Enter"&&!e.shiftKey){e.preventDefault();if(e.target.value.trim()){chatAsk(e.target.value,e.target.id);e.target.value="";if(e.target.id==="home-in"){S.chatOpen=false;S.tab.chatv="conv";go("chat")}else chatRefresh()}}});
 /* ---------- render ---------- */
+/* Teclado (TAB): tudo o que se clica recebe foco, tem nome e responde a Enter e Espaço; o foco vai para o título ao trocar de tela;
+   diálogos prendem o foco e devolvem ao botão de origem; Esc fecha menus; setas andam entre abas e opções; a lateral abre ao receber foco. */
+const KB_SEL='[data-act]:not(button):not(a):not(input):not(select):not(textarea):not(label):not(summary):not(.scrim),tr.click,[data-go]:not(button):not(a):not(input):not(select):not(textarea):not(label):not(tr)';
+const KB_FOC='a[href],button:not([disabled]),input:not([disabled]):not([type=hidden]),select:not([disabled]),textarea:not([disabled]),summary,[tabindex]:not([tabindex="-1"])';
+const kbFocusable=m=>[...m.querySelectorAll(KB_FOC)].filter(e=>e.offsetParent!==null||e===document.activeElement);
+function kbFix(){document.querySelectorAll(KB_SEL).forEach(e=>{if(e.hasAttribute("tabindex"))return;e.tabIndex=0;e.dataset.kb="1";if(!e.matches("tr")&&!e.getAttribute("role"))e.setAttribute("role","button")})}
+function kbMain(){const h=document.querySelector("#view h1");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}}
+let KB_LAST=null,kbOp=null,kbT=0;
+const kbDesc=e=>e&&e.dataset?{act:e.dataset.act,val:e.dataset.val,go:e.dataset.go,id:e.id}:null;
+function kbRestore(d){if(!d)return;let n=d.id?document.getElementById(d.id):null;if(!n&&d.act)n=document.querySelector(`[data-act="${d.act}"]${d.val!=null?`[data-val="${String(d.val).replace(/"/g,'\\"')}"]`:""}`);if(!n&&d.go)n=document.querySelector(`[data-go="${d.go}"]`);if(n&&n.focus)n.focus({preventScroll:true});else kbMain()}
+function kbModal(){const m=[...document.querySelectorAll('[role=dialog][aria-modal="true"]')].pop();
+ if(m){if(!kbOp)kbOp=KB_LAST||{};if(!m.contains(document.activeElement)){const f=kbFocusable(m),pick=m.querySelector("[autofocus],textarea,input:not([type=checkbox]):not([type=radio])")||f[0]||m;if(pick===m)m.tabIndex=-1;pick.focus({preventScroll:true})}}
+ else if(kbOp){const o=kbOp;kbOp=null;kbRestore(o)}}
+new MutationObserver(()=>{clearTimeout(kbT);kbT=setTimeout(()=>{kbFix();kbModal()},16)}).observe(document.body,{childList:true,subtree:true});
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("button,a,[data-act],[data-go]");if(t&&!t.closest('[role=dialog][aria-modal="true"]'))KB_LAST=kbDesc(t)},true);
+document.addEventListener("focusin",e=>{if(!e.target.closest('[role=dialog][aria-modal="true"]'))KB_LAST=kbDesc(e.target);if(e.target.closest&&e.target.closest("#side"))document.body.classList.add("nav-peek")});
+document.addEventListener("focusout",e=>{if(!e.relatedTarget||!e.relatedTarget.closest||!e.relatedTarget.closest("#side"))document.body.classList.remove("nav-peek")});
+document.addEventListener("keydown",e=>{const t=e.target;
+ if((e.key==="Enter"||e.key===" ")&&t.dataset&&t.dataset.kb){e.preventDefault();t.click();return}
+ if(e.key==="Tab"){const m=[...document.querySelectorAll('[role=dialog][aria-modal="true"]')].pop();if(m){const f=kbFocusable(m);if(f.length){const a=document.activeElement,first=f[0],last=f[f.length-1];if(e.shiftKey&&(a===first||!m.contains(a))){e.preventDefault();last.focus()}else if(!e.shiftKey&&(a===last||!m.contains(a))){e.preventDefault();first.focus()}}else{e.preventDefault()}}return}
+ if(e.key==="Escape"&&!S.drawer&&!document.querySelector('[role=dialog][aria-modal="true"]')){const ex=document.querySelector('[aria-expanded="true"][aria-haspopup]');if(ex){ex.click();const n=document.querySelector(`[data-act="${ex.dataset.act}"]`);if(n)n.focus();return}if(S.sgOpen){S.sgOpen=null;renderOverlay()}return}
+ if(["ArrowLeft","ArrowRight","ArrowUp","ArrowDown","Home","End"].includes(e.key)&&t.matches&&t.matches("button")){const g=t.closest('[role=tablist],[role=radiogroup],.seg');if(g){const b=[...g.querySelectorAll("button:not([disabled])")],i=b.indexOf(t);if(i>=0){let n=i;if(e.key==="ArrowLeft"||e.key==="ArrowUp")n=(i-1+b.length)%b.length;else if(e.key==="ArrowRight"||e.key==="ArrowDown")n=(i+1)%b.length;else if(e.key==="Home")n=0;else n=b.length-1;e.preventDefault();b[n].focus()}}}
+});
 function render(){
   document.body.classList.toggle("hide-novo",!S.novo);[...document.body.classList].filter(x=>x.startsWith("r-")).forEach(x=>document.body.classList.remove(x));document.body.classList.add("r-"+S.route);
   renderSide();renderTop();
@@ -3693,7 +3767,7 @@ function renderOverlay(){
 /* ---------- eventos ---------- */
 const langRefresh=()=>{if(S.route==="atendimento"&&S.c)refreshConsult(["head"]);else render()};
 document.addEventListener("click",e=>{if(e.target.closest(".selpop"))return;if(S.langOpen&&!e.target.closest(".langw")){S.langOpen=null;langRefresh()}if(S.agOpen&&!e.target.closest(".agw:not(.micw)")){S.agOpen=false;render()}if(S.micOpen&&!e.target.closest(".micw")){S.micOpen=false;render()}},true);
-document.addEventListener("input",e=>{if(["home-in","full-in","chat-in"].includes(e.target.id)&&e.target.value==="/"){e.target.value="";S.chatPr=e.target.id;e.target.id==="chat-in"?chatRefresh():render();return}if(["pac-q","usr-q","aud-q","sa-q","ag-q","kb-q"].includes(e.target.id)){const k=e.target.id.replace("-q","");if(k==="pac"){S.pf=S.pf||{q:"",setor:"",per:"36"};S.pf.q=e.target.value}else if(k==="kb"){S.kbf=S.kbf||{q:"",t:"",st:""};S.kbf.q=e.target.value}else{S.fq=S.fq||{};S.fq[k]=e.target.value}const pos=e.target.selectionStart,id=e.target.id;render();const n=document.getElementById(id);if(n){n.focus();n.setSelectionRange(pos,pos)}return}if(e.target.id==="hist-q"){S.hf=S.hf||{};S.hf.q=e.target.value;const pos=e.target.selectionStart;render();const n=document.getElementById("hist-q");if(n){n.focus();n.setSelectionRange(pos,pos)}return}if(e.target.id!=="tr-q")return;const q=e.target.value.trim().toLowerCase();S.c.trQ=e.target.value;let n=0;document.querySelectorAll(".tr2 .ln2").forEach(l=>{const ok=!q||l.dataset.tx.includes(q);l.classList.toggle("tr-off",!ok);if(ok)n++});const c=document.getElementById("tr-n");if(c)c.textContent=q?`${n} de ${document.querySelectorAll(".tr2 .ln2").length} trechos`:`${n} trechos`});
+document.addEventListener("input",e=>{if(["home-in","full-in","chat-in"].includes(e.target.id)&&e.target.value==="/"){e.target.value="";S.chatPr=e.target.id;e.target.id==="chat-in"?chatRefresh():render();return}if(e.target.id==="rate-t"){rateOf(rateKey()).t=e.target.value;return}if(["pac-q","usr-q","aud-q","sa-q","ag-q","kb-q"].includes(e.target.id)){const k=e.target.id.replace("-q","");if(k==="pac"){S.pf=S.pf||{q:"",setor:"",per:"36"};S.pf.q=e.target.value}else if(k==="kb"){S.kbf=S.kbf||{q:"",t:"",st:""};S.kbf.q=e.target.value}else{S.fq=S.fq||{};S.fq[k]=e.target.value}const pos=e.target.selectionStart,id=e.target.id;render();const n=document.getElementById(id);if(n){n.focus();n.setSelectionRange(pos,pos)}return}if(e.target.id==="hist-q"){S.hf=S.hf||{};S.hf.q=e.target.value;const pos=e.target.selectionStart;render();const n=document.getElementById("hist-q");if(n){n.focus();n.setSelectionRange(pos,pos)}return}if(e.target.id!=="tr-q")return;const q=e.target.value.trim().toLowerCase();S.c.trQ=e.target.value;let n=0;document.querySelectorAll(".tr2 .ln2").forEach(l=>{const ok=!q||l.dataset.tx.includes(q);l.classList.toggle("tr-off",!ok);if(ok)n++});const c=document.getElementById("tr-n");if(c)c.textContent=q?`${n} de ${document.querySelectorAll(".tr2 .ln2").length} trechos`:`${n} trechos`});
 document.addEventListener("input",e=>{if(e.target.id==="ag-q"){const l=document.getElementById("ag-l");if(l)l.innerHTML=agList(e.target.value)}});
 document.addEventListener("keydown",e=>{if(e.target.id!=="ag-q")return;if(e.key==="Escape"){S.agOpen=false;render();const b=document.querySelector(".agb");if(b)b.focus()}if(e.key==="Enter"){const f=document.querySelector("#ag-l .ag-o");if(f)f.click()}if(e.key==="ArrowDown"){e.preventDefault();const f=document.querySelector("#ag-l .ag-o");if(f)f.focus()}});
 document.addEventListener("keydown",e=>{const o=e.target.closest&&e.target.closest(".ag-o");if(!o)return;if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();const all=[...document.querySelectorAll("#ag-l .ag-o")],i=all.indexOf(o);const n=all[i+(e.key==="ArrowDown"?1:-1)];if(n)n.focus();else if(e.key==="ArrowUp")document.getElementById("ag-q").focus()}if(e.key==="Escape"){S.agOpen=false;render()}});
@@ -3739,8 +3813,13 @@ document.addEventListener("click",e=>{
    case"ag-new":{let n="Novo agente",k=2;while(S.agc&&S.agc[n]||ASS.some(x=>x[0]===n))n="Novo agente "+k++;agcOf("Cardiologia");S.agc[n]={flux:false,prev:true,chat:true,ex:true,dc:true,calc:true,memed:true,mevo:false,desc:"",grp:["Padrão · 142"],rt:[],rep:[],doc:[],nw:1};const row=[n,"Padrão","",0];ASS.unshift(row);ASSX.unshift(row);S.agEd=n;S.agIns=null;go("assistente");toast("Agente criado como rascunho · dê um nome e monte a estrutura");break}
    case"ag-ed":S.agEd=v;S.agIns=null;go("assistente");break;
    case"agf":{const a=agcOf(S.agEd||"Cardiologia");a[v]=!a[v];if(v==="flux"&&a.flux){CIR_PAD.slice().reverse().forEach(d=>{if(!a.rt.some(x=>x[0]===d[0]))a.rt.unshift(d)});toast("Fluxo cirúrgico ligado · Check-list cirúrgico e Sugestões de OPME entram como padrão");render();break}render();toast(`${{prev:"Atendimento anterior",flux:"Fluxo cirúrgico",chat:"Fale com a Lya",ex:"Anexos",dc:"Dados Clínicos",calc:"Calculadoras",memed:"Memed",mevo:"Mevo"}[v]} ${a[v]?"ligado":"desligado"}`);break}
+   case"rate":{const r=rateOf(rateKey());r.n=+v;if(r.n>=4){r.ok=true;r.m=[];r.t="";toast("Avaliação enviada · obrigada")}else r.ok=false;refreshConsult(["main"]);break}
+   case"rate-m":{const r=rateOf(rateKey());r.m=r.m.includes(v)?r.m.filter(x=>x!==v):r.m.concat(v);refreshConsult(["main"]);break}
+   case"rate-send":{const r=rateOf(rateKey());r.ok=true;toast("Avaliação enviada · obrigada, vamos usar para melhorar");refreshConsult(["main"]);break}
+   case"rate-edit":{const r=rateOf(rateKey());r.ok=false;if(r.n>=4)r.n=0;refreshConsult(["main"]);break}
    case"kb-re":{const r=kbInit()[+v];if(r){r[5]="Indexando";render();toast("Reindexando · "+r[0])}break}
    case"kb-clear":S.kbf={q:"",t:"",st:""};render();break
+   case"skip":{const v=document.getElementById("view");v.tabIndex=-1;v.focus();break}
    case"ag-save":{const n=S.agEd||"Cardiologia",a=agcOf(n),er=[];if(!n.trim())er.push("o nome");if(!(a.desc||"").trim())er.push("a descrição");if(!(a.grp||[]).length)er.push("ao menos um grupo");if(er.length){toast("Preencha "+er.join(", ")+" antes de salvar")}else{delete a.nw;toast("Agente salvo · vale para os próximos atendimentos")}render();break}
    case"ag-dup":{const o=S.agEd||"Cardiologia",a=agcOf(o);let n="Cópia de "+o,k=2;while((S.agc&&S.agc[n])||ASS.some(x=>x[0]===n))n="Cópia de "+o+" "+k++;S.agc[n]=JSON.parse(JSON.stringify(a));S.agc[n].nw=1;const base=ASS.find(x=>x[0]===o)||["","Padrão","",0];const row=[n,base[1],base[2],0];ASS.unshift(row);ASSX.unshift(row);S.agEd=n;S.agIns=null;go("assistente");toast("Agente duplicado · ajuste o nome e salve");break}
    case"agi-open":S.agIns=S.agIns===v?null:v;S.agInsT=null;render();break;

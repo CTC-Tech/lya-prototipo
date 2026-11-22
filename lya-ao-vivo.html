@@ -677,7 +677,7 @@ pre.jr-code{margin:0;padding:14px 16px;border-radius:12px;background:#0F1B2D;col
           <li><b>Resposta neutra:</b> “Enviar código” responde igual com e-mail existente ou não, para ninguém descobrir quem tem conta. O e-mail só sai se a conta existir e estiver ativa.</li>
           <li><b>Código:</b> 6 dígitos aleatórios, uso único, validade de 24 horas, guardado só como hash. Pedir outro invalida o anterior.</li>
           <li><b>Limites:</b> no máximo 3 envios por hora por e-mail e 5 tentativas erradas por código; depois, bloqueia por 15 minutos e avisa no e-mail da conta. Limite também por IP.</li>
-          <li><b>Política de senha:</b> mínimo de 12 caracteres, com especial, número, maiúscula e minúscula; não pode repetir as 5 últimas nem conter o e-mail. A validação existe no servidor, não só na tela.</li>
+          <li><b>Política de senha:</b> mínimo de 12 caracteres, com especial, número, maiúscula e minúscula; as mesmas regras da Lya atual. A validação existe no servidor, não só na tela.</li>
           <li><b>Depois de trocar:</b> encerrar todas as sessões abertas, mandar e-mail avisando da troca (com “não fui eu”) e registrar na Auditoria. Quem tem 2FA continua com 2FA no próximo login.</li>
           <li><b>Contas só com Google ou SSO:</b> não têm senha na Lya; o e-mail explica que a entrada é pelo Google ou pela instituição.</li>
         </ul></div>
@@ -709,8 +709,7 @@ pre.jr-code{margin:0;padding:14px 16px;border-radius:12px;background:#0F1B2D;col
           <tr><td><b>Esqueci · reenviar</b></td><td>Reenviar código pouco depois do envio</td><td>“Aguarde 30 segundos para pedir outro código.” Depois: “Novo código enviado · o anterior deixou de valer.”</td><td>Fica na etapa</td></tr>
           <tr><td><b>Esqueci · código errado ou vencido</b></td><td>Alterar senha com código inválido (no protótipo, <span class="mono">000000</span>)</td><td>“Código inválido ou expirado. Peça um novo código.”</td><td>Fica na etapa, foco no código</td></tr>
           <tr><td><b>Esqueci · senhas diferentes</b></td><td>Digitar as duas senhas diferentes</td><td>“As senhas não conferem.” sob o campo; botão desabilitado.</td><td>Fica na etapa</td></tr>
-          <tr><td><b>Esqueci · senha já usada</b></td><td>Nova senha igual a uma das últimas 5 (no protótipo, <span class="mono">SenhaAntiga#2025</span>)</td><td>“Essa senha já foi usada antes. Escolha uma diferente das últimas 5 senhas.”</td><td>Fica na etapa</td></tr>
-          <tr><td><b>Esqueci · sucesso</b></td><td>Código certo e senha dentro dos requisitos</td><td>Aviso verde no login: “Senha alterada. Você saiu de todos os outros dispositivos. Entre com a nova senha.” e “Senha alterada · Enviamos um aviso para o seu e-mail”.</td><td>Login</td></tr>
+                    <tr><td><b>Esqueci · sucesso</b></td><td>Código certo e senha dentro dos requisitos</td><td>Aviso verde no login: “Senha alterada. Você saiu de todos os outros dispositivos. Entre com a nova senha.” e “Senha alterada · Enviamos um aviso para o seu e-mail”.</td><td>Login</td></tr>
           <tr><td><b>Google · escolher conta</b></td><td>Continuar com Google</td><td>“Escolha uma conta.” “A Lya recebe só seu nome e e-mail.” “A verificação em duas etapas é a do Google; a Lya não pede o código do app.”</td><td>Escolher conta · Voltar</td></tr>
           <tr><td><b>Google · conta vinculada</b></td><td>Conta com usuário na Lya</td><td>“Entrou com o Google · Dra. Helena Duarte.”</td><td>Escolha da organização</td></tr>
           <tr><td><b>Google · sem vínculo</b></td><td>Conta Google sem usuário na Lya, ou “Usar outra conta”</td><td>“Conta sem acesso à Lya. <i>e-mail</i> não está vinculada a nenhum usuário da Lya. Peça ao administrador da sua organização para convidar esse e-mail, ou entre com e-mail e senha.”</td><td>Voltar ao login · Entrar com e-mail e senha · Tentar outra conta Google</td></tr>
@@ -728,15 +727,15 @@ pre.jr-code{margin:0;padding:14px 16px;border-radius:12px;background:#0F1B2D;col
         <div class="box"><h4>Regras de segurança do login</h4><ul>
           <li><b>Tentativas:</b> 5 senhas incorretas bloqueiam a conta por 15 minutos e mandam e-mail de aviso. O contador zera no login certo. O mesmo vale para o código do app (5 erros).</li>
           <li><b>Códigos por e-mail</b> (esqueci a senha e cadastro): 6 dígitos, uso único, <b>24 horas</b>, no máximo 3 envios por hora e 5 tentativas erradas por código; 30 segundos entre um envio e outro.</li>
-          <li><b>Senha:</b> 12 caracteres, com especial, número, maiúscula e minúscula; não repete as 5 últimas. Validado no servidor.</li>
+          <li><b>Senha:</b> 12 caracteres, com especial, número, maiúscula e minúscula. Validado no servidor.</li>
           <li><b>Sessão:</b> 1 hora, para qualquer forma de entrar. Sem “Manter conectado”.</li>
           <li><b>Mensagens neutras:</b> senha incorreta, e-mail sem conta e pedido de código respondem igual.</li>
         </ul></div>
         <div class="box"><h4>Verificação feita no protótipo</h4><ul>
-          <li><b>25 caminhos testados</b> de ponta a ponta, sem falha: login, senha incorreta e bloqueio, código do app, escolha da organização, esqueci a senha (do e-mail ao sucesso), Google (vinculado, sem vínculo, outra conta), cadastro (e-mail, senha, código, perfil e criação) e Sair.</li>
+          <li><b>24 caminhos testados</b> de ponta a ponta, sem falha: login, senha incorreta e bloqueio, código do app, escolha da organização, esqueci a senha (do e-mail ao sucesso), Google (vinculado, sem vínculo, outra conta), cadastro (e-mail, senha, código, perfil e criação) e Sair.</li>
           <li><b>14 variações de tela</b> conferidas: um título por tela, sem barra de rolagem em 1366×686, sem estouro de largura, erros com <span class="mono">role="alert"</span>, todo botão e todo campo com nome.</li>
-          <li><b>Corrigido nesta rodada:</b> faltavam as mensagens de senha incorreta, bloqueio, código do app errado, reenvio, senha já usada, Sair e sessão expirada; o erro do código do app não era anunciado; a redefinição de senha passava da altura da tela quando mostrava erro.</li>
-          <li><b>Simulações no protótipo:</b> senha <span class="mono">errada</span> (senha incorreta), código <span class="mono">000000</span> (código errado), <span class="mono">SenhaAntiga#2025</span> (senha já usada) e o e-mail <span class="mono">helena.duarte@exemplo.com.br</span> (conta que já existe).</li>
+          <li><b>Corrigido nesta rodada:</b> faltavam as mensagens de senha incorreta, bloqueio, código do app errado, reenvio, Sair e sessão expirada; o erro do código do app não era anunciado; a redefinição de senha passava da altura da tela quando mostrava erro.</li>
+          <li><b>Simulações no protótipo:</b> senha <span class="mono">errada</span> (senha incorreta), código <span class="mono">000000</span> (código errado), e o e-mail <span class="mono">helena.duarte@exemplo.com.br</span> (conta que já existe).</li>
         </ul></div>
       </div>
       <div class="jr-h"><h3>01 · Sessão de 1 hora</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Regra de segurança</span></div>

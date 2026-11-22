@@ -652,7 +652,7 @@ pre.jr-code{margin:0;padding:14px 16px;border-radius:12px;background:#0F1B2D;col
       <div class="scroll-x"><table class="metrics">
         <thead><tr><th>Tela · estado</th><th>O que o usuário vê</th><th>Ações</th><th>Resposta da Lya / próximo passo</th></tr></thead>
         <tbody>
-          <tr><td><b>Login</b></td><td>Marca à esquerda (“A Lya ouve o atendimento e organiza o que importa”); à direita, e-mail, senha, “Manter conectado”.</td><td>Entrar · Entrar com a conta da instituição (SSO) · Esqueci minha senha</td><td>E-mail inválido ou senha vazia: mensagem no próprio campo, sem sair da tela. Esqueci a senha: link por e-mail. SSO pula para a escolha da organização.</td></tr>
+          <tr><td><b>Login</b></td><td>Painel à esquerda com a foto de uma consulta (médica e paciente à mesa) ocupando todo o painel, com um véu azul claro e parelho, só um pouco mais firme embaixo, para a foto aparecer bem, e a frase “A Lya ouve o atendimento e organiza o que importa” embaixo; o painel some em telas estreitas. A <b>logo colorida fica centralizada no topo do formulário</b> (branca no tema escuro), no lugar do título “Entrar na Lya”, que seria repetição (o título segue no código só para leitor de tela), e não sobre a foto, para ter sempre contraste e não brigar com a imagem; à direita, e-mail e senha. <b>Não há “Manter conectado”</b>: a sessão termina após 1 hora por segurança, e o login avisa isso embaixo do botão.</td><td>Entrar · Continuar com Google · Esqueci minha senha · Criar conta</td><td>E-mail inválido ou senha vazia: mensagem no próprio campo, sem sair da tela. Esqueci a senha: link por e-mail. SSO pula para a escolha da organização.</td></tr>
           <tr><td><b>Verificação em duas etapas</b></td><td>“Confirme que é você”: código de 6 dígitos do app autenticador (Google Authenticator ou Microsoft Authenticator). Sem código por SMS.</td><td>Confirmar · Perdi o acesso ao app · Voltar</td><td>Código incompleto: “Digite os 6 dígitos”. Perdeu o app: o administrador da organização redefine a verificação. Exigida para perfis com permissões sensíveis ou por política da organização.</td></tr>
           <tr><td><b>Escolha da organização</b></td><td>Só aparece se a conta estiver em mais de uma organização (ex.: Hospital Aurora e consultório particular), com o perfil em cada uma.</td><td>Escolher organização</td><td>Carrega perfil e permissões daquela organização. Troca depois pelo menu do perfil.</td></tr>
           <tr><td><b>Tela inicial por perfil</b></td><td>Quem atende (médico, enfermeiro, B2C, gestor com permissão de atender) cai em <b>Iniciar atendimento</b>. Quem não atende cai na primeira tela permitida: Relatórios (qualidade) e, se não houver, Atendimentos.</td><td>—</td><td>Menu lateral mostra só o que o perfil pode ver. “Sair”, no menu do perfil, volta ao login.</td></tr>
@@ -662,6 +662,119 @@ pre.jr-code{margin:0;padding:14px 16px;border-radius:12px;background:#0F1B2D;col
           <tr><td><b>Conta › Usuários › Dados cadastrais</b> (administrador)</td><td>Mesmos campos da Lya atual: Nome*, Data de nascimento*, CPF*, E-mail*, Telefone*, Usuário de prontuário, Endereço opcional (CEP, rua, número, complemento, bairro, cidade e estado), Profissão*, Especialidade*, Tipo de registro*, Número do registro*, UF*, Status da conta*. O agente padrão fica em Acesso e permissões.</td><td>Salvar · Voltar · Convidar usuário (e-mail, profissão, perfil, grupo)</td><td>Usa o mesmo bloco “Atuação profissional” do Meu perfil. Inativo não entra na Lya, mas o histórico continua. No convite, a pessoa completa o registro no conselho e configura o app autenticador no primeiro acesso.</td></tr>
         </tbody></table></div>
 
+      <div class="jr-h"><h3>01 · Esqueci minha senha e entrar com Google</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">No protótipo</span></div>
+      <div class="scroll-x"><table class="metrics">
+        <thead><tr><th>Tela · estado</th><th>O que o usuário vê</th><th>Ações</th><th>Resposta da Lya / próximo passo</th></tr></thead>
+        <tbody>
+          <tr><td><b>Login · botão Google</b></td><td>“Continuar com Google” no topo, separado do e-mail e senha por “ou com e-mail e senha”. Logo abaixo ficam e-mail, senha e “Entrar”. O SSO corporativo foi retirado do login.</td><td>Continuar com Google</td><td>Abre a escolha de conta.</td></tr>
+          <tr><td><b>Google · escolher conta</b></td><td>Lista de contas Google e “Usar outra conta”. Aviso: a Lya recebe só nome e e-mail, e a verificação em duas etapas é a do Google.</td><td>Escolher uma conta · Voltar</td><td>Conta já vinculada: entra (escolhe a organização, se tiver mais de uma). Conta sem vínculo: tela “Conta sem acesso à Lya”.</td></tr>
+          <tr><td><b>Google · conta sem acesso</b></td><td>“<i>e-mail</i> não está vinculada a nenhum usuário da Lya. Peça ao administrador para convidar esse e-mail, ou entre com e-mail e senha.”</td><td>Entrar com e-mail e senha · Tentar outra conta Google</td><td>Nenhuma conta é criada sozinha. O tentativa vai para a Auditoria.</td></tr>
+          <tr><td><b>Esqueci · e-mail</b></td><td>Título, uma frase e o campo E-mail (já preenchido se foi digitado no login). Aviso: a resposta é a mesma exista ou não conta.</td><td>Enviar código · Voltar</td><td>E-mail inválido: “Digite um e-mail válido.” no campo, com foco nele. E-mail válido: vai para a tela do código.</td></tr>
+          <tr><td><b>Esqueci · código e nova senha</b></td><td>“Se <i>e-mail</i> tem conta, enviamos um código de 6 dígitos. Ele vale por 24 horas.” Campos Código, Nova senha e Confirmar (cada um com olho para mostrar). Cinco requisitos, na ordem e com o texto da Lya atual: “No mínimo 12 caracteres”, “Caracteres especiais (ex: !@#$%)”, “Números”, “Letras maiúsculas” e “Letras minúsculas”. Cada um tem um círculo vazado: <b>vermelho com ×</b> enquanto não cumprido, <b>verde com ✓</b> quando cumprido, neutro antes de digitar. Senhas diferentes mostram “As senhas não conferem.” sob o campo.</td><td>Alterar senha · Reenviar código · Voltar</td><td>“Alterar senha” só habilita com o código completo e as seis regras cumpridas. Código errado ou vencido: “Código inválido ou expirado. Peça um novo código.” Sucesso: volta ao login com o aviso verde “Senha alterada. Você saiu de todos os outros dispositivos.”</td></tr>
+        </tbody></table></div>
+      <div class="jr-spec">
+        <div class="box"><h4>Como implementar · esqueci a senha</h4><ul>
+          <li><b>Resposta neutra:</b> “Enviar código” responde igual com e-mail existente ou não, para ninguém descobrir quem tem conta. O e-mail só sai se a conta existir e estiver ativa.</li>
+          <li><b>Código:</b> 6 dígitos aleatórios, uso único, validade de 24 horas, guardado só como hash. Pedir outro invalida o anterior.</li>
+          <li><b>Limites:</b> no máximo 3 envios por hora por e-mail e 5 tentativas erradas por código; depois, bloqueia por 15 minutos e avisa no e-mail da conta. Limite também por IP.</li>
+          <li><b>Política de senha:</b> mínimo de 12 caracteres, com especial, número, maiúscula e minúscula; não pode repetir as 5 últimas nem conter o e-mail. A validação existe no servidor, não só na tela.</li>
+          <li><b>Depois de trocar:</b> encerrar todas as sessões abertas, mandar e-mail avisando da troca (com “não fui eu”) e registrar na Auditoria. Quem tem 2FA continua com 2FA no próximo login.</li>
+          <li><b>Contas só com Google ou SSO:</b> não têm senha na Lya; o e-mail explica que a entrada é pelo Google ou pela instituição.</li>
+        </ul></div>
+        <div class="box"><h4>Como implementar · entrar com Google</h4><ul>
+          <li><b>OpenID Connect:</b> pedir só <span class="mono">openid email profile</span>. Aceitar só e-mail verificado pelo Google.</li>
+          <li><b>Vínculo:</b> a conta Google entra se o e-mail já é de um usuário da Lya (convite aceito). Não criar usuário automaticamente.</li>
+          <li><b>Política por organização:</b> a administração escolhe se permite Google, restringe a domínios (ex.: <span class="mono">@hospital.org.br</span>) ou exige o SSO corporativo e desliga a senha.</li>
+          <li><b>Duas etapas:</b> quem entra pelo Google não digita o código do app da Lya, porque o Google já faz a verificação. Organizações que exigirem 2FA da Lya podem ligar essa trava.</li>
+          <li><b>Médico particular (B2C):</b> pode se cadastrar com Google; o primeiro acesso cria o consultório e leva ao aceite dos termos.</li>
+          <li><b>Auditoria:</b> login, falha e conta sem vínculo viram evento com e-mail, método (Google, senha ou SSO) e origem.</li>
+        </ul></div>
+      </div>
+      <div class="jr-h"><h3>01 · Mapa completo do login: estados, mensagens e saídas</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Verificado em 22/11/2026</span></div>
+      <div class="prose"><p>Todo caminho do login com a mensagem exata que a pessoa lê. Regra geral: <b>toda falha diz o que aconteceu e o que fazer</b>; erro aparece junto do campo, é anunciado por leitor de tela (<span class="mono">role="alert"</span>) e leva o foco ao campo com problema; todo estado tem “Voltar”; a mensagem de senha incorreta e a de e-mail sem conta são iguais, para não revelar quem tem conta.</p></div>
+      <div class="scroll-x"><table class="metrics"><thead><tr><th>Estado</th><th>O que dispara</th><th>O que a pessoa lê</th><th>Para onde vai</th></tr></thead><tbody>
+          <tr><td><b>Login</b></td><td>Abrir a Lya, ou “Voltar ao login” de qualquer etapa</td><td>—</td><td>Entrar · Continuar com Google · Esqueci minha senha · Criar conta</td></tr>
+          <tr><td><b>Login · e-mail inválido</b></td><td>Entrar com e-mail fora do formato</td><td>“Digite um e-mail válido.”</td><td>Fica no login, foco no campo</td></tr>
+          <tr><td><b>Login · senha vazia</b></td><td>Entrar sem senha</td><td>“Digite a senha.”</td><td>Fica no login</td></tr>
+          <tr><td><b>Login · senha incorreta</b></td><td>Entrar com senha errada (no protótipo, a senha <span class="mono">errada</span>)</td><td>“E-mail ou senha incorretos. Confira os dados e tente de novo. Você tem mais N tentativas antes do bloqueio de 15 minutos.” A mensagem é a mesma exista ou não conta com o e-mail.</td><td>Fica no login, foco e seleção na senha</td></tr>
+          <tr><td><b>Bloqueio</b></td><td>5 senhas incorretas, ou 5 códigos do app incorretos</td><td>“Acesso bloqueado por 15 minutos.” Explica as 5 tentativas, que um aviso foi para o e-mail da conta e que quem esqueceu a senha não precisa esperar. “Se não foi você, avise o administrador.”</td><td>Esqueci minha senha (já com o e-mail) · Voltar ao login</td></tr>
+          <tr><td><b>Código do app (2FA)</b></td><td>Credenciais certas</td><td>“Confirme que é você.” Pede o código de 6 dígitos do app autenticador.</td><td>Confirmar · Perdi o acesso ao app · Voltar</td></tr>
+          <tr><td><b>2FA · código curto</b></td><td>Confirmar com menos de 6 dígitos</td><td>“Digite os 6 dígitos do código.”</td><td>Fica na etapa</td></tr>
+          <tr><td><b>2FA · código errado</b></td><td>Código errado (no protótipo, <span class="mono">000000</span>)</td><td>“Código incorreto. Abra o app autenticador, espere o código mudar e digite o novo. Você tem mais N tentativas.”</td><td>Fica na etapa; na 5ª, Bloqueio</td></tr>
+          <tr><td><b>Escolha da organização</b></td><td>Código certo, ou conta Google vinculada, e conta em mais de uma organização</td><td>“Onde você vai trabalhar hoje?” com a lista de organizações. “Dá para trocar depois pelo menu do perfil.”</td><td>Escolher organização · Voltar ao login</td></tr>
+          <tr><td><b>Dentro da Lya</b></td><td>Escolher a organização</td><td>“Bem-vinda, Dra. Helena” (ou “Entrou como <i>perfil</i>”).</td><td>Tela inicial do perfil</td></tr>
+          <tr><td><b>Esqueci · e-mail</b></td><td>Esqueci minha senha</td><td>“Digite o e-mail da sua conta para receber o código de redefinição.” “A resposta é a mesma exista ou não conta com esse e-mail.”</td><td>Enviar código · Voltar</td></tr>
+          <tr><td><b>Esqueci · e-mail inválido</b></td><td>Enviar com e-mail fora do formato</td><td>“Digite um e-mail válido.”</td><td>Fica na etapa</td></tr>
+          <tr><td><b>Esqueci · código e nova senha</b></td><td>Enviar código</td><td>“Se <i>e-mail</i> tem conta, enviamos um código de 6 dígitos. Ele vale por 24 horas.” Aviso “Código enviado · confira seu e-mail”.</td><td>Alterar senha · Reenviar código · Voltar</td></tr>
+          <tr><td><b>Esqueci · reenviar</b></td><td>Reenviar código pouco depois do envio</td><td>“Aguarde 30 segundos para pedir outro código.” Depois: “Novo código enviado · o anterior deixou de valer.”</td><td>Fica na etapa</td></tr>
+          <tr><td><b>Esqueci · código errado ou vencido</b></td><td>Alterar senha com código inválido (no protótipo, <span class="mono">000000</span>)</td><td>“Código inválido ou expirado. Peça um novo código.”</td><td>Fica na etapa, foco no código</td></tr>
+          <tr><td><b>Esqueci · senhas diferentes</b></td><td>Digitar as duas senhas diferentes</td><td>“As senhas não conferem.” sob o campo; botão desabilitado.</td><td>Fica na etapa</td></tr>
+          <tr><td><b>Esqueci · senha já usada</b></td><td>Nova senha igual a uma das últimas 5 (no protótipo, <span class="mono">SenhaAntiga#2025</span>)</td><td>“Essa senha já foi usada antes. Escolha uma diferente das últimas 5 senhas.”</td><td>Fica na etapa</td></tr>
+          <tr><td><b>Esqueci · sucesso</b></td><td>Código certo e senha dentro dos requisitos</td><td>Aviso verde no login: “Senha alterada. Você saiu de todos os outros dispositivos. Entre com a nova senha.” e “Senha alterada · Enviamos um aviso para o seu e-mail”.</td><td>Login</td></tr>
+          <tr><td><b>Google · escolher conta</b></td><td>Continuar com Google</td><td>“Escolha uma conta.” “A Lya recebe só seu nome e e-mail.” “A verificação em duas etapas é a do Google; a Lya não pede o código do app.”</td><td>Escolher conta · Voltar</td></tr>
+          <tr><td><b>Google · conta vinculada</b></td><td>Conta com usuário na Lya</td><td>“Entrou com o Google · Dra. Helena Duarte.”</td><td>Escolha da organização</td></tr>
+          <tr><td><b>Google · sem vínculo</b></td><td>Conta Google sem usuário na Lya, ou “Usar outra conta”</td><td>“Conta sem acesso à Lya. <i>e-mail</i> não está vinculada a nenhum usuário da Lya. Peça ao administrador da sua organização para convidar esse e-mail, ou entre com e-mail e senha.”</td><td>Voltar ao login · Entrar com e-mail e senha · Tentar outra conta Google</td></tr>
+          <tr><td><b>Cadastro · e-mail</b></td><td>Criar conta</td><td>“Criar sua conta.” Dica: “Use o e-mail que você mais acessa: enviamos um código para ele.” Termos no rodapé.</td><td>Continuar (só com e-mail válido) · Cadastrar com Google · Voltar</td></tr>
+          <tr><td><b>Cadastro · e-mail que já existe</b></td><td>Continuar com e-mail de usuário existente</td><td>Aviso verde no login: “Este e-mail já tem conta. Entre com ele ou use Esqueci minha senha.”</td><td>Login</td></tr>
+          <tr><td><b>Cadastro · senha</b></td><td>E-mail novo</td><td>“Estamos quase lá!” Cinco requisitos com círculo vermelho ou verde; “As senhas não conferem.” se forem diferentes.</td><td>Continuar (só com tudo certo) · Voltar</td></tr>
+          <tr><td><b>Cadastro · código</b></td><td>Continuar na senha</td><td>“Confirme seu e-mail.” “Ele vale por 24 horas.” Erros iguais aos do esqueci a senha (“Digite os 6 dígitos do código.” e “Código inválido ou expirado. Peça um novo código.”).</td><td>Confirmar e-mail · Reenviar código · Voltar</td></tr>
+          <tr><td><b>Cadastro · perfil</b></td><td>Código certo</td><td>“Conte um pouco sobre você.” Nome completo, como quer ser chamado, profissão, registro e termos. Botão desabilitado com a dica “Marque a caixa dos Termos de uso para criar a conta.” Erros: “Informe seu nome completo.” e “Informe o número do registro profissional.”</td><td>Criar conta · Voltar</td></tr>
+          <tr><td><b>Cadastro · pronto</b></td><td>Criar conta</td><td>“Conta criada · bem-vindo(a), <i>nome</i>. Você começa no plano Gratuito.”</td><td>Tela inicial do médico particular (B2C)</td></tr>
+          <tr><td><b>Sair</b></td><td>Sair no menu do perfil</td><td>Aviso azul no login: “Você saiu da Lya. Entre de novo quando quiser.”</td><td>Login</td></tr>
+          <tr><td><b>Sessão expirada</b></td><td>1 hora depois do login, em qualquer tela</td><td>Aviso azul no login: “Sua sessão terminou por segurança, depois de 1 hora. Entre de novo para continuar. O que você já tinha feito num atendimento está guardado.” No protótipo, o painel de controle tem “Simular sessão expirada”.</td><td>Login</td></tr>
+        </tbody></table></div>
+
+      <div class="jr-spec">
+        <div class="box"><h4>Regras de segurança do login</h4><ul>
+          <li><b>Tentativas:</b> 5 senhas incorretas bloqueiam a conta por 15 minutos e mandam e-mail de aviso. O contador zera no login certo. O mesmo vale para o código do app (5 erros).</li>
+          <li><b>Códigos por e-mail</b> (esqueci a senha e cadastro): 6 dígitos, uso único, <b>24 horas</b>, no máximo 3 envios por hora e 5 tentativas erradas por código; 30 segundos entre um envio e outro.</li>
+          <li><b>Senha:</b> 12 caracteres, com especial, número, maiúscula e minúscula; não repete as 5 últimas. Validado no servidor.</li>
+          <li><b>Sessão:</b> 1 hora, para qualquer forma de entrar. Sem “Manter conectado”.</li>
+          <li><b>Mensagens neutras:</b> senha incorreta, e-mail sem conta e pedido de código respondem igual.</li>
+        </ul></div>
+        <div class="box"><h4>Verificação feita no protótipo</h4><ul>
+          <li><b>25 caminhos testados</b> de ponta a ponta, sem falha: login, senha incorreta e bloqueio, código do app, escolha da organização, esqueci a senha (do e-mail ao sucesso), Google (vinculado, sem vínculo, outra conta), cadastro (e-mail, senha, código, perfil e criação) e Sair.</li>
+          <li><b>14 variações de tela</b> conferidas: um título por tela, sem barra de rolagem em 1366×686, sem estouro de largura, erros com <span class="mono">role="alert"</span>, todo botão e todo campo com nome.</li>
+          <li><b>Corrigido nesta rodada:</b> faltavam as mensagens de senha incorreta, bloqueio, código do app errado, reenvio, senha já usada, Sair e sessão expirada; o erro do código do app não era anunciado; a redefinição de senha passava da altura da tela quando mostrava erro.</li>
+          <li><b>Simulações no protótipo:</b> senha <span class="mono">errada</span> (senha incorreta), código <span class="mono">000000</span> (código errado), <span class="mono">SenhaAntiga#2025</span> (senha já usada) e o e-mail <span class="mono">helena.duarte@exemplo.com.br</span> (conta que já existe).</li>
+        </ul></div>
+      </div>
+      <div class="jr-h"><h3>01 · Sessão de 1 hora</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Regra de segurança</span></div>
+      <div class="jr-spec">
+        <div class="box"><h4>Regra</h4><ul>
+          <li><b>A sessão dura 1 hora</b> e depois pede o login de novo. Por isso o login <b>não tem “Manter conectado”</b>; manter a opção prometeria uma sessão longa que a regra não permite.</li>
+          <li><b>Aviso na entrada:</b> embaixo do botão “Entrar”, “Por segurança, a sessão termina após 1 hora.”</li>
+          <li><b>Vale para todos os métodos:</b> e-mail e senha, Google e qualquer outro SSO. Entrar pelo Google não alonga a sessão.</li>
+        </ul></div>
+        <div class="box"><h4>A definir com o time</h4><ul>
+          <li><b>Atendimento em andamento:</b> a sessão pode acabar no meio de uma consulta. O áudio, a transcrição e o relatório em rascunho não podem se perder: guardar no servidor enquanto a sessão está viva e, ao entrar de novo, voltar ao mesmo atendimento.</li>
+          <li><b>Aviso antes de acabar:</b> sugestão de avisar 5 minutos antes (“Sua sessão termina em 5 minutos”), com a escolha de salvar e sair ou renovar entrando de novo. A decisão de permitir renovar sem digitar a senha é da segurança.</li>
+          <li><b>Contagem:</b> 1 hora contada desde o login (absoluta) ou desde a última ação (por inatividade). O texto da tela hoje diz “após 1 hora”, ou seja, absoluta; ajustar o texto se a regra for por inatividade.</li>
+        </ul></div>
+      </div>
+      <div class="jr-h"><h3>01 · Criar conta (médico particular, B2C)</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">No protótipo</span></div>
+      <div class="prose"><p>Quem atende por conta própria cria a conta sozinho, na própria tela de login (“Ainda não tem conta? Criar conta”). Quem trabalha em hospital ou clínica que já usa a Lya não se cadastra: recebe o convite do administrador. Toda etapa tem <b>Voltar</b>, embaixo do botão principal.</p></div>
+      <div class="scroll-x"><table class="metrics">
+        <thead><tr><th>Tela · estado</th><th>O que o usuário vê</th><th>Ações</th><th>Resposta da Lya / próximo passo</th></tr></thead>
+        <tbody>
+          <tr><td><b>Login · Criar conta</b></td><td>No fim do login, depois de “Ainda não tem conta?”, o botão “Criar conta”.</td><td>Criar conta</td><td>Abre “Criar sua conta”.</td></tr>
+          <tr><td><b>1 · Criar sua conta</b></td><td>“Cadastrar com Google”, ou só o e-mail. Voltar embaixo do botão e, no rodapé, “Ao usar a Lya, você concorda com os Termos de Serviço e a Política de Privacidade”.</td><td>Cadastrar com Google · Continuar · Voltar</td><td>“Continuar” só habilita com e-mail válido. O cadastro pede só e-mail e senha; o nome vem na última etapa. E-mail que já tem conta: volta ao login com “Este e-mail já tem conta. Entre com ele ou use Esqueci minha senha.”</td></tr>
+          <tr><td><b>2 · Estamos quase lá! (senha)</b></td><td>“Crie uma senha com os requisitos abaixo:”, com Senha e Repita a senha (cada uma com olho para mostrar). Os mesmos cinco requisitos e ícones da redefinição de senha, em uma coluna (“No mínimo 12 caracteres”, “Caracteres especiais (ex: !@#$%)”, “Números”, “Letras maiúsculas”, “Letras minúsculas”).</td><td>Continuar · Voltar</td><td>“Continuar” só habilita com os cinco requisitos cumpridos e as duas senhas iguais; senhas diferentes mostram “As senhas não conferem.” O mesmo padrão de requisitos vale na redefinição de senha.</td></tr>
+          <tr><td><b>3 · Confirmar e-mail</b></td><td>“Enviamos um código de 6 dígitos para <i>e-mail</i>. Ele vale por 24 horas.”</td><td>Confirmar e-mail · Reenviar código · Voltar</td><td>Código errado ou vencido: “Código inválido ou expirado. Peça um novo código.” Certo: vai para “Conte um pouco sobre você”. Cadastro pelo Google pula as etapas de senha e de confirmação do e-mail, porque o Google já confirmou.</td></tr>
+          <tr><td><b>4 · Conte um pouco sobre você</b></td><td>Nome completo (obrigatório, já preenchido no cadastro pelo Google), como quer ser chamado(a), profissão, especialidade, tipo e número do registro, UF (os mesmos campos do Meu perfil), aceite dos Termos de uso e da Política de privacidade com a versão, e “Quero receber novidades” (opcional).</td><td>Criar conta · Voltar</td><td>“Criar conta” só habilita com os termos aceitos e pede o nome completo e o número do registro. Criada: entra direto na Lya como médico particular, no plano Gratuito, com o aviso “Conta criada · bem-vindo(a), <i>nome</i>”.</td></tr>
+          <tr><td><b>Cadastrar com Google</b></td><td>Escolha de conta Google com o título “Cadastrar com o Google”.</td><td>Escolher conta · Voltar</td><td>Conta nova: vai direto à etapa 4, já com nome e e-mail. Conta que já existe: volta ao login pedindo para entrar.</td></tr>
+        </tbody></table></div>
+      <div class="jr-spec">
+        <div class="box"><h4>Como implementar</h4><ul>
+          <li><b>Criação:</b> a conta só é gravada no fim da etapa 4. Antes disso, o cadastro é um rascunho que vence em 24 horas.</li>
+          <li><b>E-mail:</b> código de 6 dígitos, uso único, 24 horas, 3 envios por hora e 5 tentativas erradas por código. Só e-mail confirmado entra.</li>
+          <li><b>Registro profissional:</b> guardar profissão, conselho, número e UF. Validar no conselho quando houver consulta pública; sem validação, o médico fica como “registro informado” e os documentos assinados pedem o certificado.</li>
+          <li><b>Termos:</b> guardar a versão aceita, a data e o IP. Mudou a versão, pede o aceite de novo no próximo acesso.</li>
+          <li><b>Plano:</b> começa no Gratuito, com os limites do plano; o Unlimited é contratado depois, em Minha conta.</li>
+          <li><b>E-mail que já existe:</b> responder sem confirmar que a conta existe só vale no esqueci a senha; aqui o aviso é claro, porque quem está se cadastrando precisa saber para entrar.</li>
+          <li><b>Auditoria:</b> conta criada, e-mail confirmado e termos aceitos viram eventos.</li>
+        </ul></div>
+      </div>
       <div class="jr-h"><h3>02 · Iniciar atendimento</h3><span class="jr-tag" style="background:#E6F3F7;color:var(--navy)">Ajustada</span></div>
       <div class="scroll-x"><table class="metrics">
         <thead><tr><th>Tela · estado</th><th>O que o usuário vê</th><th>Ações</th><th>Resposta da Lya / próximo passo</th></tr></thead>
